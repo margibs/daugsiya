@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "Don't Look"
-AuthUserFile /var/www/vhosts/susanwins.com/httpdocs/laravel/.htpasswd
-Require valid-user
