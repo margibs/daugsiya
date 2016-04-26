@@ -2,6 +2,8 @@
 /node_modules
 /public/uploads
 /public/user_uploads
+.htaccess
+.htpasswd
 Homestead.yaml
 Homestead.json
 .env
