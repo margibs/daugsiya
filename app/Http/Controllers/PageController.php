@@ -41,6 +41,8 @@ use App\Model\TrackerVisit;
 use App\Model\Comment;
 
 use App\BiggestWin;
+use App\UserActivity;
+use App\Friend;
 
 use DirkGroenen\Pinterest\Pinterest;
 use Session;
@@ -54,6 +56,8 @@ class PageController extends Controller
 
     private $customQuery;
     private $commonFunctions;
+    //
+    private $activities = [];
 
     public function sample_location()
     {
@@ -645,7 +649,50 @@ class PageController extends Controller
             $this->data['played_game'] = Auth::user()->game_experiences()->where('post_id', $this->data['post']->id)->where('type', 1)->first();
             $this->data['user_rating'] = Auth::user()->user_rating()->where('post_id', $this->data['post']->id)->first();
             $this->data['gameRating'] = $this->getGameRating($this->data['post']->id);
+
+           /*
+            *   ADDING USER ACTIVITIES
+            *   AUTHOR: IAN U ROSALES
+            *   DATE: 4-28-2016
+            *   TYPE 3 STATIC
+            *   CONTENT ID FOR PRIZE ID 
+            */
+
+            $id = Auth::user()->id;
+              $data = DB::table('user_activities')
+                    ->select(
+                        'user_activities.user_id', 
+                        'user_activities.id',
+                        'users.email', 
+                        'users.id as user_id',
+                        'user_activities.type', 
+                        'user_activities.content_id',
+                        'posts.slug',
+                        'prizes.name as prizename',
+                        DB::raw('CONCAT(user_details.firstname, " ", user_details.lastname) AS full_name'),
+                        'user_details.profile_picture'
+                        )
+                    ->join('users','user_activities.user_id','=','users.id')
+                    ->join('friends', function($join) use ($id){
+                        $join->on('friends.user_id', '=', 'user_activities.user_id')->where('friends.friend_id','=', $id)
+                        ->orOn('friends.friend_id', '=', 'user_activities.user_id')->where('friends.user_id','=', $id);
+                    })
+                    ->join('user_details', function($join2) use($id){
+                         $join2->on('friends.user_id', '=', 'user_details.user_id')->where('friends.friend_id','=', $id)
+                           ->orOn('friends.friend_id', '=', 'user_details.user_id')->where('friends.user_id','=', $id);
+                       })
+                    ->leftJoin('posts', function($join3){
+                        $join3->on('user_activities.content_id', '=', 'posts.id')->where('user_activities.type', '=', 2);
+                    })
+                    ->leftJoin('prizes', function($join3){
+                        $join3->on('user_activities.content_id', '=', 'prizes.id')->where('user_activities.type', '=', 3);
+                    })
+                    ->get();
+           //dd($data);          
+           $this->data['user_activities'] = $data;
+        
         }
+
         
         $articleBannerRatio = Config::get('casino');
         $this->data['articleBannerRatio'] = $articleBannerRatio['article_banner_ratio'];

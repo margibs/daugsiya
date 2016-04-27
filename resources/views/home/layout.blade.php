@@ -457,6 +457,59 @@
 <body>
 
   
+  <div class="activity" style="top: 730px;">
+
+        <!-- <div id="mask"> -->
+
+          <h2 style="text-align: center;"> Friends Recent Activity </h2>
+          <ul >
+
+            <li> 
+             <a href="#" style="
+             overflow: hidden;
+            font-weight: 400;
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+                font-family: Roboto;">
+              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/choblab/128.jpg" style="float: none; width: 50px; margin-bottom: 10px;">
+              <p style="font-size: 17px;text-align: center;    font-family: Roboto;"> Aww you don't have any friends yet! <span style="    
+            text-decoration: none;
+            font-weight: bold;
+            color: #D21416;
+            font-family: Roboto;
+            font-size: 17px;"> Join in the chat and make some now!  </span> </p>
+            
+             </a> 
+            </li>
+
+          </ul>
+        <!-- </div> -->  
+  </div>
+
+  <div class="activity">
+
+    <h2> Friends Recent Activity </h2>
+    <ul class="bxslider">
+      
+      @foreach($user_activities as $activity)
+      <li> 
+        <img src="{{ asset($activity->profile_picture) }}">
+        <p>{{ $activity->email }}</p>
+        <p>{{ $activity->full_name }}</p>
+        <p>{{ $activity->slug }}</p>
+        <p>{{ $activity->prizename }}</p>
+        
+      </li>
+      @endforeach
+     
+
+    </ul>
+    <a class="more" href="">
+   <!--  <i class="fa fa-chevron-down"></i> -->
+    </a>
+  </div>
 
   <div class="container-fluid verytopHeader">
         <div class="container">
@@ -545,10 +598,10 @@
 
                    @else
                       <ul class="topicons" style="margin-top: 9px;">           
-                        <li> <a href="#" class="facebookSM"> <i class="ion-social-facebook"></i> </a> </li>
-                        <li> <a href="#" class="twitterSM"> <i class="ion-social-twitter"></i>  </a> </li>
-                        <li> <a href="#" class="pinterestSM"> <i class="ion-social-pinterest"></i></a> </li>
-                        <li> <a href="#" class="instagramSM"> <i class="ion-social-instagram"></i>   </a> </li>
+                        <li> <a href="#" class="twitterSM"> <img src="http://susanwins.com/uploads/73749_twittericon.png" />  </a> </li>
+                        <li> <a href="#" class="facebookSM"> <img src="http://susanwins.com/uploads/84170_facebookicon.png" /> </a> </li>                        
+                        <li> <a href="#" class="pinterestSM"> <img src="http://susanwins.com/uploads/18419_pinteresticon.png" /> </a> </li>
+                        <li> <a href="#" class="instagramSM"> <img src="http://susanwins.com/uploads/50236_instaicon.png" />   </a> </li>
                         <li style="margin-left: 10px;"> <!-- <img src="http://susanwins.com/uploads/74688_cherrylogin.gif" class="cherry" />  --> <a href="{{ url('/login') }}" class="loginbtn"> Login/Signup </a></li>
                         <!-- <li> <a href="#"> <i class="ion-social-youtube"></i>   <span>  Signout </span> </a> </li> -->
                       </ul>
@@ -621,7 +674,8 @@
           </div>
   </div> 
 
-   <div class="overlay"></div>
+      
+  <div class="overlay"></div>
 
   @yield('homecontentResposnive')
 
