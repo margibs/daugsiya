@@ -12,7 +12,9 @@ use App\User_Rating as User_Rating;
 use App\User_Detail as User_Detail;
 use File;
 use App\Model\Post;
+use App\UserActivity;
 use Illuminate\Support\Facades\Auth;
+
 
 class GameController extends Controller
 {
@@ -27,6 +29,19 @@ class GameController extends Controller
             'type' => 2
 
          ]);
+         /*
+        *   ADDING USER ACTIVITIES
+        *   AUTHOR: IAN U ROSALES
+        *   DATE: 4-26-2016
+        *   TYPE 3 STATIC
+        *   CONTENT ID FOR PRIZE ID 
+        */
+         $data = [
+                'user_id' => $request->user_id,
+                'post_id' => $request->post_id
+            ];
+
+        $activities = UserActivity::addActivity($data, 2);
 
         return json_encode($gameExp);
 
