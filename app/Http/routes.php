@@ -100,7 +100,7 @@ Route::post('home/ajax_get_filter_posts', 'PageController@ajaxGetFilterPosts');
 
 // Route::get('singlepage', 'PageController@singlepage');
 // Route::get('slug_edit', 'PageController@slug_edit');
-// Route::get('location_sample', 'PageController@sample_location');
+Route::get('location_sample', 'PageController@sample_location');
 
 // Route::get('register_the_clicks','PageController@registerClick');
 // Route::get('ladbrokesroulette','PageController@ladbrokesroulette');
