@@ -15,6 +15,7 @@ use App\Model\PrizeCode;
 use App\Model\PrizeCategory;
 use App\Model\PrizeWinner;
 use Illuminate\Support\Facades\Auth;
+use App\UserActivity;
 
 
 class PrizeController extends Controller
@@ -113,6 +114,21 @@ class PrizeController extends Controller
                 $prizeCode->save();
 
                 $won = true;
+
+                /*
+                *   ADDING USER ACTIVITIES
+                *   AUTHOR: IAN U ROSALES
+                *   DATE: 4-27-2016
+                *   TYPE 3 STATIC
+                *   CONTENT ID FOR PRIZE ID 
+                */
+                
+                $data = [
+                        'user_id' => Auth::user()->id,
+                        'post_id' => $prize->id
+                    ];
+               $activities = UserActivity::addActivity($data, 3);
+             
             }else{
                  $reason = 'prize not retrieved';
             }
@@ -172,7 +188,7 @@ class PrizeController extends Controller
 
     public function prizeCode()
     {
-    	$codes = PrizeCode::all();
+    	$codes = PrizeCode::where('redeem','!=',1)->get();
     	$counter = 1;
     	return view('prize.prizeCodes',compact(['codes','counter']));
     }
