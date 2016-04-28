@@ -43,6 +43,7 @@ use App\Model\Comment;
 use App\BiggestWin;
 use App\UserActivity;
 use App\Friend;
+use App\HomeImage;
 
 use DirkGroenen\Pinterest\Pinterest;
 use Session;
@@ -525,8 +526,23 @@ class PageController extends Controller
 
         $this->data['biggest_wins'] = BiggestWin::with('post')->take(4)->get();
 
-        
+        /*
+        * Adding dynamic image value
+        *
+        */
 
+        $headers = DB::table('home_images')
+                ->whereIn('id', [1,2])
+                ->get();
+        $this->data['home_image_headers'] = $headers;
+
+        $footers = DB::table('home_images')
+                ->whereIn('id', [5,6,7])
+                ->get();
+        $this->data['home_image_footers'] = $footers;
+
+       /* dd($this->data['home_image']);
+*/
         return view('home.homepage',$this->data);
     }
 
@@ -762,12 +778,13 @@ class PageController extends Controller
                 ->select(
                     'user_activities.user_id', 
                     'user_activities.id',
-                    'users.email', 
                     'users.id as user_id',
                     'user_activities.type', 
                     'user_activities.content_id',
                     'posts.slug',
+                    'posts.title',
                     'prizes.name as prizename',
+                    'prizes.prize_link',
                     DB::raw('CONCAT(user_details.firstname, " ", user_details.lastname) AS full_name'),
                     'user_details.profile_picture'
                     )
@@ -788,7 +805,9 @@ class PageController extends Controller
                 })
                 ->get();      
        $this->data['user_activities'] = $data;
+    
        return $this->data['user_activities'];
+      // dd($data);
     }
 
     public function category($category)

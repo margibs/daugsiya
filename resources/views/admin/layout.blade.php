@@ -72,6 +72,7 @@
                     <li> <a href="{{ url('admin/prize') }}"> <i class="fa fa-gift"></i> Prizes </a> </li>
                     <li> <a href="{{ url('admin/notification') }}"> <i class="fa fa-bell-o"></i> Notification </a> </li>
                     <li> <a href="{{ url('admin/question') }}"> <i class="fa fa-bell-o"></i> Question </a> </li>
+                     <li> <a href="{{ url('admin/home_ads') }}"> <i class="fa fa-bell-o"></i> Home ADS </a> </li>
             <!--         <li> <a href="{{ url('admin/settings') }}"> <i class="icon-line2-settings"></i> Settings </a> </li> -->
                   </ul>
                 </nav>
