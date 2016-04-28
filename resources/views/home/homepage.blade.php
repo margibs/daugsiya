@@ -306,19 +306,32 @@
                       </ul>
                   </div>
                 </div>
-                <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 categAds1366">
-                  <img src="{{ asset('images/responsive/categoryReelDivider.png') }}" class="homeCategoryDivider">
-                  <div class="categAds">
-                    <a href="#">                      
-                      <img src="http://susanwins.com/images/homepage/home-categ-ad1.jpg">
-                      <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                    </a>
-                    <a href="#">                      
-                      <img src="http://susanwins.com/images/homepage/home-categ-ad2.jpg">
-                      <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                    </a>
-                  </div>
-                </div>
+              
+              <!-- Adding Dynamic image-->
+            
+           <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 categAds1366">
+               <img src="{{ asset('images/responsive/categoryReelDivider.png') }}" class="homeCategoryDivider">
+              <!--  <div class="categAds">
+                <a href="#">                      
+                  <img src="http://susanwins.com/images/homepage/home-categ-ad1.jpg">
+                  <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
+                </a>
+                <a href="#">                      
+                  <img src="http://susanwins.com/images/homepage/home-categ-ad2.jpg">
+                  <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
+                </a>
+              </div> -->
+
+               <div class="categAds">
+                  @foreach($home_image_headers as $home_image)
+                 <a href="#">                      
+                   <img src="{{ $home_image->image}}">
+                   <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
+                 </a>
+                 @endforeach
+               </div>
+
+             </div>
               </div>
               <div class="bigwinsMain">
                 <ul>
@@ -356,23 +369,33 @@
                         </div>
                       </div>
                   </div>
-                  <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5">  
-                      <div class="ads2">
-                        <a href="">
-                          <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
-                          <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                        </a>
-                        <a href="">
-                          <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
-                          <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                        </a>
-                        <a href="">
-                          <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
-                          <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                        </a>
-                         
-                      </div>
-                  </div>
+  
+
+                <!-- Adding Dynamic image-->
+
+                <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5">  
+                    <div class="ads2">
+                    <!--   <a href="">
+                      <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
+                      <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
+                    </a>
+                    <a href="">
+                      <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
+                      <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
+                    </a>
+                    <a href="">
+                      <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
+                      <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
+                    </a> -->
+                    @foreach($home_image_footers as $home_image)
+                     <a href="#">                      
+                       <img src="{{ $home_image->image}}">
+                       <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
+                     </a>
+                   @endforeach
+                    </div>
+                </div> 
+
               </div>
         </div>
 

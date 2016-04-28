@@ -44,11 +44,16 @@ use App\PluginModel\WidgetRating;
 use App\Autopost;
 use App\BiggestWin;
 use App\Custom_Notification;
+use App\HomeImage;
 
 use Instagram;
 
 use DateTime;
 use DateTimeZone;
+
+use App\Http\HomeImageRequest;
+use Input;
+
 
 class AdminController extends Controller
 {   
@@ -528,6 +533,73 @@ class AdminController extends Controller
 
         return view('admin.users',$data);
 	}
+
+    // HOME ADS
+    public function homeAds()
+    {
+        $home_images = HomeImage::get();
+        return view('admin.homeAds',compact('home_images'));
+    }
+
+    public function insertImage(Request $request) 
+    {
+         $validator = Validator::make($request->all(), [
+            'image' => 'required',
+            'link' => 'required',
+            'position' => 'required'
+        ]);
+
+        if ($validator->fails()) 
+        {
+         
+            $home_images = HomeImage::get();
+            return view('admin.homeAds',compact('home_images'))->withErrors($validator);
+         }
+
+        $data = $request->all();
+        $image = HomeImage::create($data);
+        $home_images = HomeImage::get();
+        return view('admin.listImageAdds',compact('home_images'));
+    }
+
+    public function getAdds($id) 
+    {
+        $home_image = HomeImage::find($id);
+        return view('admin.viewAds', compact('home_image'));
+        
+    }
+
+    public function editHomeAdds($id)
+    {
+        $home_image = HomeImage::find($id);
+        return view('admin.editHomeAdd', compact('home_image'));
+       
+    }
+
+    public function editImageAdd() 
+    {
+        $home_image = HomeImage::find(Input::get('id'));
+        $data = Input::all();
+        $home_image->update($data);
+        $home_images = HomeImage::get();
+        return view('admin.homeAds',compact('home_images'));
+    }
+
+    public function listImageHome()
+    {
+        $home_images = HomeImage::get();
+        return view('admin.listImageAdds',compact('home_images'));
+    }
+
+    public function deleteImageHome($id)
+    {
+        $home_image = HomeImage::find($id);
+        $home_image->delete();
+        $home_images = HomeImage::get();
+        return view('admin.listImageAdds',compact('home_images'));
+    }
+
+    // END HOME ADS
     
     //POSTS
 	public function posts(Request $request)

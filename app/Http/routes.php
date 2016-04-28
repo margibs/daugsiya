@@ -259,6 +259,14 @@ Route::group(['middleware' => 'UserCheck'], function()
 
 	Route::post('admin/addChatroom', 'AdminController@addChatroom');
 
+	//HOME ADS
+	Route::get('admin/home_ads','AdminController@homeAds');
+	Route::post('admin/insert_image', 'AdminController@insertImage');
+	Route::get('admin/homeads/{id}', 'AdminController@getAdds');
+	Route::get('admin/edit/homeads/{id}', 'AdminController@editHomeAdds');
+	Route::post('admin/edit/imageEdit', 'AdminController@editImageAdd');
+	Route::get('admin/delete/imageDelete/{id}', 'AdminController@deleteImageHome');
+	Route::get('admin/list/imageAdds', 'AdminController@listImageHome');
 });
 
 //Ajax Call
