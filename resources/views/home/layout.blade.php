@@ -458,7 +458,10 @@
 <body>
 
   
-  <div class="activity" style="top: 730px;">
+  
+ @if(Auth::check())
+
+ <div class="activity" style="top: 730px;">
 
         <!-- <div id="mask"> -->
 
@@ -489,7 +492,9 @@
         <!-- </div> -->  
   </div>
 
-  <div class="activity">
+
+
+   <div class="activity">
 
     <h2> Friends Recent Activity </h2>
     <ul class="bxslider">
@@ -498,11 +503,10 @@
       @foreach($user_activities as $activity)
       <li> 
         <img src="{{ asset($activity->profile_picture) }}">
-        <p>{{ $activity->email }}</p>
         <p>{{ $activity->full_name }}</p>
-        <p>{{ $activity->slug }}</p>
-        <p>{{ $activity->prizename }}</p>
-        
+        <a href="{{ $activity->slug }}"  style="text-decoration:none;">  <p>{{ $activity->title }}</p></a>
+
+        <a href="{{ $activity->prize_link }}" style="text-decoration: none;">  <p>{{ $activity->prizename }}</p></a>
       </li>
       @endforeach
       @endif
@@ -513,6 +517,7 @@
    <!--  <i class="fa fa-chevron-down"></i> -->
     </a>
   </div>
+ @endif
 
   <div class="container-fluid verytopHeader">
         <div class="container">
