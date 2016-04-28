@@ -493,6 +493,7 @@
     <h2> Friends Recent Activity </h2>
     <ul class="bxslider">
 
+      @if(isset($user_activities))
       @foreach($user_activities as $activity)
       <li> 
         <img src="{{ asset($activity->profile_picture) }}">
@@ -503,6 +504,8 @@
         
       </li>
       @endforeach
+      @endif
+  
 
 
     </ul>
