@@ -579,7 +579,7 @@ class PageController extends Controller
             '<li><a href="http://susanwins.com/food"><img src="http://susanwins.com/uploads/90975_food.png"></a></li>',
             '<li><a href="http://susanwins.com/girl-power"><img src="http://susanwins.com/uploads/71220_girlpower.png"></a></li>',
             '<li><a href="http://susanwins.com/sports"><img src="http://susanwins.com/uploads/18251_sports.png "></a></li>',
-            '<li><a href="http://susanwins.com/magic"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
+            '<li><a href="http://susanwins.com/magic"><img src="http://susanwins.com/uploads/55816_magic.png"></a></li>',
 
             '<li style="position: relative; top: 10px;"><a href="http://susanwins.com/sexy"><img src="http://susanwins.com/uploads/24631_sexy.png"></a></li>',
         );
