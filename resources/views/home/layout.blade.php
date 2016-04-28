@@ -492,7 +492,7 @@
 
     <h2> Friends Recent Activity </h2>
     <ul class="bxslider">
-      
+
       @foreach($user_activities as $activity)
       <li> 
         <img src="{{ asset($activity->profile_picture) }}">
@@ -503,7 +503,7 @@
         
       </li>
       @endforeach
-     
+
 
     </ul>
     <a class="more" href="">

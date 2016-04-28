@@ -528,7 +528,7 @@ class PageController extends Controller
     public function categoryImageList()
     {
         $categories =  array(
-            '<li><a href="http://susanwins.com/adventure"><img src="http://susanwins.com/uploads/76393_adventure.png"></a></li>',
+                        '<li><a href="http://susanwins.com/adventure"><img src="http://susanwins.com/uploads/76393_adventure.png"></a></li>',
             '<li><a href="http://susanwins.com/animal"><img src="http://susanwins.com/uploads/63125_animals.png "></a></li>',
             '<li><a href="http://susanwins.com/celebs"><img src="http://susanwins.com/uploads/49000_celebs.png"></a></li>',
             '<li><a href="http://susanwins.com/classic"><img src="http://susanwins.com/uploads/66321_classic.png"></a></li>',
@@ -552,6 +552,13 @@ class PageController extends Controller
             '<li><a href="http://susanwins.com/superheroes"><img src="http://susanwins.com/uploads/28203_superhero.png"></a></li>',
             '<li><a href="http://susanwins.com/tropicaljungle"><img src="http://susanwins.com/uploads/41272_tropical.png"></a></li>',
             '<li><a href="http://susanwins.com/television"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
+
+            '<li><a href="http://susanwins.com/copsthiefs"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
+            '<li><a href="http://susanwins.com/food"><img src="http://susanwins.com/uploads/90975_food.png"></a></li>',
+            '<li><a href="http://susanwins.com/girl-power"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
+            '<li><a href="http://susanwins.com/sports"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
+            '<li><a href="http://susanwins.com/magic"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
+
             '<li style="position: relative; top: 10px;"><a href="http://susanwins.com/sexy"><img src="http://susanwins.com/uploads/24631_sexy.png"></a></li>',
         );
 
@@ -810,7 +817,7 @@ class PageController extends Controller
                 'sexy' => 'http://susanwins.com/uploads/89166_sexy.png',
                 'sports' => 'http://susanwins.com/uploads/43127_sports.png',
                 'susans-favourites' => 'http://susanwins.com/uploads/28378_susansfavs.png',
-                'food' => 'http://susanwins.com/uploads/28763_food.png',
+                'food' => 'http://susanwins.com/uploads/90975_food.png',
                 'aztec' => 'http://susanwins.com/uploads/43690_aztec.png',
                 'girl-power' => 'http://susanwins.com/uploads/79948_girlpower.png',
                 'magic' => 'http://susanwins.com/uploads/52112_magic.png',
