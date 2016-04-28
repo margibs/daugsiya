@@ -762,12 +762,13 @@ class PageController extends Controller
                 ->select(
                     'user_activities.user_id', 
                     'user_activities.id',
-                    'users.email', 
                     'users.id as user_id',
                     'user_activities.type', 
                     'user_activities.content_id',
                     'posts.slug',
+                    'posts.title',
                     'prizes.name as prizename',
+                    'prizes.prize_link',
                     DB::raw('CONCAT(user_details.firstname, " ", user_details.lastname) AS full_name'),
                     'user_details.profile_picture'
                     )
@@ -788,7 +789,9 @@ class PageController extends Controller
                 })
                 ->get();      
        $this->data['user_activities'] = $data;
+    
        return $this->data['user_activities'];
+      // dd($data);
     }
 
     public function category($category)
