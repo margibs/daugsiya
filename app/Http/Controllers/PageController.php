@@ -559,10 +559,10 @@ class PageController extends Controller
             '<li><a href="http://susanwins.com/tropicaljungle"><img src="http://susanwins.com/uploads/41272_tropical.png"></a></li>',
             '<li><a href="http://susanwins.com/television"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
 
-            '<li><a href="http://susanwins.com/copsthiefs"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
+            '<li><a href="http://susanwins.com/copsthiefs"><img src="http://susanwins.com/uploads/17382_cops.png"></a></li>',
             '<li><a href="http://susanwins.com/food"><img src="http://susanwins.com/uploads/90975_food.png"></a></li>',
-            '<li><a href="http://susanwins.com/girl-power"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
-            '<li><a href="http://susanwins.com/sports"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
+            '<li><a href="http://susanwins.com/girl-power"><img src="http://susanwins.com/uploads/71220_girlpower.png"></a></li>',
+            '<li><a href="http://susanwins.com/sports"><img src="http://susanwins.com/uploads/18251_sports.png "></a></li>',
             '<li><a href="http://susanwins.com/magic"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
 
             '<li style="position: relative; top: 10px;"><a href="http://susanwins.com/sexy"><img src="http://susanwins.com/uploads/24631_sexy.png"></a></li>',
@@ -833,7 +833,7 @@ class PageController extends Controller
                 'sexy' => 'http://susanwins.com/uploads/89166_sexy.png',
                 'sports' => 'http://susanwins.com/uploads/43127_sports.png',
                 'susans-favourites' => 'http://susanwins.com/uploads/28378_susansfavs.png',
-                'food' => 'http://susanwins.com/uploads/90975_food.png',
+                'food' => 'http://susanwins.com/uploads/28763_food.png',
                 'aztec' => 'http://susanwins.com/uploads/43690_aztec.png',
                 'girl-power' => 'http://susanwins.com/uploads/79948_girlpower.png',
                 'magic' => 'http://susanwins.com/uploads/52112_magic.png',
