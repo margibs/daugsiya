@@ -56,7 +56,7 @@ class PageController extends Controller
 
     private $customQuery;
     private $commonFunctions;
-    //
+    //array for acctivities
     private $activities = [];
 
     public function sample_location()
@@ -409,6 +409,10 @@ class PageController extends Controller
         $comment_type = 1;
         $content_id = 0;
         $user = Auth::user();
+
+        //get user activites
+        $this->getUserActivities();
+
         return view('home.allGames',compact(['posts','random_order_number','reel_posts','reel_post_buffers','category_randomizer', 'comments','comment_type','content_id', 'user']));
     }
 
@@ -513,6 +517,8 @@ class PageController extends Controller
             $this->data['user_notification_count'] = $this->getUserNotificationCount();
 
             $this->data['global_notification_count'] = $this->getGlobalNotificationCount(); 
+
+            $this->getUserActivities();
         }
 
         $this->data['session_id'] = Session::getId();
@@ -579,6 +585,9 @@ class PageController extends Controller
         }
 
         $this->data['session_id'] = Session::getId();
+
+        //get user activites
+        $this->getUserActivities();
 
         return view('home.singlepage',$this->data);
     }
@@ -650,46 +659,10 @@ class PageController extends Controller
             $this->data['user_rating'] = Auth::user()->user_rating()->where('post_id', $this->data['post']->id)->first();
             $this->data['gameRating'] = $this->getGameRating($this->data['post']->id);
 
-           /*
-            *   ADDING USER ACTIVITIES
-            *   AUTHOR: IAN U ROSALES
-            *   DATE: 4-28-2016
-            *   TYPE 3 STATIC
-            *   CONTENT ID FOR PRIZE ID 
-            */
+            //get user activites
+            $this->getUserActivities();
 
-            $id = Auth::user()->id;
-              $data = DB::table('user_activities')
-                    ->select(
-                        'user_activities.user_id', 
-                        'user_activities.id',
-                        'users.email', 
-                        'users.id as user_id',
-                        'user_activities.type', 
-                        'user_activities.content_id',
-                        'posts.slug',
-                        'prizes.name as prizename',
-                        DB::raw('CONCAT(user_details.firstname, " ", user_details.lastname) AS full_name'),
-                        'user_details.profile_picture'
-                        )
-                    ->join('users','user_activities.user_id','=','users.id')
-                    ->join('friends', function($join) use ($id){
-                        $join->on('friends.user_id', '=', 'user_activities.user_id')->where('friends.friend_id','=', $id)
-                        ->orOn('friends.friend_id', '=', 'user_activities.user_id')->where('friends.user_id','=', $id);
-                    })
-                    ->join('user_details', function($join2) use($id){
-                         $join2->on('friends.user_id', '=', 'user_details.user_id')->where('friends.friend_id','=', $id)
-                           ->orOn('friends.friend_id', '=', 'user_details.user_id')->where('friends.user_id','=', $id);
-                       })
-                    ->leftJoin('posts', function($join3){
-                        $join3->on('user_activities.content_id', '=', 'posts.id')->where('user_activities.type', '=', 2);
-                    })
-                    ->leftJoin('prizes', function($join3){
-                        $join3->on('user_activities.content_id', '=', 'prizes.id')->where('user_activities.type', '=', 3);
-                    })
-                    ->get();
-           //dd($data);          
-           $this->data['user_activities'] = $data;
+         
         
         }
 
@@ -766,6 +739,49 @@ class PageController extends Controller
         }
         // dd(microtime(true) - $begin);
         // return view('home.single',$this->data);
+    }
+
+    public function getUserActivities() {
+      /*
+        *   ADDING USER ACTIVITIES
+        *   AUTHOR: IAN U ROSALES
+        *   DATE: 4-28-2016
+        *   TYPE 3 STATIC
+        *   CONTENT ID FOR PRIZE ID 
+        */
+
+        $id = Auth::user()->id;
+          $data = DB::table('user_activities')
+                ->select(
+                    'user_activities.user_id', 
+                    'user_activities.id',
+                    'users.email', 
+                    'users.id as user_id',
+                    'user_activities.type', 
+                    'user_activities.content_id',
+                    'posts.slug',
+                    'prizes.name as prizename',
+                    DB::raw('CONCAT(user_details.firstname, " ", user_details.lastname) AS full_name'),
+                    'user_details.profile_picture'
+                    )
+                ->join('users','user_activities.user_id','=','users.id')
+                ->join('friends', function($join) use ($id){
+                    $join->on('friends.user_id', '=', 'user_activities.user_id')->where('friends.friend_id','=', $id)
+                    ->orOn('friends.friend_id', '=', 'user_activities.user_id')->where('friends.user_id','=', $id);
+                })
+                ->join('user_details', function($join2) use($id){
+                     $join2->on('friends.user_id', '=', 'user_details.user_id')->where('friends.friend_id','=', $id)
+                       ->orOn('friends.friend_id', '=', 'user_details.user_id')->where('friends.user_id','=', $id);
+                   })
+                ->leftJoin('posts', function($join3){
+                    $join3->on('user_activities.content_id', '=', 'posts.id')->where('user_activities.type', '=', 2);
+                })
+                ->leftJoin('prizes', function($join3){
+                    $join3->on('user_activities.content_id', '=', 'prizes.id')->where('user_activities.type', '=', 3);
+                })
+                ->get();      
+       $this->data['user_activities'] = $data;
+       return $this->data['user_activities'];
     }
 
     public function category($category)
