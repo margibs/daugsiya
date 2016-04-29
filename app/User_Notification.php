@@ -20,4 +20,8 @@ class User_Notification extends Model
 
     	return $this->belongsTo('App\Model\Post', 'post_id');
     }
+
+    public function comment(){
+    	return $this->belongsTo('App\Model\Comment', 'post_id')->where('user_notification.type', '=', 3);
+    }
 }

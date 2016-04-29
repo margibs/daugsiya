@@ -1008,7 +1008,7 @@ width: 23%;
                             <img src="{{$comment->user->user_detail->profile_picture ? url('').'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
                             <span class="timestamp" data-datetime="{{ $comment->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                             <div class="comment-info">{{$comment->user->email}}</div>
-                            <div class="comment-content">{{ $comment->content }}</div>
+                            <div class="comment-content">{!! $comment->content !!}</div>
                             <a href="javascript:;" class="reply_btn">Reply</a>
 
                             <div class="reply-list" id="reply-to-{{$comment->id}}">
@@ -1017,7 +1017,7 @@ width: 23%;
                                 <img src="{{$reply->user->user_detail->profile_picture ? url('').'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
                                 <span class="timestamp" data-datetime="{{ $reply->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                                 <div class="reply-info">{{$reply->user->email}}</div>
-                                <div class="reply-content">{{ $reply->content }}</div>
+                                <div class="reply-content">{!! $reply->content !!}</div>
                               </div>
                               @endforeach
                             </div>
