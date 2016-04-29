@@ -27,6 +27,8 @@ use Validator;
 use Hash;
 use Session;
 
+use Yajra\Datatables\Datatables;
+
 
 class UserController extends Controller
 {
@@ -56,6 +58,36 @@ class UserController extends Controller
        
 
         return view('user.register');
+    }
+
+    /*
+    *   ADDING DATATABLE FOR USER INDEX
+    *   AUTHOR: IAN ROSALES 
+    *   4-29-2016
+    *
+    */
+
+    public function getIndex() 
+    {
+        return view('admin.user');
+    }
+
+    public function anyData() 
+    {
+        $users = User::select('users')
+                    ->leftjoin('user_details', 'users.id', '=', 'user_details.user_id')
+                    ->select(
+                        'users.id', 
+                        DB::raw('CONCAT(user_details.firstname, " ", user_details.lastname) AS full_name'),
+                        'users.email', 
+                        'users.created_at', 
+                        'users.updated_at'
+                        )->get();
+        return Datatables::of($users)
+                ->editColumn('created_at', '{!! $created_at->diffForHumans() !!}')
+                ->editColumn('updated_at', '{!! $created_at->diffForHumans() !!}')
+                ->make(true);
+
     }
 
     /**
