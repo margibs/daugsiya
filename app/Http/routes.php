@@ -291,6 +291,9 @@ Route::group(['middleware' => 'UserCheck'], function()
 	    'getIndex' => 'homeimagedatatable',
 	]);
 
+	//FUNCTION FOR DYNAMIC PAGE
+	Route::get('admin/dynamic/link', 'AdminController@getLink');
+
 });
 
 //Ajax Call

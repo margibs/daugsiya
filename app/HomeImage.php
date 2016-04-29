@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class HomeImage extends Model
 {
@@ -11,4 +12,12 @@ class HomeImage extends Model
     			'link',
     			'position'
     		];
+
+    public static function getHomeImage()
+    {
+    	$data = DB::table('home_images')
+    						->select('*')
+    						->get();
+    	return $data;
+    }
 }

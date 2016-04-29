@@ -53,6 +53,7 @@ use DateTimeZone;
 
 use App\Http\HomeImageRequest;
 use Input;
+use App\Model\CasinoBanner;
 
 
 
@@ -630,6 +631,21 @@ class AdminController extends Controller
         $post->is_mobile = $is_mobile;
         $post->save();
         return json_encode($data);
+    }
+
+    /*
+    *   FUNCTION FOR DYNAMIC LINK
+    *   AUTHOR: IAN ROSALES
+    *   DATE: 4-29-2016
+    */
+
+    public function getLink()
+    {
+        $articles = CasinoBanner::getArticles();
+        $skypsCrappers = CasinoBanner::getSkypsCrapper();
+        $casinos = HomeImage::getHomeImage();
+
+        return view('admin.dynamic_link', compact('articles', 'skypsCrappers', 'casinos'));
     }
    
     //POSTS

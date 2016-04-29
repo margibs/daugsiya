@@ -41,7 +41,7 @@
         		<td>{{ $article->priority }}</td>
         		 <td class="center">
                 {!! Form::open() !!}
-                    <a href="{!! url('dental/clinics/'.$article->id.'/edit') !!}">
+                    <a href="{{url('admin/article_banner')}}/{{$article->id}}">
                         <i class="glyphicon glyphicon-edit"></i>
                     </a>
                     {!! Form::hidden('id', $article->id) !!}
@@ -73,7 +73,7 @@
         		<td>{{ $skypsCrapper->priority }}</td>
         		 <td class="center">
                 {!! Form::open() !!}
-                    <a href="{!! url('dental/clinics/'.$skypsCrapper->id.'/edit') !!}">
+                    <a href="{{url('admin/skyscraper_banner')}}/{{$skypsCrapper->id}}">
                         <i class="glyphicon glyphicon-edit"></i>
                     </a>
                     {!! Form::hidden('id', $skypsCrapper->id) !!}
