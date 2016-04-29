@@ -412,9 +412,11 @@ class PageController extends Controller
         $user = Auth::user();
 
         //get user activites
-        $this->getUserActivities();
+        $user_activities = $this->getUserActivities();
 
-        return view('home.allGames',compact(['posts','random_order_number','reel_posts','reel_post_buffers','category_randomizer', 'comments','comment_type','content_id', 'user']));
+        $myFriends = Friend::myFriends();
+
+        return view('home.allGames',compact(['posts','random_order_number','reel_posts','reel_post_buffers','category_randomizer', 'comments','comment_type','content_id', 'user', 'user_activities', 'myFriends']));
     }
 
     public function ajaxAllGamesPaginate(Request $request)
@@ -681,7 +683,7 @@ class PageController extends Controller
             $this->data['played_game'] = Auth::user()->game_experiences()->where('post_id', $this->data['post']->id)->where('type', 1)->first();
             $this->data['user_rating'] = Auth::user()->user_rating()->where('post_id', $this->data['post']->id)->first();
             $this->data['gameRating'] = $this->getGameRating($this->data['post']->id);
-
+            $this->data['myFriends'] = Friend::myFriends();
             //get user activites
             $this->getUserActivities();
 
@@ -773,16 +775,18 @@ class PageController extends Controller
         *   CONTENT ID FOR PRIZE ID 
         */
 
-        $id = Auth::user()->id;
+    $this->data['user_activities'] = false;
+        if(Auth::check()){
+            $id = Auth::user()->id;
           $data = DB::table('user_activities')
                 ->select(
                     'user_activities.user_id', 
                     'user_activities.id',
                     'users.id as user_id',
-                    'user_activities.type', 
+                    'user_activities.type',
                     'user_activities.content_id',
                     'posts.slug',
-                    'posts.title',
+                    'posts.name as gamename',
                     'prizes.name as prizename',
                     'prizes.prize_link',
                     DB::raw('CONCAT(user_details.firstname, " ", user_details.lastname) AS full_name'),
@@ -798,16 +802,18 @@ class PageController extends Controller
                        ->orOn('friends.friend_id', '=', 'user_details.user_id')->where('friends.user_id','=', $id);
                    })
                 ->leftJoin('posts', function($join3){
-                    $join3->on('user_activities.content_id', '=', 'posts.id')->where('user_activities.type', '=', 2);
+                    $join3->on('user_activities.content_id', '=', 'posts.id')->where('user_activities.type', '<=', 2);
                 })
-                ->leftJoin('prizes', function($join3){
-                    $join3->on('user_activities.content_id', '=', 'prizes.id')->where('user_activities.type', '=', 3);
+                ->leftJoin('prizes', function($join4){
+                    $join4->on('user_activities.content_id', '=', 'prizes.id')->where('user_activities.type', '=', 3);
                 })
                 ->get();      
        // dd($data);
        $this->data['user_activities'] = $data;
+
        return $this->data['user_activities'];
       // dd($data);
+        }
     }
 
     public function category($category)

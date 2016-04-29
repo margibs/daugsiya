@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 use App\Model\Comment as Comment;
 use App\User;
 use Illuminate\Support\Facades\Auth as Auth;
+use App\User_Notification;
+use App\Model\Post;
+use App\Model\Category;
+use DateTime;
 
 class CommentController extends Controller
 {
@@ -38,6 +42,63 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    protected function notifyFriends($comment){
+
+            $friendTags = $comment->friendTags;
+            if($friendTags && count($friendTags) > 0){
+
+                $insertData = array();
+                $datetime = new DateTime();
+            $notification_type = 3;
+            if($comment->type == 3){
+                $notification_type = 5;
+            }else if($comment->type == 2){
+                $notification_type = 4;
+            }
+
+                foreach($friendTags as $friend_id){
+                    array_push($insertData, array('user_id' => $comment->user_id, 'friend_id' => $friend_id, 'post_id' => $comment->content_id, 'type' => $notification_type, 'created_at' => $datetime,  'updated_at' => $datetime));
+                }
+
+            }
+
+            if(User_Notification::insert($insertData)){
+
+            $url = url('').':8891/friend_tag_notification';
+
+            $emitData = array();
+
+            if($comment->type == 3){
+                $emitData['content'] = Post::find($comment->content_id);
+            }else if($comment->type == 2){
+                $emitData['content'] = Category::find($comment->content_id);
+            }else if($comment->type == 1){
+                $emitData['content'] = 'all_games';
+            }
+            
+            $emitData['user'] = User::with('user_detail')->find($comment->user_id);
+            $emitData['type'] = $comment->type;
+            $emitData['friendTags'] = $friendTags;
+            $data_string = json_encode($emitData);
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+                'Content-Type: application/json',                                                                                
+                'Content-Length: ' . strlen($data_string))                                                                       
+            );                                                                                                                   
+                                                                                                                                 
+            $result = curl_exec($ch);
+                    
+            }
+
+    }
+
     public function addComment(Request $request)
     {
         //
@@ -55,6 +116,9 @@ class CommentController extends Controller
 
             $request['user'] = User::with('user_detail')->find($request->user_id);
 
+            $comment->friendTags = $request->friendTags;
+            $this->notifyFriends($comment);
+
             return json_encode($request->all());
         }
 
@@ -69,11 +133,15 @@ class CommentController extends Controller
         $comment->content = $request->content;
         $comment->parent = $request->parent;
         $comment->type = $request->type;
-        
         if($comment->save()){
 
               $request['id'] = $comment->id;
 
+              $request['user'] = User::with('user_detail')->find($request->user_id);
+
+            $comment->friendTags = $request->friendTags;
+            $this->notifyFriends($comment);
+            
             return json_encode($request->all());
         }
 
