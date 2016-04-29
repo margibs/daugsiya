@@ -275,6 +275,9 @@ Route::group(['middleware' => 'UserCheck'], function()
 	Route::post('admin/edit/imageEdit', 'AdminController@editImageAdd');
 	Route::get('admin/delete/imageDelete/{id}', 'AdminController@deleteImageHome');
 	Route::get('admin/list/imageAdds', 'AdminController@listImageHome');
+
+	//FUNCTION FOR CHANGE IS MOBILE
+	Route::post('admin/posts/ismobile', 'AdminController@ismobile');
 });
 
 //Ajax Call
