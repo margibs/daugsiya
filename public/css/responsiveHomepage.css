@@ -10,6 +10,7 @@
 }
 .categories ul li a, .categories ul li a img{
       width: 100%;
+      height: auto;
 }
 .categoryMain{
   overflow: hidden;
