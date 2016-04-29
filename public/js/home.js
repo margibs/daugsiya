@@ -41,10 +41,9 @@ $(function(){
 	});
 
 	socket.on('connect', function(){
-
 		if(userId)
 		{
-		  socket.emit('login', { user_id : userId , profile_picture : userImage, name : userName, session_id : sessionId }, false, isAdmin);
+		  socket.emit('login', { user_id : userId , profile_picture : userImage, name : userName, session_id : sessionId }, false, isAdmin, myFriends);
 		}
 		else
 		{
@@ -137,7 +136,66 @@ $(function(){
 
       }
 
+      socket.on('post_friendTag_notification', function(data){
 
+      		span = $('<span>').addClass('notifcount');
+			notifcount = 1;
+
+			if($('#unreadUserNotification').find('.notifcount').length)
+			{
+			  notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
+			}
+
+			$('#unreadUserNotification').html('').append($(span).text(notifcount));
+			console.log(data);
+			data_url = data.content;
+
+			if(data.type == 3 || data.type == 2){
+				data_url = data.content.slug;
+			}
+
+			data_url = BASE_URL+'/'+data_url;
+
+			$('#myNotifications').prepend(
+			  $('<li>').append(
+							$('<a href="'+data_url+'">')
+							.append(
+								$('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+							)
+							.append(
+								$('<p>')
+								.append(
+									$('<span>').addClass('name').text(data.user.user_detail.firstname+' '+data.user.user_detail.lastname+' tagged you in a comment. ')
+								)
+							)
+						)
+			);
+      });
+
+      socket.on('post_userActivity', function(data){
+      		/*alert(JSON.stringify(data));*/
+
+      	type = data.type;
+      	p = $('<p></p>');
+      		alert(type);
+      	full_name = data.user.user_detail.firstname+' '+data.user.user_detail.lastname;
+      	if(type == 1){
+      		$(p).html(full_name+' added <a href="'+BASE_URL+'/'+data.content.slug+'"  style="text-decoration:none;">'+data.content.name+'</a> as a new Favorite');
+      	}else if(type == 2){
+      		$(p).html(full_name+' played <a href="'+BASE_URL+'/'+data.content.slug+'"  style="text-decoration:none;">'+data.content.name+'</a>');
+      	}else if(type == 3){
+      		$(p).html(full_name+' just won '+data.content.name);
+      	}
+
+      	$('#friendUserActivityContainer').prepend(
+      			$('<li>')
+      					.append($('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+
+      						)
+      					.append(p)
+      		)
+
+      });
 
 	socket.on('post_recommendGame_notification', function(friend){
 
@@ -927,7 +985,6 @@ $(function(){
 					li = $('<li>');
 
 					request = this;
-
 					if(request.type == 0)
 					{
 						button = $('<a href="javascript:;">')
@@ -995,6 +1052,51 @@ $(function(){
 									.append(
 										$('<span>').text('Click to Play')
 									)
+								)
+							)
+						);
+					}
+					else if(request.type == 3)
+					{
+						$(li).append(
+							$('<a href="'+BASE_URL+'/all_games">')
+							.append(
+								$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+							)
+							.append(
+								$('<p>')
+								.append(
+									$('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
+								)
+							)
+						);
+					}
+					else if(request.type == 5)
+					{
+						$(li).append(
+							$('<a href="'+BASE_URL+'/'+request.postslug+'">')
+							.append(
+								$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+							)
+							.append(
+								$('<p>')
+								.append(
+									$('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
+								)
+							)
+						);
+					}
+					else if(request.type == 4)
+					{
+						$(li).append(
+							$('<a href="'+BASE_URL+'/'+request.categoryslug+'">')
+							.append(
+								$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+							)
+							.append(
+								$('<p>')
+								.append(
+									$('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
 								)
 							)
 						);
