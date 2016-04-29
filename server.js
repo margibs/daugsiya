@@ -408,13 +408,13 @@ io.on('connection', function (socket) {
 
 
     socket.on('comment', function(data){
-        socket.broadcast.to(socket.room_name).emit('push_comment', data);
+        socket.to(socket.room_name).emit('push_comment', data);
     });
 
     socket.on('reply', function(data){
       console.log('reply');
       console.log(data);
-        socket.broadcast.to(socket.room_name).emit('push_reply', data);
+        socket.to(socket.room_name).emit('push_reply', data);
     });
 
   socket.on('login', function (userdata, chatroom, adminmode){

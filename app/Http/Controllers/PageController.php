@@ -550,7 +550,7 @@ class PageController extends Controller
     public function categoryImageList()
     {
         $categories =  array(
-            '<li><a href="http://susanwins.com/adventure"><img src="http://susanwins.com/uploads/76393_adventure.png"></a></li>',
+                        '<li><a href="http://susanwins.com/adventure"><img src="http://susanwins.com/uploads/76393_adventure.png"></a></li>',
             '<li><a href="http://susanwins.com/animal"><img src="http://susanwins.com/uploads/63125_animals.png "></a></li>',
             '<li><a href="http://susanwins.com/celebs"><img src="http://susanwins.com/uploads/49000_celebs.png"></a></li>',
             '<li><a href="http://susanwins.com/classic"><img src="http://susanwins.com/uploads/66321_classic.png"></a></li>',
@@ -567,14 +567,21 @@ class PageController extends Controller
             '<li><a href="http://susanwins.com/pirates"><img src="http://susanwins.com/uploads/70833_pirate.png"></a></li>',
             '<li><a href="http://susanwins.com/relaxingsoothing"><img src="http://susanwins.com/uploads/49793_relaxing.png"></a></li>',
             '<li><a href="http://susanwins.com/romance"><img src="http://susanwins.com/uploads/33566_romantic.png"></a></li>',
-            '<li><a href="http://susanwins.com/sea-2"><img src="http://susanwins.com/uploads/42258_sea.png"></a></li>',
+            '<li><a href="http://susanwins.com/sea"><img src="http://susanwins.com/uploads/42258_sea.png"></a></li>',
             '<li><a href="http://susanwins.com/seasonal"><img src="http://susanwins.com/uploads/52845_seasonal.png"></a></li>',
             '<li><a href="http://susanwins.com/vegas"><img src="http://susanwins.com/uploads/35722_vegas.png"></a></li>',
             '<li><a href="http://susanwins.com/sorcery"><img src="http://susanwins.com/uploads/88737_sorcery.png"></a></li>',
             '<li><a href="http://susanwins.com/superheroes"><img src="http://susanwins.com/uploads/28203_superhero.png"></a></li>',
             '<li><a href="http://susanwins.com/tropicaljungle"><img src="http://susanwins.com/uploads/41272_tropical.png"></a></li>',
             '<li><a href="http://susanwins.com/television"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
-            '<li style="position: relative; top: 10px;"><a href="http://susanwins.com/sexy"><img src="http://susanwins.com/uploads/24631_sexy.png"></a></li>',
+
+            '<li><a href="http://susanwins.com/copsthiefs"><img src="http://susanwins.com/uploads/17382_cops.png"></a></li>',
+            '<li><a href="http://susanwins.com/food"><img src="http://susanwins.com/uploads/90975_food.png"></a></li>',
+            '<li><a href="http://susanwins.com/girl-power"><img src="http://susanwins.com/uploads/71220_girlpower.png"></a></li>',
+            '<li><a href="http://susanwins.com/sports"><img src="http://susanwins.com/uploads/18251_sports.png "></a></li>',
+            '<li><a href="http://susanwins.com/magic"><img src="http://susanwins.com/uploads/55816_magic.png"></a></li>',
+
+            '<li><a href="http://susanwins.com/sexy"><img src="http://susanwins.com/uploads/sexy_cat.png"></a></li>',
         );
 
 
@@ -824,7 +831,7 @@ class PageController extends Controller
                 'seasonal' => 'http://susanwins.com/uploads/78618_seasonal.png',
                 'superheroes' => 'http://susanwins.com/uploads/16974_superhero.png',
                 'sorcery' => 'http://susanwins.com/uploads/50933_sorcery.png',
-                'sea-2' => 'http://susanwins.com/uploads/72390_sea.png',
+                'sea' => 'http://susanwins.com/uploads/72390_sea.png',
                 'relaxingsoothing' => 'http://susanwins.com/uploads/92030_relaxing.png',
                 'mysterious' => 'http://susanwins.com/uploads/99370_mysteru.png',
                 'myths-legends' => 'http://susanwins.com/uploads/47026_myths.png',

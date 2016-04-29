@@ -2,6 +2,7 @@
 /node_modules
 /public/uploads
 /public/user_uploads
+/storage
 .htaccess
 .htpasswd
 Homestead.yaml

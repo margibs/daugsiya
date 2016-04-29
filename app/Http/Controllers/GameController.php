@@ -48,6 +48,18 @@ class GameController extends Controller
     }
 
 
+public function searchHashGame(Request $request){
+
+        $games = array();
+        if($request->wildcard != ''){
+            $games = Post::where('name', 'like', '%'.$request->wildcard.'%')->take(5)->get();    
+        }
+
+        return json_encode($games);
+        
+    }
+
+
     public function getMyFriends(Request $request){
 
         $friends = [];
@@ -237,6 +249,21 @@ class GameController extends Controller
         $data['friend'] = $this->userRelationship($request->user_id, $request->other_person);
 
         return json_encode($data);
+    }
+
+        public function viewUserProfile(Request $request){
+
+        $user = User::with('user_detail')->find($request->user_id);
+
+        $data['user_detail'] = $user->user_detail;
+        $data['friend'] = false;
+        if(Auth::check()){
+            $auth_user_id = Auth::user()->id;
+           $data['friend'] = $this->userRelationship($auth_user_id, $user->id); 
+        }
+
+        return json_encode($data);
+
     }
 
     public function readFriendRequests(Request $request){
