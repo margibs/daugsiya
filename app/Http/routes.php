@@ -271,6 +271,22 @@ Route::group(['middleware' => 'UserCheck'], function()
 	Route::post('admin/edit/imageEdit', 'AdminController@editImageAdd');
 	Route::get('admin/delete/imageDelete/{id}', 'AdminController@deleteImageHome');
 	Route::get('admin/list/imageAdds', 'AdminController@listImageHome');
+
+	//FUNCTION FOR CHANGE IS MOBILE
+	Route::post('admin/posts/ismobile', 'AdminController@ismobile');
+	//DATA TABLE FOR USER CONTROLLER
+	Route::controller('userdatatable', 'UserController', [
+	    'anyData'  => 'userdatatable.data',
+	    'getIndex' => 'userdatatable',
+	]);
+
+
+	//DATA TABLE FOR USER CONTROLLER
+	Route::controller('homeimagedatatable', 'HomeImagesController', [
+	    'anyData'  => 'homeimagedatatable.data',
+	    'getIndex' => 'homeimagedatatable',
+	]);
+
 });
 
 //Ajax Call

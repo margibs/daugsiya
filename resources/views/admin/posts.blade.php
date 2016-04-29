@@ -38,6 +38,9 @@
     <td>
     {!! Form::select('date', ['all' => 'Date','12' => 'December'],Request::input('date')) !!}
     </td>
+    <td>
+      Is Mobile
+    </td>
     <td> <input type="submit" value="Filter"> </td>
   </thead>
   </form>
@@ -65,6 +68,17 @@
       @endif
      </td>
       <td> {{ date( 'jS F Y', strtotime($post->created_at) ) }} </td>
+      <td>
+          @if($post->is_mobile == 0)
+          <!--   <input type="checkbox"  class="is_mobile" value="{{ $post->id }}"><br> -->
+           <input type="checkbox" name="is_mobile[]" id="is_mobile" value="{{ $post->id }}"><br>
+          @else
+           <!-- <input type="checkbox" class="is_mobile" value="{{ $post->id }}" checked><br> -->
+
+           <input type="checkbox" name="is_mobile[]" id="is_mobile" value="{{ $post->id }}" checked><br>
+          
+          @endif
+      </td>
       <td class="del" style="text-align: center;"> <a href="{{url('admin/posts')}}/{{$post->id}}/delete" style="font-size: 12px;color: #CAC8C8;"><i class="icon-line-cross"></i></a> </td>
     </tr>   
   @endforeach 
@@ -92,6 +106,54 @@
   //       // change to any color that was previously used.
   //       $('.blogoptions').css('visibility','hidden');
   //   });
+
+/*
+*
+* ADDING FUNCTION TO CHECK IF MOBILE 
+* AUTHOR: IAN ROSALES
+* DATA:  4/29/2016
+*
+*
+*
+*/
+  
+  $("input[type=checkbox]").change( function() {
+    if($(this).is(":checked")){
+      var value = $(this).val();
+      var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'), template_for_media_file = $.trim($("#template_for_media_file").html());
+     $.ajax({
+          type: 'post',
+          url: "{{ url('admin/posts/ismobile') }}",
+          data: {_token: CSRF_TOKEN,'is_mobile' : 1, 'id': value},
+          success: function(response)
+          {
+            console.log(response);
+          },
+          error: function(error)
+          {
+            console.log(error);
+          }
+        });
+    }
+    if ($(this).is(':checked') == false) {
+      var value = $(this).val();
+      var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'), template_for_media_file = $.trim($("#template_for_media_file").html());
+      $.ajax({
+        type: 'post',
+        url: "{{ url('admin/posts/ismobile') }}",
+        data: {_token: CSRF_TOKEN,'is_mobile' : 0, 'id': value},
+        success: function(response)
+        {
+          console.log(response);
+        },
+        error: function(error)
+        {
+          console.log(error);
+        }
+      });
+    }
+  });
+ 
  </script>
 
 @endsection

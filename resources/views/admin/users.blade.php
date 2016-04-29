@@ -1,3 +1,5 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> 
+
 @extends('admin.layout')
 
 @section('content')
@@ -21,51 +23,33 @@
 </div>
 
 
-<table>
-  <thead>
-    <td>First Name</td>
-    <td>Last Name</td>
-	<td>Email</td>
-<!-- 	<td>Status</td>
-	<td>Banned</td>
-	<td>User Level</td> -->
-  </thead>
-  <tbody>
-  @foreach($users as $user)
-	<tr>
-		@if($user->user_detail != null)
-			<td class="subTD"> {{$user->user_detail->firstname}}</td>
-			<td class="subTD"> {{$user->user_detail->lastname}}</td>
-		@endif
-		<td class="subTD">{{$user->email}}</td>
-<!-- 		<td class="subTD">
-			@if($user->activated == 1)
-			<span style="color:green;">Active</span>
-			@elseif($user->activated == 2)
-			<span style="color:green;">Active From Social Media</span>
-			@else
-			<span style="color:red;">Not Active</span>
-			@endif
-		</td>
-		<td class="subTD">
-			@if($user->banned == 0)
-			<span style="color:green;">Not Banned</span>
-			@else
-			<span style="color:red;">Banned</span>
-			@endif
-		</td>
-		<td class="subTD">
-			@if($user->is_admin == 1)
-			<span style="color:green;">Admin</span>
-			@elseif($user->is_admi == 0)
-			<span style="color:green;">User</span>
-			@else
-			<span style="color:green;">Writer</span>
-			@endif
-		</td> -->
-	</tr>
-	@endforeach
-  </tbody>
-</table>
+ <table class="table table-condensed table-bordered table-striped" id="users-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+            </tr>
+        </thead>
+    </table>
 
 @endsection
+
+@push('scripts')
+<script>
+$(function() {
+    $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('userdatatable.data') !!}',
+        columns: [
+            { data: 'full_name', name: 'full_name' },
+            { data: 'email', name: 'email' },
+            { data: 'created_at', name: 'created_at' },
+            { data: 'updated_at', name: 'updated_at' }
+        ]
+    });
+});
+</script>
+@endpush

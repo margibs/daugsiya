@@ -31,6 +31,9 @@
         <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> 
     <![endif]-->
 
+<!--     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>        
     <script type="text/javascript">
     if (typeof jQuery == 'undefined') {
@@ -94,6 +97,12 @@
 
   })
 </script>
+
+ <!-- DataTables -->
+  <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   <!-- App scripts -->
+        @stack('scripts')
 
 </body>
 </html>

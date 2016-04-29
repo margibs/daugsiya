@@ -461,37 +461,7 @@
   
  @if(Auth::check())
 
- <div class="activity" style="top: 730px;">
-
-        <!-- <div id="mask"> -->
-
-          <h2 style="text-align: center;"> Friends Recent Activity </h2>
-          <ul >
-
-            <li> 
-             <a href="#" style="
-             overflow: hidden;
-            font-weight: 400;
-            color: #000;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-                font-family: Roboto;">
-              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/choblab/128.jpg" style="float: none; width: 50px; margin-bottom: 10px;">
-              <p style="font-size: 17px;text-align: center;    font-family: Roboto;"> Aww you don't have any friends yet! <span style="    
-            text-decoration: none;
-            font-weight: bold;
-            color: #D21416;
-            font-family: Roboto;
-            font-size: 17px;"> Join in the chat and make some now!  </span> </p>
-            
-             </a> 
-            </li>
-
-          </ul>
-        <!-- </div> -->  
-  </div>
-
+ 
 
 
    <div class="activity">
@@ -500,6 +470,35 @@
     <ul class="bxslider" id="friendUserActivityContainer">
 
       @if(isset($user_activities))
+       @if(count($user_activities) != 0 && $user_activities != null)
+
+          @else
+           <div class="activity" style="top: 730px;">
+            <!--   <h2 style="text-align: center;"> Friends Recent Activity </h2> -->
+              <ul >
+
+                <li> 
+                 <a href="#" style="
+                 overflow: hidden;
+                font-weight: 400;
+                color: #000;
+                text-decoration: none;
+                text-align: center;
+                display: block;
+                    font-family: Roboto;">
+                  <img src="https://s3.amazonaws.com/uifaces/faces/twitter/choblab/128.jpg" style="float: none; width: 50px; margin-bottom: 10px;">
+                  <p style="font-size: 17px;text-align: center;    font-family: Roboto;"> Aww you don't have any friends yet! <span style="    
+                text-decoration: none;
+                font-weight: bold;
+                color: #D21416;
+                font-family: Roboto;
+                font-size: 17px;"> Join in the chat and make some now!  </span> </p>
+                
+                 </a> 
+                </li>
+              </ul>
+      </div>
+       @endif
       @foreach($user_activities as $activity)
       <li> 
         <img src="{{ $activity->profile_picture ? asset($activity->profile_picture) : asset('images/default_profile_picture.png') }}">
@@ -512,8 +511,33 @@
          @endif
       </li>
       @endforeach
-      @endif
-  
+      @else
+          <div class="activity" style="top: 730px;">
+             <!--  <h2 style="text-align: center;"> Friends Recent Activity </h2> -->
+              <ul >
+
+                <li> 
+                 <a href="#" style="
+                 overflow: hidden;
+                font-weight: 400;
+                color: #000;
+                text-decoration: none;
+                text-align: center;
+                display: block;
+                    font-family: Roboto;">
+                  <img src="https://s3.amazonaws.com/uifaces/faces/twitter/choblab/128.jpg" style="float: none; width: 50px; margin-bottom: 10px;">
+                  <p style="font-size: 17px;text-align: center;    font-family: Roboto;"> Aww you don't have any friends yet! <span style="    
+                text-decoration: none;
+                font-weight: bold;
+                color: #D21416;
+                font-family: Roboto;
+                font-size: 17px;"> Join in the chat and make some now!  </span> </p>
+                
+                 </a> 
+                </li>
+              </ul>
+      </div>
+      @endif  
 
 
     </ul>

@@ -151,6 +151,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
     ],
 
@@ -207,6 +208,7 @@ return [
         'Location'  => Stevebauman\Location\Facades\Location::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Agent'     => Jenssegers\Agent\Facades\Agent::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],
 

@@ -3,6 +3,7 @@
 /public/uploads
 /public/user_uploads
 /storage
+composer.lock
 .htaccess
 .htpasswd
 Homestead.yaml

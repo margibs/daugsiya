@@ -1757,7 +1757,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         notifUrl = '{{ url("notification") }}',
         get_casino_category = '{{$get_casino_category}}',
         get_post_id = '{{$post->id}}',
-        header_counter = 0,
         finalSidebarContentHeight = 0,
         contentOffset = 1,
         ajaxDone = false,
@@ -1776,6 +1775,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         startAddingSidebarInterval = null,
         maxSidebarAutoLoad = 10 * 10, //10 seconds
         maxSidebarCounter = 0;
+
+        header_counter = 0;
 
         post_comment_connected = false;
         login_success = false;
@@ -3122,25 +3123,39 @@ $('.postcontent img').css('display','inline');
 
         var machine2 = $("#planeMachine2").slotMachine({
           active  : 0,
-          delay : 500
+          delay : 500,
+         randomize : function(activeElementIndex){
+              return 2;
+          }
         });
 
         var machine3 = $("#planeMachine3").slotMachine({
           active  : 0,
-          delay : 500          
+          delay : 500,
+         randomize : function(activeElementIndex){
+              return 1;
+          }      
         });
 
         var machine4 = $("#planeMachine4").slotMachine({
           active  : 0,
-          delay : 500
+          delay : 500,
+         randomize : function(activeElementIndex){
+              return 1;
+          }
         });
 
         var machine5 = $("#planeMachine5").slotMachine({
           active  : 0,
-          delay : 500
+          delay : 500,
+         randomize : function(activeElementIndex){
+              return 1;
+          }
         });
 
         function onComplete(active){
+         console.log('yeah yeah yo yo');
+         console.log(active);
           switch(this.element[0].id){
             case 'machine1':
               $("#planeMachine2").text("Index: "+this.active);
@@ -3159,7 +3174,9 @@ $('.postcontent img').css('display','inline');
 
         $("#winwinwin3").click(function(){
 
-          machine2.shuffle(5, onComplete);
+          machine2.shuffle(5, function(){
+            machine2.setRandomize(0);
+          });
 
           setTimeout(function(){
             machine3.shuffle(5, onComplete);
@@ -3172,6 +3189,28 @@ $('.postcontent img').css('display','inline');
           setTimeout(function(){
             machine5.shuffle(5, onComplete);
           }, 700);
+
+            if(header_counter == 0)
+            {
+
+              $('.featimg .replaceme').fadeOut(300, function() {
+             
+
+              $('.featimg .replaceme').attr("src","http://susanwins.com/uploads/64878_click-header.png");
+              $('.featimg .replaceme').fadeIn(100);
+
+               $('.hidethenshow').css({'display':'block'}).addClass('animated bounceIn');
+
+                 function showme(){
+                     $('.hidethenshowtwo').css({'display':'block'}).addClass('animated bounceIn');
+                  }
+                  setTimeout(showme, 500);
+
+              });
+
+            }
+
+            header_counter++;
 
         })
 
