@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Friend;
 use App\User_Notification;
+use Auth;
+use DB;
 
 class FriendController extends Controller
 {
@@ -24,6 +26,28 @@ class FriendController extends Controller
         $friend = Friend::findOrFail($request->id);
 
         echo json_encode($friend->forceDelete());
+    }
+
+        public function searchHashFriend(Request $request){
+
+      if(Auth::check()){
+
+        $user_id = Auth::user()->id;
+
+        $wildcard = $request->wildcard;
+
+        $friends = Friend::where('friends.user_id', $user_id)->join('user_details', function($join) use($user_id){
+
+          $join->on('friends.user_id', '=', 'user_details.user_id')->where('friends.friend_id','=', $user_id)
+            ->orOn('friends.friend_id', '=', 'user_details.user_id')->where('friends.user_id','=', $user_id);
+
+        })->select(DB::raw('CONCAT(user_details.firstname," ", user_details.lastname) as fullname, user_details.user_id as id'))->whereRaw("CONCAT(user_details.firstname,' ', user_details.lastname) LIKE "."'%".$request->wildcard."%'")->orWhere('friends.friend_id', $user_id)->whereRaw("CONCAT(user_details.firstname,' ', user_details.lastname) LIKE "."'%".$request->wildcard."%'")->take(5)->get();
+
+       /*return json_encode($lastQuery);*/
+
+        return json_encode($friends);
+      }
+
     }
 
 
