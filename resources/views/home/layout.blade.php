@@ -40,6 +40,7 @@
   <link rel="stylesheet" href="{{ asset('css/responsiveHomepage.css') }}">        
   <link rel="stylesheet" href="{{ asset('css/animate.css') }}">        
   <link rel="stylesheet" href="{{ asset('css/hint.min.css') }}">
+   <link rel="stylesheet" href="{{ asset('css/tagging.css') }}">
   <!-- <link rel="stylesheet" href="{{ asset('css/bttrlazyloading.min.css') }}">         -->
   <link rel="stylesheet" href="{{ asset('css/jquery.slotmachine.css') }}">
   <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
@@ -706,14 +707,14 @@
        (function(){
 
 
-        _tracker = document.createElement('script');
+        /*_tracker = document.createElement('script');
         _tracker.type = 'text/javascript';
         _tracker.async = true;
         _tracker.src = ('https:' == document.location.protocol ? 'https://ssl.' : 'http://') + 'nexolytics.susanwins.com/js/tracker.js';
 
         var s = document.getElementsByTagName('script')[0];
 
-        s.parentNode.insertBefore(_tracker,s);
+        s.parentNode.insertBefore(_tracker,s);*/
 
        })();
 
@@ -739,6 +740,8 @@
     <script src="{{ asset('js/livestamp.min.js') }}"></script> 
     <script src="{{ asset('js/home.js') }}"></script>
     <script src="{{ asset('js/jquery.slotmachine.js') }}"></script>
+    <script src="{{ asset('js/jquery.caret.js') }}"></script>
+    <script src="{{ asset('js/tagging.js') }}"></script>
     <!--<script src="{{ elixir('js/custom/main.js') }}"></script>-->
   <script>
 
@@ -845,8 +848,9 @@ timeZone = 'Europe/London';
 
       if(login_success && comment_connected)
       {
-        $('#submitCommentTextarea').removeAttr('disabled');
+        $('#submitCommentTextarea').removeAttr('disabled').tagging();
         $('#submitCommentForm').removeAttr('disabled');
+
       }
 
     }
@@ -876,7 +880,7 @@ timeZone = 'Europe/London';
                   $('<div></div>').addClass('comment-info').text(this.email)
                 )
                 .append(
-                  $('<div></div>').addClass('comment-content').text(this.content)
+                  $('<div></div>').addClass('comment-content').html(this.content)
                 )
               )
             );
@@ -925,7 +929,7 @@ timeZone = 'Europe/London';
                       $('<div></div>').addClass('comment-info').text(this.email)
                     )
                     .append(
-                      $('<div></div>').addClass('comment-content').text(this.content)
+                      $('<div></div>').addClass('comment-content').html(this.content)
                     )
                     .append(
                       $('<a href="javascript:;">').addClass('reply_btn').text('Reply')
@@ -941,6 +945,8 @@ timeZone = 'Europe/London';
               
       return this.theComment;
     };
+
+    $('.reply-form textarea').tagging();
 
     socket.on('push_comment', function(response){
 
@@ -960,7 +966,13 @@ timeZone = 'Europe/London';
 
       if($('#comment-'+comment.id).length == 0)
       {
-        $('#commentList ul').append(comment.maketheComment());
+
+        getComment = comment.maketheComment();
+
+        $('#commentList ul').append(getComment);
+        lastComment = $('#commentList ul').find('> li').last();
+        $(lastComment).find('textarea').tagging();
+        console.log($(getComment).find('textarea'));
         $(document).trigger('adjustHeight');
       }
 
@@ -1010,8 +1022,9 @@ timeZone = 'Europe/London';
           tempComment = comment.makeTemporaryComment();
 
           $('#commentList ul').append(tempComment);
-          $('#no-comments').remove();              
 
+          temporaryComment = $('#commentList ul').find('> li.temporary').last();
+          $('#no-comments').remove();              
           if(comment.user_id && comment.user_id && comment.email)
           {
 
@@ -1029,7 +1042,16 @@ timeZone = 'Europe/London';
                 if(response)
                 {
                   comment.id = response.id;
-                  $(comment.temporaryComment).replaceWith(comment.maketheComment());
+                  getComment = comment.maketheComment();
+                  $(temporaryComment).replaceWith(getComment);
+                  $(getComment).find('textarea').tagging();
+                  /*createTag = setInterval(function(){
+
+                      if($(getComment).find('textarea').length){
+                        $(getComment).find('textarea').tagging();
+                        clearInterval(createTag);
+                      }
+                  }, 500);*/
                   $(document).trigger('adjustHeight');
                   tempComment = null;
                   socket.emit('comment', response);
@@ -1094,7 +1116,7 @@ timeZone = 'Europe/London';
                 $('<img>').addClass('avatar').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic)
                 )
               .append($('<div></div>').addClass('reply-info').text(this.email))
-              .append($('<div></div>').addClass('reply-content').text(this.content));
+              .append($('<div></div>').addClass('reply-content').html(this.content));
 
       return this.temporaryReply;
     }
@@ -1111,7 +1133,7 @@ timeZone = 'Europe/London';
                           .prepend($('<span class="livetime"></span>').livestamp(moment.tz(timeZone).format()))
                       )
               .append($('<div></div>').addClass('reply-info').text(this.email))
-              .append($('<div></div>').addClass('reply-content').text(this.content));
+              .append($('<div></div>').addClass('reply-content').html(this.content));
 
       return this.theReply;
     }
@@ -1139,6 +1161,7 @@ timeZone = 'Europe/London';
 
                 tempReply = reply.makeTemporaryReply();
                 $('#reply-to-'+reply.parent).append(tempReply);
+                temporaryReply = $('#reply-to-'+reply.parent).find('> .temporary').last();
                 $(document).trigger('adjustHeight');
                 $.ajax({
                     type : 'post',
@@ -1154,7 +1177,7 @@ timeZone = 'Europe/London';
                             reply.id = response.id;
                             response.profile_picture = userImage;
                             
-                            $(reply.temporaryReply).replaceWith(reply.maketheReply());
+                            $(temporaryReply).replaceWith(reply.maketheReply());
                             $(document).trigger('adjustHeight');
                               tempReply = null;
 

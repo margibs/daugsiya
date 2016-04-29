@@ -132,6 +132,14 @@ Route::get('notification/postCustomNotification', 'NotificationController@postCu
 Route::post('session/getUserSession', 'UserSessionController@getUserSession');
 Route::post('clubhouse/session', 'UserController@session');
 
+
+//Tagging
+
+Route::get('searchHashGame', 'GameController@searchHashGame');
+Route::get('searchHashFriend', 'FriendController@searchHashFriend');
+
+Route::get('profile/viewUserProfile', 'GameController@viewUserProfile');
+
 Route::group(['middleware' => 'UserCheck'], function()
 {
 	//QUESTION BACKEND
