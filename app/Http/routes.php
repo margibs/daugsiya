@@ -114,10 +114,6 @@ Route::post('home/ajax_get_posts_for_big_wins','PageController@ajaxGetPostsforBi
 /*Route::post('home/ajax_tracker_click','PageController@ajaxTrackerClick');*/
 
 
-// Comment
-Route::post('add_comment', 'CommentController@addComment');
-Route::post('add_reply', 'CommentController@addReply');
-
 //CRON AUTOPOSTER
 Route::get('admin/autoposts/all', 'AdminController@runAutopost');
 Route::get('admin/autoposts/facebook', 'AutoPostController@runFacebookPost');
@@ -284,6 +280,11 @@ Route::post('casino/ajax/get_article_banner','PageController@ajaxGetArticleBanne
 
 Route::group(['middleware' => 'ClubMiddleware'], function()
 {
+
+	// Comment
+	Route::post('add_comment', 'CommentController@addComment');
+	Route::post('add_reply', 'CommentController@addReply');
+
 	Route::get('clubhouse/home', 'ClubhouseController@home');
 	Route::get('clubhouse/profile', 'UserController@profile');
 	Route::post('clubhouse/profile/changePassword', 'UserController@changePassword');
