@@ -55,6 +55,8 @@ use App\Http\HomeImageRequest;
 use Input;
 
 
+
+
 class AdminController extends Controller
 {   
     private $customQuery;
@@ -534,6 +536,11 @@ class AdminController extends Controller
         return view('admin.users',$data);
 	}
 
+    /*
+    *   FUNCTION FOR HOME ADDS IMAGE
+    *   AUTHOR: IAN ROSALES
+    *   DATE: 4-28-2016
+    */
     // HOME ADS
     public function homeAds()
     {
@@ -582,7 +589,7 @@ class AdminController extends Controller
         $data = Input::all();
         $home_image->update($data);
         $home_images = HomeImage::get();
-        return view('admin.homeAds',compact('home_images'));
+        return view('admin.listImageAdds',compact('home_images'));
     }
 
     public function listImageHome()
@@ -624,7 +631,7 @@ class AdminController extends Controller
         $post->save();
         return json_encode($data);
     }
-    
+   
     //POSTS
 	public function posts(Request $request)
 	{

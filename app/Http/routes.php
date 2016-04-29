@@ -278,6 +278,19 @@ Route::group(['middleware' => 'UserCheck'], function()
 
 	//FUNCTION FOR CHANGE IS MOBILE
 	Route::post('admin/posts/ismobile', 'AdminController@ismobile');
+	//DATA TABLE FOR USER CONTROLLER
+	Route::controller('userdatatable', 'UserController', [
+	    'anyData'  => 'userdatatable.data',
+	    'getIndex' => 'userdatatable',
+	]);
+
+
+	//DATA TABLE FOR USER CONTROLLER
+	Route::controller('homeimagedatatable', 'HomeImagesController', [
+	    'anyData'  => 'homeimagedatatable.data',
+	    'getIndex' => 'homeimagedatatable',
+	]);
+
 });
 
 //Ajax Call

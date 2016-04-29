@@ -1,3 +1,5 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> 
+
 @extends('admin.layout')
 
 @section('content')
@@ -5,27 +7,41 @@
 @include('admin.navigations.homeImageNav')
 
 
-<table>
-	<thead>
-		<th>Image</th>
-		<th>Link</th>
-		<th>Position</th>
-		<th>Action</th>
-	</thead>
-	<tbody>
-		@foreach($home_images as $media_file)
-			<tr>
-				<td>{{$media_file->image}}</td>
-				<td>{{$media_file->link}}</td>
-				<td>{{$media_file->position}}</td>
-				<td>
-					<a href="{{url('admin/homeads')}}/{{$media_file->id}}">View</a> |
-					<a href="{{url('admin/edit/homeads')}}/{{$media_file->id}}">Edit</a> |
-					<a href="{{url('admin/delete/imageDelete')}}/{{$media_file->id}}">Delete</a> 
-				</td>
-			</tr>
-		@endforeach
-	</tbody>
-</table> 
 
+
+ <table class="table table-condensed table-bordered table-striped" id="users-table">
+        <thead>
+            <tr>
+            	<th>Id</th>
+                <th>Image</th>
+				<th>Link</th>
+				<th>Position</th>
+				<th>Creted</th>
+				<th>Updated</th>
+				<th>Action</th>
+            </tr>
+        </thead>
+    </table>
+
+@endsection
+
+@push('scripts')
+<script>
+$(function() {
+    $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! route('homeimagedatatable.data') !!}',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'image', name: 'image' },
+            { data: 'link', name: 'link' },
+            { data: 'position', name: 'position' },
+            { data: 'created_at', name: 'created_at' },
+            { data: 'updated_at', name: 'updated_at' },
+            { data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+});
+</script>
 @endsection
