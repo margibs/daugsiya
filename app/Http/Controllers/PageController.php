@@ -804,8 +804,8 @@ class PageController extends Controller
                     $join3->on('user_activities.content_id', '=', 'prizes.id')->where('user_activities.type', '=', 3);
                 })
                 ->get();      
+       // dd($data);
        $this->data['user_activities'] = $data;
-    
        return $this->data['user_activities'];
       // dd($data);
     }
