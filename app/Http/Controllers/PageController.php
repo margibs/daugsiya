@@ -813,6 +813,7 @@ class PageController extends Controller
 
        return $this->data['user_activities'];
       // dd($data);
+        }
     }
 
     public function category($category)
