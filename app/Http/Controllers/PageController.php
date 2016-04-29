@@ -412,9 +412,11 @@ class PageController extends Controller
         $user = Auth::user();
 
         //get user activites
-        $this->getUserActivities();
+        $user_activities = $this->getUserActivities();
 
-        return view('home.allGames',compact(['posts','random_order_number','reel_posts','reel_post_buffers','category_randomizer', 'comments','comment_type','content_id', 'user']));
+        $myFriends = Friend::myFriends();
+
+        return view('home.allGames',compact(['posts','random_order_number','reel_posts','reel_post_buffers','category_randomizer', 'comments','comment_type','content_id', 'user', 'user_activities', 'myFriends']));
     }
 
     public function ajaxAllGamesPaginate(Request $request)
@@ -764,8 +766,7 @@ class PageController extends Controller
         // return view('home.single',$this->data);
     }
 
-    public function getUserActivities() 
-    {
+    public function getUserActivities() {
       /*
         *   ADDING USER ACTIVITIES
         *   AUTHOR: IAN U ROSALES
@@ -806,8 +807,7 @@ class PageController extends Controller
                 ->leftJoin('prizes', function($join4){
                     $join4->on('user_activities.content_id', '=', 'prizes.id')->where('user_activities.type', '=', 3);
                 })
-                ->get();
-            } 
+                ->get();      
        // dd($data);
        $this->data['user_activities'] = $data;
 

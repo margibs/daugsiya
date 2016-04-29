@@ -469,39 +469,13 @@
     <h2> Friends Recent Activity </h2>
     <ul class="bxslider" id="friendUserActivityContainer">
 
-      @if(isset($user_activities))
-       @if(count($user_activities) != 0 && $user_activities != null)
+      @if(isset($myFriends) && count($myFriends) > 0)
+       
 
-          @else
-           <div class="activity" style="top: 730px;">
-            <!--   <h2 style="text-align: center;"> Friends Recent Activity </h2> -->
-              <ul >
-
-                <li> 
-                 <a href="#" style="
-                 overflow: hidden;
-                font-weight: 400;
-                color: #000;
-                text-decoration: none;
-                text-align: center;
-                display: block;
-                    font-family: Roboto;">
-                  <img src="https://s3.amazonaws.com/uifaces/faces/twitter/choblab/128.jpg" style="float: none; width: 50px; margin-bottom: 10px;">
-                  <p style="font-size: 17px;text-align: center;    font-family: Roboto;"> Aww you don't have any friends yet! <span style="    
-                text-decoration: none;
-                font-weight: bold;
-                color: #D21416;
-                font-family: Roboto;
-                font-size: 17px;"> Join in the chat and make some now!  </span> </p>
-                
-                 </a> 
-                </li>
-              </ul>
-      </div>
-       @endif
-      @foreach($user_activities as $activity)
-      <li> 
-        <img src="{{ $activity->profile_picture ? asset($activity->profile_picture) : asset('images/default_profile_picture.png') }}">
+       @if(isset($user_activities) && count($user_activities) != 0 && $user_activities != null)
+        @foreach($user_activities as $activity)
+          <li> 
+          <img src="{{ $activity->profile_picture ? asset($activity->profile_picture) : asset('images/default_profile_picture.png') }}">
         @if($activity->type == 1)
             <p>{{ $activity->full_name }} addedd <a href="{{ $activity->slug }}"  style="text-decoration:none;">{{ $activity->gamename }}</a> as a new Favorite</p>
         @elseif($activity->type == 2)
@@ -509,14 +483,17 @@
         @elseif($activity->type == 3)
             <p>{{ $activity->full_name }} just won {{ $activity->prizename }}</p>
          @endif
-      </li>
-      @endforeach
-      @else
-          <div class="activity" style="top: 730px;">
-             <!--  <h2 style="text-align: center;"> Friends Recent Activity </h2> -->
-              <ul >
+            </li>
+        @endforeach
 
-                <li> 
+
+  
+       @endif
+
+
+        @else
+
+                   <li> 
                  <a href="#" style="
                  overflow: hidden;
                 font-weight: 400;
@@ -535,8 +512,7 @@
                 
                  </a> 
                 </li>
-              </ul>
-      </div>
+
       @endif  
 
 
