@@ -764,7 +764,8 @@ class PageController extends Controller
         // return view('home.single',$this->data);
     }
 
-    public function getUserActivities() {
+    public function getUserActivities() 
+    {
       /*
         *   ADDING USER ACTIVITIES
         *   AUTHOR: IAN U ROSALES
@@ -805,7 +806,8 @@ class PageController extends Controller
                 ->leftJoin('prizes', function($join4){
                     $join4->on('user_activities.content_id', '=', 'prizes.id')->where('user_activities.type', '=', 3);
                 })
-                ->get();      
+                ->get();
+            } 
        // dd($data);
        $this->data['user_activities'] = $data;
 
