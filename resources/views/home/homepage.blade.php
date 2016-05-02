@@ -147,7 +147,80 @@
                 </h1>  
                 <div class="reels">
                   <div class="row no-gutter">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                    <?php 
+                      $counter = 1;
+                      $segment = $reel_posts_count / 4;
+                      $counter1 = 0;
+                      $counter2 = 0;
+                      $counter3 = 0;
+                      $counter4 = 0;
+                    ?>
+
+                    @foreach($reel_posts as $reel_post)
+
+                      @if($counter == 1)
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                          <div id="planeMachine2">
+                            <div class="text-center">
+                              <img src="{{url('')}}/uploads/{{$reel_post->reels_image}}">                              
+                            </div>
+                            <?php $counter1++; ?>
+                      @elseif($counter < $segment)
+                            <div class="text-center">
+                              <img src="{{url('')}}/uploads/{{$reel_post->reels_image}}">                              
+                            </div>
+                            <?php $counter1++; ?>
+                      @elseif($counter == $segment)
+                          </div>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                          <div id="planeMachine3">
+                            <div class="text-center">
+                              <img src="{{url('')}}/uploads/{{$reel_post->reels_image}}">                              
+                            </div>
+                            <?php $counter2++; ?>
+                      @elseif($counter < $segment*2 && $counter > $segment)
+                            <div class="text-center">
+                              <img src="{{url('')}}/uploads/{{$reel_post->reels_image}}">                              
+                            </div>
+                            <?php $counter2++; ?>
+                      @elseif($counter == $segment*2)
+                          </div>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                          <div id="planeMachine4">
+                            <div class="text-center">
+                              <img src="{{url('')}}/uploads/{{$reel_post->reels_image}}">                              
+                            </div>
+                            <?php $counter3++; ?>
+                      @elseif($counter < $segment*3 && $counter > $segment && $counter > $segment*2)
+                            <div class="text-center">
+                              <img src="{{url('')}}/uploads/{{$reel_post->reels_image}}">                              
+                            </div>
+                            <?php $counter3++; ?>
+                      @elseif($counter == $segment*3)
+                          </div>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                          <div id="planeMachine5">
+                            <div class="text-center">
+                              <img src="{{url('')}}/uploads/{{$reel_post->reels_image}}">                              
+                            </div>
+                            <?php $counter4++; ?>
+                      @elseif($counter < $segment*4 && $counter > $segment && $counter > $segment*2 && $counter > $segment*3)
+                            <div class="text-center">
+                              <img src="{{url('')}}/uploads/{{$reel_post->reels_image}}">                              
+                            </div> 
+                            <?php $counter4++; ?>
+                      @endif
+
+                      <?php $counter++; ?>
+
+                    @endforeach
+                          </div>
+                          </div>
+<!--                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <div id="planeMachine2">
                               <div class="text-center">
                                 <img src="http://susanwins.com/uploads/63331_we.jpg">                              
@@ -162,11 +235,13 @@
                                 <img src="http://susanwins.com/uploads/63331_we.jpg">                              
                               </div>
                               <div class="text-center">
-                                <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
+                                <img src="http://susanwins.com/uploads/ .jpg">
                               </div>
                           </div>
-                    </div>          
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    </div> -->
+
+
+<!--                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <div id="planeMachine3">
                               <div class="text-center">
                                 <img src="http://susanwins.com/uploads/63331_we.jpg">                              
@@ -222,7 +297,7 @@
                                 <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
                               </div>
                         </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
 
@@ -594,73 +669,105 @@
 
 
    $(window).bind("load", function() {
-   
+        
+        new_blah1 = 0;
+        new_blah2 = 0;
+        new_blah3 = 0;
+        new_blah4 = 0;
+
         var machine1 = $("#planeMachine2").slotMachine({
           active  : 0,
-          delay : 500
+          delay : 500,
+          randomize:function(activeElementIndex){
+              console.log(new_blah1);
+              return new_blah1;
+          }
         });
 
         var machine2 = $("#planeMachine3").slotMachine({
-          active  : 1,
-          delay : 500
+          active  : 0,
+          delay : 500,
+          randomize:function(activeElementIndex){
+              console.log(new_blah2);
+              return new_blah2;
+          }
         });
 
         var machine3 = $("#planeMachine4").slotMachine({
-          active  : 2,
-          delay : 500
+          active  : 0,
+          delay : 500,
+          randomize:function(activeElementIndex){
+              console.log(new_blah3);
+              return new_blah3;
+          }
         });
 
         var machine4 = $("#planeMachine5").slotMachine({
-          active  : 4,
-          delay : 500
+          active  : 0,
+          delay : 500,
+          randomize:function(activeElementIndex){
+              console.log(new_blah4);
+              return new_blah4;
+          }
         });
 
+
+        function watermelon(new_blah)
+        {
+          return new_blah;
+        }
+
         $("#gogogo2").click(function(){
+
+          new_blah1++;
+          new_blah2++;
+          new_blah3++;
+          new_blah4++; 
+
+          console.log('counters');
+
+          console.log('{{$counter1}}');
+          console.log('{{$counter2}}');
+          console.log('{{$counter3}}');
+          console.log('{{$counter4}}');
+
+          if(new_blah1 == {{$counter1}})
+          {
+            new_blah1 = 0;
+          }
+
+          if(new_blah2 == {{$counter2}})
+          {
+            new_blah2 = 0;
+          }
+
+          if(new_blah3 == {{$counter3}})
+          {
+            new_blah3 = 0;
+          }
+
+          if(new_blah4 == {{$counter4}})
+          {
+            new_blah4 = 0;
+          }
+
 
           // machine1.next();
           // machine2.next();
           // machine3.next();
           // machine4.next();
-          machine1.shuffle(3, function(){
-            machine1.destroy();
-            machine1 = $("#planeMachine2").slotMachine({
-              active  : 1,
-              delay : 500
-            });
-            machine1.next();
-          });
+          machine1.shuffle(3);
 
           setTimeout(function(){
-            machine2.shuffle(1, function(){
-            machine2.destroy();
-            machine2 = $("#planeMachine3").slotMachine({
-              active  : 2,
-              delay : 500
-            });
-            machine2.next();
-          });
+            machine2.shuffle(1);
           }, 500);
 
           setTimeout(function(){
-            machine3.shuffle(5, function(){
-            machine3.destroy();
-            machine3 = $("#planeMachine4").slotMachine({
-              active  : 3,
-              delay : 500
-            });
-            machine3.next();
-          });
+            machine3.shuffle(5);
           }, 700);
 
           setTimeout(function(){
-            machine4.shuffle(2, function(){
-            machine4.destroy();
-            machine4 = $("#planeMachine5").slotMachine({
-              active  : 4,
-              delay : 500
-            });
-            machine4.next();
-          });
+            machine4.shuffle(2);
           }, 900);
 
         });
