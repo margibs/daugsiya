@@ -21,5 +21,5 @@
 		</a>
 </div>
 
-<a href="{{ url('admin/edit/homeads/'.$home_image->id) }}">EDIT</a>
+<!-- <a href="{{ url('admin/edit/homeads/'.$home_image->id.'?redirect=admin/dynamic/link') }}">EDIT</a> -->
 @endsection

@@ -290,7 +290,19 @@ Route::group(['middleware' => 'UserCheck'], function()
 	//FUNCTION FOR DYNAMIC PAGE
 	Route::get('admin/dynamic/link', 'AdminController@getLink');
 
+	/*
+	*  FUNCTION FOR DYNAMIC LINK
+	*	AUTHO: IAN ROSLAES
+	*	DATE: 5/2/2016
+	*/
+	
+	//DATA TABLE FOR SKYSCRAPPER DYANAMI LINK
+	Route::get('admin/article/get','HomeImagesController@articleGet');
+	Route::get('admin/skypscrapper/get','HomeImagesController@skypscrapperGet');
+	Route::get('admin/home-adds/get', 'HomeImagesController@anyDataCasino');
+
 });
+
 
 //Ajax Call
 Route::post('casino/ajax/get_casino','PageController@ajaxGetCasino');

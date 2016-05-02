@@ -17,6 +17,7 @@
 {!! Form::model($home_image, ['method' => 'POST' , 'action' => ['AdminController@editImageAdd', $home_image->id]]) !!}
 	
 	{!! Form::hidden('id', $home_image->id) !!}
+	{!! Form::hidden('homeadds', $redirect) !!}
 	<div class="form-group">
 		<h6> Image  </h6> 
 		
