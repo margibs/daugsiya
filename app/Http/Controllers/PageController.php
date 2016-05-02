@@ -550,7 +550,7 @@ class PageController extends Controller
     public function categoryImageList()
     {
         $categories =  array(
-                        '<li><a href="http://susanwins.com/adventure"><img src="http://susanwins.com/uploads/76393_adventure.png"></a></li>',
+            '<li><a href="http://susanwins.com/adventure"><img src="http://susanwins.com/uploads/76393_adventure.png"></a></li>',
             '<li><a href="http://susanwins.com/animal"><img src="http://susanwins.com/uploads/63125_animals.png "></a></li>',
             '<li><a href="http://susanwins.com/celebs"><img src="http://susanwins.com/uploads/49000_celebs.png"></a></li>',
             '<li><a href="http://susanwins.com/classic"><img src="http://susanwins.com/uploads/66321_classic.png"></a></li>',
@@ -575,7 +575,7 @@ class PageController extends Controller
             '<li><a href="http://susanwins.com/tropicaljungle"><img src="http://susanwins.com/uploads/41272_tropical.png"></a></li>',
             '<li><a href="http://susanwins.com/television"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
 
-            '<li><a href="http://susanwins.com/copsthiefs"><img src="http://susanwins.com/uploads/17382_cops.png"></a></li>',
+            '<li><a href="http://susanwins.com/copsthiefs"><img src="http://susanwins.com/uploads/cops_cat2.png"></a></li>',
             '<li><a href="http://susanwins.com/food"><img src="http://susanwins.com/uploads/90975_food.png"></a></li>',
             '<li><a href="http://susanwins.com/girl-power"><img src="http://susanwins.com/uploads/71220_girlpower.png"></a></li>',
             '<li><a href="http://susanwins.com/sports"><img src="http://susanwins.com/uploads/18251_sports.png "></a></li>',
