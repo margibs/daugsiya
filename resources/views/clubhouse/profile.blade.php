@@ -8,8 +8,6 @@
 
 <link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
 
-
-
 @endsection
 
  @section('switch-button')
@@ -1160,39 +1158,20 @@
 
 
           <div class="picwrapper wrapper">
-            <div class="itemLabels"> Upload image </div>   
-          
-          <div id="upload-demo"></div>
-         <input type="file" id="upload" value="Choose a file">
-          <button class="upload-result">Result</button>
-          
-         <!--    <div id="demo-basic" class="croppie-container">
-                    </div>
-         
-                   <div class="actions">
-         <label class="myLabel">
-             <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" />
-           <span>  +  </span> 
-                 </label>
-         <button class="basic-result">Result</button>
-                   </div>
-          -->
+            <div class="itemLabels"> Upload image </div>        
+            <div class="pic">                 
+            <img src="{{  $user->user_detail->profile_picture ? asset('').'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png')   }}" alt="" class="profile_pic" id="picPreview">
+            </div>
 
-    <!--   <label class="myLabel">
-    <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" />
-    
-    <span>  +  </span>  -->
-
-            
-
+            <label class="myLabel">
+            <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" />
+            <span>  +  </span>
         </label>
 
          <!--    <button class="file-upload">            
             <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" > + </button> -->
 
-    </div>  
-
-
+    </div>
 
 @endsection
 
@@ -1903,35 +1882,7 @@ function init_bookflip(startpage){
 }
 
 
-
-/*var basic = $('#demo-basic').croppie({
-    viewport: {
-        width: 150,
-        height: 200
-    }
-});
-basic.croppie('bind', {
-    url: 'images/default_profile_picture.png',
-    points: [77,469,280,739]
-});
-//on button click
-basic.croppie('result', 'html');
-*/
-
-
-$uploadCrop = $('#upload-demo').croppie({
-   viewport: {
-      width: 200,
-      height: 200,
-      type: 'circle'
-   },
-   boundary: {
-      width: 300,
-      height: 300
-   }
-});
 </script>
-
 
 @endsection
 

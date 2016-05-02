@@ -14,6 +14,7 @@ use File;
 use App\Model\Post;
 use App\UserActivity;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 
 class GameController extends Controller
@@ -152,12 +153,32 @@ public function searchHashGame(Request $request){
         if(!file_exists(public_path().$directory)){
             $createDirectory = File::makeDirectory(public_path().$directory, 0777, false, true);
         }
-        
+        if(!file_exists($directory.'/5050/')) {
+            $createDirectory = File::makeDirectory($directory.'/5050/', 0777, false, true);
+        }
+        if(!file_exists($directory.'/4545/')) {
+            $createDirectory = File::makeDirectory($directory.'/4545/', 0777, false, true);
+        }
+        if(!file_exists($directory.'/2020/')) {
+            $createDirectory = File::makeDirectory($directory.'/2020/', 0777, false, true);
+        }
 
+        
         $filename = 'profile_picture-'.date('Y-m-d-H-i-s').'.'.$request->file('profile_picture')->getClientOriginalExtension();
+
+        $path50 = public_path($directory.'/5050/' . $filename);
+        $path45 = public_path($directory.'/4545/' . $filename);
+        $path20 = public_path($directory.'/2020/' . $filename);
+       
+    
 
         if($createDirectory && $request->hasFile('profile_picture')){
             $request->file('profile_picture')->move($directory, $filename);
+
+            $thumb = Image::make($directory.'/'.$filename)->resize(50,50)->save($path50, 50);
+            $thumb = Image::make($directory.'/'.$filename)->resize(45,45)->save($path45, 50);
+            $thumb = Image::make($directory.'/'.$filename)->resize(20,20)->save($path20, 50);
+
             $user_detail = User_Detail::firstOrCreate([ 'user_id' => $request->user_id ]);
             $user_detail->profile_picture = $directory.'/'.$filename;
             $user_detail->save();
