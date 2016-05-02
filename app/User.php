@@ -81,14 +81,6 @@ class User extends Model implements AuthenticatableContract,
     }
 
 
-    public function user_session(){
-        return $this->hasOne('App\User_Session');
-    }
-    public function user_sessions(){
-        return $this->hasMany('App\User_Session');
-    }
-
-
     public function friends(){
         return $this->hasMany('App\Friend')->with('friend');
     }

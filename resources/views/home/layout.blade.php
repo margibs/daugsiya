@@ -725,7 +725,7 @@
     <!--<script src="{{ asset('js/jquery.m.flip.js') }}"></script>   -->
     <!-- <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js"></script> -->
     <script> 
-            var myFriends = '<?php echo isset($myFriends) && count($myFriends) > 0 ? json_encode($myFriends) : "" ?> ';
+            var myFriends = '<?php echo isset($myFriends) && count($myFriends) > 0 ? json_encode($myFriends) : "" ?>';
     </script>
     <script src="{{ asset('js/ezslots.js') }}"></script>   
     <!-- <script src="{{ asset('js/jquery.bttrlazyloading.min.js') }}"></script>   -->
@@ -796,7 +796,8 @@
     var user = user_json ? JSON.parse(user_json) : false;
     var comment_type = "{{ isset($comment_type) ? $comment_type : '' }}";
     var content_id = "{{ isset($content_id) ? $content_id : '' }}";
-
+    var BASE_URL = $('meta[name="baseURL"]').attr('content');
+    var friendUrl = BASE_URL+'/friends';
     // getAnotherToken();
 
     // setInterval(getAnotherToken, 10000);
@@ -822,8 +823,6 @@
 timeZone = 'Europe/London';
 
 // Comment ---------------
-    
-
   
   $('.timestamp').each(function(){
       timestamp = this;
@@ -950,6 +949,130 @@ timeZone = 'Europe/London';
               
       return this.theComment;
     };
+
+        $(document).on('click', '.viewPersonContainer .actionButtons button', function(){
+
+        other_person = $(this).data('other_person');
+        action = $(this).data('action');
+        friend_id = $(this).data('friend_id');
+
+        $(this).attr('disabled', 'disabled');
+
+        //alert('i want to '+action+' person '+other_person+'using friend_id '+friend_id);
+
+        if(action){
+
+            if(other_person && action == 1){
+              /*alert('add friend');*/
+              addFriend(other_person);
+            }else if(action == 2 && friend_id && other_person){
+              /*alert('cancel friend request');*/
+              cancelFriendRequest(friend_id, other_person);
+            }else if(action == 3 && friend_id && other_person){
+              /*alert('accept friend request');*/
+              acceptFriendRequest(friend_id, other_person);
+            }else if(action == 4 && friend_id && other_person){
+              /*alert('unfriend');*/
+              unFriend(friend_id, other_person);
+            }
+
+
+        }
+
+
+       });
+
+function unFriend(friend_id, other_person){
+      $.ajax({
+
+            url : friendUrl+'/unFriend',
+            data : { id : friend_id , _token : CSRF_TOKEN },
+            type : 'POST',
+            dataType : 'json',
+            success : function(data){
+
+              new_button = $('<button>').data('action', 1).data('other_person', other_person).text('Add Friend');
+
+              $('.viewPersonContainer .actionButtons').find('button').replaceWith(new_button);
+
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+
+          });
+   }
+
+   function acceptFriendRequest(friend_id, other_person){
+          
+          $.ajax({
+
+            url : friendUrl+'/acceptFriendRequest',
+            data : { id : friend_id , _token : CSRF_TOKEN },
+            type : 'POST',
+            dataType : 'json',
+            success : function(data){
+
+              if(data){
+                socket.emit('friend_request_accepted', { other_person : other_person });
+              }
+
+              new_button = $('<button>').data('action', 4).data('other_person', other_person).data('friend_id', friend_id).text('Unfriend');
+
+              $('.viewPersonContainer .actionButtons').find('button').replaceWith(new_button);
+
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+
+          });
+
+   }
+
+   function cancelFriendRequest(friend_id, other_person){
+
+      $.ajax({
+
+          url : friendUrl+'/cancelFriendRequest',
+          data : { id : friend_id, _token : CSRF_TOKEN },
+          type : 'POST',
+          dataType : 'json',
+          success : function(deleted){
+              
+             new_button = $('<button>').data('action', 1).data('other_person', other_person).text('Add Friend');
+
+            $('.viewPersonContainer .actionButtons').find('button').replaceWith(new_button);
+
+          },error : function(xhr){
+            console.log(xhr.responseText);
+          }
+
+      });
+
+   }
+
+
+   function addFriend(other_person){
+      console.log(' add this friend '+other_person);
+
+      $.ajax({
+
+          url : friendUrl+'/addFriend',
+          data : { user_id : user.id, friend_id : other_person, _token : CSRF_TOKEN },
+          type : 'POST',
+          dataType : 'json',
+          success : function(data){
+            console.log(data);
+
+            new_button = $('<button>').data('action', 2).data('other_person', other_person).data('friend_id', data.id).text('Cancel Friend Request');
+             socket.emit('send_addFriend_request', { from : user.id, to : other_person, id : data.id });
+            $('.viewPersonContainer .actionButtons').find('button').replaceWith(new_button);
+
+          },error : function(xhr){
+            console.log(xhr.responseText);
+          }
+
+      });
+   }
 
     $('.reply-form textarea').tagging();
 

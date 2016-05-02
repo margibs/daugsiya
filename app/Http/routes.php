@@ -125,7 +125,6 @@ Route::get('admin/autoposts/check_execute', 'AutoPostController@checkExecute');
 
 Route::post('room/getRoomMessages', 'ChatroomController@getRoomMessages');
 Route::get('notification/postCustomNotification', 'NotificationController@postCustomNotification');
-Route::post('session/getUserSession', 'UserSessionController@getUserSession');
 Route::post('clubhouse/session', 'UserController@session');
 
 

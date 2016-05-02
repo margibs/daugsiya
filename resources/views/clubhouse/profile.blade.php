@@ -945,7 +945,7 @@
 
                                   @foreach($user->myFriends as $fr)
                                   <li data-friend="{{$fr->friend->id }}">
-                                    <span {{ isset($fr->friend->user_session) && $fr->friend->user_session->session_id ? '' : 'class=offline' }}  id="friend-online-status-{{ $fr->friend->user_detail->user_id }}"></span>
+                                    <span class="offline" id="friend-online-status-{{ $fr->friend->user_detail->user_id }}"></span>
                                     <div class="options" data-user="{{ $fr->friend->user_detail->user_id }}">
                                       <a  data-target="#pmBox" class="subModalToggle pmFriend"> <i class="fa fa-comment"></i>  </a>
                                       <!-- <a  data-target="#friendProfile" id="friendprofopen" class="subModalToggle viewFriendProfile toggle-good">  <i class="fa fa-user"></i> </a> -->
@@ -1290,7 +1290,7 @@ $(document).ready(function(){
 /*    friend_login
 friend_logout*/
 
-    socket.on('friend_login', function(friend_id){
+    /*socket.on('friend_login', function(friend_id){
         console.log('friend_login');
         console.log(friend_id);
         $('#friend-online-status-'+friend_id).removeClass('offline').parent('li').prependTo('#friendList');
@@ -1299,7 +1299,7 @@ friend_logout*/
         console.log('friend_logout');
         console.log(friend_id);
         $('#friend-online-status-'+friend_id).addClass('offline');
-    });
+    });*/
 
 
     playNowAJAX = false;

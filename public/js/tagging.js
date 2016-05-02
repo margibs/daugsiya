@@ -5,9 +5,9 @@
 
 
 	function placeCaretAtEnd(el) {
-   /* el.focus();*/
+    el.focus();
 
-    $(el).parent('.textarea').focus();
+    /*$(el).parent('.textarea').focus();*/
     if (typeof window.getSelection != "undefined"
             && typeof document.createRange != "undefined") {
         var range = document.createRange();
@@ -171,14 +171,22 @@
 
 	});
 
+	$(document).on('click', '.parentContent', function(e){
 
+		placeCaretAtEnd($(this).find('.textarea')[0]);
+	});
 	$(document).on('focus','.dummyTextarea', function(e){
 			
-			parentContent = $(this).find('.parentContent');
+			/*parentContent = $(this).find('.parentContent');
 
 
-				$(parentContent).focus();
-
+				$(parentContent).find('.textarea').focus();*/
+				if($(this).text() == '' && $(this).find('.parentContent').length == 1){
+					$(this).removeClass('hasText');
+					
+				}else{
+					$(this).addClass('hasText');
+				}
 
 			});
 
@@ -488,11 +496,18 @@
 				}
 
 				 if($(theDummyTextarea).html() == ''){
+				 		$(theDummyTextarea).removeClass('hasText');
 						$(theDummyTextarea).resetTagging();
 					}
 
 			$(TextArea).decodeValue($(theDummyTextarea).html());
 
+			if($(theDummyTextarea).text() == '' && $(theDummyTextarea).find('.parentContent').length == 1){
+					$(theDummyTextarea).removeClass('hasText');
+					
+				}else{
+					$(theDummyTextarea).addClass('hasText');
+				}
 			});
 
 				$(document).on('keydown','.dummyTextarea', function(e){
@@ -529,6 +544,12 @@
 						placeCaretAtEnd( $(_this).find(' > .parentContent > .textarea')[0] );	
 					}*/
 
+				}
+
+				if(typingAction(e)){
+					$(theDummyTextarea).addClass('hasText');
+				}else{
+					$(theDummyTextarea).removeClass('hasText');
 				}
 
 			});
