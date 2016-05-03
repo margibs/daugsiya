@@ -2052,36 +2052,6 @@ function init_bookflip(startpage){
 }
 
 
-<<<<<<< HEAD
-
-/*var basic = $('#demo-basic').croppie({
-    viewport: {
-        width: 150,
-        height: 200
-    }
-});
-basic.croppie('bind', {
-    url: 'images/default_profile_picture.png',
-    points: [77,469,280,739]
-});
-//on button click
-basic.croppie('result', 'html');
-*/
-
-
-/*$uploadCrop = $('#upload-demo').croppie({
-   viewport: {
-      width: 200,
-      height: 200,
-      type: 'circle'
-   },
-   boundary: {
-      width: 300,
-      height: 300
-   }
-});*/
-=======
->>>>>>> 716615a7e751b994398f4828d9acec2a9a4dd28a
 </script>
 
 @endsection
