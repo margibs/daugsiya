@@ -1550,25 +1550,8 @@ contentHeight = $(contents_here).outerHeight() +'px';
 
         
     }
-/*      $.ajax({
-        type: 'post',
-        url: "{{url('home/ajax_get_ads_posts_init')}}",
-        data: {_token: CSRF_TOKEN2}, 
-        success: function(response)
-        {
-          var parsed = JSON.parse(response);
 
-          $.each( parsed, function( i, l ){
-            $( ".rellimg" ).append(l);
-          });
-
-        }
-        
-      });*/
-
-
-
-      // APIS
+    // APIS
 
 
   $('#share_via_pinterest').sharrre({

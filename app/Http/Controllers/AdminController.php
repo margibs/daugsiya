@@ -592,11 +592,11 @@ class AdminController extends Controller
        
     }
 
-    public function editImageAdd() 
+    public function editImageAdd(Request $request, $id) 
     {
 
         $request = Input::get('homeadds');
-        $home_image = HomeImage::find(Input::get('id'));
+        $home_image = HomeImage::findOrFail($id);
         $data = Input::all();
         $home_image->update($data);
         $home_images = HomeImage::get();
@@ -612,6 +612,11 @@ class AdminController extends Controller
     {
         $home_images = HomeImage::get();
         return view('admin.listImageAdds',compact('home_images'));
+    }
+
+    public function listImageHomeTrashed()
+    {
+        return view('admin.listImageAddTrashed');
     }
 
     public function deleteImageHome($id)

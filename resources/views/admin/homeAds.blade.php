@@ -123,7 +123,7 @@ h2{
 					@endif
 
 
-					<form action="{{ url('admin/insert_image') }}" method="POST" class="form-horizontal">
+					<form action="{{ url('admin/homeads/insert_image') }}" method="POST" class="form-horizontal">
 					{!! csrf_field() !!}
 
 					<div class="row">	

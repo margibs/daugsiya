@@ -264,13 +264,15 @@ Route::group(['middleware' => 'UserCheck'], function()
 
 	//HOME ADS
 	Route::get('admin/home_ads','AdminController@homeAds');
-	Route::post('admin/insert_image', 'AdminController@insertImage');
+	Route::post('admin/homeads/insert_image', 'AdminController@insertImage');
 	Route::get('admin/homeads/{id}', 'AdminController@getAdds');
-	Route::get('admin/edit/homeads/{id}', 'AdminController@editHomeAdds');
-	Route::post('admin/edit/imageEdit', 'AdminController@editImageAdd');
-	Route::get('admin/delete/imageDelete/{id}', 'AdminController@deleteImageHome');
-	Route::get('admin/list/imageAdds', 'AdminController@listImageHome');
-
+	Route::get('admin/homeads/edit/{id}', 'AdminController@editHomeAdds');
+	Route::post('admin/homeads/edit/{id}', 'AdminController@editImageAdd');
+	/*Route::post('admin/edit/imageEdit', 'AdminController@editImageAdd');*/
+	Route::get('admin/homeads/delete/imageDelete/{id}', 'AdminController@deleteImageHome');
+	Route::get('admin/homeads/list/imageAdds', 'AdminController@listImageHome');
+	Route::get('admin/homeads/list/trashed', 'AdminController@listImageHomeTrashed');
+	Route::get('admin/homeads/list/trashedData', 'HomeImagesController@trashedData');
 	//FUNCTION FOR CHANGE IS MOBILE
 	Route::post('admin/posts/ismobile', 'AdminController@ismobile');
 	//DATA TABLE FOR USER CONTROLLER

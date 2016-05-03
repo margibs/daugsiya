@@ -493,11 +493,16 @@ class PageController extends Controller
         DB::table('posts')
         ->select('posts.id','posts.slug','posts.reels_image')
         ->where('status',1)
-        ->where('posts.reels_image','!=','')
         ->orderBy(DB::raw('RAND()'))
         // ->orderBy('posts.id','ASC')
-        ->take(20)
         ->get();
+
+        $this->data['reel_posts_count'] = 
+        DB::table('posts')
+        ->select(DB::raw('COUNT(1)'))
+        ->where('status',1)
+        // ->orderBy('posts.id','ASC')
+        ->count();
 
         $this->data['random_order_number'] = rand(1, 50);
 
@@ -552,7 +557,7 @@ class PageController extends Controller
     public function categoryImageList()
     {
         $categories =  array(
-                        '<li><a href="http://susanwins.com/adventure"><img src="http://susanwins.com/uploads/76393_adventure.png"></a></li>',
+            '<li><a href="http://susanwins.com/adventure"><img src="http://susanwins.com/uploads/76393_adventure.png"></a></li>',
             '<li><a href="http://susanwins.com/animal"><img src="http://susanwins.com/uploads/63125_animals.png "></a></li>',
             '<li><a href="http://susanwins.com/celebs"><img src="http://susanwins.com/uploads/49000_celebs.png"></a></li>',
             '<li><a href="http://susanwins.com/classic"><img src="http://susanwins.com/uploads/66321_classic.png"></a></li>',
@@ -577,7 +582,7 @@ class PageController extends Controller
             '<li><a href="http://susanwins.com/tropicaljungle"><img src="http://susanwins.com/uploads/41272_tropical.png"></a></li>',
             '<li><a href="http://susanwins.com/television"><img src="http://susanwins.com/uploads/28435_television.png"></a></li>',
 
-            '<li><a href="http://susanwins.com/copsthiefs"><img src="http://susanwins.com/uploads/17382_cops.png"></a></li>',
+            '<li><a href="http://susanwins.com/copsthiefs"><img src="http://susanwins.com/uploads/cops_cat2.png"></a></li>',
             '<li><a href="http://susanwins.com/food"><img src="http://susanwins.com/uploads/90975_food.png"></a></li>',
             '<li><a href="http://susanwins.com/girl-power"><img src="http://susanwins.com/uploads/71220_girlpower.png"></a></li>',
             '<li><a href="http://susanwins.com/sports"><img src="http://susanwins.com/uploads/18251_sports.png "></a></li>',
@@ -918,13 +923,13 @@ class PageController extends Controller
 
     public function getTopGamesCategory($id)
     {
-        if(count($this->top_games_array) == 8)
+        if(count($this->top_games_array) == 6)
         {
             return $this->top_games_array;
         }
         else
         {
-            $new_top_games = 8 - count($this->top_games_array);
+            $new_top_games = 6 - count($this->top_games_array);
             $collection_of_top_games = DB::table('posts')
             ->join('widget_ratings','posts.id','=','widget_ratings.post_id')
             ->join('post_categories','posts.id','=','post_categories.post_id')
@@ -1203,7 +1208,7 @@ class PageController extends Controller
 
             foreach ($collection_of_banners as $collection_of_banner) 
             {
-               $this->article_banners_array[] = "<p><a href='".$collection_of_banner->image_link."' track-action='56ddbe3996ada' class='get_me_article_banner' get-this-id='".$collection_of_banner->id."'><div class='questionMarkHover hint--top hint--bounce hint--rounded' data-hint='Click to know more'> ? </div><img class='not_count' src='".url('uploads')."/" .$collection_of_banner->image_url. "' style='width:100%;'></a></p>" ;
+               $this->article_banners_array[] = "<p><a href='".$collection_of_banner->image_link."' track-action='56ddbe3996ada' class='get_me_article_banner' get-this-id='".$collection_of_banner->id."'><img class='not_count' src='".url('uploads')."/" .$collection_of_banner->image_url. "' style='width:100%;'></a></p>" ;
             
             }
 
