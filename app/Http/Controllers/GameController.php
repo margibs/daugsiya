@@ -156,9 +156,8 @@ public function searchHashGame(Request $request){
         $directory = 'user_uploads/user_'.$request->user_id;
         $data = User_Detail::find($request->user_id);
         if($data->profile_picture != "" && $data->profile_picture != null) {
-            $result = substr($data->profile_picture, 0, 5);
-            $sample = 'user_uploads/'.$result.$request->user_id;
-            $success = File::cleanDirectory('user_uploads/'.$result.$request->user_id.'/');
+            $path = 'user_uploads/'.'user_'.$request->user_id.'/';
+            $success = File::cleanDirectory($path);
         }
 
         $createDirectory = true;
@@ -178,9 +177,11 @@ public function searchHashGame(Request $request){
         
         $filename = 'profile_picture-'.date('Y-m-d-H-i-s').'.'.$request->file('profile_picture')->getClientOriginalExtension();
 
+
         $path50 = public_path($directory.'/5050/' . $filename);
         $path45 = public_path($directory.'/4545/' . $filename);
         $path20 = public_path($directory.'/2020/' . $filename);
+
         
         if($createDirectory && $request->hasFile('profile_picture')){
             $request->file('profile_picture')->move($directory, $filename);
@@ -189,8 +190,9 @@ public function searchHashGame(Request $request){
             $thumb = Image::make($directory.'/'.$filename)->resize(45,45)->save($path45, 50);
             $thumb = Image::make($directory.'/'.$filename)->resize(20,20)->save($path20, 50);
 
+
             $user_detail = User_Detail::firstOrCreate([ 'user_id' => $request->user_id ]);
-            $user_detail->profile_picture = $directory.'/'.$filename;
+            $user_detail->profile_picture = $filename;
             $user_detail->save();
             
         }
