@@ -26,6 +26,38 @@ app.post("/push_custom_notification", function(req, res, next) {
     res.send(true);
 });
 
+app.post("/push_userActivity", function(req, res, next) {
+    console.log('push_userActivity');
+    console.log(req.body);
+    activity_data = {};
+    activity_data.user = req.body.user;
+    activity_data.content = req.body.content;
+    activity_data.type = req.body.type;
+    io.to('friend_'+activity_data.user.id).emit("post_userActivity", activity_data);
+    res.send(true);
+});
+
+app.post("/friend_tag_notification", function(req, res, next) {
+    /*io.sockets.emit("post_custom_notification", req.body);*/
+    console.log('friend_tag_notification');
+    friends = req.body.friendTags;
+
+    notification_data = {};
+    notification_data.content = req.body.content;
+    notification_data.user = req.body.user;
+    notification_data.type = req.body.type;
+
+    getSockets = io.sockets;
+
+    for(i=0;i<friends.length;i++){
+        getSockets.in('user_'+friends[i]);
+    }
+
+    getSockets.emit('post_friendTag_notification', notification_data );
+
+    res.send(true);
+});
+
 app.post("/push_recommendGame_notification", function(req, res, next) {
     request = req.body;
 
@@ -417,7 +449,7 @@ io.on('connection', function (socket) {
         socket.to(socket.room_name).emit('push_reply', data);
     });
 
-  socket.on('login', function (userdata, chatroom, adminmode){
+  socket.on('login', function (userdata, chatroom, adminmode, myFriends){
 
     if(userdata.session_id){
       console.log(userdata.session_id);
@@ -447,6 +479,14 @@ io.on('connection', function (socket) {
           socket.emit('rooms_opened', myRooms);
 
 
+        }
+      }
+      console.log('myFriends');
+      console.log(myFriends);
+      if(myFriends && myFriends.length > 0){
+        for(j=0;j<myFriends.length;j++){
+          friend_id = myFriends[j];
+          socket.join('friend_'+friend_id);
         }
       }
 

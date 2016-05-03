@@ -14,6 +14,7 @@ use File;
 use App\Model\Post;
 use App\UserActivity;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 
 class GameController extends Controller
@@ -26,7 +27,7 @@ class GameController extends Controller
 
             'post_id' => $request->post_id,
             'user_id' => $request->user_id,
-            'type' => 2
+            'type' => 1
 
          ]);
          /*
@@ -41,7 +42,7 @@ class GameController extends Controller
                 'post_id' => $request->post_id
             ];
 
-        $activities = UserActivity::addActivity($data, 2);
+        $activities = UserActivity::addActivity($data, 1);
 
         return json_encode($gameExp);
 
@@ -123,6 +124,12 @@ public function searchHashGame(Request $request){
 
          ]);
 
+        $data = [
+                'user_id' => $request->user_id,
+                'post_id' => $request->post_id
+            ];
+
+        $activities = UserActivity::addActivity($data, 2);
 
         $gameExp->gameRating = $this->getGameRating($request->post_id);
 
@@ -146,12 +153,32 @@ public function searchHashGame(Request $request){
         if(!file_exists(public_path().$directory)){
             $createDirectory = File::makeDirectory(public_path().$directory, 0777, false, true);
         }
-        
+        if(!file_exists($directory.'/5050/')) {
+            $createDirectory = File::makeDirectory($directory.'/5050/', 0777, false, true);
+        }
+        if(!file_exists($directory.'/4545/')) {
+            $createDirectory = File::makeDirectory($directory.'/4545/', 0777, false, true);
+        }
+        if(!file_exists($directory.'/2020/')) {
+            $createDirectory = File::makeDirectory($directory.'/2020/', 0777, false, true);
+        }
 
+        
         $filename = 'profile_picture-'.date('Y-m-d-H-i-s').'.'.$request->file('profile_picture')->getClientOriginalExtension();
+
+        $path50 = public_path($directory.'/5050/' . $filename);
+        $path45 = public_path($directory.'/4545/' . $filename);
+        $path20 = public_path($directory.'/2020/' . $filename);
+       
+    
 
         if($createDirectory && $request->hasFile('profile_picture')){
             $request->file('profile_picture')->move($directory, $filename);
+
+            $thumb = Image::make($directory.'/'.$filename)->resize(50,50)->save($path50, 50);
+            $thumb = Image::make($directory.'/'.$filename)->resize(45,45)->save($path45, 50);
+            $thumb = Image::make($directory.'/'.$filename)->resize(20,20)->save($path20, 50);
+
             $user_detail = User_Detail::firstOrCreate([ 'user_id' => $request->user_id ]);
             $user_detail->profile_picture = $directory.'/'.$filename;
             $user_detail->save();
@@ -279,9 +306,16 @@ public function searchHashGame(Request $request){
 
         $user = User::findOrFail($request->user_id);
 
-        $friend_requests = $user->accepted_friends()->where('confirmed', 0)->selectRaw('friends.id,friends.user_id,friends.friend_id,friends.read, 0, friends.confirmed, friends.created_at, null');
+        $friend_requests = $user->accepted_friends()->where('confirmed', 0)->selectRaw('friends.id,friends.user_id,friends.friend_id,friends.read, 0, friends.confirmed, friends.created_at, null, null,null');
 
-        $user_notifications = $user->user_notifications()->with('game')->selectRaw('user_notifications.id,user_notifications.user_id,user_notifications.friend_id,user_notifications.read, user_notifications.type, 0, user_notifications.created_at, user_notifications.post_id')->where('user_notifications.read', 0)->union($friend_requests)->orderBy('read', 'asc')->orderBy('created_at', 'desc')->get();
+        $user_notifications = $user->user_notifications()->with('game')->selectRaw('user_notifications.id,user_notifications.user_id,user_notifications.friend_id,user_notifications.read, user_notifications.type, 0, user_notifications.created_at, user_notifications.post_id, posts.slug as postslug, categories.slug as categoryslug')
+        ->leftJoin('posts', function($join){
+            $join->on('posts.id','=', 'user_notifications.post_id')->whereIn('user_notifications.type', [2,5]);
+        })
+        ->leftJoin('categories', function($join){
+            $join->on('categories.id','=', 'user_notifications.post_id')->where('user_notifications.type','=', 4);
+        })
+        ->where('user_notifications.read', 0)->union($friend_requests)->orderBy('read', 'asc')->orderBy('created_at', 'desc')->get();
 
         return json_encode($user_notifications);
     }

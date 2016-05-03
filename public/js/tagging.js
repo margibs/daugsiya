@@ -533,6 +533,25 @@
 
 			});
 
+	$(document).on('simulateSubmit','form', function(e){
+
+				friendTags = [];
+				 $(this).find('.dummyTextarea .findFriend').each(function(){
+
+				 	friend_id = $(this).attr('data-id');
+
+				 	if(friend_id){
+				 		friendTags.push(friend_id);
+				 	}
+				 	
+				});
+				 $(this).data('friendTags', friendTags);
+
+				/* alert(JSON.stringify(friendTags));*/
+
+				$(this).find('.dummyTextarea').resetTagging();
+			});
+
 	$.fn.tagging = function(){
 
 
@@ -564,9 +583,7 @@
 			$(dummyTextareaParent).insertBefore(TextArea);
 			$(TextArea).hide();
 
-			$(TextArea).parents('form').on('submit', function(){
-				$(this).find('.dummyTextarea').resetTagging();
-			});
+
 			
 		
 		});

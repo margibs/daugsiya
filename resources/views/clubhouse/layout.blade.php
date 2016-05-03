@@ -27,6 +27,9 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900' rel='stylesheet' type='text/css'>
 
+  
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+
     <!--<link rel="stylesheet" href="{{ elixir('css/clubhouse-all.css') }}">-->
 
     <script src="{{ asset('js/modernizr.custom.js') }}"></script>
@@ -353,6 +356,8 @@
     <script src="{{ asset('js/livestamp.min.js') }}"></script> 
 
   <script src="{{ asset('js/sockets.io.js') }}"></script>
+
+
   <script>
 
 
@@ -872,129 +877,208 @@ london = moment.tz(timeZone);
       $('#notificationMenu').find('.notifcount').remove();
       
     });
+
+
+    socket.on('post_friendTag_notification', function(data){
+
+          span = $('<span>').addClass('notifcount');
+      notifcount = 1;
+
+      if($('#unreadUserNotification').find('.notifcount').length)
+      {
+        notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
+      }
+
+      $('#unreadUserNotification').html('').append($(span).text(notifcount));
+      console.log(data);
+      data_url = data.content;
+
+      if(data.type == 3 || data.type == 2){
+        data_url = data.content.slug;
+      }
+
+      data_url = baseUrl+'/'+data_url;
+
+      $('#myNotifications').prepend(
+        $('<li>').append(
+              $('<a href="'+data_url+'">')
+              .append(
+                $('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+              )
+              .append(
+                $('<p>')
+                .append(
+                  $('<span>').addClass('name').text(data.user.user_detail.firstname+' '+data.user.user_detail.lastname+' tagged you in a comment. ')
+                )
+              )
+            )
+      );
+      });
      
 
        $('#notificationMenu').one('click', function(){
 
-        theButton = this;
+    theButton = this;
 
-      $('#myNotifications').html('').append($('<li style="border:none;">').addClass('loading').append('<div class="typing-indicator"><span></span><span></span><span></span></div><p> Loading... </p>'));
+    $('#myNotifications').html('').append($('<li style="border:none;">').addClass('loading').append('<div class="typing-indicator"><span></span><span></span><span></span></div><p> Loading... </p>'));
 
-      $.ajax({
-          url : profileUrl+'/getFriendRequests',
-          data : { user_id : userId, _token : CSRF_TOKEN },
-          dataType : 'json',
-          type : 'POST',
-          success : function(data){
-            console.log('getFriendRequests');
-              console.log(data);
+    $.ajax({
+      url : profileUrl+'/getFriendRequests',
+      data : { user_id : userId, _token : CSRF_TOKEN },
+      dataType : 'json',
+      type : 'POST',
+      success : function(data)
+      {
+        console.log('getFriendRequests');
+        console.log(data);
 
-              if(data){
-                readUserNotifications();
+        if(data)
+        {
+          readUserNotifications();
+          $(theButton).bind('ckick', readUserNotifications);
+        }
 
-                $(theButton).bind('ckick', readUserNotifications);
-              }
-            $('#myNotifications').html('');
+        $('#myNotifications').html('');
 
-              $.each(data, function(){
+        $.each(data, function(){
 
+          li = $('<li>');
 
-                li = $('<li>');
+          request = this;
+          if(request.type == 0)
+          {
+            button = $('<a href="javascript:;">')
+            .append(
+              $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+            )
+            .append(
+              $('<p>')
+              .append(
+                $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname)
+              )
+              .append(
+                $('<div>').addClass('actionList')
+                .append(
+                  $('<button>').text('Accept').addClass('acceptFriend').data('id', request.id).data('user', request.user_id)
+                )
+                .append(
+                  $('<button>').text('Decline').addClass('declineFriend').data('id', request.id)
+                )
+              )
+            );
 
-                request = this;
+            $(li).attr('id', 'friend-request-'+request.user_id).append(
+            button
+            );     
 
-                if(request.type == 0){
-                    button = $('<a href="javascript:;">')
-                        .append(
-                          $('<img>').attr('src', request.user.user_detail.profile_picture ? publicUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
-                          )
-                        .append(
-                          $('<p>')
-                              .append(
-                                $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname)
-                                )
-                              .append(
-                                $('<div>').addClass('actionList')
-                                  .append(
-                                    $('<button>').text('Accept').addClass('acceptFriend').data('id', request.id).data('user', request.user_id)
-                                    )
-                                  .append(
-                                    $('<button>').text('Decline').addClass('declineFriend').data('id', request.id)
-                                    )
-                                )
-                          );
-
-               
-
-               
-                      $(li).attr('id', 'friend-request-'+request.user_id).append(
-                        button
-                      )      
-                 
-                }else if(request.type == 1){
-
-                  $(li).append(
-                        $('<a href="javascript:;">')
-                          .append(
-                            $('<img>').attr('src', request.user.profile_picture ? publicUrl+'/'+request.user.profile_picture : defaultProfilePic )
-                            )
-                          .append(
-                            $('<p>')
-                                .append(
-                                  $('<span>').addClass('name').text('You and '+request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' are now friends!')
-                                  )
-                                .append(
-                                  $('<div>').addClass('actionList').data('user', request.user.user_detail.user_id)
-                                    .append(
-                                        $('<button>').text('Message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox')
-                                        )
-                                  )
-                            )
-                      )
-
-                }else if(request.type == 2){
-
-                    $(li).append(
-                          $('<a href="'+baseUrl+'/'+request.game.slug+'">')
-                            .append(
-                              $('<img>').attr('src', request.user.user_detail.profile_picture ? publicUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
-                              )
-                            .append(
-                              $('<p>')
-                                  .append(
-                                    $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' recommended you to play. ')
-                                    )
-                                  .append(
-                                    $('<div>').addClass('actionList')
-                                      .append(
-                                          $('<span>').text('Click to Play')
-                                          )
-                                    )
-                              )
-                        )
-
-                }
-
-
-                if(request.read == 0){
-
-                    $(li).find('a').addClass('unread');
-
-                  }
-
-                 $('#myNotifications').append(li);
-
-                
-
-              });
-
-          },error : function(xhr){
-            console.log(xhr.responseText);
           }
-      });
+          else if(request.type == 1)
+          {
+            $(li).append(
+              $('<a href="javascript:;">')
+              .append(
+              $('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
+              )
+              .append(
+                $('<p>')
+                .append(
+                  $('<span>').addClass('name').text('You and '+request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' are now friends!')
+                )
+                .append(
+                  $('<div>').addClass('actionList').data('user', request.user.user_detail.user_id)
+                  .append(
+                    $('<button>').text('Message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox')
+                  )
+                )
+              )
+            );
 
+          }
+          else if(request.type == 2)
+          {
 
-   });
+            $(li).append(
+              $('<a href="'+baseUrl+'/'+request.game.slug+'">')
+              .append(
+                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+              )
+              .append(
+                $('<p>')
+                .append(
+                  $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' recommended you to play. ')
+                )
+                .append(
+                  $('<div>').addClass('actionList')
+                  .append(
+                    $('<span>').text('Click to Play')
+                  )
+                )
+              )
+            );
+          }
+          else if(request.type == 3)
+          {
+            $(li).append(
+              $('<a href="'+baseUrl+'/all_games">')
+              .append(
+                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+              )
+              .append(
+                $('<p>')
+                .append(
+                  $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
+                )
+              )
+            );
+          }
+          else if(request.type == 5)
+          {
+            $(li).append(
+              $('<a href="'+baseUrl+'/'+request.postslug+'">')
+              .append(
+                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+              )
+              .append(
+                $('<p>')
+                .append(
+                  $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
+                )
+              )
+            );
+          }
+          else if(request.type == 4)
+          {
+            $(li).append(
+              $('<a href="'+baseUrl+'/'+request.categoryslug+'">')
+              .append(
+                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+              )
+              .append(
+                $('<p>')
+                .append(
+                  $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
+                )
+              )
+            );
+          }
+
+          if(request.read == 0)
+          {
+            $(li).find('a').addClass('unread');
+          }
+
+          $('#myNotifications').append(li);
+
+        });
+
+      },
+      error : function(xhr)
+      {
+        console.log(xhr.responseText);
+      }
+    });
+
+  });
 
 
   socket.on('post_addFriend_request', function(request_id, request){
@@ -1753,6 +1837,7 @@ interact('.draggable')
 
 
   </script>
+    <script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
    @yield('custom_scripts')
   @yield('footer_scripts')
 

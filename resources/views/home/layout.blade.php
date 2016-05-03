@@ -467,53 +467,33 @@
    <div class="activity">
 
     <h2> Friends Recent Activity </h2>
-    <ul class="bxslider">
+    <ul class="bxslider" id="friendUserActivityContainer">
 
-      @if(isset($user_activities))
-       @if(count($user_activities) != 0 && $user_activities != null)
+      @if(isset($myFriends) && count($myFriends) > 0)
+       
 
-          @else
-           <div class="activity" style="top: 730px;">
-            <!--   <h2 style="text-align: center;"> Friends Recent Activity </h2> -->
-              <ul >
+       @if(isset($user_activities) && count($user_activities) != 0 && $user_activities != null)
+        @foreach($user_activities as $activity)
+          <li> 
+          <img src="{{ $activity->profile_picture ? asset($activity->profile_picture) : asset('images/default_profile_picture.png') }}">
+        @if($activity->type == 1)
+            <p>{{ $activity->full_name }} addedd <a href="{{ $activity->slug }}"  style="text-decoration:none;">{{ $activity->gamename }}</a> as a new Favorite</p>
+        @elseif($activity->type == 2)
+            <p>{{ $activity->full_name }} played <a href="{{ $activity->slug }}"  style="text-decoration:none;">{{ $activity->gamename }}</a></p>
+        @elseif($activity->type == 3)
+            <p>{{ $activity->full_name }} just won {{ $activity->prizename }}</p>
+         @endif
+            </li>
+        @endforeach
 
-                <li> 
-                 <a href="#" style="
-                 overflow: hidden;
-                font-weight: 400;
-                color: #000;
-                text-decoration: none;
-                text-align: center;
-                display: block;
-                    font-family: Roboto;">
-                  <img src="https://s3.amazonaws.com/uifaces/faces/twitter/choblab/128.jpg" style="float: none; width: 50px; margin-bottom: 10px;">
-                  <p style="font-size: 17px;text-align: center;    font-family: Roboto;"> Aww you don't have any friends yet! <span style="    
-                text-decoration: none;
-                font-weight: bold;
-                color: #D21416;
-                font-family: Roboto;
-                font-size: 17px;"> Join in the chat and make some now!  </span> </p>
-                
-                 </a> 
-                </li>
-              </ul>
-      </div>
+
+  
        @endif
-      @foreach($user_activities as $activity)
-      <li> 
-        <img src="{{ asset($activity->profile_picture) }}">
-        <p>{{ $activity->full_name }}</p>
-        <a href="{{ $activity->slug }}"  style="text-decoration:none;">  <p>{{ $activity->title }}</p></a>
 
-        <a href="{{ $activity->prize_link }}" style="text-decoration: none;">  <p>{{ $activity->prizename }}</p></a>
-      </li>
-      @endforeach
-      @else
-          <div class="activity" style="top: 730px;">
-             <!--  <h2 style="text-align: center;"> Friends Recent Activity </h2> -->
-              <ul >
 
-                <li> 
+        @else
+
+                   <li> 
                  <a href="#" style="
                  overflow: hidden;
                 font-weight: 400;
@@ -532,8 +512,7 @@
                 
                  </a> 
                 </li>
-              </ul>
-      </div>
+
       @endif  
 
 
@@ -745,7 +724,9 @@
     </script>
     <!--<script src="{{ asset('js/jquery.m.flip.js') }}"></script>   -->
     <!-- <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js"></script> -->
-
+    <script> 
+            var myFriends = '<?php echo isset($myFriends) && count($myFriends) > 0 ? json_encode($myFriends) : "" ?> ';
+    </script>
     <script src="{{ asset('js/ezslots.js') }}"></script>   
     <!-- <script src="{{ asset('js/jquery.bttrlazyloading.min.js') }}"></script>   -->
     <script src="{{ asset('js/jquery.unveil.js') }}"></script> 
@@ -1028,7 +1009,7 @@ timeZone = 'Europe/London';
     $('#commentForm').on('submit', function(e){
 
       e.preventDefault();
-
+      $(this).trigger('simulateSubmit');
       if(tempComment == null){
 
         comment = new Comment();
@@ -1040,6 +1021,7 @@ timeZone = 'Europe/London';
         comment.profile_picture = userImage;
         actionUrl = $(this).attr('action');
 
+        friendTags = $(this).data('friendTags');
         if(comment.content)
         {
 
@@ -1056,7 +1038,7 @@ timeZone = 'Europe/London';
 
             $.ajax({
               type : 'post',
-              data : { _token : CSRF_TOKEN , content : comment.content, user_id : comment.user_id, email : comment.email , content_id : comment.content_id, type : comment_type },
+              data : { _token : CSRF_TOKEN , content : comment.content, user_id : comment.user_id, email : comment.email , content_id : comment.content_id, type : comment_type, friendTags : friendTags },
               url : actionUrl,
               dataType : 'json',
               success : function(response)
@@ -1165,6 +1147,8 @@ timeZone = 'Europe/London';
     $('#commentList').on('submit', '.reply-form', function(e){
 
       e.preventDefault();
+      $(this).trigger('simulateSubmit');
+
       if(tempReply == null){
 
             reply = new Reply();
@@ -1179,6 +1163,8 @@ timeZone = 'Europe/London';
 
             actionUrl = $(this).attr('action');
 
+             friendTags = $(this).data('friendTags');
+
             if(reply.content){
 
               $(this).find('[name="content"]').val('');
@@ -1189,7 +1175,7 @@ timeZone = 'Europe/London';
                 $(document).trigger('adjustHeight');
                 $.ajax({
                     type : 'post',
-                    data : {  user_id : reply.user_id, content : reply.content, content_id : reply.content_id, email : reply.email, _token : CSRF_TOKEN, parent : reply.parent, type : comment_type },
+                    data : {  user_id : reply.user_id, content : reply.content, content_id : reply.content_id, email : reply.email, _token : CSRF_TOKEN, parent : reply.parent, type : comment_type, friendTags : friendTags },
                     url : actionUrl,
                     dataType : 'json',
                     success : function(response){
@@ -1305,7 +1291,7 @@ timeZone = 'Europe/London';
       $('#pmBox').fadeToggle();
     });
 
-    $('.bxslider').bxSlider({
+   /* $('.bxslider').bxSlider({
     mode: 'vertical',
     slideMargin: 5,
     minSlides: 6,
@@ -1313,7 +1299,7 @@ timeZone = 'Europe/London';
     pager:false,
     prevText:'‹',
     nextText:'›'
-    });
+    });*/
 
   });
 
