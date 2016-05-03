@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'lifetime' => 9999,
+    'lifetime' => 1200,
 
     'expire_on_close' => true,
 
@@ -135,7 +135,7 @@ return [
     |
     */
 
-    'domain' => null,
+    'domain' => '.daugsiya.dev',
 
     /*
     |--------------------------------------------------------------------------
@@ -149,5 +149,7 @@ return [
     */
 
     'secure' => false,
+
+    'http_only' => true,
 
 ];

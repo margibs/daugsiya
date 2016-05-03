@@ -46,9 +46,10 @@ class CommentController extends Controller
     protected function notifyFriends($comment){
 
             $friendTags = $comment->friendTags;
+            $insertData = array();
             if($friendTags && count($friendTags) > 0){
 
-                $insertData = array();
+                
                 $datetime = new DateTime();
             $notification_type = 3;
             if($comment->type == 3){
@@ -63,7 +64,7 @@ class CommentController extends Controller
 
             }
 
-            if(User_Notification::insert($insertData)){
+            if(User_Notification::insert($insertData) && count($insertData) > 0){
 
             $url = url('').':8891/friend_tag_notification';
 

@@ -31,7 +31,7 @@ $(function() {
     $('#users-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{!! route('homeimagedatatable.data') !!}',
+        ajax: '/admin/homeads/list/trashedData',
         columns: [
             { data: 'id', name: 'id' },
             { data: 'image', name: 'image' },
