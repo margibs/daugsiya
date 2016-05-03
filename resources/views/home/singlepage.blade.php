@@ -853,81 +853,41 @@ width: 23%;
               <img src="{{$category_image}}">
           </div>
 
-           <div class="reels">
+                <div class="reels">
                   <div class="row no-gutter">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine2">
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                              </div>
-                          </div>
-                    </div>          
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine3">
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                              </div>
-                          </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine4">
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine5">
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                          </div>
-                        </div>
-                    </div>
+
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div id="planeMachine2">
+						@foreach($top_games as $key => $value)
+							{!! $value !!}
+                		@endforeach
+						</div>
+					</div>
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div id="planeMachine3">
+						@foreach($top_games as $key => $value)
+							{!! $value !!}
+                		@endforeach
+						</div>
+					</div>
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div id="planeMachine4">
+						@foreach($top_games as $key => $value)
+							{!! $value !!}
+                		@endforeach
+						</div>
+					</div>
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div id="planeMachine5">
+						@foreach($top_games as $key => $value)
+							{!! $value !!}
+                		@endforeach
+						</div>
+					</div>
                   </div>
                 </div>
 
@@ -1247,38 +1207,10 @@ contentHeight = $(contents_here).outerHeight() +'px';
 
   });
 
-      // var images4 = [
-      // '<div class="slotwrapper"><div class="details"><a href="#"><img src="http://susanwins.com/uploads/50904_category-reel-game1.jpg"></a></div></div>',
-      // ];    
-
-      // var images5 = [
-      // '<div class="slotwrapper"><div class="details"><a href="#"><img src="http://susanwins.com/uploads/50904_category-reel-game1.jpg"></a></div></div>'
-      // ];
-
-      // var images6 = [
-      // '<div class="slotwrapper"><div class="details"><a href="#"><img src="http://susanwins.com/uploads/50904_category-reel-game1.jpg"></a></div></div>'
-      // ];
-
-
-      // $("#playFancy").click(function(){
-       
-      //   ezslot19.spin();
-      //   ezslot20.spin();
-      //   ezslot21.spin();
-
-      // });
-
-
-      // var ezslot19 = new EZSlots("ezslots19",{"reelCount":1,"winningSet":[0,0,0,0],"symbols":images4,"height":220,"width":270});
-      // var ezslot20 = new EZSlots("ezslots20",{"reelCount":1,"winningSet":[0,0,0,0],"symbols":images5,"height":220,"width":270});
-      // var ezslot21 = new EZSlots("ezslots21",{"reelCount":1,"winningSet":[0,0,0,0],"symbols":images6,"height":220,"width":270});
-  
-
-
 
     var CSRF_TOKEN2 = $('meta[name="csrf-token"]').attr('content');
+	var finalSidebarContentHeight = 0, sidebarContentHeight = 0;
 
-              var finalSidebarContentHeight = 0, sidebarContentHeight = 0;
     contentOffset = 1;
     ajaxDone = false;
     sideBarHeightLeft = 0;
@@ -1614,59 +1546,6 @@ contentHeight = $(contents_here).outerHeight() +'px';
   });
 
       //ENDOF APIS
-
-$(function(){
-  
-
-  var top_games = 
-  [
-    "{!! $top_games[0] !!}",
-    "{!! $top_games[1] !!}",
-    "{!! $top_games[2] !!}",
-    "{!! $top_games[3] !!}",
-    "{!! $top_games[4] !!}",
-    "{!! $top_games[5] !!}",
-    "{!! $top_games[6] !!}",
-    "{!! $top_games[7] !!}"
-  ];
-
-  var images19 = 
-  [
-    top_games[0],
-    top_games[3],
-    top_games[6]
-  ];
-
-  var images20 = 
-  [
-    top_games[1],
-    top_games[4],
-    top_games[7]
-  ];
-
-  var images21 = 
-  [
-    top_games[2],
-    top_games[5]
-  ];
-
-
-  var ezslot19 = new EZSlots("ezslots19",{"reelCount":1,"winningSet":[0,0,0,0],"symbols":images19,"height":220,"width":226});
-  var ezslot20 = new EZSlots("ezslots20",{"reelCount":1,"winningSet":[0,0,0,0],"symbols":images20,"height":220,"width":226});
-  var ezslot21 = new EZSlots("ezslots21",{"reelCount":1,"winningSet":[0,0,0,0],"symbols":images21,"height":220,"width":226});
-  
-  
-
-   $("#playFancy").click(function(){ 
-    console.log(ezslot19.spin());
-    console.log(ezslot20.spin());
-    console.log(ezslot21.spin());
-  });
- 
-
-});
-
-
 });
 
 	var width = $(window).width(); 
@@ -1747,8 +1626,7 @@ $(function(){
 	
 	 $(window).bind("load", function() {
    
-
-		var machine1 = $("#planeMachine2").slotMachine({
+        var machine1 = $("#planeMachine2").slotMachine({
           active  : 0,
           delay : 500
         });
@@ -1764,41 +1642,24 @@ $(function(){
         });
 
         var machine4 = $("#planeMachine5").slotMachine({
-          active  : 2,
+          active  : 3,
           delay : 500
         });
 
-        function onComplete(active){
-          switch(this.element[0].id){
-            case 'machine1':
-              $("#planeMachine2").text("Index: "+this.active);
-              break;
-            case 'machine2':
-              $("#planeMachine3").text("Index: "+this.active);
-              break;
-            case 'machine3':
-              $("#planeMachine4").text("Index: "+this.active);
-              break;
-            case 'machine4':
-              $("#planeMachine5").text("Index: "+this.active);
-              break;
-          }
-        }
-
         $("#winwinwin3").click(function(){
 
-          machine1.shuffle(5, onComplete);
+          machine1.shuffle(5);
 
           setTimeout(function(){
-            machine2.shuffle(5, onComplete);
+            machine2.shuffle(5);
           }, 500);
 
           setTimeout(function(){
-            machine3.shuffle(5, onComplete);
+            machine3.shuffle(5);
           }, 600);
 
           setTimeout(function(){
-            machine4.shuffle(5, onComplete);
+            machine4.shuffle(5);
           }, 700);
 
         })
