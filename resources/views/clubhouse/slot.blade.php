@@ -50,7 +50,6 @@
 	@media(min-width: 1440px){
 	  #roombg{
 	     top: 0;
-	     left: 0;
 	  }	
 	 
 	}
@@ -119,7 +118,7 @@
   @endif
 
 	<div class="bgwrapper">
-			<img id="roombg" src="{{url('images/clubhouse')}}/slotroom.png" alt="">		
+			<img id="roombg" src="{{url('images/clubhouse')}}/slotroom.jpg" alt="">		
 
 			<div class="gamelist">
 			  <ul>

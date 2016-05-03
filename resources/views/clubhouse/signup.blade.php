@@ -29,6 +29,7 @@
   .formBox h1{
     font-family: 'Work Sans',Roboto,Helvetica,Arial,Sans-serif;
     font-size: 50px;
+    font-weight: 600;
   }
   .formBox h2{
     color: #cccccc;
@@ -67,6 +68,7 @@
     -webkit-box-shadow: 0 0 10px -2px #B3B3B3;
     box-shadow: 0 0 10px -2px #B3B3B3;
     text-shadow: 0px 1px 2px rgb(167, 121, 17);
+    font-weight: 600;
   }
   .formBox .terms{
     font-family: Roboto;
@@ -86,6 +88,7 @@
     font-family: 'Work Sans';
     font-size: 36px;
     line-height: 31px;
+    font-weight: 600;
   }
   .benefits ul li{
     font-family: Roboto;
@@ -98,9 +101,11 @@
     margin-right: 10px;
     position: relative;
     top: 8px;
+    margin-left: -47px;
   }
   .benefits ul{
-        margin-top: 30px;
+    margin-top: 30px;
+    margin-left: 42px;
   }
 </style>
 
@@ -114,7 +119,27 @@
 	<div class="container">
 
 		  <div class="row">
-                <div class="col-lg-12">
+                
+
+                 <div class="col-lg-12">
+                      
+                      <div class="benefits">
+                        <h2> Here is Why you Should Sign Up with Susan </h2>
+                        <ul>
+                          <li> <i class="ion-images" style="color: #10A590;"></i> Receive Susan's Welcome Pack with Free Gifts! </li>
+                          <li> <i class="ion-easel" style="color: #CC6464;"></i> Meet New Friends & Have a Laugh   </li>
+                          <li> <i class="ion-heart" style="color: #AC070A;"></i> Get Exclusive Casino Bonuses & Offers (Only For Susan's Members!)   </li>
+                          <li> <i class="ion-heart" style="color: #AC070A;"></i> Keep up to Date With the Latest Slots Games   </li>
+                          <li> <i class="ion-heart" style="color: #AC070A;"></i> 24/7 Chat Lounges – Relax and Socialise with the Girls & Me   </li>
+                          <li> <i class="ion-heart" style="color: #AC070A;"></i> VIP Susan's Club Membership Card – Get into Hot Events Around the UK   </li>
+                          <li> <i class="ion-heart" style="color: #AC070A;"></i> Win Amazing Prizes & Holidays    </li>
+                          <li> <i class="ion-heart" style="color: #AC070A;"></i> Get 24/7 Access to My Private Clubhouse  </li>
+                        </ul>
+                      </div>
+                  
+			           </div>
+
+                 <div class="col-lg-12">
                   <div class="formBox">
                     <h1> Sign-up </h1>
                     <h2> It's free and always will be </h2>
@@ -136,11 +161,11 @@
                         <section>
                         <div class="form-group">
                           <!-- <label for="">Enter your Firstname</label> -->
-                            <input type="text" name="firstname" placeholder="Firstname">
+                            <input type="text" name="firstname" placeholder="First Name">
                         </div>
                         <div class="form-group">
                          <!--  <label for="">Enter your Lastname</label> -->
-                            <input type="text" name="lastname" placeholder="Lasttname">
+                            <input type="text" name="lastname" placeholder="Last Name">
                         </div>
                         <div class="form-group">
                           <!-- <label for="">Enter your Email</label> -->
@@ -163,19 +188,6 @@
 
                   </div>    
                 </div>  
-
-                 <div class="col-lg-12">
-                      
-                      <div class="benefits">
-                        <h2> Connect with friends and the world around you on Susanwins</h2>
-                        <ul>
-                          <li> <i class="ion-images" style="color: #10A590;"></i> See photos and updates from friends in News Feed. </li>
-                          <li> <i class="ion-easel" style="color: #CC6464;"></i> Share what's new in your life on your Timeline. </li>
-                          <li> <i class="ion-heart" style="color: #AC070A;"></i> Find more of what you're looking for with Facebook Search. </li>
-                        </ul>
-                      </div>
-                  
-			           </div>
 							   
 					</div>
     </div>

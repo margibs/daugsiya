@@ -672,7 +672,7 @@
   </div>
 
     <div class="bgwrapper">
-      <img id="roombg" src="{{url('images/clubhouse')}}/profileroom3.png" alt="">
+      <img id="roombg" src="{{url('images/clubhouse')}}/profileroom3.jpg" alt="">
 
       <div  class="box good tvbox">
         <i class="fa fa-times"></i> 
@@ -1853,7 +1853,7 @@ function init_bookflip(startpage){
    startingPage = startpage;
    var pages=new Array;
 
-    pWidth=380; //width of each page
+    pWidth=424; //width of each page
     pHeight=482; //height of each page
 
     numPixels=20;  //size of block in pixels to move each pass

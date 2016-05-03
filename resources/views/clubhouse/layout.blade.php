@@ -25,10 +25,7 @@
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900' rel='stylesheet' type='text/css'>
-
-  
-    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900,500' rel='stylesheet' type='text/css'>
 
     <!--<link rel="stylesheet" href="{{ elixir('css/clubhouse-all.css') }}">-->
 
@@ -64,23 +61,213 @@
 
 
       .pmBox{
-          position: absolute;
-          top: 20%;
-          left: 50%;
-          z-index: 4;
+       /* overflow: hidden; */
+      /* top: 120px; */
+      border-radius: 5px;
+      width: 370px;
+      text-align: center;
+      padding: 0 0 13px 0;
+      display: none;
+      -moz-box-shadow: 0 0 30px -10px #000;
+      -webkit-box-shadow: 0 0 30px -10px #000;
+      box-shadow: 0 0 30px -10px #000;
+      height: 400px;
+      overflow: hidden;
+      position: fixed;
+      -moz-box-shadow: 0 3px 6px 1px #7F7F7F;
+      -webkit-box-shadow: 0 3px 6px 1px #7F7F7F;
+      box-shadow: 0 3px 6px 1px #7F7F7F;
+      border: none;
+      background: #979797;
+      z-index: 99;
+      }
+      .pmBox ul li{
+      overflow: hidden;
+          margin-bottom: 15px;
+      }
+      .pmBox ul li img{
+      width: 33px;
+      border-radius: 50%;
+      float: left;
+      margin-right: 14px;
+      margin-left: 15px;
+      margin-bottom: -85px;
+      }
+      .pmBox ul li span, .bigChatBox .body #messageContent li span{
+      font-family: Roboto,Helvetica,Arial,sans-serif;
+      text-align: left;
+      font-size: 14px;
+      padding: 10px 20px;
+      margin-right: 20px;
+      font-weight: 500;
+      margin-left: 61px;
+      margin-top: 0;
+      background: rgb(255, 255, 255);
+      border-radius: 20px;
+      line-height: 18px;
+      float: left;
+      display: block;
+      }
+      #sendPrivateMessage{
+        text-align: left;
+      }
+
+      .pmBox ul li span.alt{
+       background: #F4ABAA;
+        display: inline-block;
+        float: right!important;
+        margin-left: 50px!important;
+        color: #BC5554;
+      }
+      .pmBox .body h2{
+      background: rgb(140,2,5);
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+      background: -moz-linear-gradient(top, rgb(49, 49, 49) 0%, rgb(6, 6, 6)  100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(49, 49, 49)), color-stop(100%,rgb(6, 6, 6) ));
+      background: -webkit-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: -o-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: -ms-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: linear-gradient(to bottom, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c0205', endColorstr='#ba0034',GradientType=0 );
+      -moz-box-shadow: 0 0 10px -3px #000;
+      -webkit-box-shadow: 0 0 10px -3px #000;
+      box-shadow: 0 2px 10px -3px #000;
+      font-family: Roboto;
+      padding: 11px;
+      font-size: 20px;
+      font-weight: 600;
+      -moz-box-shadow: 0 0 10px -1px #000;
+      -webkit-box-shadow: 0 0 10px -1px #000;
+      box-shadow: 0 0 10px -1px #000;
+      position: relative;
+      z-index: 2;
+      color: #FFFFFF;
+      text-shadow: 0px 1px 2px rgb(109, 9, 9);
+      }
+      .pmBox .body{
+        background: #EDEDED;
+        padding-bottom: 10px;
+      }
+      .pmBox .body h2 i{
+      float: right;
+      color: #B5B2B2;
+      margin: 1px;
+      cursor: pointer;
+      }
+      .pmBox .body ul{
+        padding-top: 15px;
+      }
+      .pmBox .body h2 span.online{
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      background: green;
+      border-radius: 50%;
+      margin-right: 2px;
+      }
+      .pmBox  .footer{
+        margin-top: 10px;
+        border-top: 1px solid #E8E8E8;
+        margin-top: -1px;
+      }
+      .pmBox .triggers {
+      position: absolute;
+      bottom: 16px;
+      right: 19px;
+      z-index: 2;
+      }
+      .pmBox .arrow_box {
+      right: -139px;
+      top: 4px;
+      z-index: 101;
+      }
+      .pmBox textarea {
+      border: 1px solid transparent;
+      padding: 18px;
+      width: 84%;
+      height: 60px;
+      font-family: 'Work Sans';
+      font-size: 16px;
+      font-weight: 500;
+      min-height: 60px;
+      -moz-box-shadow: 0 0 7px -3px #D8D8D8;
+      -webkit-box-shadow: 0 0 7px -3px #D8D8D8;
+      box-shadow: 0 0 7px -3px #D8D8D8;
+      padding-right: 80px;
+      margin: 1px 0 -3px 0;
+      }
+    
+      .pmBox textarea:focus{
+        outline: none;
+      }
+
+      .pmBox .footer{
+      position: relative;
+      }
+      .pmBox #tooltip {
+      position: absolute;
+      top: 276px;
+      z-index: 100;
+      right: 20px;
+      height: 200px;
+      }
+      .pmBox  #tooltip ul {
+      text-align: left;
+      }
+      .pmBox #tooltip ul li img{
+      width: 32px!important;
+      margin: 5px!important;
+      float: none!important;
+      }
+      .pmBox .triggers i {
+      font-size: 27px;
+      margin-left: 3px;
+      color: #807C7C;
+      cursor: pointer;
+      border-left: 1px solid #ddd;
+      padding-left: 12px;
+      }
+      .pmBox .common {
+      min-height: 15px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      overflow: hidden;
+      }
+.pmFooter{
+        background: rgb(255,255,255);
+        
+      }
+      .pmFooter p{
+        font-family: roboto;
+        font-size: 12px;
+        color: #C9C5C5;
+        background: #EDEDED;
+        padding: 5px 0 9px 0;
+      }
+      .messageBox ul li a p{
+      color:#000;
       }
 
       .messageBox.notificationBox {
-          right: -6px;
+          right: -59px;
           z-index: 20;
       }
+      .globalNotifBox {
+        right: -13px;
+    }
 
       #myNotifications li button{
-            display: inline-block;
-          font-size: 12px;
-          padding: 4px 15px;
-          margin: 6px 5px;
-          width: 100px;
+        display: inline-block;
+        font-size: 12px;
+        padding: 4px 15px;
+        margin: 6px 5px;
+        width: 100px;
+        background: #9C0504;
+        border: none;
+        border-radius: 15px;
+        color: #fff;
+        border: 1px solid #941413;
+        cursor: pointer;
       }
       .friendProfile  .msgImgcont{
         width: 150px;
@@ -188,7 +375,7 @@
 
                       <ul class="topicons">
                               
-                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/80737_clubhouseicon.png" /> </a> </li>
+                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png" /> </a> </li>
                         <li> 
                           <a href="javascript:;" id="messagesMenu"> 
                             <span id="unreadMessageNotification">
@@ -196,7 +383,7 @@
                                 <span class="notifcount   animated bounce bounceInUp">{{ $unread_messages_count }}</span>
                               @endif
                             </span>
-                            <img src="http://susanwins.com/uploads/16972_chaticon.png" />
+                            <img src="http://susanwins.com/uploads/64163_chaticon.png" />
                           </a> 
                         </li>
 
@@ -209,7 +396,7 @@
                               @endif
                             </span>
                         
-                            <img src="http://susanwins.com/uploads/78234_notificationicon.png" />
+                            <img src="http://susanwins.com/uploads/83444_notificationicon.png" />
                           </a> 
                          </li>
                         
@@ -222,13 +409,13 @@
                                       </span>
                                 @endif
                             </span>
-                           <img src="http://susanwins.com/uploads/34532_friendicon.png" />
+                           <img src="http://susanwins.com/uploads/43069_friendicon.png" />
                            </a> 
                         </li>
 
                         <li style="margin-right: 6px;"> 
                           <a href="{{ url('/logout') }}"> 
-                           <img src="http://susanwins.com/uploads/39695_logouticon.png" />
+                           <img src="http://susanwins.com/uploads/34338_logouticon.png" />
                           </a> 
                         </li>
 
@@ -236,10 +423,10 @@
 
                    @else
                        <ul class="topicons" style="margin-top: 9px;">           
-                        <li> <a href="#" class="facebookSM"> <i class="ion-social-facebook"></i> </a> </li>
-                        <li> <a href="#" class="twitterSM"> <i class="ion-social-twitter"></i>  </a> </li>
-                        <li> <a href="#" class="pinterestSM"> <i class="ion-social-pinterest"></i></a> </li>
-                        <li> <a href="#" class="instagramSM"> <i class="ion-social-instagram"></i>   </a> </li>
+                         <li> <a href="#" class="twitterSM"> <img src="http://susanwins.com/uploads/73749_twittericon.png" />  </a> </li>
+                         <li> <a href="#" class="facebookSM"> <img src="http://susanwins.com/uploads/84170_facebookicon.png" /> </a> </li>                        
+                        <li> <a href="#" class="pinterestSM"> <img src="http://susanwins.com/uploads/18419_pinteresticon.png" /> </a> </li>
+                        <li> <a href="#" class="instagramSM"> <img src="http://susanwins.com/uploads/50236_instaicon.png" />   </a> </li>
                         <li style="margin-left: 10px;"><!--  <img src="http://susanwins.com/uploads/74688_cherrylogin.gif" class="cherry" />   --><a href="{{ url('/login') }}" class="loginbtn"> Login/Signup </a></li>
                         <!-- <li> <a href="#"> <i class="ion-social-youtube"></i>   <span>  Signout </span> </a> </li> -->
                       </ul>
@@ -260,17 +447,7 @@
         </div>
   </div>
 
-
-    @yield('split-content')
-
-     @if(isset($user))
-      <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
-    @endif
-      @if(isset($session_id))
-   <input type="hidden" value="{{ $session_id }}" id="sessionId">
-  @endif
-    @yield('background-content')
-      <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
+ <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
           <div class="divContainer">
             <div class="header"></div>
               <div class="body">
@@ -306,13 +483,25 @@
                       <i class="fa fa-smile-o pmTrigger"></i>
                       <i class="fa fa-paper-plane"></i>
                     </div>
+                    <p> Press enter to send message</p>
                     <form id="sendPrivateMessage">
                         <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message" style="height:auto;" ></textarea>
                     </form>
                 </div>
             </div>
       </div>
-	
+  
+
+    @yield('split-content')
+
+     @if(isset($user))
+      <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+    @endif
+      @if(isset($session_id))
+   <input type="hidden" value="{{ $session_id }}" id="sessionId">
+  @endif
+    @yield('background-content')
+     
     <script src="{{ asset('js/jquery-1.12.0.js') }}"></script>
     <script src="{{ asset('js/CSSPlugin.min.js') }}"></script> 
     <script src="{{ asset('js/TweenLite.min.js') }}"></script> 
@@ -356,8 +545,6 @@
     <script src="{{ asset('js/livestamp.min.js') }}"></script> 
 
   <script src="{{ asset('js/sockets.io.js') }}"></script>
-
-
   <script>
 
 
@@ -455,6 +642,17 @@ london = moment.tz(timeZone);
            $('.guideSusanContainer').css('display', 'none');
       });
     }); 
+
+      $(document).mouseup(function (e)
+  {
+      var container = $(".messageBox");
+
+      if (!container.is(e.target)
+          && container.has(e.target).length === 0)
+      {
+          container.hide();
+      }
+  });
 
         tourAjax = false;
     $(document).on('click', '.cd-tour-nav .complete', function(){
@@ -877,208 +1075,129 @@ london = moment.tz(timeZone);
       $('#notificationMenu').find('.notifcount').remove();
       
     });
-
-
-    socket.on('post_friendTag_notification', function(data){
-
-          span = $('<span>').addClass('notifcount');
-      notifcount = 1;
-
-      if($('#unreadUserNotification').find('.notifcount').length)
-      {
-        notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
-      }
-
-      $('#unreadUserNotification').html('').append($(span).text(notifcount));
-      console.log(data);
-      data_url = data.content;
-
-      if(data.type == 3 || data.type == 2){
-        data_url = data.content.slug;
-      }
-
-      data_url = baseUrl+'/'+data_url;
-
-      $('#myNotifications').prepend(
-        $('<li>').append(
-              $('<a href="'+data_url+'">')
-              .append(
-                $('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
-              )
-              .append(
-                $('<p>')
-                .append(
-                  $('<span>').addClass('name').text(data.user.user_detail.firstname+' '+data.user.user_detail.lastname+' tagged you in a comment. ')
-                )
-              )
-            )
-      );
-      });
      
 
        $('#notificationMenu').one('click', function(){
 
-    theButton = this;
+        theButton = this;
 
-    $('#myNotifications').html('').append($('<li style="border:none;">').addClass('loading').append('<div class="typing-indicator"><span></span><span></span><span></span></div><p> Loading... </p>'));
+      $('#myNotifications').html('').append($('<li style="border:none;">').addClass('loading').append('<div class="typing-indicator"><span></span><span></span><span></span></div><p> Loading... </p>'));
 
-    $.ajax({
-      url : profileUrl+'/getFriendRequests',
-      data : { user_id : userId, _token : CSRF_TOKEN },
-      dataType : 'json',
-      type : 'POST',
-      success : function(data)
-      {
-        console.log('getFriendRequests');
-        console.log(data);
+      $.ajax({
+          url : profileUrl+'/getFriendRequests',
+          data : { user_id : userId, _token : CSRF_TOKEN },
+          dataType : 'json',
+          type : 'POST',
+          success : function(data){
+            console.log('getFriendRequests');
+              console.log(data);
 
-        if(data)
-        {
-          readUserNotifications();
-          $(theButton).bind('ckick', readUserNotifications);
-        }
+              if(data){
+                readUserNotifications();
 
-        $('#myNotifications').html('');
+                $(theButton).bind('ckick', readUserNotifications);
+              }
+            $('#myNotifications').html('');
 
-        $.each(data, function(){
+              $.each(data, function(){
 
-          li = $('<li>');
 
-          request = this;
-          if(request.type == 0)
-          {
-            button = $('<a href="javascript:;">')
-            .append(
-              $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
-            )
-            .append(
-              $('<p>')
-              .append(
-                $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname)
-              )
-              .append(
-                $('<div>').addClass('actionList')
-                .append(
-                  $('<button>').text('Accept').addClass('acceptFriend').data('id', request.id).data('user', request.user_id)
-                )
-                .append(
-                  $('<button>').text('Decline').addClass('declineFriend').data('id', request.id)
-                )
-              )
-            );
+                li = $('<li>');
 
-            $(li).attr('id', 'friend-request-'+request.user_id).append(
-            button
-            );     
+                request = this;
 
+                if(request.type == 0){
+                    button = $('<a href="javascript:;">')
+                        .append(
+                          $('<img>').attr('src', request.user.user_detail.profile_picture ? publicUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          )
+                        .append(
+                          $('<p>')
+                              .append(
+                                $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname)
+                                )
+                              .append(
+                                $('<div>').addClass('actionList')
+                                  .append(
+                                    $('<button>').text('Accept').addClass('acceptFriend').data('id', request.id).data('user', request.user_id)
+                                    )
+                                  .append(
+                                    $('<button>').text('Decline').addClass('declineFriend').data('id', request.id)
+                                    )
+                                )
+                          );
+
+               
+
+               
+                      $(li).attr('id', 'friend-request-'+request.user_id).append(
+                        button
+                      )      
+                 
+                }else if(request.type == 1){
+
+                  $(li).append(
+                        $('<a href="javascript:;">')
+                          .append(
+                            $('<img>').attr('src', request.user.profile_picture ? publicUrl+'/'+request.user.profile_picture : defaultProfilePic )
+                            )
+                          .append(
+                            $('<p>')
+                                .append(
+                                  $('<span>').addClass('name').text('You and '+request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' are now friends!')
+                                  )
+                                .append(
+                                  $('<div>').addClass('actionList').data('user', request.user.user_detail.user_id)
+                                    .append(
+                                        $('<button>').text('Message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox')
+                                        )
+                                  )
+                            )
+                      )
+
+                }else if(request.type == 2){
+
+                    $(li).append(
+                          $('<a href="'+baseUrl+'/'+request.game.slug+'">')
+                            .append(
+                              $('<img>').attr('src', request.user.user_detail.profile_picture ? publicUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                              )
+                            .append(
+                              $('<p>')
+                                  .append(
+                                    $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' recommended you to play. ')
+                                    )
+                                  .append(
+                                    $('<div>').addClass('actionList')
+                                      .append(
+                                          $('<span>').text('Click to Play')
+                                          )
+                                    )
+                              )
+                        )
+
+                }
+
+
+                if(request.read == 0){
+
+                    $(li).find('a').addClass('unread');
+
+                  }
+
+                 $('#myNotifications').append(li);
+
+                
+
+              });
+
+          },error : function(xhr){
+            console.log(xhr.responseText);
           }
-          else if(request.type == 1)
-          {
-            $(li).append(
-              $('<a href="javascript:;">')
-              .append(
-              $('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
-              )
-              .append(
-                $('<p>')
-                .append(
-                  $('<span>').addClass('name').text('You and '+request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' are now friends!')
-                )
-                .append(
-                  $('<div>').addClass('actionList').data('user', request.user.user_detail.user_id)
-                  .append(
-                    $('<button>').text('Message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox')
-                  )
-                )
-              )
-            );
+      });
 
-          }
-          else if(request.type == 2)
-          {
 
-            $(li).append(
-              $('<a href="'+baseUrl+'/'+request.game.slug+'">')
-              .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
-              )
-              .append(
-                $('<p>')
-                .append(
-                  $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' recommended you to play. ')
-                )
-                .append(
-                  $('<div>').addClass('actionList')
-                  .append(
-                    $('<span>').text('Click to Play')
-                  )
-                )
-              )
-            );
-          }
-          else if(request.type == 3)
-          {
-            $(li).append(
-              $('<a href="'+baseUrl+'/all_games">')
-              .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
-              )
-              .append(
-                $('<p>')
-                .append(
-                  $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
-                )
-              )
-            );
-          }
-          else if(request.type == 5)
-          {
-            $(li).append(
-              $('<a href="'+baseUrl+'/'+request.postslug+'">')
-              .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
-              )
-              .append(
-                $('<p>')
-                .append(
-                  $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
-                )
-              )
-            );
-          }
-          else if(request.type == 4)
-          {
-            $(li).append(
-              $('<a href="'+baseUrl+'/'+request.categoryslug+'">')
-              .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
-              )
-              .append(
-                $('<p>')
-                .append(
-                  $('<span>').addClass('name').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
-                )
-              )
-            );
-          }
-
-          if(request.read == 0)
-          {
-            $(li).find('a').addClass('unread');
-          }
-
-          $('#myNotifications').append(li);
-
-        });
-
-      },
-      error : function(xhr)
-      {
-        console.log(xhr.responseText);
-      }
-    });
-
-  });
+   });
 
 
   socket.on('post_addFriend_request', function(request_id, request){
@@ -1524,7 +1643,7 @@ $(document).on('click', '.pmFriend', function(){
     });
 
     $('.pmBox .messagesContent').slimScroll({
-        height: '345px',
+        height: '261px',
         start: 'bottom'
     });
 
@@ -1837,7 +1956,6 @@ interact('.draggable')
 
 
   </script>
-    <script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
    @yield('custom_scripts')
   @yield('footer_scripts')
 

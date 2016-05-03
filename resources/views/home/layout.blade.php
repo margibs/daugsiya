@@ -40,14 +40,14 @@
   <link rel="stylesheet" href="{{ asset('css/responsiveHomepage.css') }}">        
   <link rel="stylesheet" href="{{ asset('css/animate.css') }}">        
   <link rel="stylesheet" href="{{ asset('css/hint.min.css') }}">
-   <link rel="stylesheet" href="{{ asset('css/tagging.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/tagging.css') }}">
   <!-- <link rel="stylesheet" href="{{ asset('css/bttrlazyloading.min.css') }}">         -->
   <link rel="stylesheet" href="{{ asset('css/jquery.slotmachine.css') }}">
   <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:500,800,900' rel='stylesheet' type='text/css'>
    
 
     <!--[if lt IE 9]>
@@ -125,10 +125,16 @@
 
       z-index: 30;
       }
-
-      .messageBox.notificationBox {
-      right: -47px;
-      z-index: 20;
+      .pmFooter{
+        background: rgb(255,255,255);
+        
+      }
+      .pmFooter p{
+        font-family: roboto;
+        font-size: 12px;
+        color: #C9C5C5;
+        background: #EDEDED;
+        padding: 5px 0 9px 0;
       }
 
       #myNotifications li button{
@@ -156,12 +162,12 @@
       }
 
       .messageBox.notificationBox {
-      right: -60px;
+      right: -57px;
       z-index: 20;
       }
 
       .messageBox.globalNotifBox{
-      right: -4px;
+      right: -10px;
       z-index: 10;
       }
 
@@ -183,7 +189,7 @@
       }
 
 
-      .fa-smile-o, .fa-paper-plane{
+      .fa-paper-plane{
       display: none;
       }
 
@@ -278,28 +284,31 @@
       }
 
       .pmBox{
-      /*overflow: hidden;*/
-      /*top: 120px;*/
+       /* overflow: hidden; */
+      /* top: 120px; */
       border-radius: 5px;
-      background: rgba(255, 255, 255, 0.95);
       width: 370px;
       text-align: center;
-      /*position: relative;
-      left: 93%;*/
       padding: 0 0 13px 0;
       display: none;
       -moz-box-shadow: 0 0 30px -10px #000;
       -webkit-box-shadow: 0 0 30px -10px #000;
       box-shadow: 0 0 30px -10px #000;
-      height: 470px;
+      height: 400px;
       overflow: hidden;
-      position:fixed;
+      position: fixed;
+      -moz-box-shadow: 0 3px 6px 1px #7F7F7F;
+      -webkit-box-shadow: 0 3px 6px 1px #7F7F7F;
+      box-shadow: 0 3px 6px 1px #7F7F7F;
+      border: none;
+      background: #979797;
       }
       .pmBox ul li{
       overflow: hidden;
+          margin-bottom: 15px;
       }
       .pmBox ul li img{
-      width: 45px;
+      width: 33px;
       border-radius: 50%;
       float: left;
       margin-right: 14px;
@@ -309,36 +318,57 @@
       .pmBox ul li span, .bigChatBox .body #messageContent li span{
       font-family: Roboto,Helvetica,Arial,sans-serif;
       text-align: left;
-      font-size: 13px;
+      font-size: 14px;
       padding: 10px 20px;
       margin-right: 20px;
-      font-weight: 600;
-      margin-left: 70px;
-      margin-top: 10px;
-      background:rgba(245, 245, 245, 0.77);
+      font-weight: 500;
+      margin-left: 61px;
+      margin-top: 0;
+      background: rgb(255, 255, 255);
       border-radius: 20px;
       line-height: 18px;
       float: left;
+      display: block;
       }
-
+      #sendPrivateMessage{
+        text-align: left;
+      }
 
       .pmBox ul li span.alt{
-      background: #FFCACE;
-      display: inline-block;
-      float: right!important;
-      margin-left: 50px!important;
+       background: #F4ABAA;
+        display: inline-block;
+        float: right!important;
+        margin-left: 50px!important;
+        color: #2F0C0C;
       }
       .pmBox .body h2{
-      background: rgba(255, 255, 255, 0.64);
-      font-family: 'Work Sans';
+      background: rgb(140,2,5);
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+      background: -moz-linear-gradient(top, rgb(49, 49, 49) 0%, rgb(6, 6, 6)  100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(49, 49, 49)), color-stop(100%,rgb(6, 6, 6) ));
+      background: -webkit-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: -o-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: -ms-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: linear-gradient(to bottom, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c0205', endColorstr='#ba0034',GradientType=0 );
+      -moz-box-shadow: 0 0 10px -3px #000;
+      -webkit-box-shadow: 0 0 10px -3px #000;
+      box-shadow: 0 2px 10px -3px #000;
+      font-family: Roboto;
       padding: 11px;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 600;
-      -moz-box-shadow: 0 0 10px -5px #000;
-      -webkit-box-shadow: 0 0 10px -5px #000;
-      box-shadow: 0 0 10px -5px #000;
+      -moz-box-shadow: 0 0 10px -1px #000;
+      -webkit-box-shadow: 0 0 10px -1px #000;
+      box-shadow: 0 0 10px -1px #000;
       position: relative;
       z-index: 2;
+      color: #FFFFFF;
+      text-shadow: 0px 1px 2px rgb(109, 9, 9);
+      }
+      .pmBox .body{
+        background: #EDEDED;
+        padding-bottom: 10px;
       }
       .pmBox .body h2 i{
       float: right;
@@ -355,12 +385,14 @@
       margin-right: 2px;
       }
       .pmBox  .footer{
-      margin-top: 10px;
+        margin-top: 10px;
+        border-top: 1px solid #E8E8E8;
+        margin-top: -1px;
       }
       .pmBox .triggers {
       position: absolute;
-      bottom: 36px;
-      right: 30px;
+      bottom: 16px;
+      right: 19px;
       z-index: 2;
       }
       .pmBox .arrow_box {
@@ -369,24 +401,26 @@
       z-index: 101;
       }
       .pmBox textarea {
-      border: 1px solid #d8d8d8;
-      padding: 20px;
-      width: 91%;
+      border: 1px solid transparent;
+      padding: 18px;
+      width: 84%;
       height: 60px;
-      border-radius: 5px;
-      position: relative;
-      /* bottom: -7px; */
-      /* left: 20px; */
       font-family: 'Work Sans';
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
       min-height: 60px;
       -moz-box-shadow: 0 0 7px -3px #D8D8D8;
       -webkit-box-shadow: 0 0 7px -3px #D8D8D8;
       box-shadow: 0 0 7px -3px #D8D8D8;
       padding-right: 80px;
-      margin: 12px 20px 5px 20px;
+      margin: 1px 0 -3px 0;
       }
+  
+    .pmBox textarea:focus{
+      outline: none;
+    }
+
+
       .pmBox .footer{
       position: relative;
       }
@@ -406,10 +440,12 @@
       float: none!important;
       }
       .pmBox .triggers i {
-      font-size: 20px;
+      font-size: 27px;
       margin-left: 3px;
       color: #807C7C;
       cursor: pointer;
+      border-left: 1px solid #ddd;
+      padding-left: 12px;
       }
       .pmBox .common {
       min-height: 15px;
@@ -417,7 +453,9 @@
       font-size: 12px;
       overflow: hidden;
       }
-
+       .pmBox .body ul{
+        padding-top: 15px;
+      }
       .messageBox ul li a p{
       color:#000;
       }
@@ -458,20 +496,13 @@
 <body>
 
   
-  
- @if(Auth::check())
-
+@if(Auth::check())
  
-
-
    <div class="activity">
-
     <h2> Friends Recent Activity </h2>
     <ul class="bxslider" id="friendUserActivityContainer">
-
       @if(isset($myFriends) && count($myFriends) > 0)
        
-
        @if(isset($user_activities) && count($user_activities) != 0 && $user_activities != null)
         @foreach($user_activities as $activity)
           <li> 
@@ -485,14 +516,9 @@
          @endif
             </li>
         @endforeach
-
-
   
        @endif
-
-
         @else
-
                    <li> 
                  <a href="#" style="
                  overflow: hidden;
@@ -512,10 +538,7 @@
                 
                  </a> 
                 </li>
-
       @endif  
-
-
     </ul>
     <a class="more" href="">
    <!--  <i class="fa fa-chevron-down"></i> -->
@@ -527,7 +550,7 @@
         <div class="container">
           <div class="col-lg-24">
                 <header>
-                  <div class="col-xs-8 col-sm-7 col-md-5 col-lg-3">
+                  <div class="col-xs-8 col-sm-5 col-md-5 col-lg-3">
                     <a href="{{ url('/') }}"><img class="logo" src="http://susanwins.com/uploads/52424_logo.png" alt="Logo"></a>
                   </div>
                   <div class="col-xs-14 col-sm-14 col-md-12 col-lg-13 hide991" style="text-align: right;">
@@ -562,7 +585,7 @@
 
                       <ul class="topicons">
                               
-                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/80737_clubhouseicon.png" /> </a> </li>
+                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png" /> </a> </li>
                         <li> 
                           <a href="javascript:;" id="messagesMenu"> 
                             <span id="unreadMessageNotification">
@@ -570,7 +593,7 @@
                                 <span class="notifcount   animated bounce bounceInUp">{{ $unread_messages_count }}</span>
                               @endif
                             </span>
-                            <img src="http://susanwins.com/uploads/16972_chaticon.png" />
+                            <img src="http://susanwins.com/uploads/64163_chaticon.png" />
                           </a> 
                         </li>
 
@@ -583,7 +606,7 @@
                               @endif
                             </span>
                         
-                            <img src="http://susanwins.com/uploads/78234_notificationicon.png" />
+                            <img src="http://susanwins.com/uploads/83444_notificationicon.png" />
                           </a> 
                          </li>
                         
@@ -596,13 +619,13 @@
                                       </span>
                                 @endif
                             </span>
-                           <img src="http://susanwins.com/uploads/34532_friendicon.png" />
+                           <img src="http://susanwins.com/uploads/43069_friendicon.png" />
                            </a> 
                         </li>
 
                         <li style="margin-right: 6px;"> 
                           <a href="{{ url('/logout') }}"> 
-                           <img src="http://susanwins.com/uploads/39695_logouticon.png" />
+                           <img src="http://susanwins.com/uploads/34338_logouticon.png" />
                           </a> 
                         </li>
 
@@ -647,7 +670,7 @@
         <div class="divContainer">
           <div class="header"></div>
             <div class="body">
-              <h2> <i class="fa fa-times"></i> <span class="online"></span> <b id="pmName"> </b> </h2>
+              <h2> <i class="ion-android-close"></i> <span class="online"></span> <b id="pmName"> </b> </h2>
               <ul class="messagesContent" id="pmMessageContent">
               </ul>
             </div>
@@ -675,10 +698,10 @@
                     </div>
 
                   <div class="triggers">
-                    
                     <i class="fa fa-smile-o pmTrigger"></i>
-                    <i class="fa fa-paper-plane"></i>
+               <!--      <i class="fa fa-paper-plane"></i> -->
                   </div>
+                  <p> Press enter to send message</p>
                   <form id="sendPrivateMessage">
                       <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message"  ></textarea>
                   </form>
@@ -686,7 +709,7 @@
           </div>
   </div> 
 
-      
+
   <div class="overlay"></div>
 
   @yield('homecontentResposnive')
@@ -710,14 +733,14 @@
        (function(){
 
 
-        /*_tracker = document.createElement('script');
+        _tracker = document.createElement('script');
         _tracker.type = 'text/javascript';
         _tracker.async = true;
         _tracker.src = ('https:' == document.location.protocol ? 'https://ssl.' : 'http://') + 'nexolytics.susanwins.com/js/tracker.js';
 
         var s = document.getElementsByTagName('script')[0];
 
-        s.parentNode.insertBefore(_tracker,s);*/
+        s.parentNode.insertBefore(_tracker,s);
 
        })();
 
@@ -1268,7 +1291,7 @@ timeZone = 'Europe/London';
     });
 
     $('.pmBox .messagesContent').slimScroll({
-      height: '355px',
+      height: '261px',
       start: 'bottom'
     });
 

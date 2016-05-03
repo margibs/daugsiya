@@ -205,7 +205,7 @@
 
   @endif
 
-			<img id="roombg" src="{{url('images/clubhouse')}}/front-house.png" alt="">		      		   
+			<img id="roombg" src="{{url('images/clubhouse')}}/front-house.jpg" alt="">		      		   
 		  
 			<div class="as" style="position:absolute;top:150px;left:220px;">
 				<ul>

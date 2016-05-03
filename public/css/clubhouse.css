@@ -1,5 +1,5 @@
   /* -------------------- HIDE EMOTICONS FOR NOW ------------------------- */
-.fa-smile-o, .fa-paper-plane{
+.fa-paper-plane{
   display: none;
 }
 
@@ -582,7 +582,7 @@ body{
 
 .messageBox ul li a img {
   height: 50px;
-  border-radius: 50%;
+  border-radius: 3px;
 }
 
 .messageBox ul li a {
@@ -2908,7 +2908,7 @@ Main Components
       display: none;
   }
   .keybox input[type=text], .keybox input[type=password], .profilebox input[type=text], .profilebox input[type=text], .profilebox textarea{
-    border: none;
+      border: none;
       font-size: 14px;
       padding: 14px 14px;
       width: 100%;
@@ -2917,7 +2917,8 @@ Main Components
       -moz-box-shadow: 0px 2px 3px -2px #696969;
       -webkit-box-shadow: 0px 2px 3px -2px #696969;
       box-shadow: 0px 2px 3px -2px #696969;
-      font-family: 'Work Sans';
+      font-family: Roboto,Arial,Helvetica,sans-serif;
+      font-weight: 500;
   }
   .keybox button, .profilebox button{
     background: #A40605;
@@ -3246,7 +3247,7 @@ Main Components
     top: 505px;
   }
   .magwrapper {    
-    left: 1005px;
+    left: 963px;
     top: 485px;
   }
   .keywrapper {    
@@ -3290,8 +3291,8 @@ Main Components
       right: 230px;
    }
    .profilebox{
-    top: 240px;
-        right: 280px;
+      top: 270px;
+      right: 40px;
    }
    .friendsbox {      
      top: 10%;
@@ -3318,6 +3319,7 @@ Main Components
     width: 78px;
     height: 92px;
     overflow: hidden;
+    margin-top: -10px;
   }
 } 
 
