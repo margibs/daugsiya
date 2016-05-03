@@ -8,8 +8,6 @@
 
 <link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
 
-
-
 @endsection
 
  @section('switch-button')
@@ -1220,10 +1218,18 @@ height: 372px;
           </div>
 
 
+<!-- <<<<<<< HEAD
                     <div class="picwrapper wrapper">
             <div class="itemLabels"> Upload image </div>        
             <div class="pic">                 
             <img src="{{  $user->user_detail->profile_picture ? asset('').'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png')   }}" alt="" class="profile_pic" id="picPreview">
+======= -->
+          <div class="picwrapper wrapper">
+            <div class="itemLabels"> Upload image </div>        
+            <div class="pic">                 
+           <!--  <img src="{{  $user->user_detail->profile_picture ? asset('').'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png')   }}" alt="" class="profile_pic" id="picPreview"> -->
+            <img src ="{{asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview"> 
+
             </div>
 
             <label class="myLabel">
@@ -1234,10 +1240,14 @@ height: 372px;
          <!--    <button class="file-upload">            
             <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" > + </button> -->
 
+<!-- <<<<<<< HEAD
     </div> 
 
 
-
+=======
+    </div>
+>>>>>>> 716615a7e751b994398f4828d9acec2a9a4dd28a -->
+</div>
 @endsection
 
 @section('custom_scripts')
@@ -2042,6 +2052,7 @@ function init_bookflip(startpage){
 }
 
 
+<<<<<<< HEAD
 
 /*var basic = $('#demo-basic').croppie({
     viewport: {
@@ -2069,8 +2080,9 @@ basic.croppie('result', 'html');
       height: 300
    }
 });*/
+=======
+>>>>>>> 716615a7e751b994398f4828d9acec2a9a4dd28a
 </script>
-
 
 @endsection
 
