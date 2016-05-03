@@ -396,7 +396,8 @@ font-family: Roboto;
 @section('custom_scripts')
 
 <script type="text/javascript">
-  loginPage = true;
+  
+   = true;
   // $(document).ready(function(){
   //   $('.susan').addClass('animated slideInLeft');
   //   $('.signupform').addClass('animated slideInUp');

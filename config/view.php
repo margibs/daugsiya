@@ -1,5 +1,16 @@
 <?php
 
+use Jenssegers\Agent\Agent as Agent;
+$Agent = new Agent();
+// agent detection influences the view storage path
+$viewPath = 'resources/views';
+if ($Agent->isMobile()) {
+   // you're a mobile device
+   $viewPath = 'resources/views/mobileView/clubhouse/login';
+} 
+
+
+
 return [
 
     /*
@@ -14,7 +25,7 @@ return [
     */
 
     'paths' => [
-        realpath(base_path('resources/views')),
+       realpath(base_path($viewPath)),
     ],
 
     /*
