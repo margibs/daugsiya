@@ -185,7 +185,6 @@ public function searchHashGame(Request $request){
 
         
         if($request->hasFile('profile_picture')){
-
             $request->file('profile_picture')->move($directory, $filename);
 
             $thumb = Image::make($directory.'/'.$filename)->resize(50,50)->save($path50, 50);
