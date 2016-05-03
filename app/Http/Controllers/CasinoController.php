@@ -371,8 +371,14 @@ class CasinoController extends Controller
         return view('casino.newArticleBanner',compact('priority_list'));
     }
 
-    public function editArticleBanner($id)
+    public function editArticleBanner(Request $request, $id)
     {
+        $redirect = '';
+        if($request->redirect != null)
+        {
+          $redirect = $request->redirect;  
+        }
+        
         $articleBanner = CasinoBanner::find($id);
         $country_codes = [];
         $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
@@ -384,7 +390,7 @@ class CasinoController extends Controller
             $country_codes[] = $country->country_code;
         }
 
-        return view('casino.editArticleBanner',compact(['articleBanner','priority_list','country_codes', 'casinos']));
+        return view('casino.editArticleBanner',compact(['articleBanner','priority_list','country_codes', 'casinos','redirect']));
     }
 
     public function addArticleBanner(Request $request,$id = 0)
@@ -443,10 +449,96 @@ class CasinoController extends Controller
             CasinoBannerCountry::insert($data);
         }
 
+        if($request->article != null)
+        {
+            return redirect($request->article);
+        }
+
         return redirect('admin/article_banner');
 
     }
+    /*
+    *   FUNCTION FOR DYNAMIC PAGE
+    *   AUTHOR: IAN ROSALES
+    *   DATE: 5-2-2016
+    **/
+    public function dynamicEditArticleBanner($id)
+    {
+        $articleBanner = CasinoBanner::find($id);
+        $country_codes = [];
+        $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
 
+        $casinos = Casino::all();
+
+        $countries = CasinoBannerCountry::where('casino_banner_id',$articleBanner->id)->get(['country_code']);
+        foreach ($countries as $country) {
+            $country_codes[] = $country->country_code;
+        }
+
+        return view('casino.dynamicEditArticleBanner',compact(['articleBanner','priority_list','country_codes', 'casinos']));
+    }
+  /*  public function dynamiceAddArticleBanner(Request $request,$id = 0)
+    {
+        $redirect = 'admin/new_article_banner';
+      
+        //check if new casino or edit casino
+        //get redirect
+        if($id != 0)
+        {
+            $redirect = 'admin/article_banner/'.$id;
+        }
+
+        $validate_rules = [
+            'image_link' => 'required',
+            'image_url' => 'required',
+            'countries' => 'required',
+        ];
+
+        //Validate input
+        $validator = Validator::make($request->all(), $validate_rules );
+
+        if ($validator->fails()) 
+        {
+            return redirect($redirect)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+                //check if new post or edit post
+        if($id != 0)
+        {
+            $casinoBanner = CasinoBanner::find($id);
+        }
+        else
+        {
+            $casinoBanner = new CasinoBanner;
+        }
+
+        $casinoBanner->image_link = $request->input('image_link');
+        $casinoBanner->banner_type = $request->input('banner_type');
+        $casinoBanner->show_banner = $request->input('show_banner') ? $request->input('show_banner') : 0 ;
+        $casinoBanner->image_url = $request->input('image_url');
+        $casinoBanner->priority = $request->input('priority');
+        $casinoBanner->casino_id = $request->input('casino_id');
+        $casinoBanner->save();
+
+        CasinoBannerCountry::where('casino_banner_id','=',$casinoBanner->id)->delete();
+        if( count( $request->input('countries') ) != 0 )
+        {
+            $data = array();
+            for ($i=0; $i < count($request->input('countries')) ; $i++) 
+            { 
+                $data[] = array('casino_banner_id' => $casinoBanner->id,'country_code' => $request->input('countries')[$i],'created_at' => date('Y-m-d H:i:s'), 'updated_at'=> date('Y-m-d H:i:s'));
+            }
+            CasinoBannerCountry::insert($data);
+        }
+
+        //redirect to dynamic page
+        return redirect('admin/dynamic/link');
+
+    }*/
+
+   
     //Skyscraper Banner
     public function skyScraperBanner()
     {
@@ -481,8 +573,14 @@ class CasinoController extends Controller
         return view('casino.newSkyScraperBanner',compact('priority_list'));
     }
 
-    public function editSkyScraperBanner($id)
+    public function editSkyScraperBanner(Request $request, $id)
     {
+        $redirect = '';
+        if($request->redirect != null)
+        {
+          $redirect = $request->redirect;  
+        }
+
         $articleBanner = CasinoBanner::find($id);
         $country_codes = [];
         $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
@@ -494,7 +592,7 @@ class CasinoController extends Controller
 
         $casinos = Casino::all();
 
-        return view('casino.editSkyScraperBanner',compact('articleBanner','priority_list','country_codes', 'casinos'));
+        return view('casino.editSkyScraperBanner',compact('articleBanner','priority_list','country_codes', 'casinos', 'redirect'));
     }
 
     public function addSkyScraperBanner(Request $request,$id = 0)
@@ -550,6 +648,11 @@ class CasinoController extends Controller
                 $data[] = array('casino_banner_id' => $casinoBanner->id,'country_code' => $request->input('countries')[$i],'created_at' => date('Y-m-d H:i:s'), 'updated_at'=> date('Y-m-d H:i:s'));
             }
             CasinoBannerCountry::insert($data);
+        }
+
+        if($request->sykycrapper != null)
+        {
+            return redirect($request->sykycrapper);
         }
 
         return redirect('admin/skyscraper_banner');

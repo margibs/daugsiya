@@ -156,7 +156,7 @@ public function searchHashGame(Request $request){
 
         $filename = 'profile_picture-'.date('Y-m-d-H-i-s').'.'.$request->file('profile_picture')->getClientOriginalExtension();
 
-        if($createDirectory && $request->hasFile('profile_picture')){
+        if($request->hasFile('profile_picture')){
             $request->file('profile_picture')->move($directory, $filename);
             $user_detail = User_Detail::firstOrCreate([ 'user_id' => $request->user_id ]);
             $user_detail->profile_picture = $directory.'/'.$filename;

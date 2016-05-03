@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
 
+
+
 @endsection
 
  @section('switch-button')
@@ -67,6 +69,62 @@
   #roombg {
     top: -40px;
  }
+}
+
+.cropperContainer{
+      top: 21%;
+    left: 14%;
+      position: absolute;
+          background: rgba(255, 255, 255, 0.98);
+    width: 370px;
+        height: 440px;
+    padding: 0 0 15px 0;
+        border-radius: 5px;
+    overflow: hidden;
+        z-index: 1;
+    moz-box-shadow: 0 0 30px -10px #000;
+    -webkit-box-shadow: 0 0 30px -10px #000;
+    box-shadow: 0 0 30px -10px #000;
+    display: none;
+}
+
+.cropperContainer .fa-times{
+     top: 0px;
+    color: rgb(158, 0, 0);
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    margin: 7px;
+    cursor: pointer;
+}
+
+.cropperContainer button{
+    background: #A40605;
+    border: none;
+    display: block;
+    width: 46.5%;
+    margin: 15px 5px 5px 5px;
+    float: left;
+    padding: 7px;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Work Sans';
+    font-size: 20px;
+    font-weight: 500;
+    -moz-box-shadow: 0px 2px 3px -2px #696969;
+    -webkit-box-shadow: 0px 2px 3px -2px #696969;
+    box-shadow: 0px 2px 3px -2px #696969;
+    cursor: pointer;
+}
+
+#cropperH{
+padding: 20px 0;
+background: rgba(190, 19, 19, 0.92);
+height: 372px; 
+}
+
+#cropperH input[type="range"]{
+      background: #000;
 }
 </style>
 
@@ -1048,7 +1106,12 @@
                 </div>
           </div>
       </div>
-
+      <div class="cropperContainer">
+      <i class="fa fa-times"></i>
+          <div id="cropperH"></div>
+          <button type="button" id="doneCropping">Done</button>
+          <button type="button" id="cancelCropping">Cancel</button>
+      </div>
      <!--  <div class="pmessagebox">
           <div class="pmBox" id="pmBox" style="margin-left: 6px;">        
                  <div class="divContainer">
@@ -1157,7 +1220,7 @@
           </div>
 
 
-          <div class="picwrapper wrapper">
+                    <div class="picwrapper wrapper">
             <div class="itemLabels"> Upload image </div>        
             <div class="pic">                 
             <img src="{{  $user->user_detail->profile_picture ? asset('').'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png')   }}" alt="" class="profile_pic" id="picPreview">
@@ -1171,7 +1234,9 @@
          <!--    <button class="file-upload">            
             <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" > + </button> -->
 
-    </div>
+    </div> 
+
+
 
 @endsection
 
@@ -1424,36 +1489,131 @@ friend_logout*/
       
 
   });
+/*doneCropping
+cancelCropping*/
 
-  $('#profilePic').on('change', function(){
-     var reader = new FileReader();
-        reader.readAsDataURL($(this)[0].files[0]);
+function dataURItoBlob(dataURI, callback) {
+// convert base64 to raw binary data held in a string
+// doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+var byteString = atob(dataURI.split(',')[1]);
 
-        reader.onload = function (event) {
-            $('#picPreview').attr('src',event.target.result );
-        };
-        _that = this;
+// separate out the mime component
+var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
 
-        formData = new FormData();
-        formData.append('profile_picture', $(this)[0].files[0]);
-        formData.append('user_id', userId);
-        formData.append('_token', CSRF_TOKEN);
+// write the bytes of the string to an ArrayBuffer
+var ab = new ArrayBuffer(byteString.length);
+var ia = new Uint8Array(ab);
+for (var i = 0; i < byteString.length; i++) {
+ia[i] = byteString.charCodeAt(i);
+}
 
-        $.ajax({
-          url: gameExpUrl+'/uploadProfilePic',
-          type : 'POST',
-          data : formData,
-          dataType : 'json',
-          processData: false,
-          contentType: false,
-          success : function(data){
-            console.log(data);
-          },error : function(xhr){
-            console.log(xhr.responseText);
-          }
-        });
+// write the ArrayBuffer to a blob, and you're done
+var bb = new Blob([ab], {type: mimeString});
+return bb;
+}
 
+/*  cropperInstance = $('#cropperH').croppie({
+          enableExif: true,
+               viewport: {
+                  width: 150,
+                  height: 150,
+                  type: 'square'
+               },
+               boundary: {
+                  width: 300,
+                  height: 300
+               }
+            });*/
+  
+  $('.cropperContainer').on('click', '> .fa-fa-times, #cancelCropping',function(){
+      $('.cropperContainer').hide();
   });
+
+/*  $('#doneCropping').on('click', function(){
+
+      cropperPromise = cropperInstance.croppie('result', {
+        type : 'canvas',
+        size : 'viewport'
+      }).then(function(cropCanvas){
+        if(cropCanvas){
+            $('#picPreview').attr('src',cropCanvas );
+
+            profile_pictureData = dataURItoBlob(cropCanvas);
+            console.log(profile_pictureData);
+          }
+      });
+      
+  });*/
+
+var $uploadCrop;
+
+    function readFile(input) {
+      if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              
+              reader.onload = function (e) {
+                 $('.cropperContainer').show();
+                $uploadCrop.croppie('bind', {
+                  url: e.target.result,
+                });
+              }
+              
+              reader.readAsDataURL(input.files[0]);
+          }
+          
+    }
+
+    uploadCropAjax = false;
+    $uploadCrop = $('#cropperH').croppie({
+         
+               viewport: {
+                  width: 150,
+                  height: 150,
+                  type: 'square'
+               },
+               boundary: {
+                  width: 300,
+                  height: 300
+               },
+                enableOrientation: true,
+                enableExif: true,
+            });
+
+    $('#profilePic').on('change', function () { readFile(this); });
+    $('#doneCropping').on('click', function (ev) {
+      $uploadCrop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport',
+      }).then(function (resp) {
+
+         
+        if(!uploadCropAjax){
+          uploadCropAjax = true;
+            profile_pictureData = dataURItoBlob(resp);
+            formData = new FormData();
+            formData.append('profile_picture', profile_pictureData, 'profile_picture.png');
+            formData.append('user_id', userId);
+            formData.append('_token', CSRF_TOKEN);
+
+              $.ajax({
+                url: gameExpUrl+'/uploadProfilePic',
+                type : 'POST',
+                data : formData,
+                dataType : 'json',
+                processData: false,
+                contentType: false,
+                success : function(data){
+                  uploadCropAjax = false;
+                  $('.cropperContainer').hide();
+                  $('#picPreview').attr('src',resp );
+                },error : function(xhr){
+                  console.log(xhr.responseText);
+                }
+              });
+        }
+
+      });
+    });
 
   $('.gameList').bind('rated','.rating', function(e, value){
       
@@ -1882,7 +2042,35 @@ function init_bookflip(startpage){
 }
 
 
+
+/*var basic = $('#demo-basic').croppie({
+    viewport: {
+        width: 150,
+        height: 200
+    }
+});
+basic.croppie('bind', {
+    url: 'images/default_profile_picture.png',
+    points: [77,469,280,739]
+});
+//on button click
+basic.croppie('result', 'html');
+*/
+
+
+/*$uploadCrop = $('#upload-demo').croppie({
+   viewport: {
+      width: 200,
+      height: 200,
+      type: 'circle'
+   },
+   boundary: {
+      width: 300,
+      height: 300
+   }
+});*/
 </script>
+
 
 @endsection
 

@@ -27,6 +27,9 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900' rel='stylesheet' type='text/css'>
 
+  
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+
     <!--<link rel="stylesheet" href="{{ elixir('css/clubhouse-all.css') }}">-->
 
     <script src="{{ asset('js/modernizr.custom.js') }}"></script>
@@ -357,6 +360,8 @@
     <script src="{{ asset('js/livestamp.min.js') }}"></script> 
 
   <script src="{{ asset('js/sockets.io.js') }}"></script>
+
+
   <script>
 
 
@@ -1907,6 +1912,7 @@ interact('.draggable')
 
 
   </script>
+    <script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
    @yield('custom_scripts')
   @yield('footer_scripts')
 
