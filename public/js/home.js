@@ -1,3 +1,5 @@
+	var onlineFriendsList = [];
+
 $(function(){
 
 	// window.onresize = function(){ location.reload(); }
@@ -52,6 +54,42 @@ $(function(){
 
 	});
 
+	socket.on('myOnlineFriends', function(onlineFriends){
+
+		onlineFriendsList = onlineFriends;
+	});
+
+	socket.on('friendOffline', function(friend_id){
+        index = onlineFriendsList.indexOf(parseInt(friend_id));
+        if(index != -1){
+
+        	onlineFriendsList.splice(index, 1);
+        	offlineUserOnlineStatusElements(friend_id);
+        }
+    });
+	socket.on('friendOnline', function(friend_id){
+        
+        index = onlineFriendsList.indexOf(parseInt(friend_id));
+        friendIndex = myFriends.indexOf(parseInt(friend_id));
+        if(index == -1 && friendIndex >=0 ){
+        	onlineFriendsList.push(friend_id);
+        	onlineUserOnlineStatusElements(friend_id);
+        }
+
+    });
+
+    function offlineUserOnlineStatusElements(friend_id){
+    if($('#pmBox').data('current') == friend_id && $('#pmBox').is(':visible'))
+		{
+			$('#pmBox').find('.body h2 > span').removeClass('online');
+		}
+    }
+    function onlineUserOnlineStatusElements(friend_id){
+    if($('#pmBox').data('current') == friend_id && $('#pmBox').is(':visible'))
+		{
+			$('#pmBox').find('.body h2 > span').addClass('online');
+		}
+    }
 
 	socket.on('user_banned', function(data, room_id){
 		console.log('user_banned');
@@ -59,7 +97,6 @@ $(function(){
 		console.log($('#chatbox-'+room_id).length);
       if(data.user_id == userId && $('#chatbox-'+room_id).length ){
         $('#chatbox-'+room_id).find('textarea').initBan(data.time);
-        $('#')
       }
 
    });
@@ -950,6 +987,17 @@ $(function(){
 		$('.messageNotifBox ').hide();
 	});
 
+		$(document).mouseup(function (e)
+	{
+	    var container = $(".messageBox");
+
+	    if (!container.is(e.target)
+	        && container.has(e.target).length === 0)
+	    {
+	        container.hide();
+	    }
+	});
+
 	$('#notificationMenu').on('click', function(){
 
 		$('#notificationMenu').find('.notifcount').remove();
@@ -1201,6 +1249,11 @@ $(function(){
 			$('#pmBox').attr('data-current', theUser);
 			$('#sendPrivateMessage').data('user', theUser);
 			$(modal).find('.divContainer').hide();
+			if(onlineFriendsList.indexOf(parseInt(theUser)) != -1){
+				$('#pmBox').find('.body h2 > span').addClass('online');
+			}else{
+				$('#pmBox').find('.body h2 > span').removeClass('online');
+			}
 
 			loading = $('<div>').addClass('loadContainer').append('<div class="typing-indicator"><span></span><span></span><span></span></div><p> Loading... </p>');
 

@@ -20,8 +20,8 @@ use App\Model\Question;
 use App\Global_Notification;
 use App\Private_Message;
 use App\Userchat_Read;
-use App\User_Session;
 use App\User_Tour;
+use App\Friend;
 use DateTime;
 use Validator;
 use Hash;
@@ -441,8 +441,8 @@ class UserController extends Controller
 
         $session_id = Session::getId();
 
-
-        return view('clubhouse.profile', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count', 'questions', 'questionaire', 'session_id'));
+        $myFriends = Friend::myFriends();
+        return view('clubhouse.profile', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count', 'questions', 'questionaire', 'session_id', 'myFriends'));
     }
 
 

@@ -72,6 +72,7 @@ app.post("/user_login", function(req, res, next) {
     request = req.body;
     io.to(request.session_id).emit('user_logged_in');
     io.to('friend_'+request.user_id).emit('friend_login', request.user_id);
+    io.to('friend_'+request.user_id).emit('friendOnline', request.user_id);
     res.send(true);
 });
 app.post("/user_logout", function(req, res, next) {
@@ -79,10 +80,10 @@ app.post("/user_logout", function(req, res, next) {
     request = req.body;
     console.log('user_logout');
     console.log(request);
-    io.to(request.session_id).emit('user_logged_out');
-    if(request.remaining_sessions == 0){
+    io.to('user_'+request.user_id).emit('user_logged_out');
+    /*if(request.remaining_sessions == 0){
         io.to('friend_'+request.user_id).emit('friend_logout', request.user_id);
-    }
+    }*/
     
     res.send(true);
 });
@@ -222,6 +223,14 @@ function User(id, name, profile_picture, adminmode){
 User.prototype.exists = function(){
   for(i=0;i<users.length;i++){
     if(users[i].id == this.id){
+      return true;
+    }
+  }
+  return false;
+}
+function UserOnline(user_id){
+  for(i=0;i<users.length;i++){
+    if(users[i].id == user_id){
       return true;
     }
   }
@@ -481,15 +490,23 @@ io.on('connection', function (socket) {
 
         }
       }
-      console.log('myFriends');
-      console.log(myFriends);
-      if(myFriends && myFriends.length > 0){
-        for(j=0;j<myFriends.length;j++){
-          friend_id = myFriends[j];
-          socket.join('friend_'+friend_id);
-        }
-      }
+      if(myFriends !=undefined && (typeof myFriends == 'string' && myFriends.trim() !='')){
 
+          myFriendsParse = JSON.parse(myFriends);
+          onlineFriends = [];
+          if(myFriendsParse && myFriendsParse.length > 0){
+            for(j=0;j<myFriendsParse.length;j++){
+              friend_id = myFriendsParse[j];
+              socket.join('friend_'+friend_id);
+              if(UserOnline(friend_id)){
+                onlineFriends.push(friend_id);
+              }
+            }
+          }
+
+          socket.emit('myOnlineFriends', onlineFriends);
+      }
+    
       socket.emit('login_success');
     } 
 
@@ -709,8 +726,9 @@ io.on('connection', function (socket) {
 
             }else{
             
-            console.log('user disconnected');
+            
             user_id = socket.user.id;
+            console.log('user disconnected '+user_id);
             socket.user.removeUser();
 
             if(socket.currentRoom){
@@ -724,6 +742,7 @@ io.on('connection', function (socket) {
 
           }
 
+
             socket.broadcast.to('admin_'+socket.currentRoom.id).emit('display_users', socket.currentRoom.getRegularPeople() );
           
 
@@ -734,6 +753,8 @@ io.on('connection', function (socket) {
 
               }
 
+              socket.broadcast.to('friend_'+user_id).emit('friendOffline', user_id);
+              console.log('friendOffline');
 
             
             }

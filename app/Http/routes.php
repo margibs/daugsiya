@@ -125,7 +125,6 @@ Route::get('admin/autoposts/check_execute', 'AutoPostController@checkExecute');
 
 Route::post('room/getRoomMessages', 'ChatroomController@getRoomMessages');
 Route::get('notification/postCustomNotification', 'NotificationController@postCustomNotification');
-Route::post('session/getUserSession', 'UserSessionController@getUserSession');
 Route::post('clubhouse/session', 'UserController@session');
 
 
@@ -265,13 +264,15 @@ Route::group(['middleware' => 'UserCheck'], function()
 
 	//HOME ADS
 	Route::get('admin/home_ads','AdminController@homeAds');
-	Route::post('admin/insert_image', 'AdminController@insertImage');
+	Route::post('admin/homeads/insert_image', 'AdminController@insertImage');
 	Route::get('admin/homeads/{id}', 'AdminController@getAdds');
-	Route::get('admin/edit/homeads/{id}', 'AdminController@editHomeAdds');
-	Route::post('admin/edit/imageEdit', 'AdminController@editImageAdd');
-	Route::get('admin/delete/imageDelete/{id}', 'AdminController@deleteImageHome');
-	Route::get('admin/list/imageAdds', 'AdminController@listImageHome');
-
+	Route::get('admin/homeads/edit/{id}', 'AdminController@editHomeAdds');
+	Route::post('admin/homeads/edit/{id}', 'AdminController@editImageAdd');
+	/*Route::post('admin/edit/imageEdit', 'AdminController@editImageAdd');*/
+	Route::get('admin/homeads/delete/imageDelete/{id}', 'AdminController@deleteImageHome');
+	Route::get('admin/homeads/list/imageAdds', 'AdminController@listImageHome');
+	Route::get('admin/homeads/list/trashed', 'AdminController@listImageHomeTrashed');
+	Route::get('admin/homeads/list/trashedData', 'HomeImagesController@trashedData');
 	//FUNCTION FOR CHANGE IS MOBILE
 	Route::post('admin/posts/ismobile', 'AdminController@ismobile');
 	//DATA TABLE FOR USER CONTROLLER
@@ -287,7 +288,22 @@ Route::group(['middleware' => 'UserCheck'], function()
 	    'getIndex' => 'homeimagedatatable',
 	]);
 
+	//FUNCTION FOR DYNAMIC PAGE
+	Route::get('admin/dynamic/link', 'AdminController@getLink');
+
+	/*
+	*  FUNCTION FOR DYNAMIC LINK
+	*	AUTHO: IAN ROSLAES
+	*	DATE: 5/2/2016
+	*/
+	
+	//DATA TABLE FOR SKYSCRAPPER DYANAMI LINK
+	Route::get('admin/article/get','HomeImagesController@articleGet');
+	Route::get('admin/skypscrapper/get','HomeImagesController@skypscrapperGet');
+	Route::get('admin/home-adds/get', 'HomeImagesController@anyDataCasino');
+
 });
+
 
 //Ajax Call
 Route::post('casino/ajax/get_casino','PageController@ajaxGetCasino');

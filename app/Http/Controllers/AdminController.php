@@ -53,6 +53,7 @@ use DateTimeZone;
 
 use App\Http\HomeImageRequest;
 use Input;
+use App\Model\CasinoBanner;
 
 
 
@@ -571,25 +572,40 @@ class AdminController extends Controller
 
     public function getAdds($id) 
     {
+
         $home_image = HomeImage::find($id);
         return view('admin.viewAds', compact('home_image'));
         
     }
 
-    public function editHomeAdds($id)
-    {
+    public function editHomeAdds(Request $request,$id)
+    { 
+
+        $redirect = '';
+        if($request->redirect != null)
+        {
+          $redirect = $request->redirect;  
+        }
+
         $home_image = HomeImage::find($id);
-        return view('admin.editHomeAdd', compact('home_image'));
+        return view('admin.editHomeAdd', compact('home_image', 'redirect'));
        
     }
 
-    public function editImageAdd() 
+    public function editImageAdd(Request $request, $id) 
     {
-        $home_image = HomeImage::find(Input::get('id'));
+
+        $request = Input::get('homeadds');
+        $home_image = HomeImage::findOrFail($id);
         $data = Input::all();
         $home_image->update($data);
         $home_images = HomeImage::get();
-        return view('admin.listImageAdds',compact('home_images'));
+       
+        if($request != null)
+        {
+            return redirect($request);
+        }
+         return view('admin.listImageAdds',compact('home_images'));
     }
 
     public function listImageHome()
@@ -598,17 +614,34 @@ class AdminController extends Controller
         return view('admin.listImageAdds',compact('home_images'));
     }
 
+    public function listImageHomeTrashed()
+    {
+        return view('admin.listImageAddTrashed');
+    }
+
     public function deleteImageHome($id)
     {
+        $request = Input::get('redirect');
         $home_image = HomeImage::find($id);
         if($home_image)
         {
+            if($request != null)
+            {
+                $home_image->delete();
+                $home_images = HomeImage::get();
+                return redirect($request);
+            }
             $home_image->delete();
             $home_images = HomeImage::get();
             return view('admin.listImageAdds',compact('home_images'));
+
         }
         else
         {
+            if($request != null)
+            {
+                return redirect($request);
+            }
             $home_images = HomeImage::get();
             return view('admin.listImageAdds',compact('home_images'));
         }
@@ -631,6 +664,23 @@ class AdminController extends Controller
         $post->save();
         return json_encode($data);
     }
+
+    /*R
+    *   FUNCTION FOR DYNAMIC LINK
+    *   AUTHOR: IAN ROSALES
+    *   DATE: 4-29-2016
+    */
+
+    public function getLink()
+    {
+        $articles = CasinoBanner::getArticles();
+        $skypsCrappers = CasinoBanner::getSkypsCrapper();
+        $casinos = HomeImage::getHomeImage();
+
+        return view('admin.dynamic_link', compact('articles', 'skypsCrappers', 'casinos'));
+    }
+
+   
    
     //POSTS
 	public function posts(Request $request)

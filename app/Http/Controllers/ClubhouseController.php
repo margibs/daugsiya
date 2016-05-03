@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Lang;
 use App\Global_Notification;
 use App\Model\Post;
 use Session;
-use App\User_Session;
+use App\Friend;
 
 class ClubhouseController extends Controller
 {
@@ -30,7 +30,7 @@ class ClubhouseController extends Controller
 
     protected function authenticated(Request $request, $user){
 
-        $url = url('').':8891/user_login';
+      /*  $url = url('').':8891/user_login';
 
         $nodeData['session_id'] = $this->old_session_id;
         $nodeData['user_id'] = $user->id;
@@ -58,9 +58,33 @@ class ClubhouseController extends Controller
 
         $user_session->save();
 
-        Session::start();
+        Session::start();*/
+        Session::setId($this->old_session_id);
+        Session::start(); 
+
+        $url = url('').':8891/user_login';
+
+        $nodeData['user_id'] = $user->id;
+        $nodeData['session_id'] = $this->old_session_id;
+        $data_string = json_encode($nodeData);
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+            'Content-Type: application/json',                                                                                
+            'Content-Length: ' . strlen($data_string))                                                                       
+        );                                                                                                                   
+
+        $result = curl_exec($ch);
+        curl_close($ch);
 
         return redirect($this->redirectPath);
+
+
     }
 
 	public function postLogin(Request $request)
@@ -114,8 +138,26 @@ class ClubhouseController extends Controller
         if(Auth::check())
         {
             $redirect = $request->input('redirect') ? $request->input('redirect') : '/';
-
             $url = url('').':8891/user_logout';
+
+            $user_id = Auth::user()->id;
+
+            $nodeData['user_id'] =$user_id;
+            $data_string = json_encode($nodeData);
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
+                'Content-Type: application/json',                                                                                
+                'Content-Length: ' . strlen($data_string))                                                                       
+            );                                                                                                                   
+                                                                                                                                 
+            $result = curl_exec($ch);
+            curl_close($ch);
+            /*$url = url('').':8891/user_logout';
 
             $user_id = Auth::user()->id;
 
@@ -144,10 +186,8 @@ class ClubhouseController extends Controller
                                                                                                                                  
             $result = curl_exec($ch);
             
-
+*/
             Auth::logout();
-
-            Session::flush();
         }
 
         return redirect('/');
@@ -208,7 +248,9 @@ class ClubhouseController extends Controller
 
             $session_id = Session::getId();
 
-        return view('clubhouse.home', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count', 'session_id'));
+            $myFriends = Friend::myFriends();
+
+        return view('clubhouse.home', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count', 'session_id', 'myFriends'));
     }
 
     public function slot()
@@ -225,7 +267,9 @@ class ClubhouseController extends Controller
 
         $session_id = Session::getId();
 
-        return view('clubhouse.slot', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count','posts', 'session_id'));
+        $myFriends = Friend::myFriends();
+
+        return view('clubhouse.slot', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count','posts', 'session_id', 'myFriends'));
     }
 
     public function prize()
@@ -239,8 +283,10 @@ class ClubhouseController extends Controller
         $global_notification_count = $this->getGlobalNotificationCount();
 
         $session_id = Session::getId();
+
+        $myFriends = Friend::myFriends();
         
-        return view('clubhouse.prize', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count', 'session_id'));
+        return view('clubhouse.prize', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count', 'session_id', 'myFriends'));
     }
 
 }

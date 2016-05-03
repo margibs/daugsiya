@@ -89,7 +89,8 @@ class MessageController extends Controller
         $private_message->to = $request->to;
         $private_message->message = $request->message;
 
-        echo json_encode( $private_message->save() );
+
+       echo json_encode( $private_message->save() );
 
     }
 
@@ -99,17 +100,18 @@ class MessageController extends Controller
         $user = User::findOrFail($request->user_id);
 
         $friendMessages = $user->recieved_private_messages()->groupBy('from')->get();
-                $messages = [];
+                $messages = []; 
 
+        $path = 'user_uploads/'.'user_';
         foreach($friendMessages as $msg){
-                   /* dd($msg->from);*/
                     $lastMessage = Private_Message::with('from_user')->where('from', $msg->from)->where('to', $msg->to)->orderBy('created_at', 'desc')->first();
-                    
+                    $path = 'user_uploads/'.'user_'.$lastMessage->from_user->id.'/'.$lastMessage->from_user->user_detail->profile_picture;
+                    if(($lastMessage->from_user->user_detail->profile_picture == '') || (file_exists($path))) {
+                        $lastMessage->from_user->user_detail->profile_picture =  'user_uploads/default_image/default_01.png';
+                    }
                     array_push($messages, $lastMessage);
                 }
-
-
-        echo json_encode($messages);
+        return json_encode($messages);
 
     }
 
