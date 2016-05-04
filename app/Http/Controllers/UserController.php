@@ -646,4 +646,6 @@ class UserController extends Controller
         return json_encode($chatroom->room_messages);
     }
 
+    
+
 }

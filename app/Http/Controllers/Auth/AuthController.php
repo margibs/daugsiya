@@ -84,6 +84,7 @@ class AuthController extends Controller
 
     public function signup(Request $request){
 
+        //return json_encode($request->all());
     $validator = $this->signupValidator($request->all());
 
         if ($validator->fails()) {
