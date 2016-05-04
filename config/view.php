@@ -6,7 +6,7 @@ $Agent = new Agent();
 $viewPath = 'resources/views';
 if ($Agent->isMobile()) {
    // you're a mobile device
-   $viewPath = 'resources/views/mobileView/clubhouse/login';
+   $viewPath = 'resources/views/mobileView';
 } 
 
 
@@ -26,6 +26,7 @@ return [
 
     'paths' => [
        realpath(base_path($viewPath)),
+
     ],
 
     /*
