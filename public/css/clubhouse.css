@@ -2138,14 +2138,26 @@ Main Components
     left: 69%;
   }
   .profilePage .cd-single-step:nth-of-type(5) {
+     top: 36%;
+    left: 61%;
+  }
+  .profilePage .cd-single-step:nth-of-type(6) {
+     top: 36%;
+    left: 61%;
+  }
+  .profilePage .cd-single-step:nth-of-type(7) {
+     top: 36%;
+    left: 61%;
+  }
+  .profilePage .cd-single-step:nth-of-type(8) {
     top: 50%;
     left: 65%;
   }
-  .profilePage .cd-single-step:nth-of-type(6) {
+  .profilePage .cd-single-step:nth-of-type(9) {
     top: 44%;
     left: 42.3%;
   }
-  .profilePage .cd-single-step:nth-of-type(7) {
+  .profilePage .cd-single-step:nth-of-type(10) {
     top: 43%;
     left: 30%;
   }

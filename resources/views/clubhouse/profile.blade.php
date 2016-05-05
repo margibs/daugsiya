@@ -7,6 +7,7 @@
 @section('scripts_here')
 
 <link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
+<link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
 
 @endsection
 
@@ -603,7 +604,8 @@ height: 372px;
       </div>
     </li> <!-- .cd-single-step -->
 
-    <li class="cd-single-step">
+    <li class="cd-single-step" id="beforeTvStep">
+
       <span>Step 3</span>
 
       <div class="cd-more-info left">
@@ -612,8 +614,35 @@ height: 372px;
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
+    <li class="cd-single-step afterTvStep" id="afterTvFirstStep" data-next="tab2">
+      <span>Step 3.5</span>
 
-    <li class="cd-single-step">
+      <div class="cd-more-info right">
+        <h2>View games</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <img src="img/step-3.png" alt="step 3">
+      </div>
+    </li> <!-- .cd-single-step -->
+    <li class="cd-single-step afterTvStep" data-next="tab3"  data-prev="tab1">
+      <span>Step 3.5</span>
+
+      <div class="cd-more-info right">
+        <h2>View games 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <img src="img/step-3.png" alt="step 3">
+      </div>
+    </li> <!-- .cd-single-step -->
+    <li class="cd-single-step afterTvStep" data-prev="tab2">
+      <span>Step 3.5</span>
+
+      <div class="cd-more-info right" id="afterTvLastStep">
+        <h2>View games 3</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <img src="img/step-3.png" alt="step 3">
+      </div>
+    </li> <!-- .cd-single-step -->
+
+    <li class="cd-single-step afterTvStep" data-prev="tab3" id="lastTvStep">
       <span>Step 4</span>
       <div class="cd-more-info left">
         <h2>Step Number 4</h2>
@@ -1218,12 +1247,7 @@ height: 372px;
           </div>
 
 
-<!-- <<<<<<< HEAD
-                    <div class="picwrapper wrapper">
-            <div class="itemLabels"> Upload image </div>        
-            <div class="pic">                 
-            <img src="{{  $user->user_detail->profile_picture ? asset('').'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png')   }}" alt="" class="profile_pic" id="picPreview">
-======= -->
+
           <div class="picwrapper wrapper">
             <div class="itemLabels"> Upload image </div>        
             <div class="pic">                 
@@ -1240,17 +1264,12 @@ height: 372px;
          <!--    <button class="file-upload">            
             <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" > + </button> -->
 
-<!-- <<<<<<< HEAD
-    </div> 
 
-
-=======
-    </div>
->>>>>>> 716615a7e751b994398f4828d9acec2a9a4dd28a -->
 </div>
 @endsection
 
 @section('custom_scripts')
+<script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
 <script src="{{ asset('js/jquery.rateit.min.js') }}"></script>
 <!-- <script src="{{ asset('js/jquery.vticker.min.js') }}"></script> -->
 <script src="{{ asset('js/bookflip.js') }}"></script>
@@ -1288,6 +1307,36 @@ $(document).ready(function(){
   });
   $('.tvwrapper').click(function() {        
      $(".tvbox ").fadeToggle('fast');
+  });
+
+
+
+
+
+  $('#beforeTvStep').on('click','.cd-next', function(){
+      $(".tvbox ").fadeIn('fast');
+  });
+
+$('#lastTvStep').on('click', '.cd-prev', function(){
+     $(".tvbox ").fadeIn('fast');
+});
+
+  $('.afterTvStep').on('click', '.cd-prev', function(){
+      prev = $(this).parents('.afterTvStep').attr('data-prev');
+
+      if(prev){
+          $("label[for='"+prev+"']").trigger('click');
+      }else{
+         $(".tvbox ").fadeOut('fast');
+      }
+  });
+  $('.afterTvStep').on('click', '.cd-next', function(){
+      next = $(this).parents('.afterTvStep').attr('data-next');
+      if(next){
+          $("label[for='"+next+"']").trigger('click');
+      }else{
+         $(".tvbox ").fadeOut('fast');
+      }
   });
 
   $('#friendprofopen').click(function() {        

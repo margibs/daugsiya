@@ -86,13 +86,13 @@ height: 372px;
 .userDetail .imgContainer{
        width: 100%;
 }
-
 .userDetail .imgContainer .changePicButtonContainer{
         width: 167px;
     border-radius: 50%;
     padding: 8px;
     position: relative;
         margin: 20px auto;
+        background: #fff;
 }
 
 .userDetail .changePicButton{
@@ -101,6 +101,7 @@ height: 372px;
     height: 150px;
     border-radius: 50%;
     overflow: hidden;
+        border: 1px solid #ccc;
 }
 
 .userDetail .changePicButtonContainer label{
@@ -150,6 +151,14 @@ height: 372px;
    font-size: 18px;
 }
 
+.userDetail .actionButton{
+    padding: 8px 20px;
+    color: #ccc;
+    background: #fff;
+    border-radius: 1em;
+}
+
+
 .userDetail .upperHalf .userDetailActions a .icon{
         font-size: 45px;
     vertical-align: middle;
@@ -174,6 +183,23 @@ height: 372px;
 .listFav ul li img{
         width: 100%;
     padding-right: 10%;
+}
+
+.pageLoading{
+        position: absolute;
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+
+.pageLoading .preloaderContainer{
+        margin: auto;
+}
+.pageLoading .preloaderContainer .preloader-wrapper{
+        display: block;
+    margin: auto;
+    margin-top: 50%;
 }
 
 /* .userDetail .imgContainer{

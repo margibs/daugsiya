@@ -1282,7 +1282,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                               </div>
 
                               <div class="text-center">
-                               {!! $casino_lists[0] !!}
+                               {!! $casino_lists[3] !!}
                               </div> 
 
                               <div class="text-center">
@@ -1290,7 +1290,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                               </div> 
 
                               <div class="text-center">
-                               {!! $casino_lists[0] !!}
+                               {!! $casino_lists[2] !!}
                               </div> 
                             
                               
@@ -1309,11 +1309,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                               </div> 
 
                               <div class="text-center">
-                                {!! $casino_lists[1] !!}
+                                {!! $casino_lists[0] !!}
                               </div> 
 
                               <div class="text-center">
-                                {!! $casino_lists[1] !!}
+                                {!! $casino_lists[2] !!}
                               </div> 
                               
                            
@@ -1332,11 +1332,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                           </div>
                            
                            <div class="text-center">
-                            {!! $casino_lists[2] !!}
+                            {!! $casino_lists[0] !!}
                           </div>
 
                           <div class="text-center">
-                            {!! $casino_lists[2] !!}
+                            {!! $casino_lists[1] !!}
                           </div>
                           
                         </div>
@@ -1354,11 +1354,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                           </div> 
 
                           <div class="text-center">
-                             {!! $casino_lists[3] !!}
+                             {!! $casino_lists[2] !!}
                           </div> 
 
                           <div class="text-center">
-                             {!! $casino_lists[3] !!}
+                             {!! $casino_lists[1] !!}
                           </div> 
                           
                       
@@ -1897,6 +1897,37 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         $('.recommendFriends .fa-times').on('click', function(){
             $(".recommendFriends").fadeOut('fast');
         });
+
+          /* var y = $(window).scrollTop(); */
+          var y = $('.pointingSusan').offset().top;
+           $("html, body").animate({ scrollTop: y }, 400); 
+
+           var explode = function(){
+               $('.bottomCasinos').css({
+                  'height':'180px',
+                  'padding':'10px 0'
+               });
+                var ulOpen = function(){
+                    $('#circle').css({
+                        'display':'none'                       
+                     });
+                };
+                setTimeout(ulOpen, 1600);
+
+
+                 var giftbox = function(){
+                      $('.bottomCasinos ul').css({
+                           'display':'block'                       
+                        });
+                  };
+                  setTimeout(giftbox, 1700);
+                  
+
+            };
+            setTimeout(explode, 500);
+
+          
+          });
 
   /*  socket.on('connect', function(){
       room = 'post_comment_{{$post->id}}';
@@ -2918,17 +2949,21 @@ $('.postcontent img').css('display','inline');
     });
     //END LAZY LOADING
 
-    //IDLE POPUP//
-    $(window).scroll(function () { 
-      if( $(window).scrollTop() > 300 ) 
-      {
-        $('.popunder').animate({bottom: '-340px'}, 300);
-      }
-    })
+     //IDLE POPUP//
+
 
     startIdleCounting = setInterval( checkIdle, 1000 );
     idleCounter = 0;
-    maxIdle = 10;
+    maxIdle = 2;
+    popunderShown = false;
+      $(window).scroll(function () { 
+      /*if( $(window).scrollTop() > 300 ) 
+      {
+        $('.popunder').animate({bottom: '-340px'}, 300);
+      }*/
+
+           
+    });
 
     //checkTitleSeen()
 
@@ -2936,25 +2971,38 @@ $('.postcontent img').css('display','inline');
 
 
     idleCounter++;
+    console.log(idleCounter);
 
      title_is_seen = checkTitleSeen();
 
     if(idleCounter == maxIdle){
-        clearInterval(startIdleCounting);
+        
+          $('.popunder').animate({bottom: '-9px'}, 300);
+          popunderShown= true;
+          clearInterval(startIdleCounting);
 
-        if(title_is_seen == false){
+       /* if(title_is_seen == false){
             $('.popunder').animate({bottom: '-9px'}, 300);
-        }
+        }*/
 
     }
 
     }
 
-    $(window).bind('scroll load', function(){
+    $(window).on('scroll load', function(){
     title_is_seen = checkTitleSeen();
-    if(title_is_seen){
-         clearInterval(startIdleCounting);
+    idleCounter = 0;
+    if(popunderShown){
+        clearInterval(startIdleCounting);
+        $('.popunder').animate({bottom: '-340px'}, 300);
+      /*  popunderShown = false;
+        $('.popunder').animate({bottom: '-340px'}, 300);
+        startIdleCounting = setInterval( checkIdle, 1000 );*/
     }
+
+   /* if(title_is_seen){
+         clearInterval(startIdleCounting);
+    }*/
     });
 
     function checkTitleSeen(){
