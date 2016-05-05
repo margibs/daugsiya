@@ -13,6 +13,7 @@ $(function(){
 
 	//USER DETAILS
 	userImage = $('#userId').data('image');
+	userProfileImage = $('#userId').data('profile');
 	userId = $('#userId').val();
     userName = $('#userId').data('name');
     isAdmin = $('#userId').data('isAdmin') == 1 ? true : false;
@@ -1527,7 +1528,7 @@ $(function(){
 							//   )
 							.append(
 								/*$('<img src="'+( userImage ? BASE_URL+'/user_uploads/user_'+userId+'/'+userImage : defaultProfilePic) +'">')*/
-								$('<img src="'+( userImage ? BASE_URL+'/'+userImage : defaultProfilePic) +'">')
+								$('<img src="'+( userProfileImage ? BASE_URL+'/'+userImage : defaultProfilePic) +'">')
 
 							)
 						)
