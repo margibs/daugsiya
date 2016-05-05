@@ -25,10 +25,38 @@ height: 280px;
 }
 .reels{
 padding: 0 53px 0 67px;
-margin-top: 13px;
+margin-top: 19px;
 height: 244px;
 overflow: hidden;
 }
+.reels p{
+color: white;
+padding: 4px 0;
+background: rgb(226,39,39);
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UyMjcyNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiMDBmMGYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  rgba(226,39,39,1) 0%, rgba(176,15,15,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,39,39,1)), color-stop(100%,rgba(176,15,15,1)));
+background: -webkit-linear-gradient(top,  rgba(226,39,39,1) 0%,rgba(176,15,15,1) 100%);
+background: -o-linear-gradient(top,  rgba(226,39,39,1) 0%,rgba(176,15,15,1) 100%);
+background: -ms-linear-gradient(top,  rgba(226,39,39,1) 0%,rgba(176,15,15,1) 100%);
+background: linear-gradient(to bottom,  rgba(226,39,39,1) 0%,rgba(176,15,15,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e22727', endColorstr='#b00f0f',GradientType=0 );
+
+-moz-box-shadow: inset 0 0 10px -3px #000;
+-webkit-box-shadow: inset 0 0 10px -3px #000;
+box-shadow: inset 0 0 10px -3px #000;
+
+position: relative;
+text-align: center;
+width: 102%;
+margin-left: -8px;
+font-family: 'Work Sans';
+font-weight: 600;
+text-shadow: 0px 2px 2px rgb(102, 3, 3);
+color: #FFD4D4;
+letter-spacing: 0.5px;
+}
+
 .reels img{
 border-right: 2px solid #040404;
 }
@@ -510,9 +538,10 @@ top: -41px;
 margin-left: 0;
 }
 #playbig .button{
-text-align: center;
-font: 33px/0.9em 'Work Sans',sans-serif;
-padding: .2em .6em;
+ text-align: center;
+font-size: 33px;
+padding: .3em .6em;
+line-height: 28px;
 }
 
 .reply-list{
@@ -821,19 +850,16 @@ width: 23%;
 
 #planeMachine2, #planeMachine3, #planeMachine4, #planeMachine5{
 	height: 238px;
-	padding-top: 16px;
 }
 
 </style>
       <div class="recommendBox">
-          
-          <div class="recommendFriends">
-              <i class="fa fa-times"></i>
-              <ul id="friendRecommentList">
-  </ul>
-        <button class="recommendBtn" id="recommendBtn" type="button">Recommend Game</button>
-          </div>
-
+	      <div class="recommendFriends">
+	        <i class="fa fa-times"></i>
+	        <ul id="friendRecommentList">
+				</ul>
+	    	<button class="recommendBtn" id="recommendBtn" type="button">Recommend Game</button>
+	      </div>
       </div>
 
 
@@ -853,7 +879,10 @@ width: 23%;
               <img src="{{$category_image}}">
           </div>
 
-                <div class="reels">
+
+           <div class="reels">
+           		  <!-- <p> Top Rated Games </p> -->
+
                   <div class="row no-gutter">
 
 
@@ -1482,8 +1511,25 @@ contentHeight = $(contents_here).outerHeight() +'px';
 
         
     }
+/*      $.ajax({
+        type: 'post',
+        url: "{{url('home/ajax_get_ads_posts_init')}}",
+        data: {_token: CSRF_TOKEN2}, 
+        success: function(response)
+        {
+          var parsed = JSON.parse(response);
 
-    // APIS
+          $.each( parsed, function( i, l ){
+            $( ".rellimg" ).append(l);
+          });
+
+        }
+        
+      });*/
+
+
+
+      // APIS
 
 
   $('#share_via_pinterest').sharrre({

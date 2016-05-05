@@ -4,7 +4,7 @@
 
 <style type="text/css">
   body {
-        margin-top: 100px;
+        margin-top: 120px;
     }
   img{width: 100%;}
   .container_24{display: none;}
@@ -20,17 +20,102 @@
     top: 540px;
     margin-left: 0;
   }
-  @media(max-width: 1366px){
-    .container {
-        width: 1085px;
+  @media(min-width: 1600px){
+    .homepageReel .susan {
+      right: 98px;
+      top: 4px;
     }
-
+    #planeMachine2, #planeMachine3, #planeMachine4, #planeMachine5 {
+      height: 299px;
+    }
+    .headText span, .headText2 span{
+          font-size: 118px;
+    }
+    .container {
+      width: 1230px;
+    }
+    .topReel {
+      left: 8px;
+      width: 99.5%;
+    }
+    .categoryReel {
+      width: 100%;
+      left: 2px;
+      height: 1132px;
+      top: 725px;
+    }
+    .reels {
+      padding: 0 96px 0 90px;
+      margin-top: 60px;
+    }
+    #playbig {
+      right: 125px;
+      top: 555px;
+      height: 291px;
+    }
+    #playbig .button {
+      font: 46px/1em 'Work Sans',sans-serif;
+      padding: .4em .6em;
+      font-weight: 600;
+    }
+    #playbig a {
+      width: 170px!important;
+      text-align: center;
+      height: 89px!important;
+    }
+    .homeText {
+      margin-top: 81px;
+      margin-left: 156px;
+      margin-left: 157px;
+      font-size: 33px;
+    }
+    .homeText2{
+      top: 720px;
+      left: 219px;
+      font-size: 33px;
+    }
+    .categoryMain {
+      overflow: hidden;
+      padding: 38px 39px 8px 55px;
+    }
+    .categories{
+      padding: 20px 0px 28px 22px;
+    }
+    .categAds{
+      height: 1090px;
+    }
+    .bigwinsMain {
+      padding: 102px 10px 0 68px;
+    }
+    .bigwinsMainReel{
+      top: 1857px;
+      width: 100%;
+    }
+    .latestMain {
+      margin: 98px 10px 0 11px;
+      -moz-box-shadow: 0px 5px 4px 2px #3A3A3A;
+      -webkit-box-shadow: 0px 5px 4px 2px #3A3A3A;
+      box-shadow: 0px 5px 4px 2px #3A3A3A;
+    }
+    .bigwinsMain ul li a {
+      height: 286px;
+      width: 271px;
+    }
+  }
+  @media(max-width: 1366px){
+  	body{
+  		margin-top: 100px;
+  	}
+    .container {
+        width: 1060px;
+    }
     .topReel{
       width: 100%;
     }
     .categoryReel{
-      top: 643px;
-      width: 1106px;
+      top: 629px;
+      height: 953px;
+      width: 1081px;
     }
     .homepageReel .headText2{
       font-size: 60px;
@@ -41,91 +126,1300 @@
       margin-right: 90px;
     }
     .homepageReel .susan{
-      width: 273px;
+      width: 235px;
       z-index: 2;
       right: 67px;
-      top: -7px;
+      top: 2px;
     }
     .homeText{
       margin-top: 88px;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
     }
     .homeText2{
-      top: 646px;
-      left: 221px;
+      top: 627px;
+      left: 218px;
     }
     .categoryMain{
-      padding: 35px 52px 0px 49px;
+      padding: 23px 61px 0px 46px;
     }
     .categories{
       padding:10px 10px 57px 10px;
     }
     .reels {
-        padding: 0 80px 0 84px;
-        margin-top: 53px;
+        padding: 0 76px 0 79px;
+    	margin-top: 46px;
         height: 259px;
     }
     #playbig{
-        top: 510px;
+        top: 491px;
     }
     .categAds1366{
       padding-right: 0;
     }
 
     .bigwinsMainReel{
-      top: 1658px;
+      top: 1578px;
       left: 1px;
-      width: 1108px;
+      width: 1083px;
     }
     .bigwinsMain {
-      padding: 102px 0px 0 58px;
+      padding: 5px 0px 0 58px;
     }
     .bigwinsMain ul li a {
-        height: 253px;
+        height: 248px;
     }
     .latestMain{
-      margin: 68px 0px 0 9px;
+      margin: 64px -1px 0 8px;
     }
     .latestMain ul li a{
-      height: 127px;
+      height: 124px;
     }
     .footerReel{
           width: 101%;
     }
   }
   @media(max-width: 1199px){
-     #playbig a {
-        width: 140px;
-        height: 77px;
+      body {
+          margin-top: 120px;
+      }
+       #playbig a {
+          width: 140px;
+          height: 77px;
+      }
+      #playbig .button {
+          font: 37px/1em 'Work Sans',sans-serif;
+          padding: .4em .6em;
+           font-weight: 600;
+      }
+      #playbig {
+          right: 95px;
+          top: 482px;
+      }
+      .homeText2 {
+        top: 627px;
+      }
+      .homepageReel{
+        height: auto;
+      }
+      .bigwinsMain ul li, .bigwinsMain ul li a{
+            height: 251px;
+      width: 235px;
+      }
+      .latestMain {
+          margin: 65px -1px 0 8px;
+      }
+      .latestMain ul li a {
+          height: 114px;
+      }
+      .latestMain .ads2 {
+       margin-top: 53px;
+      }
+      .latestMain .ads2 img{
+         width: 98%;
+      }
+      .categoryMain {
+          padding: 23px 44px 0px 49px;
+      }
+      .categAds a img {
+        width: 100%;
     }
-    #playbig .button {
-        font: 37px/1em 'Work Sans',sans-serif;
-        padding: .4em .6em;
-         font-weight: 600;
+  }
+ 
+  @media(max-width: 1024px){
+    .container{
+      width: 100%;
+    }
+    body {
+      margin-top: 110px;
+    }
+
+    .homepageReel .susan {
+      width: 230px;
+      right: 61px;
+      top: -8px;
+    }
+    .topReel {
+        width: 99.5%;
+    }
+    .reels {
+      padding: 0 70px 0 75px;
+      margin-top: 40px;
+      height: 242px;
+    }
+    .categoryReel{
+      width: 100%;
+      top: 585px;
+      left: 3px;
+    }
+    .categAds{
+      height: 937px;
+    }
+    .categoryMain {
+      padding: 16px 45px 0px 43px;
+    }
+     .categories {
+      padding: 10px 9px 25px 10px;
+    }
+    .homepageReel .headText2 {
+      font-size: 60px;
+      padding-top: 45px;
+    }
+    .headText span, .headText2 span {
+      font-size: 96px;
+      margin-right: 90px;
+    }
+    .homeText {
+      margin-top: 88px;
+      margin-bottom: 8px;
+      margin-left: 103px;
+    }
+    .homeText2 {
+      top: 586px;
+      left: 154px;
+    }
+    .bigwinsMainReel {
+        top: 1471px;
+        width: 100%;
+        left: 3px;
     }
     #playbig {
         right: 95px;
-        top: 482px;
+        top: 459px;
     }
-    .homepageReel{
-      height: auto;
+    #playbig a {
+      width: 140px!important;
+      height: 72px!important;
+    }
+    .bigwinsMain {
+        padding: 11px 0px 0 58px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 229px;
+        width: 216px;
+    }
+    .latestMain {
+        margin: 38px 3px 0 8px;
+    }
+    .footerReel {
+      width: 100%;
+    }
+
+  }
+  @media(max-width: 1015px){
+    .categoryReel{
+      top: 582px;
+    }
+    .categoryMain {
+        padding: 13px 45px 0px 43px;
+    }
+    .homeText2 {
+      top: 580px;
+    }
+  }
+
+  @media(max-width: 1012px){
+    .categoryReel{
+      top: 579px;
+    }
+    .categoryMain {
+        padding: 10px 45px 0px 43px;
+    }
+    .homeText2 {
+      top: 578px;
+    }
+    .bigwinsMainReel {
+      top: 1461px;
+    }
+    .bigwinsMain {
+        padding: 5px 0px 0 58px;
+    }
+  }
+  @media(max-width: 1006px){
+    .categoryReel{
+      top: 575px;
+      height: 877px;
+    }
+    .categAds {
+        height: 842px;
+    }
+    .categoryMain {
+        padding: 3px 45px 0px 43px;
+    }
+    .homeText2 {
+      top: 571px;
+    }
+    .bigwinsMainReel {
+      top: 1442px;
+    }
+    .bigwinsMain {
+        padding: 87px 0px 0 58px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 228px;
+        width: 213px;
+    }
+  }
+  @media(max-width: 997px){
+    .categoryReel {
+        top: 571px;
+    }
+    .categoryMain {
+        padding: 0px 45px 0px 43px;
+    }
+    .homeText2 {
+        top: 568px;
     }
   }
   @media(max-width: 991px){
+    .verytopHeader {
+        padding: 5px 0 5px 70px;
+    }
+    .homepageReel .susan {
+        top: -15px;
+    }
     #playbig {
-        right: 51px;
-        top: 362px;
+        right: 100px;
+        top: 447px;
     }
     #playbig a {
-        width: 120px;
-        height: 65px;
+        width: 127px!important;
+        height: 66px!important;
     }
     #playbig .button {
         font: 33px/1em 'Work Sans',sans-serif;
         font-weight: 600;
     }
+    .homepageReel .headText2 {
+        font-size: 56px;
+        padding-top: 41px;
+    }
+    .reels {
+        padding: 0 72px 0 72px;
+        margin-top: 42px;
+        height: 232px;
+    }
+    .categoryReel {
+        top: 561px;
+    }
+    .homeText {
+      margin-top: 91px;
+    }
+    .homeText2 {
+        top: 558px;
+    }
+    .categoryMain {
+        height: 971px;
+    }
+    .bigwinsMainReel {
+        top: 1438px;
+    }
+    .bigwinsMain {
+        padding: 93px 0px 0 58px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 224px;
+        width: 209px;
+    }
+    .latestMain {
+        margin: 76px 2px 0 8px;
+    }
+    .latestMain .ads2 {
+          margin-top: 13px;
+    }
+    .latestMain ul li a {
+        height: 151px;
+    }
+    .categAds {
+        height: 844px;
+    }
   }
 
+  @media(max-width: 975px){
+    .homepageReel .susan {
+        top: -18px;
+    }
+    .categoryReel {
+        top: 557px;
+        height: 854px;
+    }
+    .categories ul li {
+        width: 19%;
+    }
+    .latestMain ul li a {
+        height: 150px;
+    }
+    .reels {
+        padding: 0 70px 0 71px;
+        margin-top: 38px;
+        height: 228px;
+    }
+    .homeText{
+      margin-top: 94px;
+      margin-bottom: 10px;
+      font-size: 26px;
+    }
+    .homeText2 {
+      top: 553px;
+      font-size: 26px;
+      margin-left: -2px;
+    }
+    .categoryMain {
+        padding: 0 43px 0px 41px;
+    }
+    .categAds {
+        height: 821px;
+        overflow: hidden;
+    }
+    .bigwinsMain {
+        padding: 72px 0px 0 58px;
+    }
+    .bigwinsMainReel {
+        top: 1410px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 221px;
+        width: 205px;
+    }
+    .latestMain {
+        margin: 76px 2px 0 7px;
+    }
+  }
+
+  @media(max-width: 966px){
+    .homepageReel .susan {
+        top: -20px;
+    }
+    .homepageReel .headText2 {
+        font-size: 55px;
+        padding-top: 40px;
+    }
+    .headText span, .headText2 span {
+        font-size: 93px;
+        margin-right: 90px;
+    }
+    .reels {
+        padding: 0 70px 0 71px;
+        margin-top: 42px;
+        height: 229px;
+    }
+    .homeText {
+         margin-bottom: 12px;
+         margin-left: 101px;
+    }
+    .homeText2 {
+        top: 546px;
+    }
+    #playbig {
+        top: 434px;
+    }
+    .categoryReel {
+      top: 553px;
+      height: 848px;
+    }
+    .categAds {
+      height: 816px;
+    }
+    .homeText {
+        margin-top: 89px;
+        margin-bottom: 11px;        
+    }
+    .homeText2 {
+        top: 548px;     
+    }
+    .latestMain ul li a {
+        height: 148px;
+    }
+    .bigwinsMainReel {
+        top: 1390px;
+    }
+    .bigwinsMain {
+        padding: 53px 0px 0 51px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 218px;
+        width: 206px;
+    }
+  }
+  @media(max-width: 959px){
+    .homepageReel .susan {
+        top: -21px;
+    }
+    .categoryReel {
+      top: 547px;
+      height: 838px;
+    } 
+    .reels {
+      padding: 0 69px 0 69px;
+      margin-top: 40px;
+      height: 223px;
+    }
+    .homeText {
+        margin-bottom: 12px;
+    }
+    .homeText2 {
+        top: 540px;
+        margin-left: -5px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 216px;
+        width: 204px;
+    }
+    .latestMain ul li a {
+        height: 145px;
+    }
+    .bigwinsMainReel {
+        top: 1380px;
+    }
+    .categAds {
+        height: 805px;
+    }
+    .bigwinsMain {
+        padding: 48px 0px 0 51px;
+    }
+  }
+  @media(max-width: 949px){
+    .homepageReel .susan {
+        top: -23px;
+    }
+    .homepageReel .headText2 {
+      font-size: 51px;
+    }
+    .headText span, .headText2 span {
+      font-size: 87px;
+    }
+    .homeText {
+        margin-bottom: 10px;
+    }
+    .reels {
+      padding: 0 69px 0 69px;
+      margin-top: 47px;
+      height: 223px;
+    }
+    .categAds {
+        height: 797px;
+    }
+    .categories {
+        padding: 10px 9px 19px 10px;
+    }
+    .categoryReel {
+        top: 542px;
+        height: 828px;
+    }
+    .categoryMain {
+        padding: 0 40px 0px 39px;
+    }
+    .homeText2 {
+      top: 537px;
+    }
+    .bigwinsMain {
+        padding: 39px 0px 0 51px;
+    }
+    .bigwinsMainReel {
+        top: 1369px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 214px;
+        width: 202px;
+    }
+  }
+  @media(max-width: 941px){
+        #playbig {
+          top: 425px;
+      }
+      .homeText {
+          margin-top: 86px;
+          margin-bottom: 8px;
+      }
+      .bigwinsMain {
+          padding: 26px 0px 0 51px;
+      }
+      .homeText2 {
+          top: 532px;
+      }
+      .categoryReel {
+          top: 537px;
+          height: 825px;
+      }
+      .categAds {
+          height: 789px;
+      }
+      .bigwinsMainReel {
+          top: 1357px;
+      }
+      .bigwinsMain ul li, .bigwinsMain ul li a {
+          height: 212px;
+          width: 200px;
+      }
+      .latestMain {
+          margin: 76px 1px 0 7px;
+      }
+  }
+  @media(max-width: 932px){
+    #playbig {
+        top: 421px;
+    }
+    .reels {
+      padding: 0 66px 0 67px;
+      margin-top: 43px;
+      height: 217px;
+    }
+    .homepageReel .susan {
+        top: -27px;
+    }
+    .homeText {
+      margin-top: 86px;
+      margin-bottom: 12px;
+      margin-left: 79px;
+    }
+    .homeText2 {
+        top: 524px;
+        margin-left: -28px;
+    }
+    .categoryReel {
+        top: 532px;
+        height: 816px;
+    }
+    .categAds {
+        height: 786px;
+    }
+    .bigwinsMain {
+        padding: 24px 0px 0 51px;
+    }
+    .bigwinsMainReel {
+        top: 1345px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 208px;
+        width: 197px;
+    }
+    .latestMain ul li a {
+        height: 137px;
+    }
+  }
+
+  @media(max-width: 923px){
+    .categoryReel {
+        top: 526px;
+        height: 800px;
+    }
+    .categoryMain {
+      padding: 0 40px 0px 37px;
+      height: 968px;
+    }
+    .homeText{
+        margin-bottom: 6px;
+        margin-left: 81px;
+    }
+    .categAds {
+        height: 770px;
+    }
+    .categories {
+        padding: 10px 9px 16px 10px;
+    }
+    .bigwinsMainReel {
+        top: 1319px;
+    }
+    .bigwinsMain {
+        padding: 0 0px 0 51px;
+    }
+    .latestMain {
+        margin: 76px 1px 0 6px;
+    }
+  }
+
+  @media(max-width: 913px){
+    .homepageReel .susan {
+        top: -31px;
+    }
+    .homepageReel .headText2 {
+      font-size: 50px;
+    }
+    .headText span, .headText2 span {
+        font-size: 82px;
+    }
+    #playbig {
+      top: 410px;
+      right: 90px;
+    }
+    .homeText2 {
+      top: 518px;
+    }
+    .categoryReel {
+        top: 520px;
+        height: 792px;
+    }
+    .categoryMain {
+        padding: 0 40px 0px 37px;
+        height: 963px;
+    }
+    .categAds {
+        height: 762px;
+    }
+    .bigwinsMainReel {
+        top: 1309px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 205px;
+        width: 193px;
+    }
+    .refCell:hover .info2 {
+        padding-top: 45px;
+    }
+    .info2 h3 {
+      font-size: 38px;
+    }
+  }
+
+  @media(max-width: 903px){
+    .reels {
+        height: 211px;
+    }
+    #playbig {
+        top: 406px;
+        right: 90px;
+    }
+    .homeText {
+        margin-bottom: 8px;
+        margin-left: 81px;
+    }
+    .homeText2 {
+        top: 511px;
+    }
+    .categoryReel {
+        top: 517px;
+        height: 780px;
+    }
+    .categoryMain {
+        padding: 0 40px 0px 37px;
+        height: 954px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+        height: 205px;
+        width: 190px;
+    }
+    .categAds {
+        height: 751px;
+    }
+    .bigwinsMainReel {
+        top: 1295px;
+    }
+  }
+
+  @media(max-width: 900px){
+    .categoryReel {
+      top: 512px;
+      height: 780px;
+    }
+    .homepageReel .susan {
+      top: -34px;
+    }
+    .homeText2 {
+      top: 507px;
+    }
+    .homeText {
+      margin-top: 82px;
+      margin-bottom: 7px;
+      margin-left: 81px;
+    }
+    .bigwinsMainReel {
+      top: 1290px;
+    }
+    .categoryMain {
+      height: 949px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 201px;
+      width: 190px;
+    }
+  }
+
+  @media(max-width: 890px){
+    .homepageReel .susan {
+      width: 211px;
+      top: -18px;
+    }
+    .categoryReel {
+      top: 506px;
+      height: 772px;
+    }
+    .categAds {
+      height: 743px;
+    }
+    .bigwinsMainReel {
+      top: 1276px;
+    }
+    .categoryMain {
+      height: 941px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 199px;
+      width: 187px;
+    }
+    .latestMain ul li a {
+      height: 130px;
+    }
+    .topReel {
+      width: 99.4%;
+    }
+    .reels {
+      height: 209px;
+      padding: 0 62px 0 65px;
+      margin-top: 38px;
+    }
+    .homeText2 {
+      top: 501px;
+    }
+    .homeText {
+      margin-top: 82px;
+      margin-bottom: 8px;
+    }
+    #playbig {
+      top: 398px;
+      right: 90px;
+    }
+  }
+
+  @media(max-width: 880px){
+    .categoryReel {
+      top: 501px;
+      height: 771px;
+    }
+    .homeText {
+      margin-top: 82px;
+      margin-bottom: 6px;
+      margin-left: 95px;
+      font-size: 23px;
+    }
+    .homeText2 {
+      top: 501px;
+      font-size: 23px;
+      margin-left: -17px;
+    }
+    .categoryMain {
+      padding: 0 36px 0px 34px;
+      height: 954px;
+    }
+    .bigwinsMainReel {
+      top: 1270px;
+    }
+    .categoryMain {
+      height: 934px;
+    }
+    .bigwinsMain {
+      padding: 0 0px 0 47px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 197px;
+      width: 186px;
+    }
+    .latestMain {
+      margin: 76px 0px 0 5px;
+    }
+    #playbig {
+      top: 392px;
+      right: 90px;
+    }
+  }
+
+  @media(max-width: 872px){
+    .homepageReel .susan {
+      width: 200px;
+      top: -12px;
+    }
+    .reels {
+      height: 201px;
+    }
+    .categoryReel {
+      top: 496px;
+      height: 762px;
+    }
+    .homeText {
+      margin-top: 83px;
+      margin-bottom: 7px;
+    }  
+    .homeText2 {
+      top: 493px;
+    }
+    .categAds {
+      height: 734px;
+    }
+    .bigwinsMainReel {
+      top: 1257px;
+    }
+    .categoryMain {
+      height: 928px;
+    }
+    .bigwinsMain {
+      padding: 0 0px 0 45px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 195px;
+      width: 185px;
+    }
+  }
+  @media(max-width: 863px){
+    .headText span, .headText2 span {
+      font-size: 75px;
+    }
+    .homepageReel .susan {
+      width: 200px;
+      top: -13px;
+    }
+    .categoryReel {
+      top: 489px;
+      height: 749px;
+    }
+    .homeText2 {
+      top: 486px;
+    }
+    #playbig {
+      top: 380px;
+      right: 90px;
+    }
+    .categAds {
+      height: 721px;
+    }
+    .bigwinsMainReel {
+      top: 1236px;
+    }
+    .categoryMain {
+      height: 913px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 194px;
+      width: 183px;
+    }
+    .latestMain {
+      margin: 73px 0px 0 5px;
+    }
+  }
+  @media(max-width: 853px){
+    .categoryReel {
+      top: 486px;
+      height: 744px;
+    }
+    .homeText {
+      margin-top: 80px;
+    }
+    .homeText2 {
+      top: 484px;
+    }
+    .categAds {
+      height: 716px;
+    }
+    .bigwinsMainReel {
+      top: 1229px;
+    }
+    .categoryMain {
+      height: 905px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 191px;
+      width: 180px;
+    }
+    .latestMain ul li a {
+      height: 126px;
+    }
+  }
+  @media(max-width: 846px){
+    .categoryReel {
+      top: 482px;
+      height: 733px;
+    }
+    .homeText {
+      margin-top: 76px;
+    }
+    .homeText2 {
+      top: 480px;
+    }
+    .categAds {
+      height: 705px;
+    }
+    .bigwinsMainReel {
+      top: 1214px;
+    }
+    .categoryMain {
+      height: 890px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 188px;
+      width: 179px;
+    }
+    .latestMain {
+      margin: 73px -1px 0 5px;
+    }
+  }
+
+  @media(max-width: 840px){
+    .homepageReel .headText2 {
+      font-size: 47px;
+    }
+    .headText span, .headText2 span {
+      font-size: 72px;
+    }
+    .categoryReel {
+      top: 477px;
+      height: 730px;
+    }
+    .reels {
+      height: 198px;
+     padding: 0 59px 0 62px;
+    }
+    .homeText {
+      margin-top: 79px;
+    }
+    .homepageReel .susan {
+      width: 192px;
+      top: -11px;
+    }
+    .homeText2 {
+      top: 473px;
+      margin-left: -19px;
+    }
+    #playbig {
+      top: 368px;
+      right: 90px;
+    }
+    .categoryMain {
+      padding: 0 34px 0px 32px;
+    }
+    .categAds {
+      height: 703px;
+    }
+    .bigwinsMainReel {
+      top: 1206px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 188px;
+      width: 177px;
+    }
+    .latestMain {
+      margin: 70px -1px 0 5px;
+    }
+  }
+
+  @media(max-width: 835px){
+    .categoryReel {
+      top: 477px;
+    }
+  }
+
+  @media(max-width: 831px){
+    .categoryReel {
+      top: 473px;
+      height: 718px;
+    }
+    .topReel {
+      width: 99.5%;
+      left: 7px;
+    }
+    .homeText {
+      margin-top: 75px;
+    }
+    .homeText2 {
+      top: 470px;
+      margin-left: -19px;
+    }
+    .categAds {
+      height: 691px;
+    }
+    .bigwinsMainReel {
+      top: 1190px;
+    }
+    .categoryMain {
+      height: 873px;
+    } 
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 188px;
+      width: 175px;
+    }
+    .latestMain ul li a {
+      height: 122px;
+    }
+  }
+
+  @media(max-width: 824px){
+    .homepageReel .headText2 {
+      padding-top: 35px;
+      font-size: 44px;
+    }
+    .headText span, .headText2 span {
+      font-size: 75px;
+    }
+    .reels {
+      height: 195px;
+      padding: 0 57px 0 58px;
+    }
+    #playbig {
+      top: 357px;
+      right: 90px;
+    }
+    .homepageReel .susan {
+      top: -14px;
+    }
+    .categoryReel {
+      top: 465px;
+      height: 716px;
+    }
+    .categAds {
+      height: 689px;
+    }
+    .homeText {
+      margin-left: 90px;
+    }
+    .homeText2 {
+      top: 462px;
+      margin-left: -26px;
+    }
+    .categoryMain {
+      padding: 0 32px 0px 30px;
+    }
+    .bigwinsMainReel {
+      top: 1180px;
+    }
+    .categoryMain {
+      height: 870px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 188px;
+      width: 174px;
+    }
+    .latestMain {
+      margin: 61px -1px 0 4px;
+    }
+
+  }
+  @media(max-width: 810px){
+    .homepageReel .susan {
+      top: -16px;
+    }
+    .reels {
+      height: 189px;
+      padding: 0 56px 0 57px;
+    }
+    #playbig a {
+      width: 122px!important;
+      height: 62px!important;
+    }
+    .categoryReel {
+      top: 459px;
+      height: 701px;
+    }
+    .categAds {
+      height: 682px;
+    }
+    .homeText2 {
+      top: 456px;
+      margin-left: -26px;
+    }
+    .categAds {
+      height: 673px;
+    }
+    .bigwinsMainReel {
+      top: 1156px;
+    }
+    .categoryMain {
+      height: 851px;
+    }
+    .bigwinsMain {
+      padding: 0 0px 0 40px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 183px;
+      width: 172px;
+    }
+    .latestMain ul li a {
+      height: 118px;
+    }
+  }
+  @media(max-width: 800px){
+    .categories ul li {
+        width: 24%;
+    }
+    .topReel{
+      z-index: 2;
+    }
+    .homepageReel{
+      position: relative;
+      z-index: 3;   
+    }
+    .reels {
+      height: 186px;
+      padding: 0 56px 0 57px;
+      margin-bottom: 6px;
+    }
+    .homepageReel .susan {
+      top: -18px;
+    }
+    .categoryReel {
+      top: 444px;
+      height: 1124px;
+    }
+    #playbig {
+      top: 352px;
+      right: 72px;
+      z-index: 3;
+    }
+    .homeText {
+      margin-left: 80px;
+      margin-bottom: 7px;
+      margin-top: 76px;
+      font-size: 22px;
+    }
+    .homeText2 {
+        top: 457px;
+        margin-left: -37px;
+        font-size: 22px;
+    }
+    .categoryMain {
+      height: 1188px;
+    }
+    .categAds {
+      height: 1082px;
+      background: #CB9A34;
+    }
+    .bigwinsMainReel {
+      top: 1568px;
+    }
+    .bigwinsMain {
+      padding: 74px 24px 0 40px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 181px;
+      width: 169px;
+    }
+    .latestMain {
+      margin: 61px -2px 0 4px;
+    }
+    .info2 h3 {
+      font-size: 32px;
+    }
+    .info2 button{
+      font-size: 1.2em;
+    }
+
+  }
+  @media(max-width: 768px){
+    .homepageReel .susan {
+      top: -25px;
+      right: 21px;
+    }
+    .homepageReel .headText2 {
+      padding-top: 32px;
+      font-size: 41px;
+    }
+    .headText span, .headText2 span {
+      font-size: 71px;
+    }
+    .reels {
+      height: 179px;
+      padding: 0 53px 0 54px;
+      margin-bottom: 6px;
+    }
+    #playbig {
+      top: 333px;
+    }
+    .categoryReel {
+        top: 427px;
+        height: 1100px;
+    }
+    .homeText {
+      margin-left: 81px;
+      margin-bottom: 7px;
+      margin-top: 76px;
+      font-size: 21px;
+    }
+    .homeText2 {
+      top: 440px;
+      margin-left: -39px;
+      font-size: 21px;
+    }
+    .categoryMain {
+      padding: 0 30px 0px 27px;
+    }
+    .categoryMain {
+      height: 1161px;
+    }
+    .bigwinsMainReel {
+      top: 1525px;
+    }
+    .bigwinsMain {
+      padding: 72px 24px 0 37px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 173px;
+      width: 163px;
+    }
+    .latestMain {
+      margin: 61px -2px 0 3px;
+    }
+    .latestMain ul li a {
+      height: 111px;
+    }
+  }
+  @media(max-width: 720px){
+    .reels {
+      height: 169px;
+      padding: 0 49px 0 51px;
+    }
+    .homepageReel .susan {
+      top: -15px;
+      right: 46px;
+      width: 170px;
+    }
+    .homepageReel .headText2 {
+      padding-top: 29px;
+      font-size: 38px;
+    }
+    .headText span, .headText2 span {
+      font-size: 64px;
+    }
+    #playbig {
+      top: 306px;
+      right: 72px;
+      z-index: 3;
+    }
+    .categoryReel {
+        top: 390px;
+        height: 1303px;
+      }
+    .homeText {
+      margin-left: 56px;
+      margin-bottom: 7px;
+      margin-top: 70px;
+      font-size: 21px;
+    }
+    .homeText2 {
+      top: 411px;
+      margin-left: -66px;
+      font-size: 21px;
+    }
+    .categoryMain {
+      padding: 0 26px 0px 24px;
+    }
+    .categoryMain {
+      height: 1358px;
+    }
+    .bigwinsMainReel {
+      top: 1692px;
+    }
+    .bigwinsMain {
+      padding: 60px 24px 0 34px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 173px;
+      width: 152px;
+    }
+    .latestMain {
+      margin: 47px -3px 0 2px;
+    }
+    .latestMain ul li a {
+      height: 144px;
+    }
+    .latestMain .ads2, .categAds{
+      display: none;
+    }
+  }
 </style>
 
 <div class="container-fluid">
@@ -135,8 +1429,8 @@
 
         <img src="{{ asset('images/responsive/smallerHomepageReel.jpg')}}" class="topReel" />
         <img src="{{ asset('images/responsive/categoryReel4.jpg')}}"  class="categoryReel"/>
-        <img src="{{ asset('images/responsive/bigwinsReel.png')}}" class="bigwinsMainReel">        
-        <img src="{{ asset('images/responsive/footerReel.png')}}" class="footerReel">
+        <img src="{{ asset('images/responsive/bigwinsReel.jpg')}}" class="bigwinsMainReel">        
+        <img src="{{ asset('images/responsive/footerReel.jpg')}}" class="footerReel">
 
          <div class="col-lg-24">
               <div class="homepageReel">
@@ -247,32 +1541,19 @@
                       </ul>
                   </div>
                 </div>
-              
-              <!-- Adding Dynamic image-->
-            
-           <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 categAds1366">
-               <img src="{{ asset('images/responsive/categoryReelDivider.png') }}" class="homeCategoryDivider">
-              <!--  <div class="categAds">
-                <a href="#">                      
-                  <img src="http://susanwins.com/images/homepage/home-categ-ad1.jpg">
-                  <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                </a>
-                <a href="#">                      
-                  <img src="http://susanwins.com/images/homepage/home-categ-ad2.jpg">
-                  <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                </a>
-              </div> -->
-
-               <div class="categAds">
-                  @foreach($home_image_headers as $home_image)
-                 <a href="#">                      
-                   <img src="{{ $home_image->image}}">
-                   <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                 </a>
-                 @endforeach
-               </div>
-
-             </div>
+                <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 categAds1366">
+                  <img src="{{ asset('images/responsive/categoryReelDivider.png') }}" class="homeCategoryDivider">
+                  <div class="categAds">
+                    <a href="#">                      
+                      <img src="http://susanwins.com/uploads/86029_201x503.jpg">
+                      <div class="questionMarkHover hint--left hint--bounce hint--rounded hint--warning" data-hint="Click to know more"> ? </div>
+                    </a>
+                    <a href="#">                      
+                      <img src="http://susanwins.com/uploads/83977_foxycasino01_201x503.jpg">
+                      <div class="questionMarkHover hint--left hint--bounce hint--rounded  hint--warning" data-hint="Click to know more"> ? </div>
+                    </a>
+                  </div>
+                </div>
               </div>
               <div class="bigwinsMain">
                 <ul>
@@ -310,33 +1591,23 @@
                         </div>
                       </div>
                   </div>
-  
-
-                <!-- Adding Dynamic image-->
-
-                <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5">  
-                    <div class="ads2">
-                    <!--   <a href="">
-                      <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
-                      <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                    </a>
-                    <a href="">
-                      <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
-                      <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                    </a>
-                    <a href="">
-                      <img src="http://susanwins.com/images/homepage/ad2-ad1.png">
-                      <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                    </a> -->
-                    @foreach($home_image_footers as $home_image)
-                     <a href="#">                      
-                       <img src="{{ $home_image->image}}">
-                       <div class="questionMarkHover hint--top hint--bounce hint--rounded" data-hint="Click to know more"> ? </div>
-                     </a>
-                   @endforeach
-                    </div>
-                </div> 
-
+                  <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5">  
+                      <div class="ads2">
+                        <a href="">
+                          <img src="http://susanwins.com/uploads/86029_201x503.jpg">
+                          <div class="questionMarkHover hint--left hint--bounce hint--rounded hint--warning " data-hint="Click to know more"> ? </div>
+                        </a>
+                        <a href="">
+                          <img src="http://susanwins.com/uploads/83977_foxycasino01_201x503.jpg">
+                          <div class="questionMarkHover hint--left hint--bounce hint--rounded  hint--warning" data-hint="Click to know more"> ? </div>
+                        </a>
+                        <a href="">
+                          <img src="http://susanwins.com/uploads/74087_williamhill_201x503.jpg">
+                          <div class="questionMarkHover hint--left hint--bounce hint--rounded hint--warning" data-hint="Click to know more"> ? </div>
+                        </a>
+                         
+                      </div>
+                  </div>
               </div>
         </div>
 
@@ -487,35 +1758,16 @@
           }, 500);
 
           setTimeout(function(){
-            machine3.shuffle(2);
-          }, 700);
 
-          setTimeout(function(){
+            machine3.shuffle(2);
+            }, 700);
+
+            setTimeout(function(){
             machine4.shuffle(2);
-          }, 900);
+            }, 900);
 
         });
-
-        function onComplete(active){
-          switch(this.element[0].id){
-            case 'machine1':
-              // $("#planeMachine2").text("Index: "+this.active);
-              console.log('machin1');
-              console.log(machine1.active);
-              break;
-            case 'machine2':
-              // $("#planeMachine3").text("Index: "+this.active);
-              break;
-            case 'machine3':
-              // $("#planeMachine4").text("Index: "+this.active);
-              break;
-            case 'machine4':
-              // $("#planeMachine5").text("Index: "+this.active);
-              break;
-          }
-        }
 });
-   
   </script>
 
 @endsection

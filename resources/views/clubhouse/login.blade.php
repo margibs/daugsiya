@@ -8,7 +8,7 @@
 @section('background', 'default')
 
  @section('switch-button')
- 	  <button class="categ-button"> <a href="{{ url('welcome') }}">Login / Sign-Up</a></button>
+ 	  <button class="categ-button"> <a href="{{ url('welcome') }}"> Login</a></button>
 @endsection
 
 @section('split-content')
@@ -36,7 +36,7 @@
   top: 50%;
   left: 30%;
   z-index: 2;
-  background:rgb(255, 255, 255);
+  background:rgba(255, 255, 255, 0.85);
   padding: 25px 20px;
   border-radius: 3px;
   overflow: hidden;
@@ -47,8 +47,9 @@
 }
 .signupform h3{
     font-family: 'Work Sans',Roboto,Arial,Helvetica,sans-serif;
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 .singupcontainer .signupform h1{
 	font-family: 'Work Sans';
@@ -59,7 +60,7 @@
     text-transform: uppercase;
 }
 .signupform input[type="text"], .signupform input[type="password"], .signupform input[type="email"]{
-    background: #F5F5F5;
+    background: #FFFFFF;
     border: medium none;
     padding: 12px 20px;
     font-size: 17px;
@@ -68,9 +69,9 @@
     margin-bottom: 12px;
     width: 100%;
     color: #000;
-    -moz-box-shadow: inset 0 0 10px -2px #ABABAB;
+/*    -moz-box-shadow: inset 0 0 10px -2px #ABABAB;
     -webkit-box-shadow:inset 0 0 10px -2px #ABABAB;
-    box-shadow: inset 0 0 10px -2px #ABABAB;
+    box-shadow: inset 0 0 10px -2px #ABABAB;*/
 }
 .signupform button{
   background: rgb(242, 155, 32);
@@ -122,8 +123,8 @@ font-family: Roboto;
 }
 .singupbox{
     position: absolute;
-    top: 57%;
-    right: 31%;
+    top: 53.2%;
+    right: 30%;
     z-index: 3;
     background: rgba(255, 255, 255, 0.85);
     padding: 58px 35px;
@@ -137,11 +138,11 @@ font-family: Roboto;
     font-weight: 600;
 }
 .singupbox p{
-  color: #685230;
-  font-size: 27px;
-  display: block;
-  text-align: center;
-  margin-bottom: 12px;
+    color: #685230;
+    font-size: 35px;
+    display: block;
+    text-align: center;
+    margin-bottom: 12px;
 }
 .singupbox h2{
   color: #000;
@@ -165,11 +166,80 @@ font-family: Roboto;
 }
 .butler{
     position: absolute;
-    top: 45%;
+    bottom: -6px;
     z-index: 2;
     right: 150px;
-    width: 685px;
+    width: 800px;
 }
+
+
+.oval-outer{
+  position:absolute;
+  top: 28%;
+  left:21%;
+}
+.oval-speech {
+    position: absolute;
+    width: 378px;
+    padding: 66px 35px;
+    margin: 1em auto 50px;
+    text-align: center;
+    color: #fff;
+    background: #F9AA3A;
+    -webkit-border-top-left-radius: 220px 120px;
+    -webkit-border-top-right-radius: 220px 120px;
+    -webkit-border-bottom-right-radius: 220px 120px;
+    -webkit-border-bottom-left-radius: 220px 120px;
+    -moz-border-radius: 220px / 120px;
+    border-radius: 228px / 135px;
+    border: 2px solid #F5A738;
+    -moz-transform: rotate(-6deg);
+    -webkit-transform: rotate(-6deg);
+    transform: rotate(-6deg);
+}
+.oval-speech p{
+    font-family: 'Work Sans',Roboto,Arial,Helvetica,sans-serif;
+    font-size: 49px;
+    font-weight: 600;
+    line-height: 43px;
+}
+/*.oval-speech:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: -30px;
+    right: 50%;
+    height: 30px;
+    border-right: 60px solid #5a8f00;
+    background: #5a8f00;
+    -webkit-border-bottom-right-radius: 80px 50px;
+    -moz-border-radius-bottomright: 80px 50px;
+    border-bottom-right-radius: 80px 50px;
+    -webkit-transform: translate(0, -2px);
+    -moz-transform: translate(0, -2px);
+    -ms-transform: translate(0, -2px);
+    -o-transform: translate(0, -2px);
+    transform: translate(0, -2px);
+}
+.oval-speech:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: -30px;
+    right: 50%;
+    width: 60px;
+    height: 30px;
+    background: #fff;
+    -webkit-border-bottom-right-radius: 40px 50px;
+    -moz-border-radius-bottomright: 40px 50px;
+    border-bottom-right-radius: 40px 50px;
+    -webkit-transform: translate(-30px, -2px);
+    -moz-transform: translate(-30px, -2px);
+    -ms-transform: translate(-30px, -2px);
+    -o-transform: translate(-30px, -2px);
+    transform: translate(-30px, -2px);
+}*/
+
 @media(max-width: 1680px){
   .susan {
       top: 23%;
@@ -224,6 +294,10 @@ font-family: Roboto;
   }
 }
 @media(max-width: 1366px){
+  .oval-outer {
+    top: 18%;
+    left: 7%;
+  }
   #roombg{
     top: 0px;
     left: -112px;
@@ -262,26 +336,32 @@ font-family: Roboto;
     top: 200px;
  }
  .signupform{
-    top: 48%;
-    left: 27%;
-    width: 280px;
+    top: 43%;
+    left: 20%;
+    width: 310px;
  }
- .singupbox{
-    top: 44.5%;
-    right: 27%;
-    width: 300px;
- }
- .susan{
-    top: 130px;
-    left: -70px;
+ .singupbox {
+    top: 51%;
+    right: 26%;
+    padding: 42px 20px;
+    width: 373px;
+}
+.singupbox h2 {
+    font-size: 45px;
+}
+ .susan {
+    bottom: -70px;
+    top: auto;
+    left: -180px;
     width: 670px;
-  }
-  .butler{
-    top: 28%;
+}
+ .butler {
+    top: auto;
     z-index: 2;
     right: 0;
-    width: 580px;
-  }
+    width: 700px;
+    bottom: -30px;
+}
 }
 @media(max-width: 1280px){
   #roombg {
@@ -339,13 +419,22 @@ font-family: Roboto;
 
 
 	<div class="bgwrapper">
-		<img id="roombg" src="{{url('images/clubhouse')}}/front-house.png" alt="">		      	
+		<img id="roombg" src="{{url('images/clubhouse')}}/front-house.jpg" alt="">		      	
 
-					 
+					
+
+
 					  <div class="container_24">
     							<div class="grid_12">	
+                    <div class="oval-outer">
+                       <blockquote class="oval-speech">
+                          <p> Have Fun Come on in!  </p>
+                        </blockquote>
+                    </div>
+                        
     								<div class="signupform">									
 
+                    
     									<form action="{{ url('login/post') }}" method="POST">
     									{!! csrf_field() !!}
 
