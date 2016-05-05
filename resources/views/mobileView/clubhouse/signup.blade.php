@@ -98,50 +98,56 @@
     {!! csrf_field() !!}
  
   	<div class="app-content">
+  
 		<div class="formBox">
-	    <h1> Sign-up </h1>
-	    <h2> It's free and always will be </h2>
+        <h1> Sign-up </h1>
+        <h2> It's free and always will be </h2>
 
-	    <form action="{{ url('signup/post') }}" method="POST">
-	      {!! csrf_field() !!}
-	        
-	        @if(count($errors->all()) > 0)
+        <form action="{{ url('signup/post') }}" method="POST">
+          {!! csrf_field() !!}
+            
+            @if(count($errors->all()) > 0)
 
-	          <ul class="errors">
-	            @foreach($errors->all() as $error)
-	              
-	              <li>{{ $error }}</li>
-	                
-	            @endforeach
-	          </ul>
-	        @endif
+              <ul class="errors">
+                @foreach($errors->all() as $error)
+                  
+                  <li>{{ $error }}</li>
+                    
+                @endforeach
+              </ul>
+            @endif
 
-	        <section>
-		        <div class="form-group">
-		          <!-- <label for="">Enter your Firstname</label> -->
-		            <input type="text" name="firstname" placeholder="Firstname">
-		        </div>
-		        <div class="form-group">
-		         <!--  <label for="">Enter your Lastname</label> -->
-		            <input type="text" name="lastname" placeholder="Lasttname">
-		        </div>
-		        <div class="form-group">
-		          <!-- <label for="">Enter your Email</label> -->
-		            <input type="text" name="email" placeholder="Email Address">
-		        </div>
-		        <div class="form-group">
-		          <!-- <label for="">Type a Password</label> -->
-		            <input type="password" name="password" placeholder="Password">
-		        </div>
-		      <!--   <div class="form-group" style='display:none;'>
-		        <label for="">Confirm Password</label>
-		          <input type="password" name="password_confirmation">
-		      </div> -->
-	        </section>
-	        <button> Sign me up! </button>
-	        <p class="terms"> By clicking Sign Up, you agree to our <a href="#"> Terms </a> and that you have read our <a href="#"> Data Policy </a>, including our Cookie Use. </p>
+            <section>
+            <div class="form-group">
+              <!-- <label for="">Enter your Firstname</label> -->
+                <input type="text" name="firstname" placeholder="Firstname">
+            </div>
+            <div class="form-group">
+             <!--  <label for="">Enter your Lastname</label> -->
+                <input type="text" name="lastname" placeholder="Lasttname">
+            </div>
+            <div class="form-group">
+              <!-- <label for="">Enter your Email</label> -->
+                <input type="text" name="email" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+              <!-- <label for="">Type a Password</label> -->
+                <input type="password" name="password" placeholder="Password">
+            </div>
 
-	      </form>
+             <div class="form-group">          
+				<input type="hidden" name="clubhouse" value="mobileView/clubhouse/home">
+			</div>
+          <!--   <div class="form-group" style='display:none;'>
+            <label for="">Confirm Password</label>
+              <input type="password" name="password_confirmation">
+          </div> -->
+            </section>
+            
+            <button> Sign me up! </button>
+            <p class="terms"> By clicking Sign Up, you agree to our <a href="#"> Terms </a> and that you have read our <a href="#"> Data Policy </a>, including our Cookie Use. </p>
+
+          </form>
 
     </div>    
 
@@ -153,57 +159,6 @@
 @section('script')
 
 <script>
-	App.controller('signup', function (page){
-		$(page)
-			.find('#btnSignup')
-			.on('click', function(){
-				var first_name = $('#txtFirstName').val();
-				var last_name  = $('#txtLastName').val();
-				var email = $('#txtEmail').val();
-            	var password = $('#txtPassword').val();
-
-            	//getData(first_name, last_name, email, password);
-            	//$('#result').text('fdsafsad');
-            	loginData(first_name, last_name, email, password);
-				
-			});
-	});
-
-	function loginData(first_name, last_name, email, password){
-	/*	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');*/
-		var result = '';
-		  $.ajax({
-	          //url : 'api/v1/mobile/login/getUsers',
-	          url : 'login/post',
-	          type : 'POST',
-	          data : { "first_name" : first_name, "last_name" : last_name},
-	          dataType : 'json',
-	          success : function(data){
-	            console.log(data);
-	            /*$('#result').text(data.request+" "+data.error+" "+data.error_code);*/
-	            $('#result').text(data);
-	          },error : function(xhr){
-	            console.log(xhr.responseText);
-	            result = xhr.responseText;
-	          }
-
-      });	
-		 // getData(result);
-	}
-
-	//function getData(first_name, last_name, email, password){
-	function getData(data){
-		 App.dialog({
-                    title: 'Data Infromation',
-                    text: data,
-                    okButton: 'Try Again',
-                    cancelButton: 'Cancel'
-                },function (tryAgain) {
-                    if (tryAgain) {
-                        App.load('SignUp');
-                    }
-                });
-	}
 
 	App.load('signup');
 </script>

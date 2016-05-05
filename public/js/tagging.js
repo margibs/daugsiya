@@ -127,7 +127,7 @@
 					offsetLeft = $(tagFriend).offset().left;
 
 					var defaultProfilePic = BASE_URL+'/images/default_profile_picture.png';
-					var profile_picture = data.user_detail.profile_picture ? BASE_URL+'/'+data.user_detail.profile_picture : defaultProfilePic;
+					var profile_picture = data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic;
 					$(personContainer).find('.imageFrame').html('').append($('<img>').attr('src', profile_picture ));
 					$(personContainer).find('h6').text(data.user_detail.firstname+' '+data.user_detail.lastname);
 

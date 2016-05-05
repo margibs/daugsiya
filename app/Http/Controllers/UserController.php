@@ -630,10 +630,24 @@ class UserController extends Controller
 
     public function getChatRoomPaginate(Request $request)
     {
+        
         $chatroom = Chat_Room::with('room_messages')->where('id',$request->input('room_id'))->first();
 
         $chatroom->room_messages = $chatroom->room_messages()->take(10)->offset($request->input('page')*10)->orderBy('created_at','DESC')->get();
 
+
+        //dd($chatroom->room_messages->user_detail);
+        
+        foreach($chatroom->room_messages as $message)
+        {
+            /*dd($message->user->user_detail->profile_picture);*/
+            if($message->user->user_detail->profile_picture == '') {
+                $message->user->user_detail->profile_picture = 'user_uploads/default_image/default_01.png';
+            }
+          
+        }
+
+       //dd($data);
         // $new_message = '';
 
         // foreach ($chatroom->room_messages as $chatroom_message) 
