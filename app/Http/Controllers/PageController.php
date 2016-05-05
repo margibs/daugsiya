@@ -923,13 +923,13 @@ class PageController extends Controller
 
     public function getTopGamesCategory($id)
     {
-        if(count($this->top_games_array) == 6)
+        if(count($this->top_games_array) == 8)
         {
             return $this->top_games_array;
         }
         else
         {
-            $new_top_games = 6 - count($this->top_games_array);
+            $new_top_games = 8 - count($this->top_games_array);
             $collection_of_top_games = DB::table('posts')
             ->join('widget_ratings','posts.id','=','widget_ratings.post_id')
             ->join('post_categories','posts.id','=','post_categories.post_id')

@@ -411,3 +411,4 @@ Route::get('logout', 'ClubhouseController@getLogout');
 //Single BLog
 Route::get('{category}','PageController@category');
 Route::get('{category}/{slug?}','PageController@single');
+

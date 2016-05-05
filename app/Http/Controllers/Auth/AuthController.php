@@ -84,8 +84,7 @@ class AuthController extends Controller
 
     public function signup(Request $request){
 
-        //return json_encode($request->all());
-    $validator = $this->signupValidator($request->all());
+         $validator = $this->signupValidator($request->all());
 
         if ($validator->fails()) {
 
@@ -103,8 +102,6 @@ class AuthController extends Controller
 
         $user->user_detail()->save($user_detail);
 
-
         return redirect('clubhouse/home');
-
     }
 }

@@ -109,23 +109,25 @@ class CommentController extends Controller
         $comment->user_id = $request->user_id;
         $comment->content = $request->content;
         $comment->type = $request->type;
-        
-        
+    
         if($comment->save()){
 
             $request['id'] = $comment->id;
-
+            $data = User::with('user_detail')->find($request->user_id);
             $request['user'] = User::with('user_detail')->find($request->user_id);
-
+            //dd($data->user_detail->user_id);
+            $request['user']->user_detail->profile_picture = 'user_uploads/user_'.$data->user_detail->user_id.'/'.$data->user_detail->profile_picture;
+            //dd($request['user']);
             $comment->friendTags = $request->friendTags;
             $this->notifyFriends($comment);
+
 
             return json_encode($request->all());
         }
 
     }
 
-        public function addReply(Request $request)
+    public function addReply(Request $request)
     {
 
         $comment = new Comment();
@@ -137,8 +139,10 @@ class CommentController extends Controller
         if($comment->save()){
 
               $request['id'] = $comment->id;
-
+              $data = User::with('user_detail')->find($request->user_id);
               $request['user'] = User::with('user_detail')->find($request->user_id);
+              $request['user']->user_detail->profile_picture = 'user_uploads/user_'.$data->user_detail->user_id.'/'.$data->user_detail->profile_picture;
+            //dd($request['user']);
 
             $comment->friendTags = $request->friendTags;
             $this->notifyFriends($comment);

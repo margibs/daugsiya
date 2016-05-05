@@ -264,7 +264,14 @@
     @yield('split-content')
 
      @if(isset($user))
-      <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+     <!--  <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}"> -->
+            @if($user->user_detail->profile_picture == "")
+                 <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ 'user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+            @else
+                <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ 'user_uploads/user_'}}{{$user->id}}/{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+            @endif
+      
+      <!--  <img src ="{{asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview">  -->
     @endif
       @if(isset($session_id))
    <input type="hidden" value="{{ $session_id }}" id="sessionId">
@@ -1325,7 +1332,7 @@ $(document).on('click', '.pmFriend', function(){
                     if(this.from != userId){
 
                       $(li).append(                        
-                        $('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+                        $('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
                       );
 
                     }else{

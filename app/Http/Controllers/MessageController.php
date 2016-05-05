@@ -69,6 +69,8 @@ class MessageController extends Controller
         $user = User::find($request->user_id);
         $other_person = User::with('user_detail')->find($request->other_person);
 
+       // $other_person->user_detail->profile_picture = 'user_uploads/user_'.$request->user_id.'/'.$other_person->user_detail->profile_picture;
+
         $private_messages = $user->private_messages()->where('to', $request->other_person);
         $conversation = $user->recieved_private_messages()->where('from', $request->other_person)->union($private_messages)->orderBy('created_at')->get();
 
@@ -78,6 +80,8 @@ class MessageController extends Controller
         $data['conversation'] = $conversation;
         $data['unread'] = $user->unread_messages()->count();
         $data['read'] = $user->read_messages()->count();
+
+        //dd($other_person->user_detail->profile_picture);
 
         echo json_encode($data);
     }
@@ -106,9 +110,13 @@ class MessageController extends Controller
         foreach($friendMessages as $msg){
                     $lastMessage = Private_Message::with('from_user')->where('from', $msg->from)->where('to', $msg->to)->orderBy('created_at', 'desc')->first();
                     $path = 'user_uploads/'.'user_'.$lastMessage->from_user->id.'/'.$lastMessage->from_user->user_detail->profile_picture;
-                    if(($lastMessage->from_user->user_detail->profile_picture == '') || (file_exists($path))) {
+                    if($lastMessage->from_user->user_detail->profile_picture == '') {
                         $lastMessage->from_user->user_detail->profile_picture =  'user_uploads/default_image/default_01.png';
                     }
+                    else {
+                        $lastMessage->from_user->user_detail->profile_picture = 'user_uploads/'.'user_'.$lastMessage->from_user->id.'/'.$lastMessage->from_user->user_detail->profile_picture;   
+                    }
+                    // $lastMessage->from_user->user_detail->profile_picture = 'user_uploads/'.'user_'.$lastMessage->from_user->id.'/'.$lastMessage->from_user->user_detail->profile_picture;   
                     array_push($messages, $lastMessage);
                 }
         return json_encode($messages);
