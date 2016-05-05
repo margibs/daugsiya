@@ -18,6 +18,13 @@
 @section('singlecontent')
 
 <style type="text/css">
+
+      .popunder{
+    position: fixed;
+    bottom: -340px;
+    right: 310px;
+    z-index: 2;
+}
       .fave{
       border-radius: 50px;
       border-top: 2px solid #D29B24;
@@ -1735,7 +1742,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         </div>
     </div>
   </div>
-
+ <div class="popunder">
+               <img src="http://susanwins.com/uploads/35599_scrollsusan.png" alt="Scroll down to see my videos and read my review!" />
+              </div>
   
 
 @endsection
@@ -2909,13 +2918,13 @@ $('.postcontent img').css('display','inline');
     });
     //END LAZY LOADING
 
-    // IDLE POPUP//
-    // $(window).scroll(function () { 
-    //   if( $(window).scrollTop() > 300 ) 
-    //   {
-    //     $('.popunder').animate({bottom: '-340px'}, 300);
-    //   }
-    // })
+    //IDLE POPUP//
+    $(window).scroll(function () { 
+      if( $(window).scrollTop() > 300 ) 
+      {
+        $('.popunder').animate({bottom: '-340px'}, 300);
+      }
+    })
 
     startIdleCounting = setInterval( checkIdle, 1000 );
     idleCounter = 0;
@@ -2926,47 +2935,47 @@ $('.postcontent img').css('display','inline');
     function checkIdle(){
 
 
-    // idleCounter++;
-    //  console.log(idleCounter);
+    idleCounter++;
 
-    //  title_is_seen = checkTitleSeen();
+     title_is_seen = checkTitleSeen();
 
-    // if(idleCounter == maxIdle){
-    //     clearInterval(startIdleCounting);
+    if(idleCounter == maxIdle){
+        clearInterval(startIdleCounting);
 
-    //     if(title_is_seen == false){
-    //         $('.popunder').animate({bottom: '-9px'}, 300);
-    //     }
+        if(title_is_seen == false){
+            $('.popunder').animate({bottom: '-9px'}, 300);
+        }
 
-    // }
+    }
 
     }
 
     $(window).bind('scroll load', function(){
-    // title_is_seen = checkTitleSeen();
-    // if(title_is_seen){
-    //      clearInterval(startIdleCounting);
-    // }
+    title_is_seen = checkTitleSeen();
+    if(title_is_seen){
+         clearInterval(startIdleCounting);
+    }
     });
 
     function checkTitleSeen(){
 
-    //   title = $('a[name="gohere"]');
-    //   titleOffsetHeight = title.offset().top + $('.susantinyimg').height();
-    //   pageHeight = window.height || document.documentElement.clientHeight;
+      /*title = $('a[name="gohere"]');*/
+      title = $('.postcontent h2');
+      titleOffsetHeight = title.offset().top + $('.susantinyimg').height();
+      pageHeight = window.height || document.documentElement.clientHeight;
 
-    //   documentOffsetTop = document.documentElement.scrollTop || document.body.scrollTop;  
-    //   documentHeight = documentOffsetTop + pageHeight;
+      documentOffsetTop = document.documentElement.scrollTop || document.body.scrollTop;  
+      documentHeight = documentOffsetTop + pageHeight;
 
-    //   if(titleOffsetHeight > documentHeight){
-    //       return false;
-    //   }
+      if(titleOffsetHeight > documentHeight){
+          return false;
+      }
 
-    //   return true;
+      return true;
 
-    //           //if(titleOffsetHeight)
+              //if(titleOffsetHeight)
 
-    //           /*$('.popunder').animate({bottom: '-9px'}, 300);*/
+              /*$('.popunder').animate({bottom: '-9px'}, 300);*/
 
     }
 

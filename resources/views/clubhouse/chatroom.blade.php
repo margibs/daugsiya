@@ -954,8 +954,6 @@
 
     $(this).attr('disabled', 'disabled');
 
-    //alert('i want to '+action+' person '+other_person+'using friend_id '+friend_id);
-
     if(action){
 
         if(other_person && action == 1){
