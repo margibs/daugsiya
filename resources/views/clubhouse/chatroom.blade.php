@@ -963,8 +963,6 @@
 
     $(this).attr('disabled', 'disabled');
 
-    //alert('i want to '+action+' person '+other_person+'using friend_id '+friend_id);
-
     if(action){
 
         if(other_person && action == 1){
@@ -1306,6 +1304,7 @@
    });
 
     socket.on('post_chatroom_message', function(data){
+      console.log(data.user.profile_picture);
 
       current_room_id = $('#roomDetails').attr('data-id');
       if(current_room_id == data.room_id){

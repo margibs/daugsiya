@@ -60,7 +60,7 @@ class Handler extends ExceptionHandler
         // } 
 
         if ($e instanceof TokenMismatchException){
-            return redirect('/login');
+          /*  return redirect('/login');*/
             // ->back()->withInput()->with('error', 'Your session has expired');
         }
 
