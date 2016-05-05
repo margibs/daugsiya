@@ -1,3 +1,5 @@
+	var onlineFriendsList = [];
+
 $(function(){
 
 	// window.onresize = function(){ location.reload(); }
@@ -5,14 +7,20 @@ $(function(){
 	BASE_URL = $('meta[name="baseURL"]').attr('content');
 	CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 	socket = io.connect(BASE_URL+':8891');
-	defaultProfilePic = BASE_URL+'/images/default_profile_picture.png';
+	defaultProfilePic = BASE_URL+'/user_uploads/default_image/default_01.png';
+
+	USER_UPLOADS = 'user_uploads/user_';
 
 	//USER DETAILS
 	userImage = $('#userId').data('image');
+	userProfileImage = $('#userId').data('profile');
 	userId = $('#userId').val();
     userName = $('#userId').data('name');
     isAdmin = $('#userId').data('isAdmin') == 1 ? true : false;
     sessionId = $('#sessionId').val();
+
+    var profileImage = $('#profile').val();
+
     var timeZone = 'Europe/London';
     //END USER DETAILS
 
@@ -52,6 +60,42 @@ $(function(){
 
 	});
 
+	socket.on('myOnlineFriends', function(onlineFriends){
+
+		onlineFriendsList = onlineFriends;
+	});
+
+	socket.on('friendOffline', function(friend_id){
+        index = onlineFriendsList.indexOf(parseInt(friend_id));
+        if(index != -1){
+
+        	onlineFriendsList.splice(index, 1);
+        	offlineUserOnlineStatusElements(friend_id);
+        }
+    });
+	socket.on('friendOnline', function(friend_id){
+        
+        index = onlineFriendsList.indexOf(parseInt(friend_id));
+        friendIndex = myFriends.indexOf(parseInt(friend_id));
+        if(index == -1 && friendIndex >=0 ){
+        	onlineFriendsList.push(friend_id);
+        	onlineUserOnlineStatusElements(friend_id);
+        }
+
+    });
+
+    function offlineUserOnlineStatusElements(friend_id){
+    if($('#pmBox').data('current') == friend_id && $('#pmBox').is(':visible'))
+		{
+			$('#pmBox').find('.body h2 > span').removeClass('online');
+		}
+    }
+    function onlineUserOnlineStatusElements(friend_id){
+    if($('#pmBox').data('current') == friend_id && $('#pmBox').is(':visible'))
+		{
+			$('#pmBox').find('.body h2 > span').addClass('online');
+		}
+    }
 
 	socket.on('user_banned', function(data, room_id){
 		console.log('user_banned');
@@ -59,7 +103,6 @@ $(function(){
 		console.log($('#chatbox-'+room_id).length);
       if(data.user_id == userId && $('#chatbox-'+room_id).length ){
         $('#chatbox-'+room_id).find('textarea').initBan(data.time);
-        $('#')
       }
 
    });
@@ -160,7 +203,7 @@ $(function(){
 			  $('<li>').append(
 							$('<a href="'+data_url+'">')
 							.append(
-								$('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+								$('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+'/'+datat.user_id+"/"+data.user.user_detail.profile_picture : defaultProfilePic )
 							)
 							.append(
 								$('<p>')
@@ -189,7 +232,7 @@ $(function(){
 
       	$('#friendUserActivityContainer').prepend(
       			$('<li>')
-      					.append($('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+      					.append($('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+data.user.user_detail.user_id+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
 
       						)
       					.append(p)
@@ -431,6 +474,8 @@ $(function(){
 	socket.on('post_private_message', function(message){
 
 		console.log('you got a private message!');
+		console.log(profileImage);
+		console.log(BASE_URL+'/'+message.from.profile_picture);
 		console.log(message);
 
 		if($('#pmBox').data('current') == message.from.user_id && $('#pmBox').is(':visible'))
@@ -439,7 +484,7 @@ $(function(){
 
 			$('#pmMessageContent').append(
 				$('<li>').append(
-					$('<img>').attr('src', message.from.profile_picture ? BASE_URL+'/'+message.from.profile_picture : defaultProfilePic )
+					$('<img>').attr('src', profileImage ? BASE_URL+'/'+message.from.profile_picture : defaultProfilePic )
 				)
 				.append(
 					$('<span>').text(message.message)
@@ -950,6 +995,17 @@ $(function(){
 		$('.messageNotifBox ').hide();
 	});
 
+		$(document).mouseup(function (e)
+	{
+	    var container = $(".messageBox");
+
+	    if (!container.is(e.target)
+	        && container.has(e.target).length === 0)
+	    {
+	        container.hide();
+	    }
+	});
+
 	$('#notificationMenu').on('click', function(){
 
 		$('#notificationMenu').find('.notifcount').remove();
@@ -1201,6 +1257,11 @@ $(function(){
 			$('#pmBox').attr('data-current', theUser);
 			$('#sendPrivateMessage').data('user', theUser);
 			$(modal).find('.divContainer').hide();
+			if(onlineFriendsList.indexOf(parseInt(theUser)) != -1){
+				$('#pmBox').find('.body h2 > span').addClass('online');
+			}else{
+				$('#pmBox').find('.body h2 > span').removeClass('online');
+			}
 
 			loading = $('<div>').addClass('loadContainer').append('<div class="typing-indicator"><span></span><span></span><span></span></div><p> Loading... </p>');
 
@@ -1234,7 +1295,7 @@ $(function(){
 							if(this.from != userId)
 							{
 								$(li).append(                        
-									$('<img>').attr('src', data.other_person.user_detail.profile_picture ? BASE_URL+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+									$('<img>').attr('src', data.other_person.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
 								);
 							}
 							else
@@ -1258,6 +1319,7 @@ $(function(){
 			});
 		}
 	});
+
 
   
 	$('#myNotifications').on('click', '.acceptFriend', function(){
@@ -1452,10 +1514,14 @@ $(function(){
 
 			if(message && userId && room_id)
 			{
+
+
 				$(this).val('');
 				body = $(this).parents('.activebox').find('.body');
 
 				console.log(body);
+				console.log('userImage');
+				console.log(userImage);
 
 				$(body).append(
 					$('<div>').addClass('message')
@@ -1467,7 +1533,9 @@ $(function(){
 							//   $('<img src="img/assets/chat-avatar-shine.png">').addClass('shine')
 							//   )
 							.append(
-								$('<img src="'+( userImage ? BASE_URL+'/'+userImage : defaultProfilePic) +'">')
+								/*$('<img src="'+( userImage ? BASE_URL+'/user_uploads/user_'+userId+'/'+userImage : defaultProfilePic) +'">')*/
+								$('<img src="'+( userProfileImage ? BASE_URL+'/'+userImage : defaultProfilePic) +'">')
+
 							)
 						)
 					)
@@ -1637,7 +1705,7 @@ $(function(){
 										//   $('<img src="img/assets/chat-avatar-shine.png">').addClass('shine')
 										//   )
 										.append(
-											$('<img src="'+( this.user.user_detail.profile_picture ? BASE_URL+'/'+this.user.user_detail.profile_picture : defaultProfilePic) +'">')
+											$('<img src="'+(this.user.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user.id+'/'+this.user.user_detail.profile_picture : defaultProfilePic) +'">')
 										)
 									)
 								)

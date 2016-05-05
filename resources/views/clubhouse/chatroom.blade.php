@@ -671,8 +671,16 @@
                       <a href="javascript:;" data-target="#friendProfile" class="subModalToggle viewFriendProfile">
                           
                           <div class="msgImgcont">
-                                      <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" />
-                                    </div>
+                               
+                                  <!-- <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" /> -->
+                                  @if($msg->user->user_detail->profile_picture == '')
+                                      <img src ="{{asset('user_uploads')}}/default_image/default_01.png" > 
+                                  @else
+                                      <img src ="{{asset('user_uploads')}}/user_{{$msg->user->id}}/{{$msg->user->user_detail->profile_picture }}" > 
+                                   @endif
+
+
+                              </div>
                            </a>
                           <p> {{ $msg->message }} </p>
 
@@ -823,7 +831,7 @@
    var imageUrl = '{{ asset("uploads") }}';
    var messageUrl = '{{ url("message") }}';
    var sessionUrl = '{{ url("session") }}';
-   var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+   var defaultProfilePic = publicUrl+'/user_uploads/default_image/default_01.png';
     
 
     last_room_id = $('#roomDetails').data('id');
@@ -840,9 +848,10 @@
     $.each(data, function(){
       $('#peopleList')
         .append(
-          $('<li>')
+          $('<li>') 
             .append(
               $('<img>').attr('src', this.profile_picture ? publicUrl+'/'+this.profile_picture : defaultProfilePic )
+
               )
           )
     });
@@ -958,8 +967,6 @@
     friend_id = $(this).data('friend_id');
 
     $(this).attr('disabled', 'disabled');
-
-    //alert('i want to '+action+' person '+other_person+'using friend_id '+friend_id);
 
     if(action){
 
@@ -1099,7 +1106,7 @@
                   $(modal).find('.divContainer').show();
                   $(loading).remove();
                   modal.removeClass('loading');
-                  $('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+                  $('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
                   $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
 
                   $('#pm-user').data('user', data.user_detail.user_id).find('.message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox');
@@ -1302,6 +1309,7 @@
    });
 
     socket.on('post_chatroom_message', function(data){
+      console.log(data.user.profile_picture);
 
       current_room_id = $('#roomDetails').attr('data-id');
       if(current_room_id == data.room_id){
@@ -1378,7 +1386,7 @@
                                     .append(
                                         $('<div>').addClass('msgImgcont')
                                           .append(
-                                            $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
+                                            $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'user_uploads/user_'+item.user.id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
                                           )
                                       )
                                   )

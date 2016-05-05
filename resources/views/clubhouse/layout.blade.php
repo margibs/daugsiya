@@ -339,7 +339,7 @@
 
 @yield('guide-susan')
 
-
+<!-- 
 <div class="menu-wrap">
     <nav class="menu">    
      <ul class="topicons">
@@ -378,7 +378,7 @@
 
         </ul>
     </nav>
-  </div>
+  </div> -->
 
 
  <div class="container-fluid verytopHeader">
@@ -492,7 +492,32 @@
         </div>
   </div>
 
- <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
+
+    @yield('split-content')
+
+     @if(isset($user))
+     <!--  <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}"> -->
+            @if($user->user_detail->profile_picture == "")
+                 <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ 'user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+            @else
+                <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ 'user_uploads/user_'}}{{$user->id}}/{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+            @endif
+      
+      <!--  <img src ="{{asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview">  -->
+    @endif
+
+      @if(isset($session_id))
+
+   <input type="hidden" value="{{ $session_id }}" id="sessionId">
+
+  @endif
+
+    @yield('background-content')
+
+      <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">      
+
+
+
           <div class="divContainer">
             <div class="header"></div>
               <div class="body">
@@ -572,6 +597,10 @@
        })();*/
 
     </script>
+        <script> 
+            var myFriends = '<?php echo isset($myFriends) && count($myFriends) > 0 ? json_encode($myFriends) : "" ?>';
+            var onlineFriendsList = [];
+    </script>
     <script src="{{ asset('js/ezslots.js') }}"></script>   
     <script src="{{ asset('js/jquery.unveil.js') }}"></script>   
     <script src="{{ asset('js/jquery.easing.1.3.js') }}"></script> 
@@ -602,12 +631,20 @@
             $('<img/>')[0].src = this;
         });
     }
+
+    var window_focus = true;
+
+window.onblur = function() { window_focus = false; }
+window.onfocus = function() { window_focus = true; }
+
     $(['http://susanwins.com/uploads/64878_click-header.png']).preload();
 
       socket.on('user_logged_in', function(){
-        if(!loginPage){
-            location.reload();
+        if(!window_focus){
+          location.reload();
         }
+
+        /*location.reload();*/
         
 
       });
@@ -641,12 +678,14 @@ var friendUrl = '{{ url("friends") }}';
  var clubhouseUrl = '{{ url("clubhouse") }}';
  var sessionId = $('#sessionId').val();
 var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+  
+var profileImage = $('#data-profile').val();
 var pagename = '{{ Request::segment(2) }}';
 timeZone = 'Europe/London';
 london = moment.tz(timeZone);
     socket.on('connect', function(){
 
-          socket.emit('login', { user_id : userId , profile_picture : userImage, name : userName, session_id : sessionId }, true, isAdmin);
+          socket.emit('login', { user_id : userId , profile_picture : userImage, name : userName, session_id : sessionId }, true, isAdmin, myFriends);
 
               last_room_id = $('#roomDetails').data('id');
               last_room_name = $('#roomDetails').data('name');
@@ -658,6 +697,65 @@ london = moment.tz(timeZone);
              }
 
       });
+
+
+      socket.on('myOnlineFriends', function(onlineFriends){
+
+    onlineFriendsList = onlineFriends;
+      for(i=0;i<onlineFriendsList.length;i++){
+          friend_id = onlineFriendsList[i];
+          $('#friend-online-status-'+friend_id).removeClass('offline').parent('li').prependTo('#friendList');
+      }
+
+  });
+
+    /*  socket.on('friend_login', function(friend_id){
+        console.log('friend_login');
+        console.log(friend_id);
+        $('#friend-online-status-'+friend_id).removeClass('offline').parent('li').prependTo('#friendList');
+    });
+    socket.on('friend_logout', function(friend_id){
+        console.log('friend_logout');
+        console.log(friend_id);
+        $('#friend-online-status-'+friend_id).addClass('offline');
+    });
+*/
+  socket.on('friendOffline', function(friend_id){
+        index = onlineFriendsList.indexOf(parseInt(friend_id));
+        if(index != -1){
+
+          onlineFriendsList.splice(index, 1);
+          offlineUserOnlineStatusElements(friend_id);
+        }
+    });
+  socket.on('friendOnline', function(friend_id){
+        
+        index = onlineFriendsList.indexOf(parseInt(friend_id));
+        friendIndex = myFriends.indexOf(parseInt(friend_id));
+        if(index == -1 && friendIndex >=0 ){
+          onlineFriendsList.push(friend_id);
+          onlineUserOnlineStatusElements(friend_id);
+        }
+
+    });
+
+      function offlineUserOnlineStatusElements(friend_id){
+    if($('#pmBox').data('current') == friend_id && $('#pmBox').is(':visible'))
+    {
+      $('#pmBox').find('.body h2 > span').removeClass('online');
+    }
+
+    $('#friend-online-status-'+friend_id).addClass('offline');
+    }
+    function onlineUserOnlineStatusElements(friend_id){
+    if($('#pmBox').data('current') == friend_id && $('#pmBox').is(':visible'))
+    {
+      $('#pmBox').find('.body h2 > span').addClass('online');
+    }
+
+     
+      $('#friend-online-status-'+friend_id).removeClass('offline').parent('li').prependTo('#friendList');
+    }
 
 
 /*    $.ajax({
@@ -1383,7 +1481,11 @@ $(document).on('click', '.pmFriend', function(){
             $('#pmBox').attr('data-current', theUser);
             $('#sendPrivateMessage').data('user', theUser);
             $(modal).find('.divContainer').hide();
-
+            if(onlineFriendsList.indexOf(parseInt(theUser)) != -1){
+                $('#pmBox').find('.body h2 > span').addClass('online');
+              }else{
+                $('#pmBox').find('.body h2 > span').removeClass('online');
+              }
             loading = $('<div>').addClass('loadContainer').append('<div class="typing-indicator"><span></span><span></span><span></span></div><p> Loading... </p>');
 
 
@@ -1415,7 +1517,7 @@ $(document).on('click', '.pmFriend', function(){
                     if(this.from != userId){
 
                       $(li).append(                        
-                        $('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+                        $('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
                       );
 
                     }else{
@@ -1447,7 +1549,10 @@ $(document).on('click', '.pmFriend', function(){
 
       socket.on('post_private_message', function(message){
           console.log('you got a private message!');
+          console.log(profileImage);
+          console.log(publicUrl+'/'+message.from.profile_picture );
           console.log(message);
+
 
           if($('#pmBox').data('current') == message.from.user_id && $('#pmBox').is(':visible')){
               console.log('real time add');

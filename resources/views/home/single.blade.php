@@ -18,10 +18,19 @@
 @section('singlecontent')
 
 <style type="text/css">
+
     body {
       margin-top: 100px;
     }
-    .fave{
+
+      .popunder{
+    position: fixed;
+    bottom: -340px;
+    right: 310px;
+    z-index: 2;
+}
+      .fave{
+
       border-radius: 50px;
       border-top: 2px solid #D29B24;
       border-left: 2px solid #e7b240;
@@ -1664,7 +1673,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
 
                           <div class="comment-parent">
 
-                            <img src="{{$comment->user->user_detail->profile_picture ? url('').'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
+                            <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->user_detail->user_id.'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
                             <span class="timestamp" data-datetime="{{ $comment->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                             <div class="comment-info">{{ ucfirst($comment->user->user_detail->firstname) }} {{ucfirst($comment->user->user_detail->lastname)}}</div>
                             <div class="comment-content">{!! $comment->content !!}</div>
@@ -1673,7 +1682,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                             <div class="reply-list" id="reply-to-{{$comment->id}}">
                               @foreach($comment->post_replies as $reply)
                               <div class="replies-parent">
-                                <img src="{{$reply->user->user_detail->profile_picture ? url('').'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
+                                <img src="{{$reply->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$reply->user->user_detail->user_id.'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
                                 <span class="timestamp" data-datetime="{{ $reply->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                                 <div class="reply-info">{{$reply->user->email}}</div>
                                 <div class="reply-content">{!! $reply->content !!}</div>
@@ -1776,7 +1785,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         </div>
     </div>
   </div>
-
+ <div class="popunder">
+               <img src="http://susanwins.com/uploads/35599_scrollsusan.png" alt="Scroll down to see my videos and read my review!" />
+              </div>
   
 
 @endsection
@@ -2980,13 +2991,13 @@ $('.postcontent img').css('display','inline');
     });
     //END LAZY LOADING
 
-    // IDLE POPUP//
-    // $(window).scroll(function () { 
-    //   if( $(window).scrollTop() > 300 ) 
-    //   {
-    //     $('.popunder').animate({bottom: '-340px'}, 300);
-    //   }
-    // })
+    //IDLE POPUP//
+    $(window).scroll(function () { 
+      if( $(window).scrollTop() > 300 ) 
+      {
+        $('.popunder').animate({bottom: '-340px'}, 300);
+      }
+    })
 
     startIdleCounting = setInterval( checkIdle, 1000 );
     idleCounter = 0;
@@ -2997,47 +3008,47 @@ $('.postcontent img').css('display','inline');
     function checkIdle(){
 
 
-    // idleCounter++;
-    //  console.log(idleCounter);
+    idleCounter++;
 
-    //  title_is_seen = checkTitleSeen();
+     title_is_seen = checkTitleSeen();
 
-    // if(idleCounter == maxIdle){
-    //     clearInterval(startIdleCounting);
+    if(idleCounter == maxIdle){
+        clearInterval(startIdleCounting);
 
-    //     if(title_is_seen == false){
-    //         $('.popunder').animate({bottom: '-9px'}, 300);
-    //     }
+        if(title_is_seen == false){
+            $('.popunder').animate({bottom: '-9px'}, 300);
+        }
 
-    // }
+    }
 
     }
 
     $(window).bind('scroll load', function(){
-    // title_is_seen = checkTitleSeen();
-    // if(title_is_seen){
-    //      clearInterval(startIdleCounting);
-    // }
+    title_is_seen = checkTitleSeen();
+    if(title_is_seen){
+         clearInterval(startIdleCounting);
+    }
     });
 
     function checkTitleSeen(){
 
-    //   title = $('a[name="gohere"]');
-    //   titleOffsetHeight = title.offset().top + $('.susantinyimg').height();
-    //   pageHeight = window.height || document.documentElement.clientHeight;
+      /*title = $('a[name="gohere"]');*/
+      title = $('.postcontent h2');
+      titleOffsetHeight = title.offset().top + $('.susantinyimg').height();
+      pageHeight = window.height || document.documentElement.clientHeight;
 
-    //   documentOffsetTop = document.documentElement.scrollTop || document.body.scrollTop;  
-    //   documentHeight = documentOffsetTop + pageHeight;
+      documentOffsetTop = document.documentElement.scrollTop || document.body.scrollTop;  
+      documentHeight = documentOffsetTop + pageHeight;
 
-    //   if(titleOffsetHeight > documentHeight){
-    //       return false;
-    //   }
+      if(titleOffsetHeight > documentHeight){
+          return false;
+      }
 
-    //   return true;
+      return true;
 
-    //           //if(titleOffsetHeight)
+              //if(titleOffsetHeight)
 
-    //           /*$('.popunder').animate({bottom: '-9px'}, 300);*/
+              /*$('.popunder').animate({bottom: '-9px'}, 300);*/
 
     }
 
@@ -3169,12 +3180,13 @@ $('.postcontent img').css('display','inline');
             // console.log(event.target.F.videoData.video_id);
             // var new_src = '//www.youtube.com/embed/'+event.target.F.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
             // $('iframe').attr('src',new_src).parent().html("<div style='position: relative; z-index:999;'><img src='{{url('uploads')}}/{{$yt_image_url}}'></div>");
+            console.log(event);
           }
           else if (state === 0) 
           {
             // var iframe_id_men = event.target.f.id;
             // $("#"+iframe_id_men).parent().html("<div style='position: relative; z-index:999;'><img src='{{url('uploads')}}/{{$yt_image_url}}'></div>");
-            var new_src = '//www.youtube.com/embed/'+event.target.F.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
+            var new_src = '//www.youtube.com/embed/'+event.target.D.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
             // console.log('samoka this guy 2');
             // console.log(new_src);
             $('iframe[src="'+new_src+'"]').parent().html("<div style='position: relative; z-index:999;'><a href='{{$yt_image_link}}'><img class='not_count' src='{{url('uploads')}}/{{$yt_image_url}}'></a></div>");

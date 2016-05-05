@@ -141,8 +141,6 @@
 </style>
 
 
-
-
   <div class="bgwrapper">
 		<img id="roombg" src="{{url('images/clubhouse')}}/front-house.jpg" alt="">		      	
       <div class="mainBox">
@@ -166,6 +164,7 @@
                               <li> <i class="ion-heart" style="color: #AC070A;"></i> Get 24/7 Access to My Private Clubhouse  </li>
                             </ul>
                           </div>
+
                       
     			           </div>
 

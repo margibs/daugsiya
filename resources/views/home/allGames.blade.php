@@ -1063,7 +1063,7 @@ width: 23%;
 
                           <div class="comment-parent">
 
-                            <img src="{{$comment->user->user_detail->profile_picture ? url('').'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
+                            <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->user_detail->user_id.'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
                             <span class="timestamp" data-datetime="{{ $comment->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                             <div class="comment-info">{{ ucfirst($comment->user->user_detail->firstname) }} {{ucfirst($comment->user->user_detail->lastname)}}</div>
                             <div class="comment-content">{!! $comment->content !!}</div>
@@ -1072,7 +1072,7 @@ width: 23%;
                             <div class="reply-list" id="reply-to-{{$comment->id}}">
                               @foreach($comment->allgames_replies as $reply)
                               <div class="replies-parent">
-                                <img src="{{$reply->user->user_detail->profile_picture ? url('').'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
+                                <img src="{{$reply->user->user_detail->profile_picture ? url('').'/'.'user_uploads/user_'.$reply->user->user_detail->user_id.'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
                                 <span class="timestamp" data-datetime="{{ $reply->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                                 <div class="reply-info">{{$reply->user->email}}</div>
                                 <div class="reply-content">{!! $reply->content !!}</div>

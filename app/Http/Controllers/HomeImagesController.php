@@ -31,9 +31,22 @@ class HomeImagesController extends Controller
         return Datatables::of($home_image)
                  ->addColumn('action', function ($home_image) {
                                             return 
-                                            "<a href='".url("admin/homeads")."/".$home_image->id."' >View</a>
-                                            <a href='".url("admin/edit/homeads")."/".$home_image->id."' >Edit</a>
-                                            <a href='".url("admin/delete/imageDelete")."/".$home_image->id."' >Delete</a>
+                                            "<a href='".url("admin/homeads/edit")."/".$home_image->id."' >Edit</a>
+                                            <a href='".url("admin/homeads/delete/imageDelete")."/".$home_image->id."' >Delete</a>
+                                            ";
+                                        })
+                ->editColumn('created_at', '{!! $created_at->diffForHumans() !!}')
+                ->editColumn('updated_at', '{!! $created_at->diffForHumans() !!}')
+                ->make(true);
+    }
+
+    public function trashedData() 
+    {
+        $home_image = HomeImage::select(['id', 'image', 'link', 'position', 'created_at', 'updated_at'])->onlyTrashed()->get();
+        return Datatables::of($home_image)
+                 ->addColumn('action', function ($home_image) {
+                                            return 
+                                            "<a href='".url("admin/homeads/undo")."/".$home_image->id."' >Undo</a>
                                             ";
                                         })
                 ->editColumn('created_at', '{!! $created_at->diffForHumans() !!}')
@@ -47,9 +60,8 @@ class HomeImagesController extends Controller
         return Datatables::of($home_image)
                  ->addColumn('action', function ($home_image) {
                                             return 
-                                            "<a href='".url("admin/homeads")."/".$home_image->id."?redirect=admin/dynamic/link' >View</a>
-                                            <a href='".url("admin/edit/homeads")."/".$home_image->id."?redirect=admin/dynamic/link' >Edit</a>
-                                            <a href='".url("admin/delete/imageDelete")."/".$home_image->id."?redirect=admin/dynamic/link' >Delete</a>
+                                            "<a href='".url("admin/homeads/edit")."/".$home_image->id."?redirect=admin/dynamic/link' >Edit</a>
+                                            <a href='".url("admin/homeads /delete/imageDelete")."/".$home_image->id."?redirect=admin/dynamic/link' >Delete</a>
                                             ";
                                         })
                 ->editColumn('created_at', '{!! $created_at->diffForHumans() !!}')

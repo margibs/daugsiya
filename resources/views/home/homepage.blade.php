@@ -1422,7 +1422,6 @@
   }
 </style>
 
-
 <div class="container-fluid">
   <div class="container"  style="position:relative;">
     <div class="row">
@@ -1631,8 +1630,6 @@
 
     $(document).ready(function(){
 
-
-
       var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content'),
       page = 1;
 
@@ -1761,12 +1758,13 @@
           }, 500);
 
           setTimeout(function(){
-            machine3.shuffle(3);
-          }, 700);
 
-          setTimeout(function(){
+            machine3.shuffle(2);
+            }, 700);
+
+            setTimeout(function(){
             machine4.shuffle(2);
-          }, 900);
+            }, 900);
 
         });
 });
