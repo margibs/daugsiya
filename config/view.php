@@ -2,14 +2,15 @@
 
 use Jenssegers\Agent\Agent as Agent;
 $Agent = new Agent();
-// agent detection influences the view storage path
+
+
 $viewPath = 'resources/views';
 //$viewPath = 'resources/views/mobileView';
+// agent detection influences the view storage path
 if ($Agent->isMobile()) {
-   // you're a mobile device
-   $viewPath = 'resources/views/mobileView';
+    // you're a mobile device
+    $viewPath = 'resources/views/mobileView';
 } 
-
 
 
 return [
@@ -26,7 +27,9 @@ return [
     */
 
     'paths' => [
+
        realpath(base_path($viewPath)),
+
 
     ],
 
