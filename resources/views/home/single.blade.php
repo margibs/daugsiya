@@ -26,7 +26,6 @@
     z-index: 2;
 }
       .fave{
-
       border-radius: 50px;
       border-top: 2px solid #D29B24;
       border-left: 2px solid #e7b240;
@@ -90,18 +89,14 @@
       #playedGame span{
          right: 6px;
       }
-      #playedText {
-        /* margin-left: 375px; */
-         padding: 9px 9px 9px 25px;
-         /*width: 515px;*/
-          left: 35%;
-          /* width: 336px; */
-         width: 561px;
-         text-align: center;
-      }
-      #happyPlayed{
-        width: 561px;
-        left:35%;
+      #playedText{
+       /* margin-left: 375px; */
+       padding: 9px 9px 9px 25px;
+       /*width: 515px;*/
+       left: 41%;
+       /* width: 336px; */
+         width: 222px;
+    text-align: center;
       }
       #totalVoters{
            top: -3px;
@@ -126,7 +121,7 @@
       .reels{
       padding: 0 53px 0 67px;
       margin-top: 0px;
-      height: 242px;
+      height: 234px;
       overflow: hidden;
       }
       .reels img{
@@ -140,7 +135,7 @@
         }
         .casinolist li a img{
         margin: 0 2px;
-      /*  width: 150px!important;*/
+        width: 150px!important;
         height: auto;
         }
       #no-comments{
@@ -152,18 +147,15 @@
       .sidebar .sidebarInner{
       background: #c20f14;
       padding: 12px 14px 12px 19px;
-      margin-top: -22px;
+      margin-top: -57px;
       border-radius: 4px;
-      /*overflow: hidden;*/
+      overflow: hidden;
       -moz-box-shadow: 2px 0 6px -2px #000;
       -webkit-box-shadow: 2px 0 6px -2px #000;
       box-shadow: 2px 0 6px -2px #000;
       }
       .sidebar .susan{
       margin-top: 60px;
-      position: relative;
-      left: 7px;
-      z-index: 3;
       }
       .sidebar h3{
       padding: 0 0px 0px 0px;
@@ -261,89 +253,228 @@
       }
 
 
-      
+      .commentsReel{
+      margin-left: -2px;
+      position: absolute;
+      top: 20px;
+      left: 3px;
+      width: 100.1%;
+      }
 
-      .oval-speech {
-          position: absolute;
-          width: 234px;
-          padding: 35px 21px;
-          margin: 2.5em auto 50px;
-          margin-left: -131px;
-          z-index: 2;
-          text-align: center;
-          color: #fff;
-          background:#567C17;
-          /* background: -webkit-gradient(linear, 0 0, 0 100%, from(#b8db29), to(#5a8f00)); */
-          background: -moz-linear-gradient(#b8db29, #5a8f00);
-          background: -o-linear-gradient(#b8db29, #5a8f00);
-          /* background: linear-gradient(rgb(255, 255, 255), rgb(234, 234, 234)); */
-          -webkit-border-top-left-radius: 220px 120px;
-          -webkit-border-top-right-radius: 220px 120px;
-          -webkit-border-bottom-right-radius: 220px 120px;
-          -webkit-border-bottom-left-radius: 220px 120px;
-          -moz-border-radius: 220px / 120px;
-          border-radius: 310px / 175px;
-          border: 1px solid #547818;
-          -moz-transform: rotate(-6deg);
-          -webkit-transform: rotate(-6deg);
-          transform: rotate(-6deg);
+      .related {
+      background-color: #a27721;
+      width: 97.5%;
+      padding-top: 10px;
+      margin: 0 auto;
+      position: absolute;
+      top: 64px;
+      left: 13px;
+      }
+      .related .outer {
+      background-color: #DABE83;
+      margin: 10px 30px 10px 30px;
+      padding-top: 1px;
+      border-radius: 2px;
+      -moz-box-shadow: inset 0 0 10px -1px #000;
+      -webkit-box-shadow: inset 0 0 10px -1px #000;
+      box-shadow: inset 0 0 10px -1px #000;
+      border: 1px solid #8C6416;
+      }
+      .related .outer .inner {
+      background: #F9F3E8;
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+      background: -moz-linear-gradient(left, #F9F3E8 0%, #ffffff 21%, #ffffff 50%, #ffffff 79%, #F9F3E8 100%);
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F9F3E8), color-stop(21%,#ffffff), color-stop(50%,#ffffff), color-stop(79%,#ffffff), color-stop(100%,#F9F3E8));
+      background: -webkit-linear-gradient(left, #F9F3E8 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F9F3E8 100%);
+      background: -o-linear-gradient(left, #F9F3E8 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F9F3E8 100%);
+      background: -ms-linear-gradient(left, #F9F3E8 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F9F3E8 100%);
+      background: linear-gradient(to right, #F9F3E8 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F9F3E8 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F9F3E8', endColorstr='#F9F3E8',GradientType=1 );
+      /* background: #fff; */
+      margin: 10px;
+      border: 1px solid #fff;
+      border-radius: 2px;
+      }
+      .related .outer .inner h6 {
+       font-family: 'Work Sans';
+       color: #9A0A0E;
+       padding: 20px 20px 5px 4px;
+       font-size: 25px;
+       font-weight: 800;
+       border-top: 1px solid rgba(185, 127, 11, 0.17);
+       margin-top: 37px;
+       margin: 37px 20px 20px 20px;
+      }
+      .related .outer .inner ul {
+      padding: 15px 20px 30px 20px;
+      text-align: center;
+      }
+      .related .outer .inner ul li, .related .outer .inner ul li a {
+      display: inline-block;
+      }
+      .related .outer .inner ul li {
+      width: 19%;
+      }
+      .related .outer .inner ul li a {
+      width: 100%;
+      }
+      .related .outer .inner ul li a img {
+      width: 100%;
+      }
 
-          -moz-box-shadow: 0 0 14px -3px #000;
-          -webkit-box-shadow: 0 0 14px -3px #000;
-          box-shadow: 0 0 14px -3px #000;
-      }
-      .oval-speech p {
-        font-family: 'Work Sans',Roboto,Arial,Helvetica,sans-serif;
-        font-size: 20px;
-        font-weight: 600;
-        color: #fff;
-      }
-      .oval-speech p a{
-        text-decoration: none;
-        color: #FFE208;
-        display: block;
-        font-size: 27px;
-      }
- /*     .oval-speech:before {
-          content: "";
-          position: absolute;
-          z-index: -1;
-          bottom: -30px;
-          right: 50%;
-          height: 30px;
-          border-right: 60px solid #5a8f00;
-          background: #5a8f00;
-          -webkit-border-bottom-right-radius: 80px 50px;
-          -moz-border-radius-bottomright: 80px 50px;
-          border-bottom-right-radius: 80px 50px;
-          -webkit-transform: translate(0, -2px);
-          -moz-transform: translate(0, -2px);
-          -ms-transform: translate(0, -2px);
-          -o-transform: translate(0, -2px);
-          transform: translate(0, -2px);
-      }
-      .oval-speech:after {
-          content: "";
-          position: absolute;
-          z-index: -1;
-          bottom: -30px;
-          right: 50%;
-          width: 60px;
-          height: 30px;
-          background: #fff;
-          -webkit-border-bottom-right-radius: 40px 50px;
-          -moz-border-radius-bottomright: 40px 50px;
-          border-bottom-right-radius: 40px 50px;
-          -webkit-transform: translate(-30px, -2px);
-          -moz-transform: translate(-30px, -2px);
-          -ms-transform: translate(-30px, -2px);
-          -o-transform: translate(-30px, -2px);
-          transform: translate(-30px, -2px);
-      }*/ 
+      .related .outer .inner .comments ul li{
+      width: 100%;
+      margin-bottom: 10px;
+      text-align: left;
 
+      }
+      .related .outer .inner .comments ul li .commentlist img{
+      border-radius: 50%;
+      width: 50px;
+      float: left;
+      margin: 15px 15px 0 0px;
+      border: 1px solid #ECECEC;
+      }
+      .related .outer .inner .comments ul li .commentlist  .timestamp{
+      display: block;
+      font-size: 11px;
+      color: #ECD8AB;
+      font-family: 'Work sans',roboto,arial;
+      letter-spacing: 0px;
+      text-align: right;
+      margin-bottom: 10px;
+      position: relative;
+      top: 10px;
+      }
+      .related .outer .inner .comments ul li .commentlist p{
+      font-size: 15px;
+      font-family: 'Work Sans';
+      line-height: 19px;
+      font-weight: 500;
+      margin-top: 10px;
+      /*border: 1px solid #F7F0E2;*/
+      padding: 0 0 10px 10px;
+      width: 81%;
+      border-radius: 5px;
+      }
+      .related .outer .inner .comments ul li .commentlist .reply_btn{
+      width: 100%;
+      display: block;
+      font-size: 12px;
+      margin-top: 5px;
+      text-decoration: none;
+      color: #D8BC81;
+      padding-left:64px;
+      font-family: Roboto;
+      }
+      .related .outer .inner .comments ul{
+      padding-top: 0;
+      padding-bottom: 5px;
+      }
+      .related .outer .inner .comments textarea{
+      width: 84%;
+      margin: 20px 35px;
+      border: 1px solid #fff;
+      border-radius: 3px;
+      padding: 18px 20px;
+      font-size: 15px;
+      font-family: 'Work sans', Arial, Helvetica;
+
+      -moz-box-shadow: 0 5px 4px -4px #f6e2b8;
+      -webkit-box-shadow: 0 5px 4px -4px #f6e2b8;
+      box-shadow: 0 5px 4px -4px #f6e2b8;
+
+
+      height: 100px;
+      }
+      .replies-parent{
+      overflow: hidden;
+      }
+      .reply-list{
+      margin-left: 60px;
+      margin-top: 10px;
+      }
+      .comment-info, .reply-info{
+      font-family: 'Work Sans';
+      font-size: 13px;
+      font-weight: 400;
+      color: #CCCCCC;
+      /*text-align: right;*/
+      }
+      .comment-content, .reply-content{
+      font-size: 15px;
+      font-family: 'Work Sans';
+      line-height: 19px;
+      font-weight: 500;
+      margin-top: 5px;
+      /* border: 1px solid #F7F0E2; */
+      padding: 5px 0 15px 64px;
+      width: 81%;
+      border-radius: 5px;
+      }
+      .comment-info, .livetime{
+      font-weight: 500;
+      font-family: Roboto;
+      }
+      .reply-form{
+      padding-left: 70px;
+      }
+      .reply-form textarea{
+      border: 1px solid #F9F4EA!important;
+      }
+      .rednotifbox{
+      background: #FFE7E7;
+      margin: 10px 20px;
+      padding: 16px;
+      border-radius: 5px;
+      text-align: center;
+      color: #D26060;
+      font-family: Roboto;
+      }
+      .rednotifbox a{
+      font-family: Roboto;
+      text-decoration: none;
+      color: #CA1B1B;    
+      font-weight: 600; 
+      }
+      .button_example{
+      cursor: pointer;
+      border:1px solid #b1423a; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:25px; padding: 12px 12px 12px 12px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3); color: #FFFFFF;
+      background-color: #C9625B; background-image: -webkit-gradient(linear, left top, left bottom, from(#C9625B), to(#d20202));
+      background-image: -webkit-linear-gradient(top, #C9625B, #d20202);
+      background-image: -moz-linear-gradient(top, #C9625B, #d20202);
+      background-image: -ms-linear-gradient(top, #C9625B, #d20202);
+      background-image: -o-linear-gradient(top, #C9625B, #d20202);
+      background-image: linear-gradient(to bottom, #C9625B, #d20202);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#C9625B, endColorstr=#d20202);
+
+      display: block;
+      text-align: center;
+      width: 40%;
+      margin: 0 auto 40px auto;
+      font-family: 'Work Sans';
+      font-weight: 600;
+
+      }
+
+      .button_example:hover{
+      border:1px solid #8f352f;
+      background-color: #b5433c; background-image: -webkit-gradient(linear, left top, left bottom, from(#b5433c), to(#9f0202));
+      background-image: -webkit-linear-gradient(top, #b5433c, #9f0202);
+      background-image: -moz-linear-gradient(top, #b5433c, #9f0202);
+      background-image: -ms-linear-gradient(top, #b5433c, #9f0202);
+      background-image: -o-linear-gradient(top, #b5433c, #9f0202);
+      background-image: linear-gradient(to bottom, #b5433c, #9f0202);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#b5433c, endColorstr=#9f0202);
+      }
+
+
+      .related .outer .inner .comments .button_example{
+      font-size: 20px;
+      padding: 10px;
+      width: 30%;
+      }
       .singleFooter{
       position: absolute;
-      bottom: 11px;
+      bottom: 0;
       width: 100.3%;
       }
       .singelTopReel{
@@ -481,12 +612,6 @@
       width: auto;
       }
 
-      .moveLeft{
-      left: 32%;  
-      }
-      #planeMachine2, #planeMachine3, #planeMachine4, #planeMachine5{
-      height: 250px;
-      }
 
       #playbig {
         position: absolute;
@@ -496,9 +621,8 @@
       }
       #playbig .button{
         text-align: center;
-        font-size: 33px;
-       padding: .3em .6em;
-       line-height: 28px;
+        font: 33px/0.9em 'Work Sans',sans-serif;
+        padding: .2em .6em;
       }
       .reply-list{
       margin-left: 10%;
@@ -560,7 +684,7 @@
       overflow: hidden;
       border-bottom: 1px solid rgba(255, 255, 255, 0.48);
       padding-bottom: 10px;
-      padding: 6px 20px;
+      padding: 10px 20px;
       background: rgba(255, 255, 255, 0.50);
       transition: background 0.2s ease;
       position: relative;
@@ -570,7 +694,7 @@
       .recommendFriends ul li .msgImgcont{
       width: 50px;
       height: 50px;
-      border-radius: 3px;
+      border-radius: 50%;
       overflow: hidden;
       float: left;
       }
@@ -640,36 +764,24 @@
       .bottomCasinos{
          background: #fff url(http://susanwins.com/uploads/86674_casinobonusbg.jpg) center no-repeat;
          width: 93%;
-         text-align: center;
-         margin: 10px 30px 10px 30px;
-         border-radius: 5px;
-         padding: 10px 0;
+       text-align: center;
+       margin: 10px 30px 10px 30px;
+       border-radius: 5px;
+       padding: 50px 0 10px 0;   
 
-         -moz-box-shadow: 0 0 10px -5px #000;
-         -webkit-box-shadow: 0 0 10px -5px #000;
-         box-shadow: 0 0 10px -5px #000;
-
-         position: relative;
-         overflow: hidden;
-         height: 0;   
-         padding: 0;
-
-         -webkit-transition: height 0.2s linear;
-         -moz-transition: height 0.2s linear;
-         transition: height 0.2s linear;
+       -moz-box-shadow: 0 0 10px -5px #000;
+-webkit-box-shadow: 0 0 10px -5px #000;
+box-shadow: 0 0 10px -5px #000;
       }
       .bottomCasinos .ribbon{
-         width: auto;
-         position: relative;
-         margin-bottom: -48px;
-         margin-left: 22px;
-      }
-      .bottomCasinos ul{
-         display: none;
+             width: auto;
+    position: absolute;
+    z-index: 2;
+    left: 160px;
+    top: 31px;
       }
       .bottomCasinos ul li, .bottomCasinos ul li a{
       display: inline-block;
-      text-decoration: none;
       }
       .bottomCasinos ul li {
       width: 18%!important;
@@ -681,6 +793,279 @@
       }
 
 
+
+   
+      .not_count{
+        height: auto!important;
+      }
+      .totalcontainer{
+      position: absolute;
+      overflow: hidden;
+      width: 159px;
+      height: 32px;
+      left: 11%;
+      }
+      .totalcontainer .innertotalcontainer{
+      width: 85%;
+      height:auto;
+      overflow: hidden;
+      }
+      .totalcontainer .innertotalcontainer img{
+        width: 135px;
+      }
+      .up1level{
+        position: relative;
+        z-index: 2; 
+      }
+      .text-center{
+        position: relative;
+      }
+
+      .rateBtn{
+          text-align: right;
+          padding-right: 90px;
+      }
+      .addBtn{
+          padding-left: 90px;
+      }
+      .gameExp{
+        position: relative;
+        top: 82px;
+      }
+      .musicStar{
+        top: 140px;    
+      }
+      .longtermStar{
+        top: 130px;    
+      }
+      .funStar{
+        top: 121px;    
+      }
+      .graphicStar{
+        top: 128px;    
+      }
+
+         @media(max-width: 1199px){
+      .singelTopReel{
+            height: auto;
+      }
+      .right{
+      right:2px; 
+      width: 25%;
+      }
+      .left{
+      left: -19px;
+      }
+      .content p img{
+        height: auto;
+      }
+
+      .featImg img{
+        height: auto;
+        width: 100%;
+        margin-bottom: 0;
+      }
+      .featImg{
+      margin-top: 41px;
+      margin-left: 38px;
+      width: 92.5%;
+      }
+      .reels {
+      padding: 0 41px 0 58px;
+      margin-top: 12px;
+      height: 200px;
+      }
+      .singlePostBG{
+      top: 569px;
+      }
+      .content{
+      margin-top: 150px;
+      }
+      #wrapper{
+      top: 427px;
+      }
+      .related{
+      top: 57px;
+      left: 11px;
+      }
+      .gameExp{
+      top: 62px!important;
+      }
+      #playbig{
+      top: -25px;
+      }
+     
+      #playbig .button{
+      font: 30px/0.9em 'Work Sans',sans-serif;
+      padding: .1em .6em;
+      }
+      #playbig a {
+      width: 130px!important;
+      height: 70px!important;
+      }
+     .casinolist li a img{
+      width: 150px!important;
+      }
+      .casino_yes{
+       margin-left: 216px;
+      }
+      }
+      @media(max-width: 991px){
+      .featImg {
+      margin-top: 32px;
+      margin-left: 31px;
+      width: 92.7%;
+      }
+      #addToFavorite span, #removeToFavorite span, #playedGame span {
+          top: -7px;
+      }
+      .reels {
+      padding: 0 29px 0 48px;
+      margin-top: 8px;
+      height: 156px;
+      }
+      #wrapper {
+      top: 326px;
+      left: -13px;
+      }
+      #wrapper a {
+      width: 60px;
+      height: 35px;
+      }
+      .singlePostBG{
+      top: 440px;
+      }
+      .content {
+      margin-top: 111px;
+      }
+      .content h2{
+      margin: 10px 31px 0px 49px;
+      }
+      .content p{
+      margin: 30px 41px 0px 60px;
+      }
+      .contentSociallinks {
+      margin-left: 53px;
+      }
+      .singleFooter{
+      left: 3px;
+      height: auto;
+      }
+      .commentsReel{
+      top: 29px;
+      left: 6px;
+      }
+      .related .outer .inner ul li {
+      width: 24%;
+      }
+      .randombutton, .claimbutton{
+      width: 50%;
+      }
+      .gameExp {
+      top: 47px!important;
+      }
+      .fave{
+        font-size: 15px;
+      }
+      .fave img{
+      width: 27px;
+      }
+      .fave span {
+      top: -8px;
+      }
+      #addToFavorite, #removeToFavorite{
+      left: 66px;  
+      }
+      #playedGame{
+      right: 40px;
+      }
+      #playbig{
+      right: 90px;  
+      }
+      #playbig a {
+      width: 119px!important;
+      height: 60px!important;
+      }
+      #playbig .button {
+      font: 25px/0.9em 'Work Sans',sans-serif;
+      }
+      #playbig {
+      top: -13px;
+      }
+      .popupheading{
+      font-size: 23px!important;
+      margin-bottom: 10px!important;
+      }
+      #recommendToFriend{
+      top: 11px;  
+      }
+      .musicStar {
+      top: 92px;
+      }
+      .longtermStar {
+      top: 86px;
+      }
+      .funStar {
+      top: 81px;
+      }
+      .graphicStar {
+       top: 81px;
+      }      
+      .totalcontainer .innertotalcontainer img {
+      width: 100px;
+      }
+      }
+      @media(max-width: 768px){
+      .related .outer .inner ul li {
+      width: 24%;
+      }
+      .right {
+      display: none;
+      }
+      .left {
+      left: auto;
+      }
+      .singlePostBG {
+      top: 568px;
+      }
+      .reels {
+      padding: 0 40px 0 57px;
+      margin-top: 12px;
+      height: 197px;
+      }
+      .featImg {           
+      margin-left: 36px;
+      width: 92.4%;
+      margin-top: 40px;
+      }
+      #wrapper{
+      top: 419px;
+      }
+      .content {
+      margin-top: 150px;
+      }
+      .content p {
+      margin: 30px 53px 0px 60px;
+      }
+      .commentsReel{
+      top: 30px;
+      left: 4px;
+      width: 100.2%;
+      }
+      .related{
+      width: 97.6%;
+      left: 11px;
+      top: 65px;
+      }
+      .singleFooter{
+      left: 1px;
+      }
+      .related .outer .inner ul li {
+      width: 23%;
+      }
+
+      }
+      
       #random_game{
       position: relative;
       display: block;
@@ -696,19 +1081,18 @@
        height: 268px;
       }
       .pointingSusan a{
-         border-bottom: 1px solid #BA1916;
+           border-bottom: 1px solid #BA1916;
          color: #fff;
          font-family: 'Work Sans';
          font-weight: 600;
          float: right;
-         text-align: center;
+          text-align: center;
          margin-right: 100px;
-         margin-top: 135px;
-         font-size: 30px;
-         text-decoration: none;
-         padding: 20px 40px 0px 40px;
-         border-radius: 5px;
-         cursor: pointer;
+        margin-top: 135px;
+          font-size: 30px;
+          text-decoration: none;
+          padding: 20px 40px 0px 40px;
+          border-radius: 5px;
          background: rgb(182,21,17);
          background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2I2MTUxMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkYjNiMzgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
          background: -moz-linear-gradient(top,  rgba(182,21,17,1) 0%, rgba(219,59,56,1) 100%);
@@ -824,60 +1208,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
       z-index: 2;
       }
 
-
-   
-      .not_count{
-        height: auto!important;
+  /*    .postcontent p img
+      {
+            display:none;
       }
-      .totalcontainer{
-      position: absolute;
-      overflow: hidden;
-      width: 159px;
-      height: 32px;
-      left: 11%;
-      }
-      .totalcontainer .innertotalcontainer{
-      width: 85%;
-      height:auto;
-      overflow: hidden;
-      }
-      .totalcontainer .innertotalcontainer img{
-        width: 135px;
-      }
-      .up1level{
-        position: relative;
-        z-index: 2; 
-      }
-      .text-center{
-        position: relative;
-      }
-
-      .rateBtn{
-          text-align: right;
-          padding-right: 90px;
-      }
-      .addBtn{
-          padding-left: 90px;
-      }
-      .gameExp{
-        position: relative;
-        top: 82px;
-      }
-      .musicStar{
-        top: 140px;    
-      }
-      .longtermStar{
-        top: 130px;    
-      }
-      .funStar{
-        top: 121px;    
-      }
-      .graphicStar{
-        top: 128px;    
-      }
-
-
-
+*/
+ .moveLeft{
+  left: 32%;  
+}
+#planeMachine2, #planeMachine3, #planeMachine4, #planeMachine5{
+      height: 250px;
+}
 .hidethenshow{
     display: none;
     width: auto!important;
@@ -894,377 +1235,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
     top: 130px;
     left: 341px;  
 }
-
-@keyframes spin{
-  0%{transform:rotate(0deg);}
-  100%{transform:rotate(360deg);}
-}
-
-#circle{
- width: 155px;
- height: 155px;
- background-color: #FFC847;
- border-radius: 214px;
- position: absolute;
- top: 0;
- right: 0;
- bottom: 0;
- left: 0;
- margin: auto;
- box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-#circle:after{
- content: "";
- display: block;
- border: 5px dashed white;
- width: 145px;
- height: 149px;
- margin-left: 5px;
- border-radius: 200px;
- animation: spin 10s linear infinite;
- margin-top: 3px;
-}
-#circle:hover{
-  background-image:radial-gradient(#FFED85, #FFC847 70%);
-}
-#gift{
- position: absolute;
- top: 20px;
- right: 0;
- left: 0;
- bottom: 0;
- margin: auto;
- width: 100px;
- height: 125px;
-}
-#ribbon{
- position: relative;
- width: 60px;
- height: 60px;
- transform: rotate(45deg);
- margin: auto;
- margin-bottom: -38px;
- border-radius: 0 8px 0 8px;
-}
-#ribbon:before{
-  content:"";
-  height:24px;
-  width:100%;
-  background-color:#F04D4D;
-  display:block;
-  position:absolute;
-  top:18px;
-  box-shadow:0 0 1px rgba(0,0,0,0.4);
-  border-radius:inherit;
-}
-#ribbon:after{
-  content:"";
-  height:100%;
-  width:24px;
-  background-color:#F04D4D;
-  display:block;
-  margin:auto;
-  box-shadow:0 0 1px rgba(0,0,0,0.4);
-  border-radius:inherit;
-}
-#giftbox{
- position: relative;
- margin: auto;
- width: 75px;
- height: 75px;
- background-color: white;
- border-radius: 2px;
- box-shadow: 0 0 1px rgba(0,0,0,0.4);
- overflow: hidden;
-}
-#giftbox:before{
-  content:"";
-  height:24%;
-  width:100%;
-  background-color:#F04D4D;
-  display:block;
-  position:absolute;
-  top:38%;
-  box-shadow:inherit;
-}
-#giftbox:after{
-  content:"";
-  height:100%;
-  width:24%;
-  background-color:#F04D4D;
-  display:block;
-  margin:auto;
-  box-shadow:inherit;
-}
-
-
-
-    @media(max-width: 1199px){
-          body {
-              margin-top: 80px;
-          }
-          .singelTopReel{
-                height: auto;
-          }
-          .right{
-          right:2px; 
-          width: 25%;
-          }
-          .left{
-          left: -19px;
-          }
-          .content p img{
-            height: auto;
-          }
-
-          .featImg img{
-            height: auto;
-            width: 100%;
-            margin-bottom: 0;
-          }
-          .featImg{
-          margin-top: 41px;
-          margin-left: 38px;
-          width: 92.5%;
-          }
-          .reels {
-          padding: 0 41px 0 58px;
-          margin-top: 12px;
-          height: 200px;
-          }
-          .singlePostBG{
-          top: 569px;
-          }
-          .content{
-          margin-top: 150px;
-          }
-          #wrapper{
-          top: 427px;
-          }
-          .related{
-          top: 57px;
-          left: 11px;
-          }
-          .gameExp{
-          top: 62px!important;
-          }
-          #playedText{
-            padding: 9px 9px 9px 69px;
-            width: 410px;
-            left: 40%;
-          }
-          .moveLeft {
-            left: 39%;
-            top: -12px;
-          }
-          .content p{
-            margin: 31px 56px 0px 65px;
-          }
-          .content h2{
-                padding: 20px 0 20px 0;
-          }
-          .contentSociallinks {
-              margin-left: 62px;
-          }
-          .played{
-            padding: 9px 9px 9px 69px;
-            width: 410px;
-          }
-          .noplayed{
-            padding: 9px 9px 9px 31px;
-            width: 187px;
-          }
-          #playbig{
-          top: -25px;
-          }
-         
-          #playbig .button{
-          font: 30px/0.9em 'Work Sans',sans-serif;
-          padding: .1em .6em;
-          font-weight: 600;
-          }
-          #playbig a {
-          width: 130px!important;
-          height: 70px!important;
-          }
-         .casinolist li a img{
-          width: 150px!important;
-          }
-          .casino_yes{
-           margin-left: 216px;
-          }
-          .pointingSusan{
-            bottom: -10px;
-            width: 89%;
-            left: 49px;
-          }
-          .pointingSusan a{
-            float: none;
-            position: absolute;
-            bottom: 30px;
-            right: -51px;
-          }
-          .content {
-              margin-top: 140px;
-          }
-          .oval-speech-border p{
-            margin:0!important;
-          }
-    }
-    @media(max-width: 991px){
-        .featImg {
-        margin-top: 32px;
-        margin-left: 31px;
-        width: 92.7%;
-        }
-        #addToFavorite span, #removeToFavorite span, #playedGame span {
-            top: -7px;
-        }
-        .reels {
-        padding: 0 29px 0 48px;
-        margin-top: 8px;
-        height: 156px;
-        }
-        #wrapper {
-        top: 326px;
-        left: -13px;
-        }
-        #wrapper a {
-        width: 60px;
-        height: 35px;
-        }
-        .singlePostBG{
-        top: 440px;
-        }
-        .content {
-        margin-top: 111px;
-        }
-        .content h2{
-        margin: 10px 31px 0px 49px;
-        }
-        .content p{
-        margin: 30px 41px 0px 60px;
-        }
-        .contentSociallinks {
-        margin-left: 53px;
-        }
-        .singleFooter{
-        left: 3px;
-        height: auto;
-        }
-        .commentsReel{
-        top: 29px;
-        left: 6px;
-        }
-        .related .outer .inner ul li {
-        width: 24%;
-        }
-        .randombutton, .claimbutton{
-        width: 50%;
-        }
-        .gameExp {
-        top: 47px!important;
-        }
-        .fave{
-          font-size: 15px;
-        }
-        .fave img{
-        width: 27px;
-        }
-        .fave span {
-        top: -8px;
-        }
-        #addToFavorite, #removeToFavorite{
-        left: 66px;  
-        }
-        #playedGame{
-        right: 40px;
-        }
-        #playbig{
-        right: 90px;  
-        }
-        #playbig a {
-        width: 119px!important;
-        height: 60px!important;
-        }
-        #playbig .button {
-        font: 25px/0.9em 'Work Sans',sans-serif;
-        }
-        #playbig {
-        top: -13px;
-        }
-        .popupheading{
-        font-size: 23px!important;
-        margin-bottom: 10px!important;
-        }
-        #recommendToFriend{
-        top: 11px;  
-        }
-        .musicStar {
-        top: 92px;
-        }
-        .longtermStar {
-        top: 86px;
-        }
-        .funStar {
-        top: 81px;
-        }
-        .graphicStar {
-         top: 81px;
-        }      
-        .totalcontainer .innertotalcontainer img {
-        width: 100px;
-        }
-    }
-    @media(max-width: 768px){
-      .related .outer .inner ul li {
-      width: 24%;
-      }
-      .right {
-      display: none;
-      }
-      .left {
-      left: auto;
-      }
-      .singlePostBG {
-      top: 568px;
-      }
-      .reels {
-      padding: 0 40px 0 57px;
-      margin-top: 12px;
-      height: 197px;
-      }
-      .featImg {           
-      margin-left: 36px;
-      width: 92.4%;
-      margin-top: 40px;
-      }
-      #wrapper{
-      top: 419px;
-      }
-      .content {
-      margin-top: 150px;
-      }
-      .content p {
-      margin: 30px 53px 0px 60px;
-      }
-      .commentsReel{
-      top: 30px;
-      left: 4px;
-      width: 100.2%;
-      }
-      .related{
-      width: 97.6%;
-      left: 11px;
-      top: 65px;
-      }
-      .singleFooter{
-      left: 1px;
-      }
-      .related .outer .inner ul li {
-      width: 23%;
-      }
-    }
 </style>
 
 @if(isset($user))
@@ -1302,7 +1272,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
          <div class="reels">
                   <div class="row no-gutter">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine2">
+                        <div id="planeMachine2" style="height:227px;">
                          
                               <div class="text-center">
                                 <div class="totalcontainer musicStar">
@@ -1327,7 +1297,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                           </div>
                     </div>          
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine3" >
+                        <div id="planeMachine3"  style="height:227px;">
 
                               <div class="text-center">
                                 <div class="totalcontainer longtermStar"><div class="innertotalcontainer" style="width:{{$widget_ratings->long_term_play / 10 * 100}}%;"><img src="http://susanwins.com/uploads/56148_stars.jpg" style="border:none;"  /></div></div>
@@ -1350,7 +1320,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                           </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine4">
+                        <div id="planeMachine4" style="height:227px;">
 
                           <div class="text-center">
                             <div class="totalcontainer funStar"><div class="innertotalcontainer" style="width:{{$widget_ratings->fun_rate / 10 * 100}}%;"><img src="http://susanwins.com/uploads/56148_stars.jpg" style="border:none;" /></div></div>
@@ -1372,7 +1342,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine5">
+                        <div id="planeMachine5" style="height:227px;">
 
                           <div class="text-center">
                             <div class="totalcontainer graphicStar"><div class="innertotalcontainer" style="width:{{$widget_ratings->graphics / 10 * 100}}%;"><img src="http://susanwins.com/uploads/56148_stars.jpg" style="border:none;"  /></div></div>
@@ -1510,7 +1480,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
            
                     @if($played_game)
                      <img src="{{ url('images')}}/happySusan.png" class="susanExpression moveLeft" />
-                     <div class="fave played" id="playedText">  You've Played it! <span class="hideat1199"> Please Rate  it <i class="fa fa-arrow-right" aria-hidden="true" style="margin-left:5px;"></i> </span>
+                     <div class="fave" id="playedText" style="width: 561px;left:35%;">  You've Played it! Please Rate it <i class="fa fa-arrow-right" aria-hidden="true" style="margin-left:5px;"></i>
                               <a href="#" class="playedGamePad">                                                
                                   <input type="range" value="{{ $gameRating['totalRating'] }}" step="0.5" id="gameRating">
                                   <div class="rateit" data-rateit-backingfld="#gameRating" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-max="5"></div>
@@ -1521,7 +1491,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                     
                     @else
                         <img src="{{ url('images')}}/sadSusan.png"  class="susanExpression" />  
-                        <div class="fave noplayed" id="playedText"> Not Played  <span class="hideat1199"> Yet </span> </div> 
+                        <div class="fave" id="playedText"> Not Played Yet</div> 
                         <a id="playedGame" class="fave">
                         <img src="http://susanwins.com/images/homepage/alreadyPlayedIcon.png" />
                         <span> Add to Played List </span>
@@ -1538,7 +1508,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
           <div class="content">     
 
             <div class="pointingSusan">
-               <a id="alllist">
+
+               <a href="#">
                   <img src="http://susanwins.com/uploads/53949_giftbox.png" />
                   Claim Bonus!
                </a>
@@ -1593,7 +1564,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
 
                           {!!$post->content!!}
 
-                          <h2> My thoughts </h2> 
+                          <h2 > My thoughts </h2> 
                           <p style="margin-bottom: 50px;"> 
                             {{ $widget_ratings->final_verdict }}
                           </p>
@@ -1624,12 +1595,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
 
 
                              <div class="bottomCasinos" >
-                                 <div id="circle">
-                                  <div id="gift">
-                                    <div id="ribbon"></div>
-                                    <div id="giftbox"></div>
-                                  </div>
-                                </div>
                                   <ul class="animated bounceIn">
                                     @foreach($casino_lists2 as $k => $v) 
                                     {!! $v !!}
@@ -1762,11 +1727,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         </div>
 
             <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 right">
-               <div class="sidebar">                
-                   <blockquote class="oval-speech bounceIn animated">
-                      <p> You're Missing All the Fun! <a href="#"> Signup Now </a> </p>
-                    </blockquote>
-              
+               <div class="sidebar">
                   <img src="{{ url('images/single-susan.png') }}" alt="" class="susan">
                       <div class="sidebarInner">
                         <h3> <img src="http://susanwins.com/uploads/28532_sidebartext.png" alt=""> </h3>
@@ -2933,8 +2894,9 @@ $('.postcontent img').css('display','inline');
     //LAZY LOADING
     $(".postcontent img").unveil(600, function() {
             
+
       $(this).load(function() {
-            $(this).css('width','100%').removeClass('img-loading');
+            $(this).css('width','743px').removeClass('img-loading');
             // $(this).renameAttr('height', 'data-height' );
             // $(this).renameAttr('width', 'data-width' );   
 
@@ -3250,6 +3212,8 @@ $('.postcontent img').css('display','inline');
         });
 
         function onComplete(active){
+         console.log('yeah yeah yo yo');
+         console.log(active);
           switch(this.element[0].id){
             case 'machine1':
               $("#planeMachine2").text("Index: "+this.active);
@@ -3268,7 +3232,9 @@ $('.postcontent img').css('display','inline');
 
         $("#winwinwin3").click(function(){
 
-          machine2.shuffle(5, onComplete);
+          machine2.shuffle(5, function(){
+            machine2.setRandomize(0);
+          });
 
           setTimeout(function(){
             machine3.shuffle(5, onComplete);
@@ -3282,28 +3248,27 @@ $('.postcontent img').css('display','inline');
             machine5.shuffle(5, onComplete);
           }, 700);
 
+            if(header_counter == 0)
+            {
 
-         if(header_counter == 0)
-         {
+              $('.featimg .replaceme').fadeOut(300, function() {
+             
 
-           $('.featimg .replaceme').fadeOut(300, function() {
-          
+              $('.featimg .replaceme').attr("src","http://susanwins.com/uploads/64878_click-header.png");
+              $('.featimg .replaceme').fadeIn(100);
 
-           $('.featimg .replaceme').attr("src","http://susanwins.com/uploads/64878_click-header.png");
-           $('.featimg .replaceme').fadeIn(100);
+               $('.hidethenshow').css({'display':'block'}).addClass('animated bounceIn');
 
-            $('.hidethenshow').css({'display':'block'}).addClass('animated bounceIn');
+                 function showme(){
+                     $('.hidethenshowtwo').css({'display':'block'}).addClass('animated bounceIn');
+                  }
+                  setTimeout(showme, 500);
 
-              function showme(){
-                  $('.hidethenshowtwo').css({'display':'block'}).addClass('animated bounceIn');
-               }
-               setTimeout(showme, 500);
+              });
 
-           });
+            }
 
-           header_counter++;
-
-         }
+            header_counter++;
 
         })
 

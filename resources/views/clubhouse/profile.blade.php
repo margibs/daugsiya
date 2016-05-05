@@ -53,7 +53,6 @@
             <li> <a href="#"> <span class="notifcount"> 3 </span>  <img src="img/assets/notif-icon.png" alt="Notifications" /> </a> </li>
             <li style="margin-right: 6px;"> <a href="#"> <img src="img/assets/key-icon.png" alt="Login/Signup" /> </a> </li>
           </ul> -->
-
 @endsection
 
 
@@ -128,8 +127,7 @@ height: 372px;
 }
 </style>
 
-  <!--  
-   <div class="container background-container" style="width: 1280px !important; margin-top: 40px; padding:0">
+   <!--  <div class="container background-container" style="width: 1280px !important; margin-top: 40px; padding:0">
       <img src="{{ asset('clubhouse/img/assets/livingroom.png') }}" class="background-image interactiveBackground" alt="">
 
         <div class="flipbook-viewport interactiveObj modal-popup" data-toggle="#magazine" id="interview" left="8%">
@@ -558,8 +556,7 @@ height: 372px;
                 <span>{{ ucfirst($user->user_detail->firstname) }}'s Magazine</span>
                 <img src="{{ asset('images/magazine.png') }}" alt="" class="magazine">
               </a>        
-    </div> 
-  -->
+    </div> -->
     
 <div class="roomNavIcons">
   <ul>
@@ -582,37 +579,38 @@ height: 372px;
     <li class="cd-single-step no-pulse">
 
       <div class="cd-more-info">
-        <h2> Welcome to Your Private Quarters! </h2>
-        <p> There's loads to do here, click start tour and I'll show you how it all works! </p>
+        <h2> Profile page </h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
         <img src="img/step-1.png" alt="step 1">
       </div>
     </li> <!-- .cd-single-step -->
     <li class="cd-single-step">
-      <span> Your Details </span>
+      <span>Step 1</span>
 
       <div class="cd-more-info top">
-        <h2> Your Details </h2>
-        <p> I'd love to send you my welcome pack for new members, it includes your membership card and some awesome free gifts. Just fill in your information and I'll post it over first thing! </p>
+        <h2> Your Diary </h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
         <img src="img/step-1.png" alt="step 1">
       </div>
     </li> <!-- .cd-single-step -->
 
     <li class="cd-single-step">
-      <span> We Want To Interview You! </span>
+      <span>Step 2</span>
 
       <div class="cd-more-info top">
-        <h2> We Want To Interview You! </h2>
-        <p> We're dying to know more about you! Let us know what you like - that way we can customize prizes and gifts specifically to your taste! Other users will be able to see your answers in your public profile and you can see what they put too! </p>
+        <h2>Step Number 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia quasi in quisquam.</p>
         <img src="img/step-2.png" alt="step 2">
       </div>
     </li> <!-- .cd-single-step -->
 
     <li class="cd-single-step" id="beforeTvStep">
+
       <span>Step 3</span>
 
       <div class="cd-more-info left">
-        <h2> My Slots Collections </h2>
-        <p> The TV in your room shows your 'favourite slots', 'slots you've played', and 'slots you haven't played'. Click 'Next' to see how it works... </p>
+        <h2>Step Number 3</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
@@ -1249,12 +1247,7 @@ height: 372px;
           </div>
 
 
-<!-- <<<<<<< HEAD
-                    <div class="picwrapper wrapper">
-            <div class="itemLabels"> Upload image </div>        
-            <div class="pic">                 
-            <img src="{{  $user->user_detail->profile_picture ? asset('').'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png')   }}" alt="" class="profile_pic" id="picPreview">
-======= -->
+
           <div class="picwrapper wrapper">
             <div class="itemLabels"> Upload image </div>        
             <div class="pic">                 
@@ -1271,13 +1264,7 @@ height: 372px;
          <!--    <button class="file-upload">            
             <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" > + </button> -->
 
-<!-- <<<<<<< HEAD
-    </div> 
 
-
-=======
-    </div>
->>>>>>> 716615a7e751b994398f4828d9acec2a9a4dd28a -->
 </div>
 @endsection
 
@@ -2085,7 +2072,7 @@ function init_bookflip(startpage){
    startingPage = startpage;
    var pages=new Array;
 
-    pWidth=424; //width of each page
+    pWidth=380; //width of each page
     pHeight=482; //height of each page
 
     numPixels=20;  //size of block in pixels to move each pass
