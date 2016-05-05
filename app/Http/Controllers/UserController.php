@@ -638,14 +638,14 @@ class UserController extends Controller
 
         //dd($chatroom->room_messages->user_detail);
         
-        foreach($chatroom->room_messages as $message)
-        {
-            /*dd($message->user->user_detail->profile_picture);*/
-            if($message->user->user_detail->profile_picture == '') {
-                $message->user->user_detail->profile_picture = 'user_uploads/default_image/default_01.png';
-            }
+        // foreach($chatroom->room_messages as $message)
+        // {
+        //     /*dd($message->user->user_detail->profile_picture);*/
+        //     if($message->user->user_detail->profile_picture == '') {
+        //         $message->user->user_detail->profile_picture = 'user_uploads/default_image/default_01.png';
+        //     }
           
-        }
+        // }
 
        //dd($data);
         // $new_message = '';

@@ -1507,10 +1507,14 @@ $(function(){
 
 			if(message && userId && room_id)
 			{
+
+
 				$(this).val('');
 				body = $(this).parents('.activebox').find('.body');
 
 				console.log(body);
+				console.log('userImage');
+				console.log(userImage);
 
 				$(body).append(
 					$('<div>').addClass('message')
