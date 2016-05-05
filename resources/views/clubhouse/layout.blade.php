@@ -266,9 +266,9 @@
      @if(isset($user))
      <!--  <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}"> -->
             @if($user->user_detail->profile_picture == "")
-                 <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ 'user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+                 <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ 'user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
             @else
-                <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ 'user_uploads/user_'}}{{$user->id}}/{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+                <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ 'user_uploads/user_'}}{{$user->id}}/{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
             @endif
       
       <!--  <img src ="{{asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview">  -->
@@ -427,6 +427,8 @@ var friendUrl = '{{ url("friends") }}';
  var clubhouseUrl = '{{ url("clubhouse") }}';
  var sessionId = $('#sessionId').val();
 var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+  
+var profileImage = $('#data-profile').val();
 var pagename = '{{ Request::segment(2) }}';
 timeZone = 'Europe/London';
 london = moment.tz(timeZone);
@@ -1364,7 +1366,10 @@ $(document).on('click', '.pmFriend', function(){
 
       socket.on('post_private_message', function(message){
           console.log('you got a private message!');
+          console.log(profileImage);
+          console.log(publicUrl+'/'+message.from.profile_picture );
           console.log(message);
+
 
           if($('#pmBox').data('current') == message.from.user_id && $('#pmBox').is(':visible')){
               console.log('real time add');

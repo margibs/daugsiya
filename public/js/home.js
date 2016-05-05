@@ -18,6 +18,9 @@ $(function(){
     userName = $('#userId').data('name');
     isAdmin = $('#userId').data('isAdmin') == 1 ? true : false;
     sessionId = $('#sessionId').val();
+
+    var profileImage = $('#profile').val();
+
     var timeZone = 'Europe/London';
     //END USER DETAILS
 
@@ -471,6 +474,8 @@ $(function(){
 	socket.on('post_private_message', function(message){
 
 		console.log('you got a private message!');
+		console.log(profileImage);
+		console.log(BASE_URL+'/'+message.from.profile_picture);
 		console.log(message);
 
 		if($('#pmBox').data('current') == message.from.user_id && $('#pmBox').is(':visible'))
@@ -479,7 +484,7 @@ $(function(){
 
 			$('#pmMessageContent').append(
 				$('<li>').append(
-					$('<img>').attr('src', message.from.profile_picture ? BASE_URL+'/'+USER_UPLOADS+userId+'/'+message.from.profile_picture : defaultProfilePic )
+					$('<img>').attr('src', profileImage ? BASE_URL+'/'+message.from.profile_picture : defaultProfilePic )
 				)
 				.append(
 					$('<span>').text(message.message)
@@ -1314,6 +1319,7 @@ $(function(){
 			});
 		}
 	});
+
 
   
 	$('#myNotifications').on('click', '.acceptFriend', function(){
