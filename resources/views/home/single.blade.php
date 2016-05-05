@@ -3098,12 +3098,13 @@ $('.postcontent img').css('display','inline');
             // console.log(event.target.F.videoData.video_id);
             // var new_src = '//www.youtube.com/embed/'+event.target.F.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
             // $('iframe').attr('src',new_src).parent().html("<div style='position: relative; z-index:999;'><img src='{{url('uploads')}}/{{$yt_image_url}}'></div>");
+            console.log(event);
           }
           else if (state === 0) 
           {
             // var iframe_id_men = event.target.f.id;
             // $("#"+iframe_id_men).parent().html("<div style='position: relative; z-index:999;'><img src='{{url('uploads')}}/{{$yt_image_url}}'></div>");
-            var new_src = '//www.youtube.com/embed/'+event.target.F.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
+            var new_src = '//www.youtube.com/embed/'+event.target.D.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
             // console.log('samoka this guy 2');
             // console.log(new_src);
             $('iframe[src="'+new_src+'"]').parent().html("<div style='position: relative; z-index:999;'><a href='{{$yt_image_link}}'><img class='not_count' src='{{url('uploads')}}/{{$yt_image_url}}'></a></div>");
