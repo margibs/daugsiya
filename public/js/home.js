@@ -7,7 +7,9 @@ $(function(){
 	BASE_URL = $('meta[name="baseURL"]').attr('content');
 	CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 	socket = io.connect(BASE_URL+':8891');
-	defaultProfilePic = BASE_URL+'/images/default_profile_picture.png';
+	defaultProfilePic = BASE_URL+'/user_uploads/default_image/default_01.png';
+
+	USER_UPLOADS = 'user_uploads/user_';
 
 	//USER DETAILS
 	userImage = $('#userId').data('image');
@@ -197,7 +199,7 @@ $(function(){
 			  $('<li>').append(
 							$('<a href="'+data_url+'">')
 							.append(
-								$('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+								$('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+'/'+datat.user_id+"/"+data.user.user_detail.profile_picture : defaultProfilePic )
 							)
 							.append(
 								$('<p>')
@@ -226,7 +228,7 @@ $(function(){
 
       	$('#friendUserActivityContainer').prepend(
       			$('<li>')
-      					.append($('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+      					.append($('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+data.user.user_detail.user_id+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
 
       						)
       					.append(p)
@@ -476,7 +478,7 @@ $(function(){
 
 			$('#pmMessageContent').append(
 				$('<li>').append(
-					$('<img>').attr('src', message.from.profile_picture ? BASE_URL+'/'+message.from.profile_picture : defaultProfilePic )
+					$('<img>').attr('src', message.from.profile_picture ? BASE_URL+'/'+USER_UPLOADS+userId+'/'+message.from.profile_picture : defaultProfilePic )
 				)
 				.append(
 					$('<span>').text(message.message)
@@ -1287,7 +1289,7 @@ $(function(){
 							if(this.from != userId)
 							{
 								$(li).append(                        
-									$('<img>').attr('src', data.other_person.user_detail.profile_picture ? BASE_URL+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+									$('<img>').attr('src', data.other_person.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
 								);
 							}
 							else
@@ -1520,7 +1522,9 @@ $(function(){
 							//   $('<img src="img/assets/chat-avatar-shine.png">').addClass('shine')
 							//   )
 							.append(
+								/*$('<img src="'+( userImage ? BASE_URL+'/user_uploads/user_'+userId+'/'+userImage : defaultProfilePic) +'">')*/
 								$('<img src="'+( userImage ? BASE_URL+'/'+userImage : defaultProfilePic) +'">')
+
 							)
 						)
 					)
@@ -1690,7 +1694,7 @@ $(function(){
 										//   $('<img src="img/assets/chat-avatar-shine.png">').addClass('shine')
 										//   )
 										.append(
-											$('<img src="'+( this.user.user_detail.profile_picture ? BASE_URL+'/'+this.user.user_detail.profile_picture : defaultProfilePic) +'">')
+											$('<img src="'+(this.user.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user.id+'/'+this.user.user_detail.profile_picture : defaultProfilePic) +'">')
 										)
 									)
 								)

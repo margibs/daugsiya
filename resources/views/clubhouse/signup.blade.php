@@ -148,8 +148,10 @@
                         </div>
                         <div class="form-group">
                           <!-- <label for="">Type a Password</label> -->
-                            <input type="password" name="password" placeholder="Password">
+                            <input type="password" name="password" placeholder="Password" >
                         </div>
+                       
+                          
                       <!--   <div class="form-group" style='display:none;'>
                         <label for="">Confirm Password</label>
                           <input type="password" name="password_confirmation">

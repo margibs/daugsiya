@@ -21,8 +21,7 @@ class ChatroomController extends Controller
         $room_message->user_id = $request->user_id;
         $room_message->message = $request->message;
         $room_message->chat_room_id = $request->room_id;
-
-
+    
         echo json_encode($room_message->save());
     }
 
@@ -32,7 +31,7 @@ class ChatroomController extends Controller
         $chat_room = Chat_Room::with('room_messages')->findOrFail($request->room_id);
          $user_read = Userchat_Read::firstOrCreate([ 'user_id' => $user_id, 'chat_room_id' => $chat_room->id ]);
          $user_read->last_read = new DateTime();
-        $user_read->save();
+        //$user_read->save();
 
         return json_encode($chat_room);
     }
@@ -41,7 +40,7 @@ class ChatroomController extends Controller
 
         $chatroom = Chat_Room::with('room_messages')->find($request->room_id);
 
-
+        /*dd('Hello');*/
         return json_encode(array_reverse($chatroom->room_messages()->take(10)->orderBy('created_at','DESC')->get()->toArray()));
     }
 

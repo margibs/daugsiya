@@ -473,9 +473,10 @@
        
 
        @if(isset($user_activities) && count($user_activities) != 0 && $user_activities != null)
+      
         @foreach($user_activities as $activity)
           <li> 
-          <img src="{{ $activity->profile_picture ? asset($activity->profile_picture) : asset('images/default_profile_picture.png') }}">
+          <img src="{{ $activity->profile_picture ? asset('user_uploads/user_'.$activity->user_id.'/'.$activity->profile_picture) : asset('images/default_profile_picture.png') }}">
         @if($activity->type == 1)
             <p>{{ $activity->full_name }} addedd <a href="{{ $activity->slug }}"  style="text-decoration:none;">{{ $activity->gamename }}</a> as a new Favorite</p>
         @elseif($activity->type == 2)
@@ -636,7 +637,7 @@
 
     
   @if(isset($user))
-  <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
+  <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{'user_uploads/user_'.$user->user_detail->user_id.'/'.$user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
   @endif
   @if(isset($session_id))
      <input type="hidden" value="{{ $session_id }}" id="sessionId">
