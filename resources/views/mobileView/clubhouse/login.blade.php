@@ -99,7 +99,6 @@
 
      <div class="app-page" data-page="main">
   <div class="app-content">
-  
             <div class="panel z-depth-1">                 
        <div class="row">
           <form class="col s12" action="{{ url('login/post') }}" method="POST">
