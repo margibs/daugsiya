@@ -345,12 +345,18 @@ body{
     <li class="cd-single-step no-pulse">
 
       <div class="cd-more-info">
-        <h2> Prizeroom page </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+        <h2> Susan's Prize Room! </h2>
+        <p> If you're lucky enough to have a prize code you can put it in here! There are a few ways to get prize codes: 
+          <ul>
+            <li> You'll get your first prize code in the welcome pack - make sure to fill out your details in your profile room so we can send it to you </li>
+            <li> You'll also get prize codes when you participate in the Chat Lounges - My chat hosts love to give them out! </li>
+            <li> The last way to get prize codes is by referring friends to my club! The more the merrier! </li>
+          </ul>
+        </p>
         <img src="img/step-1.png" alt="step 1">
       </div>
     </li> <!-- .cd-single-step -->
-    <li class="cd-single-step">
+   <!--  <li class="cd-single-step">
       <span>Step 1</span>
 
       <div class="cd-more-info left">
@@ -358,9 +364,9 @@ body{
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
         <img src="img/step-1.png" alt="step 1">
       </div>
-    </li> <!-- .cd-single-step -->
+    </li>  --><!-- .cd-single-step -->
 
-    <li class="cd-single-step">
+    <!-- <li class="cd-single-step">
       <span>Step 2</span>
 
       <div class="cd-more-info right">
@@ -368,7 +374,7 @@ body{
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia quasi in quisquam.</p>
         <img src="img/step-2.png" alt="step 2">
       </div>
-    </li> <!-- .cd-single-step -->
+    </li> --> <!-- .cd-single-step -->
 
   </ul> <!-- .cd-tour-wrapper -->
 

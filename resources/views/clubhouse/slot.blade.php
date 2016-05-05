@@ -25,24 +25,23 @@
 		width: 106%;
 	}
 	.gamelist{
-	  width: 680px;
-	  height: 390px;
-	  position: absolute;  
-	  top: 226px;
-      left: 657px;
-	  z-index: 2;  
-	  overflow: hidden;
+	width: 695px;
+    height: 390px;
+    position: absolute;
+    top: 224px;
+    left: 642px;
+    z-index: 2;
+    overflow: hidden;
 	}
 	.gamelist ul li, .gamelist ul li a{
 	  display: inline-block;
 	}
 	.gamelist ul li{
-	  width: 167px;
+	  width: 170px;
 	}
 	.gamelist ul li a img{
 	  width: 100%;
 	  border-radius: 3px;
-	  margin: 3px;
 	}
 	.guideSusanContainer{
 		left: 0;
@@ -98,12 +97,12 @@
     <li class="cd-single-step no-pulse">
 
       <div class="cd-more-info">
-        <h2> Slotsroom page </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+        <h2> The Slots Room </h2>
+        <p> Here's where you can browse the entire selection of online slots on SusanWins - Find new games, and relive old classics! Scroll through the games and find amazing new challenges! </p>
         <img src="img/step-1.png" alt="step 1">
       </div>
     </li> <!-- .cd-single-step -->
-    <li class="cd-single-step">
+    <!-- <li class="cd-single-step">
       <span>Step 1</span>
 
       <div class="cd-more-info left">
@@ -111,7 +110,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
         <img src="img/step-1.png" alt="step 1">
       </div>
-    </li> <!-- .cd-single-step -->
+    </li>  --><!-- .cd-single-step -->
 
   </ul> <!-- .cd-tour-wrapper -->
 

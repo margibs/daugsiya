@@ -550,10 +550,10 @@
         <div class="container">
           <div class="col-lg-24">
                 <header>
-                  <div class="col-xs-8 col-sm-5 col-md-5 col-lg-3">
+                  <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5">
                     <a href="{{ url('/') }}"><img class="logo" src="http://susanwins.com/uploads/52424_logo.png" alt="Logo"></a>
                   </div>
-                  <div class="col-xs-14 col-sm-14 col-md-12 col-lg-13 hide991" style="text-align: right;">
+                  <div class="col-xs-14 col-sm-14 col-md-12 col-lg-11 hide991" style="text-align: right;">
                     <div class="search">
                       <input type="text" placeholder="Search Games" id="search" autocomplete="off">                  
                     </div>
@@ -632,7 +632,7 @@
                       </ul>
 
                    @else
-                      <ul class="topicons" style="margin-top: 9px;">           
+                      <ul class="topicons">           
                         <li> <a href="#" class="twitterSM"> <img src="http://susanwins.com/uploads/73749_twittericon.png" />  </a> </li>
                         <li> <a href="#" class="facebookSM"> <img src="http://susanwins.com/uploads/84170_facebookicon.png" /> </a> </li>                        
                         <li> <a href="#" class="pinterestSM"> <img src="http://susanwins.com/uploads/18419_pinteresticon.png" /> </a> </li>
@@ -761,6 +761,8 @@
     <script src="{{ asset('js/interact.min.js') }}"></script> 
     <script src="{{ asset('js/jquery.bxslider.min.js') }}"></script>
     <script src="{{ asset('js/sockets.io.js') }}"></script>
+
+    <script src="{{ asset('js/classie.js') }}"></script>
     
     <script src="{{ asset('js/gameSearch.js') }}"></script> 
     <script src="{{ asset('js/moment.min.js') }}"></script> 
@@ -1327,6 +1329,21 @@ timeZone = 'Europe/London';
   });
 
  
+function init() {
+    window.addEventListener('scroll', function(e){
+        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+            shrinkOn = 10,
+            header = document.querySelector(".verytopHeader");
+        if (distanceY > shrinkOn) {
+            classie.add(header,"smaller");
+        } else {
+            if (classie.has(header,"smaller")) {
+                classie.remove(header,"smaller");
+            }
+        }
+    });
+}
+window.onload = init();
 
 
   </script>

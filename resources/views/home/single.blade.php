@@ -18,7 +18,10 @@
 @section('singlecontent')
 
 <style type="text/css">
-      .fave{
+    body {
+      margin-top: 100px;
+    }
+    .fave{
       border-radius: 50px;
       border-top: 2px solid #D29B24;
       border-left: 2px solid #e7b240;
@@ -144,7 +147,7 @@
       .sidebar .sidebarInner{
       background: #c20f14;
       padding: 12px 14px 12px 19px;
-      margin-top: -57px;
+      margin-top: -22px;
       border-radius: 4px;
       /*overflow: hidden;*/
       -moz-box-shadow: 2px 0 6px -2px #000;
@@ -153,6 +156,9 @@
       }
       .sidebar .susan{
       margin-top: 60px;
+      position: relative;
+      left: 7px;
+      z-index: 3;
       }
       .sidebar h3{
       padding: 0 0px 0px 0px;
@@ -250,7 +256,86 @@
       }
 
 
-     
+      
+
+      .oval-speech {
+          position: absolute;
+          width: 234px;
+          padding: 35px 21px;
+          margin: 2.5em auto 50px;
+          margin-left: -131px;
+          z-index: 2;
+          text-align: center;
+          color: #fff;
+          background:#567C17;
+          /* background: -webkit-gradient(linear, 0 0, 0 100%, from(#b8db29), to(#5a8f00)); */
+          background: -moz-linear-gradient(#b8db29, #5a8f00);
+          background: -o-linear-gradient(#b8db29, #5a8f00);
+          /* background: linear-gradient(rgb(255, 255, 255), rgb(234, 234, 234)); */
+          -webkit-border-top-left-radius: 220px 120px;
+          -webkit-border-top-right-radius: 220px 120px;
+          -webkit-border-bottom-right-radius: 220px 120px;
+          -webkit-border-bottom-left-radius: 220px 120px;
+          -moz-border-radius: 220px / 120px;
+          border-radius: 310px / 175px;
+          border: 1px solid #547818;
+          -moz-transform: rotate(-6deg);
+          -webkit-transform: rotate(-6deg);
+          transform: rotate(-6deg);
+
+          -moz-box-shadow: 0 0 14px -3px #000;
+          -webkit-box-shadow: 0 0 14px -3px #000;
+          box-shadow: 0 0 14px -3px #000;
+      }
+      .oval-speech p {
+        font-family: 'Work Sans',Roboto,Arial,Helvetica,sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: #fff;
+      }
+      .oval-speech p a{
+        text-decoration: none;
+        color: #FFE208;
+        display: block;
+        font-size: 27px;
+      }
+ /*     .oval-speech:before {
+          content: "";
+          position: absolute;
+          z-index: -1;
+          bottom: -30px;
+          right: 50%;
+          height: 30px;
+          border-right: 60px solid #5a8f00;
+          background: #5a8f00;
+          -webkit-border-bottom-right-radius: 80px 50px;
+          -moz-border-radius-bottomright: 80px 50px;
+          border-bottom-right-radius: 80px 50px;
+          -webkit-transform: translate(0, -2px);
+          -moz-transform: translate(0, -2px);
+          -ms-transform: translate(0, -2px);
+          -o-transform: translate(0, -2px);
+          transform: translate(0, -2px);
+      }
+      .oval-speech:after {
+          content: "";
+          position: absolute;
+          z-index: -1;
+          bottom: -30px;
+          right: 50%;
+          width: 60px;
+          height: 30px;
+          background: #fff;
+          -webkit-border-bottom-right-radius: 40px 50px;
+          -moz-border-radius-bottomright: 40px 50px;
+          border-bottom-right-radius: 40px 50px;
+          -webkit-transform: translate(-30px, -2px);
+          -moz-transform: translate(-30px, -2px);
+          -ms-transform: translate(-30px, -2px);
+          -o-transform: translate(-30px, -2px);
+          transform: translate(-30px, -2px);
+      }*/ 
+
       .singleFooter{
       position: absolute;
       bottom: 11px;
@@ -1672,7 +1757,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         </div>
 
             <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 right">
-               <div class="sidebar">
+               <div class="sidebar">                
+                   <blockquote class="oval-speech bounceIn animated">
+                      <p> You're Missing All the Fun! <a href="#"> Signup Now </a> </p>
+                    </blockquote>
+              
                   <img src="{{ url('images/single-susan.png') }}" alt="" class="susan">
                       <div class="sidebarInner">
                         <h3> <img src="http://susanwins.com/uploads/28532_sidebartext.png" alt=""> </h3>
@@ -1855,7 +1944,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                         'display':'none'                       
                      });
                 };
-                setTimeout(ulOpen, 1000);
+                setTimeout(ulOpen, 1600);
 
 
                  var giftbox = function(){
@@ -1863,7 +1952,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                            'display':'block'                       
                         });
                   };
-                  setTimeout(giftbox, 1100);
+                  setTimeout(giftbox, 1700);
                   
 
             };

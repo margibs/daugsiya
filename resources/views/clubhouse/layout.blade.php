@@ -324,6 +324,11 @@
         width: 60px;
       }
     }
+    @media(max-width: 800px){
+        .hide800{
+          display: none;
+        }
+      }
     </style>
   </head>
 <body>
@@ -335,20 +340,60 @@
 @yield('guide-susan')
 
 
+<div class="menu-wrap">
+    <nav class="menu">    
+     <ul class="topicons">
+          <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png"> </a> </li>
+          <li> 
+            <a href="javascript:;" id="messagesMenu"> 
+              <span id="unreadMessageNotification">
+                                            </span>
+              <img src="http://susanwins.com/uploads/64163_chaticon.png">
+            </a> 
+          </li>
+
+          <li> 
+
+            <a href="javascript:;" id="globalNotifMenu">                       
+              <span id="unreadGlobalNotification">
+                                              </span>
+          
+              <img src="http://susanwins.com/uploads/83444_notificationicon.png">
+            </a> 
+           </li>
+          
+          <li> 
+            <a href="javascript:;" id="notificationMenu"> 
+             <span id="unreadUserNotification">
+                                              </span>
+             <img src="http://susanwins.com/uploads/43069_friendicon.png">
+             </a> 
+          </li>
+
+          <li style="margin-right: 6px;"> 
+            <a href="http://susanwins.dev/logout"> 
+             <img src="http://susanwins.com/uploads/34338_logouticon.png">
+            </a> 
+          </li>
+
+        </ul>
+    </nav>
+  </div>
+
 
  <div class="container-fluid verytopHeader">
         <div class="container">
           <div class="col-lg-24">
                 <header>
-                  <div class="col-xs-8 col-sm-7 col-md-5 col-lg-3">
+                  <div class="col-xs-24 col-sm-24 col-md-5 col-lg-5">
                     <a href="{{ url('/') }}"><img class="logo" src="http://susanwins.com/uploads/52424_logo.png" alt="Logo"></a>
                   </div>
-                  <div class="col-xs-14 col-sm-14 col-md-12 col-lg-13 hide991" style="text-align: right;">
+                  <div class="col-xs-24 col-sm-24 col-md-12 col-lg-11 hide991" style="text-align: right;">
                     <div class="search">
                       <input type="text" placeholder="Search Games" id="search" autocomplete="off">                  
                     </div>
                   </div>
-                  <div class="col-xs-16 col-sm-17 col-md-19 col-lg-8">
+                  <div class="col-xs-24 col-sm-24 col-md-19 col-lg-8 hide800">
                     @if(Auth::check())
 
                       <div class="messageBox messageNotifBox">
@@ -375,7 +420,7 @@
 
                       <ul class="topicons">
                               
-                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png" /> </a> </li>
+                        <li> <a href="{{ url('/') }}/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png" /> </a> </li>
                         <li> 
                           <a href="javascript:;" id="messagesMenu"> 
                             <span id="unreadMessageNotification">
@@ -422,7 +467,7 @@
                       </ul>
 
                    @else
-                       <ul class="topicons" style="margin-top: 9px;">           
+                       <ul class="topicons">           
                          <li> <a href="#" class="twitterSM"> <img src="http://susanwins.com/uploads/73749_twittericon.png" />  </a> </li>
                          <li> <a href="#" class="facebookSM"> <img src="http://susanwins.com/uploads/84170_facebookicon.png" /> </a> </li>                        
                         <li> <a href="#" class="pinterestSM"> <img src="http://susanwins.com/uploads/18419_pinteresticon.png" /> </a> </li>
@@ -540,6 +585,7 @@
     <script src="{{ asset('js/interact.min.js') }}"></script> 
     <script src="{{ asset('js/jquery.mobile.min.js') }}"></script>  
     <script src="{{ asset('js/tour.js') }}"></script> 
+    <script src="{{ asset('js/classie.js') }}"></script> 
     <script src="{{ asset('js/moment.min.js') }}"></script> 
     <script src="{{ asset('js/moment-timezone.min.js') }}"></script> 
     <script src="{{ asset('js/livestamp.min.js') }}"></script> 
@@ -1954,6 +2000,48 @@ interact('.draggable')
       }
   });
 
+
+
+  (function() {
+
+    var bodyEl = document.body,
+      content = document.querySelector( '.content-wrap' ),
+      openbtn = document.getElementById( 'open-button' ),
+      closebtn = document.getElementById( 'close-button' ),
+      isOpen = false;
+
+    function init() {
+      initEvents();
+    }
+
+    function initEvents() {
+      openbtn.addEventListener( 'click', toggleMenu );
+      if( closebtn ) {
+        closebtn.addEventListener( 'click', toggleMenu );
+      }
+
+      // close the menu element if the target it´s not the menu element or one of its descendants..
+      content.addEventListener( 'click', function(ev) {
+        var target = ev.target;
+        if( isOpen && target !== openbtn ) {
+          toggleMenu();
+        }
+      } );
+    }
+
+    function toggleMenu() {
+      if( isOpen ) {
+        classie.remove( bodyEl, 'show-menu' );
+      }
+      else {
+        classie.add( bodyEl, 'show-menu' );
+      }
+      isOpen = !isOpen;
+    }
+
+    init();
+
+  })();
 
   </script>
    @yield('custom_scripts')

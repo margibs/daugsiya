@@ -880,7 +880,7 @@ width: 23%;
           </div>
 
            <div class="reels">
-           		  <p> Top Rated Games </p>
+           		  <!-- <p> Top Rated Games </p> -->
                   <div class="row no-gutter">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <div id="planeMachine2">

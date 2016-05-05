@@ -4,7 +4,7 @@
 
 <style type="text/css">
   body {
-        margin-top: 100px;
+        margin-top: 120px;
     }
   img{width: 100%;}
   .container_24{display: none;}
@@ -20,9 +20,91 @@
     top: 540px;
     margin-left: 0;
   }
+  @media(min-width: 1600px){
+    .homepageReel .susan {
+      right: 98px;
+      top: 4px;
+    }
+    #planeMachine2, #planeMachine3, #planeMachine4, #planeMachine5 {
+      height: 299px;
+    }
+    .headText span, .headText2 span{
+          font-size: 118px;
+    }
+    .container {
+      width: 1230px;
+    }
+    .topReel {
+      left: 8px;
+      width: 99.5%;
+    }
+    .categoryReel {
+      width: 100%;
+      left: 2px;
+      height: 1132px;
+      top: 725px;
+    }
+    .reels {
+      padding: 0 96px 0 90px;
+      margin-top: 60px;
+    }
+    #playbig {
+      right: 125px;
+      top: 555px;
+      height: 291px;
+    }
+    #playbig .button {
+      font: 46px/1em 'Work Sans',sans-serif;
+      padding: .4em .6em;
+      font-weight: 600;
+    }
+    #playbig a {
+      width: 170px!important;
+      text-align: center;
+      height: 89px!important;
+    }
+    .homeText {
+      margin-top: 81px;
+      margin-left: 156px;
+      margin-left: 157px;
+      font-size: 33px;
+    }
+    .homeText2{
+      top: 720px;
+      left: 219px;
+      font-size: 33px;
+    }
+    .categoryMain {
+      overflow: hidden;
+      padding: 38px 39px 8px 55px;
+    }
+    .categories{
+      padding: 20px 0px 28px 22px;
+    }
+    .categAds{
+      height: 1090px;
+    }
+    .bigwinsMain {
+      padding: 102px 10px 0 68px;
+    }
+    .bigwinsMainReel{
+      top: 1857px;
+      width: 100%;
+    }
+    .latestMain {
+      margin: 98px 10px 0 11px;
+      -moz-box-shadow: 0px 5px 4px 2px #3A3A3A;
+      -webkit-box-shadow: 0px 5px 4px 2px #3A3A3A;
+      box-shadow: 0px 5px 4px 2px #3A3A3A;
+    }
+    .bigwinsMain ul li a {
+      height: 286px;
+      width: 271px;
+    }
+  }
   @media(max-width: 1366px){
   	body{
-  		margin-top: 80px;
+  		margin-top: 100px;
   	}
     .container {
         width: 1060px;
@@ -31,7 +113,7 @@
       width: 100%;
     }
     .categoryReel{
-      top: 627px;
+      top: 629px;
       height: 953px;
       width: 1081px;
     }
@@ -51,14 +133,14 @@
     }
     .homeText{
       margin-top: 88px;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
     }
     .homeText2{
-      top: 629px;
-      left: 221px;
+      top: 627px;
+      left: 218px;
     }
     .categoryMain{
-      padding: 23px 52px 0px 49px;
+      padding: 23px 61px 0px 46px;
     }
     .categories{
       padding:10px 10px 57px 10px;
@@ -81,16 +163,16 @@
       width: 1083px;
     }
     .bigwinsMain {
-      padding: 14px 0px 0 58px;
+      padding: 5px 0px 0 58px;
     }
     .bigwinsMain ul li a {
         height: 248px;
     }
     .latestMain{
-      margin: 65px 0px 0 9px;
+      margin: 64px -1px 0 8px;
     }
     .latestMain ul li a{
-      height: 127px;
+      height: 124px;
     }
     .footerReel{
           width: 101%;
@@ -1148,6 +1230,194 @@
     }
     .latestMain ul li a {
       height: 118px;
+    }
+  }
+  @media(max-width: 800px){
+    .categories ul li {
+        width: 24%;
+    }
+    .topReel{
+      z-index: 2;
+    }
+    .homepageReel{
+      position: relative;
+      z-index: 3;   
+    }
+    .reels {
+      height: 186px;
+      padding: 0 56px 0 57px;
+      margin-bottom: 6px;
+    }
+    .homepageReel .susan {
+      top: -18px;
+    }
+    .categoryReel {
+      top: 444px;
+      height: 1124px;
+    }
+    #playbig {
+      top: 352px;
+      right: 72px;
+      z-index: 3;
+    }
+    .homeText {
+      margin-left: 80px;
+      margin-bottom: 7px;
+      margin-top: 76px;
+      font-size: 22px;
+    }
+    .homeText2 {
+        top: 457px;
+        margin-left: -37px;
+        font-size: 22px;
+    }
+    .categoryMain {
+      height: 1188px;
+    }
+    .categAds {
+      height: 1082px;
+      background: #CB9A34;
+    }
+    .bigwinsMainReel {
+      top: 1568px;
+    }
+    .bigwinsMain {
+      padding: 74px 24px 0 40px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 181px;
+      width: 169px;
+    }
+    .latestMain {
+      margin: 61px -2px 0 4px;
+    }
+    .info2 h3 {
+      font-size: 32px;
+    }
+    .info2 button{
+      font-size: 1.2em;
+    }
+
+  }
+  @media(max-width: 768px){
+    .homepageReel .susan {
+      top: -25px;
+      right: 21px;
+    }
+    .homepageReel .headText2 {
+      padding-top: 32px;
+      font-size: 41px;
+    }
+    .headText span, .headText2 span {
+      font-size: 71px;
+    }
+    .reels {
+      height: 179px;
+      padding: 0 53px 0 54px;
+      margin-bottom: 6px;
+    }
+    #playbig {
+      top: 333px;
+    }
+    .categoryReel {
+        top: 427px;
+        height: 1100px;
+    }
+    .homeText {
+      margin-left: 81px;
+      margin-bottom: 7px;
+      margin-top: 76px;
+      font-size: 21px;
+    }
+    .homeText2 {
+      top: 440px;
+      margin-left: -39px;
+      font-size: 21px;
+    }
+    .categoryMain {
+      padding: 0 30px 0px 27px;
+    }
+    .categoryMain {
+      height: 1161px;
+    }
+    .bigwinsMainReel {
+      top: 1525px;
+    }
+    .bigwinsMain {
+      padding: 72px 24px 0 37px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 173px;
+      width: 163px;
+    }
+    .latestMain {
+      margin: 61px -2px 0 3px;
+    }
+    .latestMain ul li a {
+      height: 111px;
+    }
+  }
+  @media(max-width: 720px){
+    .reels {
+      height: 169px;
+      padding: 0 49px 0 51px;
+    }
+    .homepageReel .susan {
+      top: -15px;
+      right: 46px;
+      width: 170px;
+    }
+    .homepageReel .headText2 {
+      padding-top: 29px;
+      font-size: 38px;
+    }
+    .headText span, .headText2 span {
+      font-size: 64px;
+    }
+    #playbig {
+      top: 306px;
+      right: 72px;
+      z-index: 3;
+    }
+    .categoryReel {
+        top: 390px;
+        height: 1303px;
+      }
+    .homeText {
+      margin-left: 56px;
+      margin-bottom: 7px;
+      margin-top: 70px;
+      font-size: 21px;
+    }
+    .homeText2 {
+      top: 411px;
+      margin-left: -66px;
+      font-size: 21px;
+    }
+    .categoryMain {
+      padding: 0 26px 0px 24px;
+    }
+    .categoryMain {
+      height: 1358px;
+    }
+    .bigwinsMainReel {
+      top: 1692px;
+    }
+    .bigwinsMain {
+      padding: 60px 24px 0 34px;
+    }
+    .bigwinsMain ul li, .bigwinsMain ul li a {
+      height: 173px;
+      width: 152px;
+    }
+    .latestMain {
+      margin: 47px -3px 0 2px;
+    }
+    .latestMain ul li a {
+      height: 144px;
+    }
+    .latestMain .ads2, .categAds{
+      display: none;
     }
   }
 </style>
