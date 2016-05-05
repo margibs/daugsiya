@@ -1340,12 +1340,26 @@
  
     });
 
-    
-        $('.bigChatBox .body ul').slimScroll({
-            height: '518px',
-            start: 'bottom'
-        });
 
+      //change height of slimScrol
+        var w = window.innerWidth;
+
+        if(w == 1366) {
+            $('.bigChatBox .body ul').slimScroll({
+                      height: '318px',
+                      start: 'bottom'
+                  });
+          }
+          else
+          {
+
+            $('.bigChatBox .body ul').slimScroll({
+                        height: '518px',
+                        start: 'bottom'
+                    });
+          }
+      
+         
            $('#messageContent').animate({
             scrollTop: $('#messageContent')[0].scrollHeight
            }, 500);
