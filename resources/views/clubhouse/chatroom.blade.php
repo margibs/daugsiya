@@ -99,13 +99,13 @@
   padding-bottom: 4px;
 }
 .bigChatBox .body  ul li p{
-    font-family: Roboto;
-    font-weight: 600;
-    font-size: 15px;
+    font-family: 'Work Sans';
+    font-weight: 500;
+    font-size: 14px;
     line-height: 18px;
     background: #fff;
     padding: 10px 25px;
-    margin-left: 60px;
+    margin-left: 70px;
     border-radius: 30px;
     border-radius: 30px;
     -moz-box-shadow: 0px 2px 3px -2px #BDBBBB;
@@ -257,9 +257,10 @@
 
 .roomListContainer .roomList{
     position: absolute;
-    top: 33px;
-    margin-left: 9px;
+    top: 36px;
+    margin-left: 25px;
     background: #d12324;
+    
     z-index: 2;
     width: 164px;
     border-radius: 4px;
@@ -306,12 +307,6 @@
 #privateMessageTextarea{
     min-height: 65px!important;
     height: 65px!important;
-}
-.msgImgcont{
-  width: 50px;
-  height: 50px;
-  float: left;
-  border-radius: 50%;
 }
 </style>
 
@@ -628,7 +623,7 @@
   @endif
 
         <div class="bgwrapper">
-      <img id="roombg" src="{{url('images/clubhouse')}}/chatroom.jpg" alt="">  
+      <img id="roombg" src="{{url('images/clubhouse')}}/chatroom.png" alt="">  
 
       <div class="container background-container" style="width: 1280px !important; margin-top: 40px; padding:0">
 

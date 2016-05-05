@@ -1,19 +1,8 @@
 .categories{
-    padding-bottom: 13px;
+        padding-bottom: 10px;
     -moz-box-shadow: inset 0 0 10px 0 #000;
     -webkit-box-shadow: inset 0 0 10px 0 #000;
     box-shadow: inset 0 0 10px 0 #000;
-
-        background: #F7ECBA;
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(left, #F7ECBA 0%, #ffffff 21%, #ffffff 50%, #ffffff 79%, #F7ECBA 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F7ECBA), color-stop(21%,#ffffff), color-stop(50%,#ffffff), color-stop(79%,#ffffff), color-stop(100%,#F7ECBA));
-    background: -webkit-linear-gradient(left, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
-    background: -o-linear-gradient(left, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
-    background: -ms-linear-gradient(left, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
-    background: linear-gradient(to right, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F7ECBA', endColorstr='#F7ECBA',GradientType=1 );
-    /* background: #fff; */
 }
 .categories ul li {
     width: 19%;
@@ -21,6 +10,7 @@
 }
 .categories ul li a, .categories ul li a img{
       width: 100%;
+      height: auto;
 }
 .categoryMain{
   overflow: hidden;
@@ -37,11 +27,10 @@
     margin-left: 30px;
 }
 .homeText {
-    margin-top: 57px;
+    margin-top: 59px;
     margin-bottom: 14px;
     margin-left: 164px;
     font-family: 'Work Sans';
-    font-weight: 700;
     font-size: 28px;
     color: #94804C;
     width: 100%;
@@ -53,14 +42,13 @@
     top: 677px;
     left: 224px;
     font-family: 'Work Sans';
-    font-weight: 700;
     font-size: 28px;
     color: #FFF7E3;
     width: 100%;
     text-shadow: 0px 2px 1px rgb(97, 80, 32);
 }
 .bigwinsMain{
-  padding:103px 10px 0 61px;
+  padding:104px 10px 0 61px;
   position: relative;
   z-index: 4;
   overflow: hidden;
@@ -167,7 +155,7 @@ height: 99%;
     cursor: pointer;
     display: inline-block;
     color: #C17C0C;
-    font-weight: 600;
+    font-size: 1.3em;
     font-size: 1.5em;
     background: #eee;
     border-radius: 4px;
@@ -206,11 +194,11 @@ height: 99%;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dab372', endColorstr='#b6841a',GradientType=1 );
 
   overflow: hidden;
-  margin: 58px 11px 0 10px;
+  margin: 68px 11px 0 10px;
 
-  -moz-box-shadow: 0px 26px 4px 2px #3A3A3A;
-  -webkit-box-shadow:0px 26px 4px 2px #3A3A3A;
-   box-shadow:0px 26px 4px 2px #3A3A3A; /* 0px 29px 3px 3px #3A3A3A; */
+  -moz-box-shadow: 0px 29px 3px 3px #3A3A3A;
+  -webkit-box-shadow:0px 0px 29px 3px 3px #3A3A3A;
+   box-shadow: 0px 29px 3px 3px #3A3A3A;
 
 }
 .latestMain .gameList{
@@ -219,7 +207,7 @@ height: 99%;
     background: -webkit-linear-gradient(top, #ffebaa 0%,#ad7b12 100%);
     background: linear-gradient(to bottom, #ffebaa 0%,#ad7b12 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffebaa', endColorstr='#ad7b12',GradientType=0 );
-    margin: 47px 0 20px 35px;
+    margin: 29px 0 20px 35px;
     border-radius: 3px;
     moz-box-shadow: inset 0 0 10px -2px #000;
     -webkit-box-shadow: inset 0 0 10px -2px #000;
@@ -229,27 +217,16 @@ height: 99%;
 }
 .latestMain .gameList .inner{
     border-radius: 4px;
-    background: #230562  url(http://susanwins.com/uploads/77351_catbg42.jpg) no-repeat center top;
+    background: #230562  url(http://susanwins.com/uploads/81196_purplebackground2.png) no-repeat center top;
     -moz-box-shadow: inset 0 0 10px -1px #000;
     -webkit-box-shadow: inset 0 0 10px -1px #000;
     box-shadow: inset 0 0 10px -1px #000;
     padding: 10px 14px;
     border: 1px solid #A07421;
     padding-top: 30px;
-
-    background: #F7ECBA;
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    background: -moz-linear-gradient(left, #F7ECBA 0%, #ffffff 21%, #ffffff 50%, #ffffff 79%, #F7ECBA 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#F7ECBA), color-stop(21%,#ffffff), color-stop(50%,#ffffff), color-stop(79%,#ffffff), color-stop(100%,#F7ECBA));
-    background: -webkit-linear-gradient(left, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
-    background: -o-linear-gradient(left, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
-    background: -ms-linear-gradient(left, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
-    background: linear-gradient(to right, #F7ECBA  0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F7ECBA', endColorstr='#F7ECBA',GradientType=1 );
 }
 .latestMain .ads2{
-      margin-top: 30px;
-          margin-left: 10px;
+      margin-top: 45px;
 }
 .latestMain ul{
     margin-top: -22px;
@@ -273,9 +250,8 @@ height: 99%;
   display: inline-block;
 }
 .latestMain .ads2 img{
-    border: 3px solid #ECC37F;
+    border: 2px solid #CA9E55;
     border-radius: 3px;
-    width: auto;
 }
 
 #planeMachine{
@@ -293,9 +269,9 @@ height: 99%;
 }
 .homepageReel .susan{
     right: 67px;
-    top: -13px;
+    top: -20px; /* -22px */
     position: absolute;
-    width: 270px;
+    width: auto; /* 27.3% */
   }
 .homepageReel ul li{
   display: inline-block;
@@ -361,7 +337,7 @@ height: 1430px;
 }
 .footerReel{
   position: absolute;
-  top: 100%;
+  top: 99.5%;
   left: 0px;
   width: 99.6%;
       z-index: 2;
@@ -374,7 +350,7 @@ height: 1430px;
 
 
 @media(min-width: 1800px){
-/*  .container {
+  .container {
     width: 1255px;
   }
   .homepageReel .susan{
@@ -440,7 +416,7 @@ height: 1430px;
   }
   .footerReel{
      width: 100.6%;
-  }*/
+  }
 }
 @media(max-width: 1199px){
   .homepageReel .headText2{
@@ -514,18 +490,6 @@ height: 1430px;
         height: 108px;
   }
 
-}
-
-@media(max-width: 1024px){
-  header .topicons {
-  margin-top: 14px;
-  }
-  .verytopHeader{
-  padding: 5px 35px 5px 70px;
-  }
-  .chatbox-panel{
-  right: 2%;
-  }
 }
 
 @media(max-width: 991px){
