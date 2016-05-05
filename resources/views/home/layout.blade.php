@@ -799,6 +799,7 @@
     var content_id = "{{ isset($content_id) ? $content_id : '' }}";
     var BASE_URL = $('meta[name="baseURL"]').attr('content');
     var friendUrl = BASE_URL+'/friends';
+    var profileImage = $('#data-profile').val();
     // getAnotherToken();
 
     // setInterval(getAnotherToken, 10000);
