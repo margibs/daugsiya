@@ -2107,7 +2107,7 @@ interact('.draggable')
 
 
 
-  (function() {
+ /* (function() {
 
     var bodyEl = document.body,
       content = document.querySelector( '.content-wrap' ),
@@ -2146,7 +2146,7 @@ interact('.draggable')
 
     init();
 
-  })();
+  })();*/
 
   </script>
    @yield('custom_scripts')

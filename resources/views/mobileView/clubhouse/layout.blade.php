@@ -75,16 +75,8 @@
 
 
     $(function(){
-
       $('#backButton').on('click', function(){
-        dataLoad = $(this).attr('data-load');
-          App.load(dataLoad);
-       /* if(dataLoad){
-          App.load(dataLoad);
-        }else{
-          App.back();
-        }*/
-        
+      App.back();
       });
 
               App.populator('privateMessage', function (page, request) {
@@ -98,7 +90,7 @@
 
         $(".button-collapse").sideNav();
 
-/*             App.populator('main', function (page) {
+      /*       App.populator('main', function (page) {
             this.transition = 'slide-right';
 
             $('#backButton').hide().removeAttr('data-load');
@@ -112,7 +104,7 @@
 
 
 
-     /* App.setDefaultTransition('slide-right');*/
+     
     </script>
     @yield('app-js')
 

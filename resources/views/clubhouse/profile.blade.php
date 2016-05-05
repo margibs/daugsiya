@@ -7,6 +7,7 @@
 @section('scripts_here')
 
 <link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
+<link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
 
 @endsection
 
@@ -606,8 +607,8 @@ height: 372px;
       </div>
     </li> <!-- .cd-single-step -->
 
-    <li class="cd-single-step">
-      <span> My Slots Collections </span>
+    <li class="cd-single-step" id="beforeTvStep">
+      <span>Step 3</span>
 
       <div class="cd-more-info left">
         <h2> My Slots Collections </h2>
@@ -615,8 +616,35 @@ height: 372px;
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
+    <li class="cd-single-step afterTvStep" id="afterTvFirstStep" data-next="tab2">
+      <span>Step 3.5</span>
 
-    <li class="cd-single-step">
+      <div class="cd-more-info right">
+        <h2>View games</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <img src="img/step-3.png" alt="step 3">
+      </div>
+    </li> <!-- .cd-single-step -->
+    <li class="cd-single-step afterTvStep" data-next="tab3"  data-prev="tab1">
+      <span>Step 3.5</span>
+
+      <div class="cd-more-info right">
+        <h2>View games 2</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <img src="img/step-3.png" alt="step 3">
+      </div>
+    </li> <!-- .cd-single-step -->
+    <li class="cd-single-step afterTvStep" data-prev="tab2">
+      <span>Step 3.5</span>
+
+      <div class="cd-more-info right" id="afterTvLastStep">
+        <h2>View games 3</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <img src="img/step-3.png" alt="step 3">
+      </div>
+    </li> <!-- .cd-single-step -->
+
+    <li class="cd-single-step afterTvStep" data-prev="tab3" id="lastTvStep">
       <span>Step 4</span>
       <div class="cd-more-info left">
         <h2>Step Number 4</h2>
@@ -731,7 +759,7 @@ height: 372px;
   </div>
 
     <div class="bgwrapper">
-      <img id="roombg" src="{{url('images/clubhouse')}}/profileroom3.jpg" alt="">
+      <img id="roombg" src="{{url('images/clubhouse')}}/profileroom3.png" alt="">
 
       <div  class="box good tvbox">
         <i class="fa fa-times"></i> 
@@ -1254,6 +1282,7 @@ height: 372px;
 @endsection
 
 @section('custom_scripts')
+<script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
 <script src="{{ asset('js/jquery.rateit.min.js') }}"></script>
 <!-- <script src="{{ asset('js/jquery.vticker.min.js') }}"></script> -->
 <script src="{{ asset('js/bookflip.js') }}"></script>
@@ -1291,6 +1320,36 @@ $(document).ready(function(){
   });
   $('.tvwrapper').click(function() {        
      $(".tvbox ").fadeToggle('fast');
+  });
+
+
+
+
+
+  $('#beforeTvStep').on('click','.cd-next', function(){
+      $(".tvbox ").fadeIn('fast');
+  });
+
+$('#lastTvStep').on('click', '.cd-prev', function(){
+     $(".tvbox ").fadeIn('fast');
+});
+
+  $('.afterTvStep').on('click', '.cd-prev', function(){
+      prev = $(this).parents('.afterTvStep').attr('data-prev');
+
+      if(prev){
+          $("label[for='"+prev+"']").trigger('click');
+      }else{
+         $(".tvbox ").fadeOut('fast');
+      }
+  });
+  $('.afterTvStep').on('click', '.cd-next', function(){
+      next = $(this).parents('.afterTvStep').attr('data-next');
+      if(next){
+          $("label[for='"+next+"']").trigger('click');
+      }else{
+         $(".tvbox ").fadeOut('fast');
+      }
   });
 
   $('#friendprofopen').click(function() {        
