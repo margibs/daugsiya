@@ -1228,7 +1228,7 @@ height: 372px;
             <div class="itemLabels"> Upload image </div>        
             <div class="pic">                 
            <!--  <img src="{{  $user->user_detail->profile_picture ? asset('').'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png')   }}" alt="" class="profile_pic" id="picPreview"> -->
-            <img src ="{{asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview"> 
+            <img src ="{{ $user->user_detail->profile_picture ? asset('user_uploads').'/user_'.$user->id.'/'.$user->user_detail->profile_picture : url('user_uploads/default_image/default_01.png') }}" alt="" class="profile_pic" id="picPreview"> 
 
             </div>
 

@@ -21,8 +21,13 @@ class ChatroomController extends Controller
         $room_message->user_id = $request->user_id;
         $room_message->message = $request->message;
         $room_message->chat_room_id = $request->room_id;
-    
-        echo json_encode($room_message->save());
+        /*dd($room_message->user->user_detail->profile_picture);*/
+      /*  if($room_message->user->user_detail->profile_picture == '') {
+            $room_message->user->user_detail->profile_picture = 'user_uploads/default_image/default_01.png';
+        }
+        /*dd($room_message);*/
+
+        return json_encode($room_message->save());
     }
 
     public function getChatroom(Request $request){
