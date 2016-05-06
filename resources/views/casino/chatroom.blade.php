@@ -393,8 +393,12 @@
                         @foreach($chatrooms[0]->room_messages as $msg)
                           <li data-user="{{ $msg->user->user_detail->user_id }}"> 
                                 <a href="javascript:;" data-target="#friendProfile" class="subModalToggle viewFriendProfile">
-                                    
-                                    <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" />
+                                    @if($msg->user->user_detail->profile_picture == "")
+                                         <img src="{{  asset('/user_uploads/default_image/default_01.png') }}" />
+                                    @else
+                                         <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/user_uploads/user_'.$msg->user->user_detail->user_id.'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" />
+                                    @endif
+                                   
                                      </a>
                                     <p> {{ $msg->message }} </p>
 
@@ -870,7 +874,7 @@
               .append(
                 $('<a href="javascript:;">').attr('data-target', '#friendProfile').addClass('subModalToggle viewFriendProfile')
                   .append(
-                    $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
+                    $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+this.user.user_detail.user_id+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
                   )
                 )
 		 					
@@ -929,7 +933,7 @@
             .append(
               $('<a href="javascript:;">').attr('data-target', '#friendProfile').addClass('subModalToggle viewFriendProfile')
                 .append(
-                  $('<img>').attr('src', userImage ? publicUrl+'/'+userImage : defaultProfilePic )
+                  $('<img>').attr('src', userImage ? publicUrl+'/user_uploads/user_'+userId+'/'+userImage : defaultProfilePic )
                 )
               )				
 	 					.append(
@@ -971,7 +975,7 @@
             .append(
               $('<a href="javascript:;">').attr('data-target', '#friendProfile').addClass('subModalToggle viewFriendProfile')
                 .append(
-                  $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/'+data.user.profile_picture : defaultProfilePic )
+                  $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic )
                 )
               )
 	 					.append(

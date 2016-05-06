@@ -645,7 +645,7 @@
                 <ul class="roomList">
 
                   @foreach($chatrooms as $room)
-              <li><a href="javascript:;" data-href="{{ url('clubhouse/chatroom') }}/{{$room->name}}" data-name="{{ $room->name }}" data-description="{{ $room->description }}" data-id="{{ $room->id }}">{{ $room->name }}</a></li>
+                     <li><a href="javascript:;" data-href="{{ url('clubhouse/chatroom') }}/{{$room->name}}" data-name="{{ $room->name }}" data-description="{{ $room->description }}" data-id="{{ $room->id }}">{{ $room->name }}</a></li>
                   @endforeach
                   
                 </ul>

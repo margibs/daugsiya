@@ -90,12 +90,13 @@
 
 			<div class="row">
 		      <div class="col s12">
-				<form class="col s12">
+				<form class="col s12"  id="chatMessageForm" action="{{ url('chatroom/postMessage') }}">
 			      <div class="row">
 			        <div class="input-field col s12">
-			         <span class="new badge">4</span>
-			          <textarea id="textarea1" class="materialize-textarea"></textarea>
-			          <label for="textarea1">Textarea</label>
+			      		<i class="material-icons" id="sendChat">send</i>
+			          <textarea id="chatRoomTextarea"  class="chatCommon" ></textarea>
+
+			          
 			        </div>
 			      </div>
 			    </form>
@@ -114,11 +115,15 @@
 <script>
 
 
-  App.controller('chatroom', function (page){
+  App.controller('chatroom', function (page, chatroom){
+  	//var data;
     $(page)
-      .find('#btnSignup')
+     .find('#sendChat')
       .on('click', function(){
-        getData("Hello World");
+      /*  data = .find('chatRoomTextarea');*/
+     // getData('Hello World');
+
+      //var data = $(page).find('.chatCommon').text(chatroom.firstName);
         
       });
   });

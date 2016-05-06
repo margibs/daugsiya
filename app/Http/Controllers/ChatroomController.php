@@ -26,6 +26,7 @@ class ChatroomController extends Controller
             $room_message->user->user_detail->profile_picture = 'user_uploads/default_image/default_01.png';
         }
         /*dd($room_message);*/
+        dd($request->all());
 
         return json_encode($room_message->save());
     }
