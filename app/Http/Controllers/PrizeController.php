@@ -78,6 +78,12 @@ class PrizeController extends Controller
         $casino_bonus = array(12,20,24);
         $discount_vouchers = array(1,15,23);
 
+        if($request->mobile && $request->mobile == true){
+            $casino_bonus = array(2,6,18);
+            $discount_vouchers = array(5,7,21);
+        }
+
+
         $won = false;
         $prize = false;
         $reason = false;

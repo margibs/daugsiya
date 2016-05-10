@@ -97,6 +97,7 @@ class NotificationController extends Controller
         $custom_notification->link = $request->link;
         $custom_notification->description = $request->description;
         $custom_notification->date_posting = $request->date_posting;
+        $custom_notification->image = $request->image;
         $custom_notification->save();
 
         return redirect('admin/notification');
@@ -215,6 +216,7 @@ class NotificationController extends Controller
             $custom_notification->description = $request->description;
             $custom_notification->link = $request->link;
             $custom_notification->date_posting = $request->date_posting;
+            $custom_notification->image = $request->image;
             
             $gn->custom_notification()->save($custom_notification);
 
