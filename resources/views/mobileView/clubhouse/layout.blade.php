@@ -52,7 +52,56 @@
           <h5 id="navbarTitle"></h5>
       </div>
        </nav>
+        <ul class="bottomNotification z-depth-1">
+                              
+                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png"> </a> </li>
+                        <li> 
+                          <a href="javascript:;" id="messagesMenu"> 
+                            <span id="unreadMessageNotification" class="notifCounter">
 
+                            @if(isset($unread_messages_count) && $unread_messages_count > 0)
+                                <span class="notifcount animated bounce bounceInUp">{{ $unread_messages_count }}</span>
+                              @endif
+                                                          </span>
+                            <img src="http://susanwins.com/uploads/64163_chaticon.png">
+                          </a> 
+                        </li>
+
+                        <li> 
+
+                          <a href="javascript:;" id="globalNotifMenu">                       
+                            <span id="unreadGlobalNotification" class="notifCounter">
+
+                             @if(isset($global_notification_count) && $global_notification_count > 0)
+                                <span class="notifcount   animated bounce bounceInUp">{{ $global_notification_count }}</span>
+                              @endif
+                                                            </span>
+                        
+                            <img src="http://susanwins.com/uploads/83444_notificationicon.png">
+                          </a> 
+                         </li>
+                        
+                        <li> 
+                          <a href="javascript:;" id="notificationMenu"> 
+                           <span id="unreadUserNotification" class="notifCounter">
+
+                             @if(isset($user_notification_count) && $user_notification_count > 0)
+                                  <span class="notifcount   animated bounce bounceInUp"> 
+                                        {{ $user_notification_count }}
+                                      </span>
+                                @endif
+                                                            </span>
+                           <img src="http://susanwins.com/uploads/43069_friendicon.png">
+                           </a> 
+                        </li>
+
+                        <li style="margin-right: 6px;"> 
+                          <a href="http://susanwins.com/logout"> 
+                           <img src="http://susanwins.com/uploads/34338_logouticon.png">
+                          </a> 
+                        </li>
+
+                      </ul>
 <!--    <div class="nav-wrapper">
  <a href="javascript:;" class="waves-effect waves-light btn back_button" style="display:none" id="backButton"><i class="material-icons">chevron_left</i></a>
 <a href="javascript:;" class="brand-logo"> @yield('navbar-title') </a>
@@ -67,9 +116,6 @@
     </ul>
  @endif
  </div>  -->
-
-
-    </nav>
      @if(isset($user))
         <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
     <!-- <a class="btn-floating btn-large red">
@@ -84,10 +130,64 @@
   </div>
      @endif
 
-
-
     @yield('content')
 
+      <div class="app-page" data-page="myMessages">
+      <div class="app-topbar"></div>
+  <div class="app-content">
+
+    <div class="app-content defaultBg">
+
+      <div class="pageLoading">
+                <div class="preloaderContainer">
+                      <div class="preloader-wrapper big active">
+                      <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div><div class="gap-patch">
+                          <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+             </div>
+
+              <div id="yourMessages" class="col s12">
+            <ul class="messageList">
+                   
+                        <!-- <li class="app-button" data-target="privateMessage" data-target-args=''>
+                          <img src="" alt="">
+                          <div class="msgContent">
+                              <div class="info"><h6>qweqwe</h6><span class="timestamp" data-datetime="2323"><span class="livetime"></span></span></div>
+                              <p> qweqwe </p>
+                          </div>
+                        
+                        </li> -->
+                       
+                     </ul>
+              </div>
+      </div>
+              <!--        <div class="pageLoading">
+                              <div class="preloaderContainer">
+               <div class="preloader-wrapper big active">
+               <div class="spinner-layer spinner-red-only">
+                 <div class="circle-clipper left">
+                   <div class="circle"></div>
+                 </div><div class="gap-patch">
+                   <div class="circle"></div>
+                 </div><div class="circle-clipper right">
+                   <div class="circle"></div>
+                 </div>
+               </div>
+                                  </div>
+                              </div>
+                           </div> -->
+          
+        
+      </div>
+</div>
       <div class="app-page" data-page="privateMessage">
       <div class="app-topbar"></div>
   <div class="app-content">
@@ -109,88 +209,11 @@
         <div class="chatBox">
             <div class="body">
                 <ul>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>ghehgee</span>
-                </li>
-                <li>
-                  <span class="alt">hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>ghehgee</span>
-                </li>
-                <li>
-                  <span class="alt">hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>ghehgee</span>
-                </li>
-                <li>
-                  <span class="alt">hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>ghehgee</span>
-                </li>
-                <li>
-                  <span class="alt">hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>ghehgee</span>
-                </li>
-                <li>
-                  <span class="alt">hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>ghehgee</span>
-                </li>
-                <li>
-                  <span class="alt">hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>ghehgee</span>
-                </li>
-                <li>
-                  <span class="alt">hoho</span>
-                </li>
-                <li>
-                    <img src="http://susanwins.com//user_uploads/user_5/profile_picture-2016-05-06-13-30-32.png">
-                    <span>hoho</span>
-                </li>
             </ul>
             </div>
             <div class="chatFooter">
                    <div class="triggers">
-                      <a href="javscript:;" class="sendMessage"><i class="fa fa-paper-plane"></i></a>
+                      <span class="sendMessage"><i class="fa fa-paper-plane"></i></span>
                     </div>
                     <textarea name="" placeholder="Type Message" id="sendPrivateMessageTextarea"></textarea>
             </div>
@@ -211,9 +234,8 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script> 
     <script src="{{ asset('js/moment-timezone.min.js') }}"></script> 
-    <script src="{{ asset('js/livestamp.min.js') }}"></script> 
+    <script src="{{ asset('js/livestamp.min.js') }}"></script>
     <script src="{{ asset('js/materialize.min.js') }}"></script>
-    <script src="{{ asset('js/zepto.min.js') }}"></script>
     <script src="{{ asset('js/app.min.js') }}"></script>
 
      <script src="{{ asset('js/sockets.io.js') }}"></script>
@@ -222,70 +244,16 @@
 
     CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     BASE_URL = "{{ url('/')}}";
-    USER_ID = "{{ Auth::user()->id }}";
-    USER_IMAGE = "{{ Auth::user()->user_detail->profile_picture }} ";
-    USER_NAME = "{{ Auth::user()->name }}";
+    USER_ID = "{{ isset(Auth::user()->id) ? Auth::user()->id : '' }}";
+    USER_IMAGE = "{{ isset(Auth::user()->user_detail->profile_picture) ? Auth::user()->user_detail->profile_picture : '' }} ";
+    USER_NAME = "{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}";
     DEFAULT_IMAGE = BASE_URL+'/user_uploads/default_image/default_01.png';
     ROOM_ID = "{{ isset($selectedRoom->id ) ? $selectedRoom->id  : '' }}";
     ROOM_NAME = "{{ isset($selectedRoom->name) ? $selectedRoom->name : '' }}";
     ROOM_DESCRIPTION = "{{ isset($selectedRoom->description) ? $selectedRoom->description : '' }}";
     MESSAGE = "";
-
-
-
-
-
-/*    $(document).ready(function(){
-
-
-      var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-        var userId = $('#userId').val();
-       var userImage = $('#userId').data('image');
-       var userName = $('#userId').data('name');
-       var isAdmin = $('#userId').data('isAdmin') == 1 ? true : false;
-
-       var sessionUrl = '{{ url("session") }}';
- var profileUrl = '{{ url("profile") }}';
-var friendUrl = '{{ url("friends") }}';
- var messageUrl = '{{ url("message") }}';
- var publicUrl = '{{ asset("") }}';
- var baseUrl = '{{ url() }}';
- var notifUrl = '{{ url("notification") }}';
- var clubhouseUrl = '{{ url("clubhouse") }}';
- var sessionId = $('#sessionId').val();
-var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
-
-  console.log(userImage);
-  
-var profileImage = $('#data-profile').val();
-var pagename = '{{ Request::segment(2) }}';
-timeZone = 'Europe/London';
-london = moment.tz(timeZone);
-    socket.on('connect', function(){
-
-          socket.emit('login', { user_id : userId , profile_picture : userImage, name : userName, session_id : sessionId }, true, isAdmin, myFriends);
-
-             if(ROOM_ID){
-
-              socket.emit('connect_room', { room_id : ROOM_ID, name : ROOM_NAME, description : ROOM_DESCRIPTION });
-
-             }
-
-      });
-
-
-  });*/
-
   </script>
-
- 
     <script>
-
-
-
-    
-   
 
       var socket = io.connect('{{ url('') }}:8891');
 
@@ -372,34 +340,252 @@ london = moment.tz(timeZone);
           });
 
 
+
+
+            socket.on('post_recommendGame_notification', function(friend){
+
+        console.log('post_recommendGame_notification');
+
+         span = $('<span>').addClass('notifcount animated bounce bounceInUp');
+                notifcount = 1;
+                if($('#unreadUserNotification').find('.notifcount').length){
+                  notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
+                }
+
+                $('#unreadUserNotification').html('').append($(span).text(notifcount));
+ 
+
+      });
+
+       socket.on('post_accepted_friend_notification', function(friend){
+
+          span = $('<span>').addClass('notifcount animated bounce bounceInUp');
+              notifcount = 1;
+              if($('#unreadUserNotification').find('.notifcount').length){
+                notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
+              }
+
+              $('#unreadUserNotification').html('').append($(span).text(notifcount));   
+
+       });
+
+             socket.on('post_global_notification', function(notification){
+
+
+          console.log('post_global_notification');
+          console.log(notification);
+
+          if(notification){
+
+
+            span = $('<span>').addClass('notifcount');
+              notifcount = 1;
+              if($('#unreadGlobalNotification').find('.notifcount').length){
+                notifcount = parseInt($('#unreadGlobalNotification').find('.notifcount').text())+1;
+              }
+
+              $('#unreadGlobalNotification').html('').append($(span).text(notifcount));
+
+          }
+
+
+       });
+
+
+      socket.on('post_custom_notification', function(notification){
+
+            $.each(notification, function(){
+
+              data = this;
+
+
+              span = $('<span>').addClass('notifcount');
+              notifcount = 1;
+              if($('#unreadGlobalNotification').find('.notifcount').length){
+                notifcount = parseInt($('#unreadGlobalNotification').find('.notifcount').text())+1;
+              }
+
+              $('#unreadGlobalNotification').html('').append($(span).text(notifcount));
+
+            });
+
+      });
+   socket.on('post_friendTag_notification', function(data){
+
+          span = $('<span>').addClass('notifcount');
+      notifcount = 1;
+
+      if($('#unreadUserNotification').find('.notifcount').length)
+      {
+        notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
+      }
+
+      $('#unreadUserNotification').html('').append($(span).text(notifcount));
+      });
+
+
+socket.on('post_addFriend_request', function(request_id, request){
+
+    console.log('post_addFriend_request');
+    console.log(request);
+
+          span = $('<span>').addClass('notifcount');
+        notifcount = 1;
+
+      if($('#unreadUserNotification').find('.notifcount').length)
+      {
+        notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
+      }
+
+      $('#unreadUserNotification').html('').append($(span).text(notifcount));
+
+  });
+
+
               socket.on('post_private_message', function(message){
           console.log('you got a private message!');
         /*  console.log(profileImage);*/
           console.log(publicUrl+'/'+message.from.profile_picture );
           console.log(message);
           thePage = App.getPage();
-          if(App.current() == 'privateMessage' && message.to == userId){
 
-              $(thePage).find('.chatBox .body ul').append(
-                  $('<li>')
-                      .append(
-                        $('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+message.from.profile_picture : defaultProfilePic)
-                        )
-                      .append(
-                          $('<span>').text(message.message)
-                        )
-                );
+          if(message.to == userId){
 
-               $(thePage).find('.chatBox .body').scrollTop( $(thePage).find('.chatBox .body ul')[0].scrollHeight);
+            if(App.current() == 'privateMessage'){
+
+                $(thePage).find('.chatBox .body ul').append(
+                    $('<li>')
+                        .append(
+                          $('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+message.from.profile_picture : defaultProfilePic)
+                          )
+                        .append(
+                            $('<span>').text(message.message)
+                          )
+                  );
+
+                 $(thePage).find('.chatBox .body').scrollTop( $(thePage).find('.chatBox .body ul')[0].scrollHeight);
+            }else{
+
+
+                 span = $('<span>').addClass('notifcount');
+        notifcount = 1;
+                    if($('#unreadMessageNotification').find('.notifcount').length)
+                    {
+                      notifcount = parseInt($('#unreadMessageNotification').find('.notifcount').text())+1;
+                    }
+
+                    $('#unreadMessageNotification').html('').append($(span).text(notifcount));
+                          }
           }
 
+
       });
+
+            App.controller('myGlobalNotifs', function(page, request){
+                 this.transition = 'slide-left';
+
+            });
+
+              App.controller('myMessages', function(page, request){
+                this.transition = 'slide-left';
+
+                $(page).on('appShow', function(){
+                        $('#navbarTitle').text('Messages');
+
+                        });
+                  
+                $(page).find('.pageLoading').show();
+                $(page).find('#yourMessages').hide();
+                      setTimeout(function(){
+                        $.ajax({
+                              url : messageUrl+'/getInbox',
+                              data : { user_id : userId, _token : CSRF_TOKEN },
+                              dataType : 'json',
+                              type : 'POST',
+                              success : function(data){
+
+                                sortDates = data.sort(function(a, b){
+
+                                    return new Date(a.created_at) < new Date(b.created_at);
+                                });
+
+
+                                unread_messages = [];
+                                read_messages = [];
+
+                                $.each(sortDates, function(){
+
+                                    if(this.read == 0){
+                                      unread_messages.push(this);
+                                    }else{
+                                      read_messages.push(this);
+                                    }
+                                });
+
+                                inbox = unread_messages.concat(read_messages);
+
+
+
+                              container = $(page).find('#yourMessages .messageList');
+                               container.html('');
+                               
+
+                               $.each(inbox, function(){
+
+                                msg = this;
+
+                                    li = $('<li>').addClass('app-button').attr('data-target', 'myMessages').attr('data-args', '{ "user_id" : "'+msg.from_user.user_detail.user_id+'", "name" : "'+msg.from_user.user_detail.firstname+'" }')
+                                          .append(
+                                              $('<img>').attr('src', msg.from_user.user_detail.profile_picture ? publicUrl+'/'+ msg.from_user.user_detail.profile_picture : defaultProfilePic )
+                                            )
+                                          .append(
+                                            $('<div>').addClass('msgContent')
+                                              .append(
+                                                $('<div>').addClass('info')
+                                                    .append(
+                                                      $('<h6>').text(msg.from_user.user_detail.firstname)
+                                                      )
+                                                    .append(
+                                                      $('<span>').addClass('timestamp').livestamp(moment.tz(msg.created_at, timeZone).format() )
+                                                      )
+                                                )
+                                              .append($('<p>').text(msg.message))
+                                            )
+
+                                    if(msg.read == 0){
+                                      $(li).addClass('unread');
+                                    }
+
+                                    $(li).bind('click', function(){
+                                        App.load('privateMessage', JSON.parse($(this).attr('data-args')));
+                                    });
+
+                                    container.append(li);
+
+                                    
+                    
+                               })
+                            
+                               $(page).find('.pageLoading').hide();
+                                 $(page).find('#yourMessages').show();
+
+                              },error : function(xhr){
+                                console.log(xhr.responseText);
+                              }
+                          });
+                      }, 2000);
+                    
+              });
 
 
               App.controller('privateMessage', function (page, request) {
             this.transition = 'slide-left';
-              $(page).on('appShow', function(){
 
+              $(page).on('appDestroy', function(){
+                $('.bottomNotification').show();
+              });
+              $(page).on('appShow', function(){
+                $('.bottomNotification').hide();
                 chatBox = $(page).find('.chatBox');
                 chatBoxOffsetTop = chatBox.offset().top;
                 chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
@@ -503,6 +689,12 @@ london = moment.tz(timeZone);
 
  
       });
+        
+        $('#messagesMenu').on('click', function(){
+            if(App.current() != 'myMessages'){
+              App.load('myMessages');
+            }
+        });
 
 
         $(".button-collapse").sideNav();
@@ -522,7 +714,7 @@ london = moment.tz(timeZone);
     );
 
     });
-
+    
     </script>
     @yield('app-js')
     @yield('script')

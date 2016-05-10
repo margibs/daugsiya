@@ -7,6 +7,7 @@
  @section('navbar-title', 'Home')
 @section('content')
    <div class="app-page" data-page="main">
+   <div class="app-topbar"></div>
   <div class="app-content">
          <ul class="collection">
         

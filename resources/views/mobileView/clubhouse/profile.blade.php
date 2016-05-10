@@ -7,6 +7,7 @@
  </style>
 @endsection
 
+
 @section('content')
 
   <div class="app-page" data-page="main">
@@ -17,13 +18,13 @@
         <div class="upperHalf">
             <div class="imgContainer">
         <div class="changePicButtonContainer z-depth-1" id="uploadBtn">
-            <a href="javascript:;" class="changePicButton">
+            <div class="changePicButton">
                 
                      <img src="{{ $user->user_detail->profile_picture  ? url().'/user_uploads/user_'.$user->id.'/'.$user->user_detail->profile_picture : url().'/user_uploads/default_image/default_01.png' }}" alt="" id="picPreview">
                 
                
                
-            </a>
+            </div>
                <label>
                   <span> + </span>
                 </label>
@@ -34,8 +35,8 @@
           <h6>{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}</h6>
           <div class="row userDetailActions">
                   
-          <div class="col s6"><a href="javascript:;" class="app-button" data-target="yourFriends"><span class="icon ion-person-stalker"></span> <span>{{ count($user->myFriends) }} </span></a></div>
-          <div class="col s6"><a href="javscript:;" class="app-button" data-target="yourMessages" data-target-args='{ "count" : "{{ count($user->myMessages) }}" }'><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></a></div>
+          <div class="col s6"><span class="app-button" data-target="yourFriends"><span class="icon ion-person-stalker"></span> <span>{{ count($user->myFriends) }} </span></span></div>
+          <div class="col s6"><span class="app-button" data-target="yourMessages" data-target-args='{ "count" : "{{ count($user->myMessages) }}" }'><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></span></div>
           </div>
         </div>
         <div class="lowerHalf">
@@ -75,7 +76,9 @@
         </div>
     </div>
 
-     <div id="cropModal" class="modal">
+      </div>
+</div>
+         <div id="cropModal" class="modal">
     <div class="modal-content">
         <div id="cropperH"></div>
 
@@ -84,34 +87,27 @@
       <a class="waves-effect waves-light btn" id="doneCropping">Save</a>
     </div>
   </div>
-
-      </div>
-</div>
-    
      <div id="rateModal" class="modal">
     <div class="modal-content">
-      <img src="" alt="" id="backGroundModal">
        <div class="ratingArea">
            <input type="hidden" step="0.5" id="backingfld" class="rating">
                 <div class="rateit" data-rateit-backingfld="#backingfld" data-rateit-resetable="false" data-rateit-ispreset="true" id="rateMe"></div> 
        </div>
-
-    </div>
-    <div class="modal-footer">
-      <a class="waves-effect waves-light" id="doneCropping">Close</a>
+        <button type="button" class="buttonone" id="playGame"> <i class="fa fa-play"></i> </button>
+                                <button type="button"><a href="javascript:;" id="goToGame"> <i class="fa fa-book"></i> </a></button>
     </div>
   </div>
 
 
 <div class="app-page" data-page="yourFriends">
 <div class="app-topbar"></div>
-  <div class="app-content">
+  <div class="app-content defaultBg">
          <div class="row">
               <div class="col s12">
                 <ul id="yourFriendSorting">
-                    <li><a href="javascript:;" class="active">All <span class="countAll">(<span id="countAll"></span>)</span></a></li>
-                    <li><a href="javascript:;">Online <span class="countOnline">(<span id="countOnline"></span>)</span></a></li>
-                    <li><a href="javascript:;">Offline <span class="countOffline">(<span id="countOffline"></span>)</span></a></li>
+                    <li><div class="active">All <span class="countAll">(<span id="countAll"></span>)</span></div></li>
+                    <li><div>Online <span class="countOnline">(<span id="countOnline"></span>)</span></div></li>
+                    <li><div>Offline <span class="countOffline">(<span id="countOffline"></span>)</span></div></li>
 
                 </ul>
               </div>
@@ -133,7 +129,7 @@
 
 <div class="app-page" data-page="yourMessages">
 <div class="app-topbar"></div>
-  <div class="app-content">
+  <div class="app-content defaultBg">
               <div id="myMessages" class="col s12">
             <ul class="messageList">
                    @foreach($user->myMessages as $msg)
@@ -191,8 +187,8 @@
           <h6></h6>
           <div class="row userDetailActions">
 
-                <div class="col s6"><a href="javascript:;" class="actionButton">Unfriend</a></div>
-                <div class="col s6"><a href="javscript:;" id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></a></div>
+                <div class="col s6"><span class="actionButton">Unfriend</span></div>
+                <div class="col s6"><span id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></span></div>
           
           </div>
         </div>
@@ -236,7 +232,7 @@
 <script>
 
 
- $(document).on('ready', function(){
+ (function(window, document, $){
 
       var gameExpUrl = '{{ url("gameExp") }}';
       var profileUrl = '{{ url("profile") }}';
@@ -248,112 +244,10 @@
       var userName = $('#userId').data('name');
       var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
       var imageUrl = '{{ asset("uploads") }}';
+      var baseUrl = '{{ url() }}';
       var publicUrl = '{{ asset("") }}';
       var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
 
-     /* App.controller('yourFriends', function(page){
-
-        $(page).find('#yourFriendTab').tabs();
-      });*/
-
-
-      /*App.populator('userDetails', function(page, request){
-           this.transition = 'slide-left';
-            $('#backButton').show().attr('data-load', 'yourFriends');
-
-            if(request.user_id){
-
-                                  $(page).on('click', '#profileBtn button', function(){
-
-                      other_person = $(this).data('other_person');
-                      action = $(this).data('action');
-                      friend_id = $(this).data('friend_id');
-
-                      $(this).attr('disabled', 'disabled');
-
-                      if(action){
-
-                        ajaxUrl = false;
-                        data = false;
-
-                          if(other_person && action == 1){
-
-                            ajaxUrl = friendUrl+'/addFriend';
-                              data =  { user_id : userId, friend_id : other_person };
-
-                          }else if(action == 2 && friend_id){
-
-                             ajaxUrl = friendUrl+'/cancelFriendRequest';
-                              data = { id : friend_id };
-                          }else if(action == 3 && friend_id && other_person){
-                              ajaxUrl = friendUrl+'/acceptFriendRequest';
-                              data = { id : friend_id };
-                          }else if(action == 4 && friend_id && other_person){
-                            ajaxUrl = friendUrl+'/unFriend';
-                              data = { id : friend_id };
-                          }
-
-
-                          if(data && ajaxUrl){
-                            alert(JSON.stringify(data) + ' '+ajaxUrl);
-                          }
-
-
-                      }
-
-
-                     });
-              setTimeout(function(){
-                $('.pageLoading').show();
-              $('.userDetail').hide();
-
-                                $.ajax({
-                  url : profileUrl+'/viewFriendProfile',
-                  data : { user_id : userId, other_person : request.user_id, _token : CSRF_TOKEN },
-                  dataType : 'json',
-                  type : 'POST',
-                  success : function(data){
-                    console.log(data);
-                      $('.pageLoading').hide();
-              $('.userDetail').show();
-                    $('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  )
-                       $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
-                       relation = data.friend.relation;
-                      friend_id = data.friend.friend_id;
-
-                       if(relation != 2){
-
-                        actionBtn = $('<button type="button">').data('other_person', request.user_id);
-
-                        if(relation != 1){
-                            $(actionBtn).data('friend_id', friend_id);
-                        }
-
-                        if(relation == 1){
-                          $(actionBtn).text('Add Friend').data('action', 1);
-                        }else if(relation == 3){
-                          $(actionBtn).text('Cancel Friend Request').data('action', 2);
-                        }else if(relation == 4){
-                          $(actionBtn).text('Accept Friend Request').data('action', 3);
-                        }else if(relation == 5){
-                          $(actionBtn).text('Unfriend').data('action', 4);
-                        }
-
-                        $('#profileBtn').html('').append(actionBtn);
-
-                      };
-
-
-
-                  },error : function(xhr){
-                    console.log(xhr.responseText);
-                  }
-                });
-              }, 2000);
-
-
-            }
-      });*/
 
         function changeFriendOnlineStatusCount(page, FriendId, add){
 
@@ -405,8 +299,8 @@
                  if(request.user_id && !$(page).find('#friendDetailContainer').hasClass('dataLoaded')){
 
               setTimeout(function(){
-                $('.pageLoading').show();
-              $('#friendDetailContainer').hide();
+                $(page).find('.pageLoading').show();
+              $(page).find('#friendDetailContainer').hide();
 
 
               friendFavGameUl = $(page).find('#friendFavGameUl').html('');
@@ -420,8 +314,8 @@
                   success : function(data){
                     console.log(data);
 
-                     $('.pageLoading').hide();
-              $('#friendDetailContainer').show().addClass('dataLoaded');
+                     $(page).find('.pageLoading').hide();
+              $(page).find('#friendDetailContainer').show().addClass('dataLoaded');
 
               $(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  );
 
@@ -562,6 +456,8 @@
       App.controller('main', function (page) {
             this.transition = 'slide-right';
 
+          cropModal = $('#cropModal');
+
             $(page).on('appShow', function(){
                 $('#navbarTitle').text('Profileroom');
             });
@@ -576,29 +472,33 @@
 
                 args = JSON.parse($(this).attr('data-args'));
                 console.log(args);
+                  theModal = $('#rateModal');
 
-                $('#backGroundModal').attr('src', publicUrl+'uploads/'+args.background_image);
-                $('#rateMe').bind('rated', function() { alert('rating: ' + $(this).rateit('value')); });  
+                $(theModal).find('#playGame').unbind('click').bind('click', function(){
+                    /*alert(args.post);*/
+                });
+                $(theModal).find('#goToGame').attr('href', baseUrl+'/'+args.slug);
+ 
 
-                $('#rateModal').openModal();
+                theModal.openModal();
             });
           
           $(page).on('click', '#uploadBtn', function(e){
                            e.stopPropagation();
-                            $('#profilePic').click();
+                            $('#profilePic').trigger('click');
                       });
 
                       var $uploadCrop;
 
               function readFile(input) {
 
-                 $(page).find('#cropModal').openModal();
+                 cropModal.openModal();
 
                 if (input.files && input.files[0]) {
                         var reader = new FileReader();
                         
                         reader.onload = function (e) {
-                                    $(page).find('#imageView').hide();
+                                    cropModal.find('#imageView').hide();
                        
 
                           $uploadCrop.croppie('bind', {
@@ -634,7 +534,7 @@
 
 
               uploadCropAjax = false;
-              $uploadCrop = $(page).find('#cropperH').croppie({
+              $uploadCrop = cropModal.find('#cropperH').croppie({
                    
                          viewport: {
                             width: 150,
@@ -650,7 +550,7 @@
                       });
 
               $(page).on('change','#profilePic', function () { readFile(this); });
-              $(page).on('click','#doneCropping', function (ev) {
+              cropModal.on('click','#doneCropping', function (ev) {
                 $uploadCrop.croppie('result', {
                   type: 'canvas',
                   size: 'viewport',
@@ -675,7 +575,7 @@
                           success : function(data){
                             console.log(data);
                             uploadCropAjax = false;
-                              $(page).find('#cropModal').closeModal();
+                              $('#cropModal').closeModal();
                             $(page).find('#picPreview').attr('src',resp );
                           },error : function(xhr){
                             console.log(xhr.responseText);
@@ -695,7 +595,7 @@
               }
              
 
- });
+ })(window, document, jQuery);
 
 </script>
 @endsection

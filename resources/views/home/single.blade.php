@@ -2946,10 +2946,6 @@ $('.postcontent img').css('display','inline');
           }
           //$(this).css('width','100%');
         });
-    });
-    //END LAZY LOADING
-
-     //IDLE POPUP//
 
 
     startIdleCounting = setInterval( checkIdle, 1000 );

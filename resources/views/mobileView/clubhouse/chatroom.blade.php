@@ -29,6 +29,8 @@
 </style>
 
 <div class="app-page" data-page="chatroom">
+
+	<div class="app-topbar"></div>
     {!! csrf_field() !!}
  
   	<div class="app-content">

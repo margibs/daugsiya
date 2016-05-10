@@ -98,6 +98,7 @@
 	@section('content')
 
      <div class="app-page" data-page="main">
+    <div class="app-topbar"></div>
   <div class="app-content">
             <div class="panel z-depth-1">                 
        <div class="row">
