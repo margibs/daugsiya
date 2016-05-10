@@ -627,6 +627,11 @@ margin-top: 6px;
     float: left;
     border-radius: 3px;
 }
+
+.messageBox ul li a img ~ p{
+  margin-left: 40px !important;
+}
+
 .messageBox ul li a p{
     font-family: 'Work Sans';
     padding: 5px 5px 0 5px;

@@ -10,6 +10,11 @@ class User_Detail extends Model
 
 	protected $table ="user_details";
 
+
+/*	public function getProfilePictureAttribute($value){
+		return $this->attribute['user_id'];
+	}*/
+
     public function user(){
 
     	return $this->belongsTo('App\User');

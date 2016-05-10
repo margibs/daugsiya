@@ -1,27 +1,16 @@
 @extends('clubhouse.layout')
 	
 @section('custom-styles')
+<link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
  <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
  <style>
-
-.friendList .user_online_status{
-        position: absolute;
-    width: 13px;
-    height: 13px;
-    background: green;
-    border-radius: 50%;
-    border: 2px solid #e3e3e3;
-        left: 46px;
-    top: 9px;
-    z-index: 1;
-  }
  </style>
 @endsection
 
-@section('navbar-title', 'Profile')
 @section('content')
 
   <div class="app-page" data-page="main">
+  <div class="app-topbar"></div>
   <div class="app-content">
           <div class="userDetailBackground"></div>
     <div class="userDetail">
@@ -46,7 +35,7 @@
           <div class="row userDetailActions">
                   
           <div class="col s6"><a href="javascript:;" class="app-button" data-target="yourFriends"><span class="icon ion-person-stalker"></span> <span>{{ count($user->myFriends) }} </span></a></div>
-          <div class="col s6"><a href="javscript:;"><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></a></div>
+          <div class="col s6"><a href="javscript:;" class="app-button" data-target="yourMessages" data-target-args='{ "count" : "{{ count($user->myMessages) }}" }'><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></a></div>
           </div>
         </div>
         <div class="lowerHalf">
@@ -57,7 +46,7 @@
                  <ul class="row">
 
                   @foreach($user->favorites as $favorite)
-                    <li class="col s2"><img src="{{ asset('uploads') }}/{{ $favorite->icon_feature_image }}"></li>
+                    <li class="col s2 rateGame" data-args='{ "totalRating" : "{{ $favorite->gameRating['totalRating'] }}" , "post" : "{{ $favorite->id }}" , "slug" : "{{ $favorite->slug }}", "background_image" : "{{ $favorite->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $favorite->icon_feature_image }}"></li>
                   @endforeach
               
             </ul>
@@ -96,73 +85,75 @@
     </div>
   </div>
 
-     <!--  <ul class="collection">
-       
-         <li class="collection-item">
-         <a href="javascript:;" class="app-button" data-target="uploadImage">
-     <span class="title">Upload Image</span>
-     </a>
-         </li>
-       
-      
-         <li class="collection-item">
-          <a href="javascript:;" class="app-button" data-target="yourFriends">
-     <span class="title">Your Friends</span>
-     </a>
-         </li>
-         <li class="collection-item">
-         <a href="javascript:;">
-     <span class="title">Change Password</span>
-      </a>
-         </li>
-         <li class="collection-item">
-         <a href="javascript:;">
-     <span class="title">About You</span>
-     </a>
-         </li>
-         <li class="collection-item">
-         <a href="javascript:;">
-     <span class="title">Your Profile</span>
-     </a>
-         </li>
-       
-       </ul> -->
-
       </div>
 </div>
     
+     <div id="rateModal" class="modal">
+    <div class="modal-content">
+      <img src="" alt="" id="backGroundModal">
+       <div class="ratingArea">
+           <input type="hidden" step="0.5" id="backingfld" class="rating">
+                <div class="rateit" data-rateit-backingfld="#backingfld" data-rateit-resetable="false" data-rateit-ispreset="true" id="rateMe"></div> 
+       </div>
 
+    </div>
+    <div class="modal-footer">
+      <a class="waves-effect waves-light" id="doneCropping">Close</a>
+    </div>
+  </div>
 
 
 <div class="app-page" data-page="yourFriends">
+<div class="app-topbar"></div>
   <div class="app-content">
          <div class="row">
               <div class="col s12">
-                <ul class="tabs" id="yourFriendTab">
-                  <li class="tab col s6"><a href="#myFriends">Friends ({{ count($user->myFriends) }}) </a></li>
-                  <li class="tab col s6"><a href="#myMessages">Messages</a></li>
+                <ul id="yourFriendSorting">
+                    <li><a href="javascript:;" class="active">All <span class="countAll">(<span id="countAll"></span>)</span></a></li>
+                    <li><a href="javascript:;">Online <span class="countOnline">(<span id="countOnline"></span>)</span></a></li>
+                    <li><a href="javascript:;">Offline <span class="countOffline">(<span id="countOffline"></span>)</span></a></li>
 
                 </ul>
               </div>
               <div id="myFriends" class="col s12">
-            <ul class="collection friendList">
+            <ul class="friendList row">
                    @foreach($user->myFriends as $fr)
 
-                       <li class="collection-item avatar app-button" data-target="userDetails" data-target-args='{ "user_id" : "{{ $fr->friend->user_detail->user_id }}" }'>
+                       <li class="app-button col s4" data-target="userDetails" data-target-args='{ "user_id" : "{{ $fr->friend->user_detail->user_id }}" }' id="friend_li_{{ $fr->friend->user_detail->user_id }}">
                             <span class="user_online_status offline" id="friend-online-status-{{ $fr->friend->user_detail->user_id }}"></span>
-                            <img src="{{ $fr->friend->user_detail->profile_picture ? asset('').'/'.$fr->friend->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="" class="circle">
-                            <span class="title">{{ ucwords( $fr->friend->user_detail->firstname ) }}</span>
+                            <img src="{{ $fr->friend->user_detail->profile_picture ? asset('').'/'.$fr->friend->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="">
+                            <span class="userName">{{ ucwords( $fr->friend->user_detail->firstname ) }}</span>
                           </li>
                    @endforeach
                      </ul>
               </div>
-              <div id="myMessages" class="col s12">Test 2</div>
             </div>
-        
+      </div>
+</div>
+
+<div class="app-page" data-page="yourMessages">
+<div class="app-topbar"></div>
+  <div class="app-content">
+              <div id="myMessages" class="col s12">
+            <ul class="messageList">
+                   @foreach($user->myMessages as $msg)
+                        <li class="app-button" data-target="privateMessage" data-target-args='{ "user_id" : "{{ $msg->from_user->user_detail->user_id }}", "name" : "{{ ucwords($msg->from_user->user_detail->firstname) }}" }'>
+                          <img src="{{ $msg->from_user->user_detail->profile_picture ? asset('').'/'.$msg->from_user->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="">
+                          <div class="msgContent">
+                              <div class="info"><h6>{{ ucwords($msg->from_user->user_detail->firstname) }} </h6><span class="timestamp" data-datetime="{{ $msg->created_at }}"><span class="livetime"></span></span></div>
+                              <p> {{ $msg->message }} </p>
+                          </div>
+
+                        </li>
+                       
+                   @endforeach
+                     </ul>
+              </div>
       </div>
 </div>
 
 <div class="app-page" data-page="userDetails">
+<div class="app-topbar"></div>
   <div class="app-content">
            
 
@@ -201,7 +192,7 @@
           <div class="row userDetailActions">
 
                 <div class="col s6"><a href="javascript:;" class="actionButton">Unfriend</a></div>
-                <div class="col s6"><a href="javscript:;"><span class="icon ion-ios-chatbubble"></span> <span></span></a></div>
+                <div class="col s6"><a href="javscript:;" id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></a></div>
           
           </div>
         </div>
@@ -224,6 +215,15 @@
            
         </div>
     </div>
+                      <div id="confirmModal" class="modal">
+                      <div class="modal-content">
+                        <h5></h5>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="javascript:;" class=" modal-action modal-close waves-effect waves-green btn-flat confirmUnfriend">Yes</a>
+                        <a href="javascript:;" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+                      </div>
+                    </div>
               </div>
      </div>
 </div>
@@ -231,10 +231,8 @@
 @endsection
 
 @section('app-js')
-<script>
-  
-</script>
 <script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
+<script src="{{ asset('js/jquery.rateit.min.js') }}"></script>
 <script>
 
 
@@ -252,6 +250,7 @@
       var imageUrl = '{{ asset("uploads") }}';
       var publicUrl = '{{ asset("") }}';
       var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+
      /* App.controller('yourFriends', function(page){
 
         $(page).find('#yourFriendTab').tabs();
@@ -355,53 +354,56 @@
 
             }
       });*/
-        
-        App.controller('userDetails', function(page, request){
-           this.transition = 'slide-left';
-            $('#backButton').show();
 
-            if(request.user_id){
-
-                                /*  $(page).on('click', '#profileBtn button', function(){
-
-                      other_person = $(this).data('other_person');
-                      action = $(this).data('action');
-                      friend_id = $(this).data('friend_id');
-
-                      $(this).attr('disabled', 'disabled');
-
-                      if(action){
-
-                        ajaxUrl = false;
-                        data = false;
-
-                          if(other_person && action == 1){
-
-                            ajaxUrl = friendUrl+'/addFriend';
-                              data =  { user_id : userId, friend_id : other_person };
-
-                          }else if(action == 2 && friend_id){
-
-                             ajaxUrl = friendUrl+'/cancelFriendRequest';
-                              data = { id : friend_id };
-                          }else if(action == 3 && friend_id && other_person){
-                              ajaxUrl = friendUrl+'/acceptFriendRequest';
-                              data = { id : friend_id };
-                          }else if(action == 4 && friend_id && other_person){
-                            ajaxUrl = friendUrl+'/unFriend';
-                              data = { id : friend_id };
-                          }
+        function changeFriendOnlineStatusCount(page, FriendId, add){
 
 
-                          if(data && ajaxUrl){
-                            alert(JSON.stringify(data) + ' '+ajaxUrl);
-                          }
+          if(FriendId && parseInt(FriendId) > 0){
 
+            FriendId = parseInt(FriendId);
 
+            if(add){
+
+               index = onlineFriendsList.indexOf(parseInt(FriendId));
+              friendIndex = myFriends.indexOf(parseInt(FriendId));
+                if(index == -1 && friendIndex >=0 ){
+                    onlineFriendsList.push(FriendId);
+                }
+            }else{
+              index = onlineFriendsList.indexOf(FriendId);
+                      if(index != -1){
+
+                        onlineFriendsList.splice(index, 1);
+                        myFriendsCount = myFriendsCount - 1;
                       }
 
+                 
+            }
 
-                     });*/
+
+          }
+         
+          $(page).find('#countAll').text(myFriendsCount);
+
+                  console.log(onlineFriendsList);
+          $(page).find('#countOnline').text(onlineFriendsList.length);
+          $(page).find('#countOffline').text(parseInt(myFriendsCount) - onlineFriendsList.length);
+        }
+
+        
+
+        App.controller('userDetails', function(page, request){
+           this.transition = 'slide-left';
+
+
+            $(page).on('appDestroy', function(){
+                $(page).find('#friendDetailContainer').removeClass('dataLoaded');
+            });
+            $(page).on('appShow', function(){
+                $('#navbarTitle').text('Friend Details');
+
+                 if(request.user_id && !$(page).find('#friendDetailContainer').hasClass('dataLoaded')){
+
               setTimeout(function(){
                 $('.pageLoading').show();
               $('#friendDetailContainer').hide();
@@ -419,12 +421,26 @@
                     console.log(data);
 
                      $('.pageLoading').hide();
-              $('#friendDetailContainer').show();
+              $('#friendDetailContainer').show().addClass('dataLoaded');
 
               $(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  );
 
-              $(page).find('#friendDetailContainer h6').text(data.user_detail.firstname+' '+data.user_detail.lastname);
+              friendName = data.user_detail.firstname+' '+data.user_detail.lastname;
+              $(page).find('#friendDetailContainer h6').text(friendName);
 
+
+            $(page).on('click', '#messageUser', function(){
+                App.load('privateMessage', { user_id : request.user_id, name : friendName});
+            });
+
+              friend_id = data.friend.friend_id;
+
+              $(page).on('click', '.actionButton', function(){
+                      
+                      theModal = $(page).find('#confirmModal');
+                      $(theModal).find('h5').text('Are you sure to unfriend '+friendName+' ?');
+                        $(theModal).data('friend_id', request.user_id).data('id', friend_id).openModal();
+                     });
 
               $.each(data.favorites, function(){
                        $(friendFavGameUl) 
@@ -453,36 +469,7 @@
                                 
                           )
                   });
-                    /*  $('.pageLoading').hide();
-              $('.userDetail').show();
-                    $('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  )
-                       $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
-                       relation = data.friend.relation;
-                      friend_id = data.friend.friend_id;
-
-                       if(relation != 2){
-
-                        actionBtn = $('<button type="button">').data('other_person', request.user_id);
-
-                        if(relation != 1){
-                            $(actionBtn).data('friend_id', friend_id);
-                        }
-
-                        if(relation == 1){
-                          $(actionBtn).text('Add Friend').data('action', 1);
-                        }else if(relation == 3){
-                          $(actionBtn).text('Cancel Friend Request').data('action', 2);
-                        }else if(relation == 4){
-                          $(actionBtn).text('Accept Friend Request').data('action', 3);
-                        }else if(relation == 5){
-                          $(actionBtn).text('Unfriend').data('action', 4);
-                        }
-
-                        $('#profileBtn').html('').append(actionBtn);
-
-                      };
-
-*/
+          
 
                   },error : function(xhr){
                     console.log(xhr.responseText);
@@ -492,22 +479,109 @@
 
 
             }
+             
+            });
+
+            $(page).on('click', '#confirmModal .confirmUnfriend', function(){
+                
+                /*App.load('yourFriends', {'removeUser' : .data('friend_id')});*/
+                
+                theModal = $(this).parents('#confirmModal');
+
+                theId = $(theModal).data('id');
+
+                       $.ajax({
+                            url : friendUrl+'/unFriend',
+                              data : { id : theId , _token : CSRF_TOKEN },
+                              type : 'POST',
+                              dataType : 'json',
+                              success : function(data){
+
+                                  App.back(function(){
+                                        thePage = App.getPage();
+                                        theFriend_id = $(theModal).data('friend_id');
+                                        $(thePage).find('#friend_li_'+theFriend_id).remove();
+                                         changeFriendOnlineStatusCount(thePage, theFriend_id);
+                                    });
+
+                              },error : function(xhr){
+                                console.log(xhr.responseText);
+                              }
+
+                            });
+
+
+            });
+
       });
 
-        App.controller('yourFriends', function(page){
+        App.controller('yourMessages', function(page, request){
+          this.transition = 'slide-left';
+
+        /*  alert(JSON.stringify(request));*/
+          $(page).on('appShow', function(){
+                $('#navbarTitle').html('Your Messages <span>('+request.count+')</span>');
+            });
+
+        });
+
+        App.controller('yourFriends', function(page, request){
+
+       /*   if(request){
+            alert(JSON.stringify(request));
+          }*/
         this.transition = 'slide-left';
-        $(page).find('#yourFriendTab').tabs();
 
-        $('#backButton').show();
+                    $(page).on('appShow', function(){
+                $('#navbarTitle').text('Your Friends');
+            });
+
+        changeFriendOnlineStatusCount(page);
+  
+
+        for(i=0;i<onlineFriendsList.length;i++){
+              friend_id = onlineFriendsList[i];
+              $(page).find('#friend-online-status-'+friend_id).removeClass('offline').parent('li').prependTo($(page).find('.friendList'));
+          }
+
+             socket.on('friendOffline', function(friend_id){
+                   $(page).find('#friend-online-status-'+friend_id).addClass('offline');
+                   changeFriendOnlineStatusCount(page, friend_id);
+              });
+
+               socket.on('friendOnline', function(friend_id){
+                    $(page).find('#friend-online-status-'+friend_id).removeClass('offline').parent('li').prependTo($(page).find('.friendList'));
+                    changeFriendOnlineStatusCount(page, friend_id, true);
+              });
+
+
       });
 
+
+     
       App.controller('main', function (page) {
             this.transition = 'slide-right';
 
+            $(page).on('appShow', function(){
+                $('#navbarTitle').text('Profileroom');
+            });
 
             $(page).on('click', '#profilePic', function(e){
                            e.stopPropagation();
               });
+
+             
+
+            $(page).on('click', '.rateGame', function(){
+
+                args = JSON.parse($(this).attr('data-args'));
+                console.log(args);
+
+                $('#backGroundModal').attr('src', publicUrl+'uploads/'+args.background_image);
+                $('#rateMe').bind('rated', function() { alert('rating: ' + $(this).rateit('value')); });  
+
+                $('#rateModal').openModal();
+            });
           
           $(page).on('click', '#uploadBtn', function(e){
                            e.stopPropagation();
@@ -612,12 +686,14 @@
                 });
               });
 
-            $('#backButton').hide();
       });
-
-              App.load('main');
-
-              console.log(App.getStack());
+            
+            try {
+                App.restore();
+              } catch (err) {
+                 App.load('main');
+              }
+             
 
  });
 

@@ -380,46 +380,77 @@ $(function(){
 	    else if(notification.type == 4)
 	    {
 
-	      $('#myGlobalNotifications').prepend(
-	        $('<li>')
-	        .append(
-	          $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
-	          .append(
-	            $('<p>')
-	            .append(
-	              $('<span>').text(notification.custom_notification.description)
-	            )
-	          )
-	        )
-	      );
+	      var a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(notification.custom_notification.description)
+                                  )
+                              );
+
+              if(notification.custom_notification.image){
+                   a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
+                            .append($('<img>').attr('src', BASE_URL+'/uploads/'+notification.custom_notification.image))
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(notification.custom_notification.description)
+                                  )
+                              );
+              }
+
+               $('#myGlobalNotifications').prepend(
+                $('<li>')
+                    .append(
+                      a
+                      )
+                    );
 	    }
 	  }
 	});
 
 	socket.on('post_custom_notification', function(notification){
 	  $.each(notification, function(){
-	    data = this;
-	    span = $('<span>').addClass('notifcount');
-	    notifcount = 1;
-	    if($('#unreadGlobalNotification').find('.notifcount').length){
-	      notifcount = parseInt($('#unreadGlobalNotification').find('.notifcount').text())+1;
-	    }
 
-	    $('#unreadGlobalNotification').html('').append($(span).text(notifcount));
+              data = this;
 
-	    $('#myGlobalNotifications').prepend(
-	      $('<li>')
-	          .append(
-	            $('<a href="//'+ data.custom_notification.link +' ">').addClass('unread')
-	                  .append(
-	                    $('<p>')
-	                      .append(
-	                        $('<span>').text(data.custom_notification.description)
-	                        )
-	                    )
-	            )
-	          );
-	  });
+
+              span = $('<span>').addClass('notifcount');
+              notifcount = 1;
+              if($('#unreadGlobalNotification').find('.notifcount').length){
+                notifcount = parseInt($('#unreadGlobalNotification').find('.notifcount').text())+1;
+              }
+
+              $('#unreadGlobalNotification').html('').append($(span).text(notifcount));
+
+
+              var a =  $('<a href="//'+ data.custom_notification.link +' ">').addClass('unread')
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(data.custom_notification.description)
+                                  )
+                              );
+
+              if(data.custom_notification.image){
+                   a =  $('<a href="//'+ data.custom_notification.link +' ">').addClass('unread')
+                            .append($('<img>').attr('src', BASE_URL+'/uploads/'+data.custom_notification.image))
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(data.custom_notification.description)
+                                  )
+                              );
+              }
+
+              $('#myGlobalNotifications').prepend(
+                $('<li>')
+                    .append(
+                        a
+                      )
+                    );
+
+            });
 	});
 
 	socket.on('post_addFriend_request', function(request_id, request){
@@ -815,7 +846,7 @@ $(function(){
 					.append(
 						$('<a href="javascript:;">')
 						.append(
-							$('<img src="'+( data.user.profile_picture ? BASE_URL+'/'+data.user.profile_picture : defaultProfilePic) +'">')
+							$('<img src="'+( data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic) +'">')
 						)
 					)
 				)
@@ -958,18 +989,32 @@ $(function(){
 		    else if(notification.type == 4)
 		    {
 
-		      $('#myGlobalNotifications').append(
-		        $(li)
-		        .append(
-		          $('<a href="//'+ notification.custom_notification.link +' ">')
-		          .append(
-		            $('<p>')
-		            .append(
-		              $('<span>').text(notification.custom_notification.description)
-		            )
-		          )
-		        )
-		      );
+		      var a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(notification.custom_notification.description)
+                                  )
+                              );
+
+              if(notification.custom_notification.image){
+                   a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
+                            .append($('<img>').attr('src', BASE_URL+'/uploads/'+notification.custom_notification.image))
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(notification.custom_notification.description)
+                                  )
+                              );
+              }
+ 
+
+                     $('#myGlobalNotifications').append(
+                      $(li)
+                          .append(
+                            a
+                            )
+                          );
 
 		    }
 

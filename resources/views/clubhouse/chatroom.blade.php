@@ -645,7 +645,7 @@
                 <ul class="roomList">
 
                   @foreach($chatrooms as $room)
-              <li><a href="javascript:;" data-href="{{ url('clubhouse/chatroom') }}/{{$room->name}}" data-name="{{ $room->name }}" data-description="{{ $room->description }}" data-id="{{ $room->id }}">{{ $room->name }}</a></li>
+                     <li><a href="javascript:;" data-href="{{ url('clubhouse/chatroom') }}/{{$room->name}}" data-name="{{ $room->name }}" data-description="{{ $room->description }}" data-id="{{ $room->id }}">{{ $room->name }}</a></li>
                   @endforeach
                   
                 </ul>
@@ -1202,7 +1202,7 @@
                   .append(
                       $('<div>').addClass('msgImgcont')
                           .append(
-                            $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
+                            $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+this.user.user_detail.user_id+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
                           )
                     )
                   
@@ -1320,7 +1320,7 @@
 
                   $('<div>').addClass('msgImgcont')
                     .append(
-                      $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/'+data.user.profile_picture : defaultProfilePic )
+                      $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic )
                     )
                   )
                 
@@ -1340,11 +1340,22 @@
  
     });
 
-    
-        $('.bigChatBox .body ul').slimScroll({
-            height: '518px',
-            start: 'bottom'
-        });
+        var w = window.innerWidth;
+     
+        if(w == 1366) {
+               $('.bigChatBox .body ul').slimScroll({
+              height: '318px',
+              start: 'bottom'
+          });
+        }
+        else {
+             $('.bigChatBox .body ul').slimScroll({
+              height: '518px',
+              start: 'bottom'
+          });
+        }
+
+
 
            $('#messageContent').animate({
             scrollTop: $('#messageContent')[0].scrollHeight
@@ -1381,7 +1392,7 @@
                                     .append(
                                         $('<div>').addClass('msgImgcont')
                                           .append(
-                                            $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'user_uploads/user_'+item.user.id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
+                                            $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+item.user.user_detail.user_id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
                                           )
                                       )
                                   )

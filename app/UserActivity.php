@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Model\Post;
-use App\Prize;
+use App\Model\Prize;
 class UserActivity extends Model
 {
     protected $fillable = [

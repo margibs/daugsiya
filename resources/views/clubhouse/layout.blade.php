@@ -383,8 +383,8 @@
 
     var window_focus = true;
 
-window.onblur = function() { window_focus = false; }
-window.onfocus = function() { window_focus = true; }
+    window.onblur = function() { window_focus = false; }
+    window.onfocus = function() { window_focus = true; }
 
     $(['http://susanwins.com/uploads/64878_click-header.png']).preload();
 
@@ -728,16 +728,31 @@ london = moment.tz(timeZone);
                           );
                   }else if(notification.type == 4){
 
+
+                      var a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(notification.custom_notification.description)
+                                  )
+                              );
+
+              if(notification.custom_notification.image){
+                   a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
+                            .append($('<img>').attr('src', baseUrl+'/uploads/'+notification.custom_notification.image))
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(notification.custom_notification.description)
+                                  )
+                              );
+              }
+ 
+
                      $('#myGlobalNotifications').append(
                       $(li)
                           .append(
-                            $('<a href="//'+ notification.custom_notification.link +' ">')
-                                  .append(
-                                    $('<p>')
-                                      .append(
-                                        $('<span>').text(notification.custom_notification.description)
-                                        )
-                                    )
+                            a
                             )
                           );
 
@@ -824,16 +839,30 @@ london = moment.tz(timeZone);
                     );
             }else if(notification.type == 4){
 
-               $('#myGlobalNotifications').prepend(
-                $('<li>')
-                    .append(
-                      $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
+
+               var a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
                             .append(
                               $('<p>')
                                 .append(
                                   $('<span>').text(notification.custom_notification.description)
                                   )
-                              )
+                              );
+
+              if(notification.custom_notification.image){
+                   a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
+                            .append($('<img>').attr('src', baseUrl+'/uploads/'+notification.custom_notification.image))
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(notification.custom_notification.description)
+                                  )
+                              );
+              }
+
+               $('#myGlobalNotifications').prepend(
+                $('<li>')
+                    .append(
+                      a
                       )
                     );
 
@@ -860,16 +889,30 @@ london = moment.tz(timeZone);
 
               $('#unreadGlobalNotification').html('').append($(span).text(notifcount));
 
-              $('#myGlobalNotifications').prepend(
-                $('<li>')
-                    .append(
-                      $('<a href="//'+ data.custom_notification.link +' ">').addClass('unread')
+
+              var a =  $('<a href="//'+ data.custom_notification.link +' ">').addClass('unread')
                             .append(
                               $('<p>')
                                 .append(
                                   $('<span>').text(data.custom_notification.description)
                                   )
-                              )
+                              );
+
+              if(data.custom_notification.image){
+                   a =  $('<a href="//'+ data.custom_notification.link +' ">').addClass('unread')
+                            .append($('<img>').attr('src', baseUrl+'/uploads/'+data.custom_notification.image))
+                            .append(
+                              $('<p>')
+                                .append(
+                                  $('<span>').text(data.custom_notification.description)
+                                  )
+                              );
+              }
+
+              $('#myGlobalNotifications').prepend(
+                $('<li>')
+                    .append(
+                        a
                       )
                     );
 
