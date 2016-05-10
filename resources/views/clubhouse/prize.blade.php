@@ -491,7 +491,7 @@
 					      $.ajax({
 					      	url : '{{ url("prize/claimPrize") }}',
 					      	type : 'POST',
-					      	data : { prizeCode_id : prizeCode.id, _token : CSRF_TOKEN, price : price },
+					      	data : { prizeCode_id : prizeCode.id, _token : CSRF_TOKEN, price : price, mobile : true },
 					      	dataType : 'json',
 					      	success : function(result){
 					      		console.log('yeah');
