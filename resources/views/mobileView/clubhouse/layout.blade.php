@@ -29,6 +29,7 @@
        <input type="hidden" value="{{ $session_id }}" id="sessionId">
       @endif
    <nav>
+
    <div class="nav-wrapper">
    
      <a href="javascript:;" class="brand-logo"> <img class="logo" src="http://susanwins.com/uploads/52424_logo.png" alt="Logo"> </a>
@@ -51,11 +52,29 @@
           <h5 id="navbarTitle"></h5>
       </div>
        </nav>
+
+<!--    <div class="nav-wrapper">
+ <a href="javascript:;" class="waves-effect waves-light btn back_button" style="display:none" id="backButton"><i class="material-icons">chevron_left</i></a>
+<a href="javascript:;" class="brand-logo"> @yield('navbar-title') </a>
+ @if(isset($user))
+   <a href="#" data-activates="mobile-demo2" class="button-collapse"><i class="material-icons">menu</i></a>
+     <ul class="side-nav" id="mobile-demo2">
+      <li><a href="{{ url('clubhouse/home') }}"><img src="http://susanwins.com/uploads/38368_clubhouseicon.png"> Home</a></li>
+      <li><a href="javascript:;"><img src="http://susanwins.com/uploads/64163_chaticon.png"> Messages</a></li>
+      <li><a href="javascript:;"><img src="http://susanwins.com/uploads/83444_notificationicon.png"> All Notifications</a></li>
+      <li><a href="javascript:;"><img src="http://susanwins.com/uploads/43069_friendicon.png"> Friend Requests</a></li>
+      <li><a href="{{ url('logout') }}"><img src="http://susanwins.com/uploads/34338_logouticon.png"> Logout</a></li>
+    </ul>
+ @endif
+ </div>  -->
+
+
+    </nav>
      @if(isset($user))
         <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
+    <!-- <a class="btn-floating btn-large red">
       <i class="material-icons">menu</i>
-    </a>
+    </a> -->
     <ul class="homeButtonNav">
       <li><a class="btn-floating btn-large" href="{{ url('clubhouse/profile') }}"><img src="http://susanwins.com/images/clubhouse/profileroom-thumb.gif" alt=""></a></li>
       <li><a class="btn-floating btn-large" href="{{ url('clubhouse/slotsroom') }}"><img src="http://susanwins.com/images/clubhouse/slotsroom-thumb.gif" alt=""></a></li>
@@ -179,7 +198,8 @@
         
       </div>
 </div>
-
+  
+     @yield('content-list')
   </body>
   
   <script> 
@@ -187,6 +207,7 @@
             var myFriendsCount = '<?php echo isset($myFriends) ? count($myFriends) : 0 ?>';
             var onlineFriendsList = [];
     </script>
+ 
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script> 
     <script src="{{ asset('js/moment-timezone.min.js') }}"></script> 
@@ -197,6 +218,74 @@
 
      <script src="{{ asset('js/sockets.io.js') }}"></script>
     <script>
+
+
+    CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    BASE_URL = "{{ url('/')}}";
+    USER_ID = "{{ Auth::user()->id }}";
+    USER_IMAGE = "{{ Auth::user()->user_detail->profile_picture }} ";
+    USER_NAME = "{{ Auth::user()->name }}";
+    DEFAULT_IMAGE = BASE_URL+'/user_uploads/default_image/default_01.png';
+    ROOM_ID = "{{ isset($selectedRoom->id ) ? $selectedRoom->id  : '' }}";
+    ROOM_NAME = "{{ isset($selectedRoom->name) ? $selectedRoom->name : '' }}";
+    ROOM_DESCRIPTION = "{{ isset($selectedRoom->description) ? $selectedRoom->description : '' }}";
+    MESSAGE = "";
+
+
+
+
+
+/*    $(document).ready(function(){
+
+
+      var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        var userId = $('#userId').val();
+       var userImage = $('#userId').data('image');
+       var userName = $('#userId').data('name');
+       var isAdmin = $('#userId').data('isAdmin') == 1 ? true : false;
+
+       var sessionUrl = '{{ url("session") }}';
+ var profileUrl = '{{ url("profile") }}';
+var friendUrl = '{{ url("friends") }}';
+ var messageUrl = '{{ url("message") }}';
+ var publicUrl = '{{ asset("") }}';
+ var baseUrl = '{{ url() }}';
+ var notifUrl = '{{ url("notification") }}';
+ var clubhouseUrl = '{{ url("clubhouse") }}';
+ var sessionId = $('#sessionId').val();
+var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+
+  console.log(userImage);
+  
+var profileImage = $('#data-profile').val();
+var pagename = '{{ Request::segment(2) }}';
+timeZone = 'Europe/London';
+london = moment.tz(timeZone);
+    socket.on('connect', function(){
+
+          socket.emit('login', { user_id : userId , profile_picture : userImage, name : userName, session_id : sessionId }, true, isAdmin, myFriends);
+
+             if(ROOM_ID){
+
+              socket.emit('connect_room', { room_id : ROOM_ID, name : ROOM_NAME, description : ROOM_DESCRIPTION });
+
+             }
+
+      });
+
+
+  });*/
+
+  </script>
+
+ 
+    <script>
+
+
+
+    
+   
 
       var socket = io.connect('{{ url('') }}:8891');
 
@@ -246,8 +335,8 @@
               last_room_name = $('#roomDetails').data('name');
               last_room_description = $('#roomDetails').data('description');
 
-             if(last_room_id){
-              socket.emit('connect_room', { room_id : last_room_id, name : last_room_name, description : last_room_description });
+             if(ROOM_ID){
+              socket.emit('connect_room', { room_id : ROOM_ID, name : ROOM_NAME, description : ROOM_DESCRIPTION });
 
              }
 
@@ -425,15 +514,16 @@
       });
 
               App.load('main');*/
-
-
+        $('.button-collapse2').sideNav({
+        menuWidth: 300, // Default is 240
+        edge: 'right', // Choose the horizontal origin
+        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      }
+    );
 
     });
 
-
-
-     
     </script>
     @yield('app-js')
-
+    @yield('script')
 </html>

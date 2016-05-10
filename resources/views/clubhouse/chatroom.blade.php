@@ -1202,7 +1202,7 @@
                   .append(
                       $('<div>').addClass('msgImgcont')
                           .append(
-                            $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
+                            $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+this.user.user_detail.user_id+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
                           )
                     )
                   
@@ -1320,7 +1320,7 @@
 
                   $('<div>').addClass('msgImgcont')
                     .append(
-                      $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/'+data.user.profile_picture : defaultProfilePic )
+                      $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic )
                     )
                   )
                 
@@ -1392,7 +1392,7 @@
                                     .append(
                                         $('<div>').addClass('msgImgcont')
                                           .append(
-                                            $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'user_uploads/user_'+item.user.id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
+                                            $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+item.user.user_detail.user_id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
                                           )
                                       )
                                   )

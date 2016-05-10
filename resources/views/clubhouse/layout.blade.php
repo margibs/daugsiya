@@ -383,8 +383,8 @@
 
     var window_focus = true;
 
-window.onblur = function() { window_focus = false; }
-window.onfocus = function() { window_focus = true; }
+    window.onblur = function() { window_focus = false; }
+    window.onfocus = function() { window_focus = true; }
 
     $(['http://susanwins.com/uploads/64878_click-header.png']).preload();
 

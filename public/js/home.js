@@ -846,7 +846,7 @@ $(function(){
 					.append(
 						$('<a href="javascript:;">')
 						.append(
-							$('<img src="'+( data.user.profile_picture ? BASE_URL+'/'+data.user.profile_picture : defaultProfilePic) +'">')
+							$('<img src="'+( data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic) +'">')
 						)
 					)
 				)
