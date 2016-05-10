@@ -26,6 +26,7 @@ use DateTime;
 use Validator;
 use Hash;
 use Session;
+use Agent;
 
 use Yajra\Datatables\Datatables;
 
@@ -658,6 +659,20 @@ class UserController extends Controller
         // }
 
         return json_encode($chatroom->room_messages);
+    }
+
+    public function mobileMagazine($name) {
+     /*   $response = ['route' => $name];*/
+        /*return json_encode($response);*/
+
+      /*  $Agent = new Agent();
+        if ($Agent->isMobile()) {
+           //return json_encode(['data' => 'is mobileView']);
+        }
+        else {
+            return json_encode(['data' => 'not mobileView']);
+        }*/
+        return view('mobileView.clubhouse.magazine');
     }
 
     

@@ -302,6 +302,9 @@ Route::group(['middleware' => 'UserCheck'], function()
 	Route::get('admin/skypscrapper/get','HomeImagesController@skypscrapperGet');
 	Route::get('admin/home-adds/get', 'HomeImagesController@anyDataCasino');
 
+	//ROUTE FOR MAGAZINE
+	Route::get('mobile/magazine/{name}', 'UserController@mobileMagazine');
+
 });
 
 
