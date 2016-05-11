@@ -1,4 +1,4 @@
-@extends('clubhouse.app')
+@extends('layout.app')
 
 <style type="text/css">
   .bgwrapper{

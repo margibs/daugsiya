@@ -132,7 +132,7 @@
 
     @yield('content')
 
-      <div class="app-page" data-page="myMessages">
+      <div class="app-page pageModal" data-page="myMessages">
       <div class="app-topbar"></div>
   <div class="app-content">
 
@@ -155,37 +155,70 @@
              </div>
 
               <div id="yourMessages" class="col s12">
-            <ul class="messageList">
-                   
-                        <!-- <li class="app-button" data-target="privateMessage" data-target-args=''>
-                          <img src="" alt="">
-                          <div class="msgContent">
-                              <div class="info"><h6>qweqwe</h6><span class="timestamp" data-datetime="2323"><span class="livetime"></span></span></div>
-                              <p> qweqwe </p>
-                          </div>
-                        
-                        </li> -->
-                       
+            <ul class="messageList">             
                      </ul>
               </div>
+      </div>     
       </div>
-              <!--        <div class="pageLoading">
-                              <div class="preloaderContainer">
-               <div class="preloader-wrapper big active">
-               <div class="spinner-layer spinner-red-only">
-                 <div class="circle-clipper left">
-                   <div class="circle"></div>
-                 </div><div class="gap-patch">
-                   <div class="circle"></div>
-                 </div><div class="circle-clipper right">
-                   <div class="circle"></div>
-                 </div>
-               </div>
-                                  </div>
-                              </div>
-                           </div> -->
-          
-        
+</div>
+      <div class="app-page" data-page="myGlobalNotifs">
+      <div class="app-topbar"></div>
+  <div class="app-content">
+
+    <div class="app-content defaultBg">
+
+      <!-- <div class="pageLoading">
+                <div class="preloaderContainer">
+                      <div class="preloader-wrapper big active">
+                      <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div><div class="gap-patch">
+                          <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+             </div> -->
+
+              <div id="yourGlobalNotifs" class="col s12">
+
+              wwww
+            <ul class="messageList">             
+                     </ul>
+              </div>
+      </div>     
+      </div>
+</div>
+      <div class="app-page" data-page="myUserNotifs">
+      <div class="app-topbar"></div>
+  <div class="app-content">
+
+    <div class="app-content defaultBg">
+            zzzz
+      <!-- <div class="pageLoading">
+                <div class="preloaderContainer">
+                      <div class="preloader-wrapper big active">
+                      <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div><div class="gap-patch">
+                          <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+             </div> -->
+
+              <div id="yourUserNotifs" class="col s12">
+            <ul class="messageList">             
+                     </ul>
+              </div>
+      </div>     
       </div>
 </div>
       <div class="app-page" data-page="privateMessage">
@@ -485,6 +518,10 @@ socket.on('post_addFriend_request', function(request_id, request){
                  this.transition = 'slide-left';
 
             });
+            App.controller('myUserNotifs', function(page, request){
+                 this.transition = 'slide-left';
+
+            });
 
               App.controller('myMessages', function(page, request){
                 this.transition = 'slide-left';
@@ -577,10 +614,9 @@ socket.on('post_addFriend_request', function(request_id, request){
                     
               });
 
-
               App.controller('privateMessage', function (page, request) {
-            this.transition = 'slide-left';
-
+            this.transition = 'explode-in';
+              this.restorable = false;
               $(page).on('appDestroy', function(){
                 $('.bottomNotification').show();
               });
@@ -690,9 +726,20 @@ socket.on('post_addFriend_request', function(request_id, request){
  
       });
         
+
         $('#messagesMenu').on('click', function(){
             if(App.current() != 'myMessages'){
               App.load('myMessages');
+            }
+        });        
+        $('#globalNotifMenu').on('click', function(){
+            if(App.current() != 'myGlobalNotifs'){
+              App.load('myGlobalNotifs');
+            }
+        });
+        $('#notificationMenu').on('click', function(){
+            if(App.current() != 'myUserNotifs'){
+              App.load('myUserNotifs');
             }
         });
 

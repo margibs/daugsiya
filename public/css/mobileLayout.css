@@ -5,6 +5,10 @@ left: 0;
     position: absolute;
 }
 
+.pageModal{
+    border:1px solid #ccc;
+}
+
 .app-page .app-content{
         position: relative;
 }

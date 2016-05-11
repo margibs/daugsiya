@@ -17,14 +17,14 @@ background-image: url(../images/clubhouse/sharpwheel.png);
 border-radius: 300px;
 z-index: 2; */
 
-position: absolute;
+position: relative;
     /* margin: 0 auto; */
     width: 145%;
     /* height: 100%; */
     top: 0;
     left: -74%;
     bottom: 0%;
-    /* padding-bottom: 75%; */
+    padding-bottom: 145%;
     /* right: -50%; */
     background-color: transparent;
     background-size: 100% 100%;
@@ -71,13 +71,14 @@ position: absolute;
 }
 
 .bgwrapper{
-/* 	    position: absolute; */
     width: 100%;
     float: left;
     left: 0;
-  /*   top: 112px */;
-    overflow: hidden;
+    /* top: 112px; */
+    /* overflow: hidden; */
     bottom: 0;
+    position: relative;
+    height: auto;
 
 
 
