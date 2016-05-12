@@ -184,9 +184,6 @@
 			chatBox = $(page).find('.chatBox');
                 chatBoxOffsetTop = chatBox.offset().top;
                 chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
-
-                alert(chatBoxOffsetTop);
-                alert(chatBoxFooterOffsetTop);
                   
             $(page).find('.chatBox .body').css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
 
