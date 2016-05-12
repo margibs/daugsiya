@@ -303,7 +303,7 @@ Route::group(['middleware' => 'UserCheck'], function()
 	Route::get('admin/home-adds/get', 'HomeImagesController@anyDataCasino');
 
 	//ROUTE FOR MAGAZINE
-	Route::get('mobile/magazine/{name}', 'UserController@mobileMagazine');
+	
 
 });
 
@@ -322,6 +322,8 @@ Route::group(['middleware' => 'ClubMiddleware'], function()
 
 	Route::get('clubhouse/home', 'ClubhouseController@home');
 	Route::get('clubhouse/profile', 'UserController@profile');
+	Route::get('clubhouse/magazine', 'UserController@mobileMagazine');
+
 	Route::post('clubhouse/profile/changePassword', 'UserController@changePassword');
 	Route::post('clubhouse/profile/userDetails', 'UserController@userDetails');
 	Route::get('clubhouse/findPeople', 'UserController@findPeople');

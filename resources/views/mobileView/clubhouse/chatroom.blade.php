@@ -6,8 +6,7 @@
 
 
 <div class="app-page" data-page="chatroom">
-<div class="app-topbar"></div>
-  	<div class="app-content">
+  	<div class="app-content" data-no-scroll>
   		<div class="body" id="peopleContent">
 		  <ul class="side-nav" id="mobile-demo">
                <li>
@@ -20,7 +19,8 @@
 		</div> 
 
 	   <div class="row">
-	   			<ul id="dropdown2" class="dropdown-content">
+	   			<div class="chatroomHeader">
+	   				<ul id="dropdown2" class="dropdown-content">
 				 	@foreach($chatrooms as $room)
 				    	<li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
 				    @endforeach
@@ -31,6 +31,7 @@
 							 <a href="#" data-activates="mobile-demo" class="button-collapse2">{{ $selectedRoom->name }}<span id="people_count"></span></a>
 						</p>
 					</center>
+	   			</div>
 					 	
 				<div class="chatBox">
 		            <div class="body">
@@ -143,7 +144,8 @@
 
 <script>
 
-	var profileUrl = '{{ url("profile") }}';
+(function(window, document, $){
+		var profileUrl = '{{ url("profile") }}';
 	var publicUrl = '{{ asset("") }}';
 	 var imageUrl = '{{ asset("uploads") }}';
    var friendUrl = '{{ url("friends") }}';
@@ -485,7 +487,6 @@ App.controller('userDetails', function(page, request){
   });
 
   thePage = App.getPage();
-  console.log(thePage);
 
   function getData(data){
      App.dialog({
@@ -499,6 +500,8 @@ App.controller('userDetails', function(page, request){
                     }
                 });
   }	
+
+})(window, document, jQuery);
 
 </script>
 

@@ -54,7 +54,7 @@
   </style>
    <div class="app-page" data-page="main">
 <!--    <div class="app-topbar"></div> -->
-  <div class="app-content">
+  <div class="app-content" data-no-scroll>
          <ul class="collection">
         
           <li class="collection-item avatar">

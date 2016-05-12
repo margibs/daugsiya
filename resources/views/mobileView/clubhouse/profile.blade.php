@@ -31,8 +31,9 @@
             </div>
 
         </div>
-           <a class="editProfile">Edit Profile</a>
-            <a class="changePassword">Change Password</a>
+           <span class="editProfile">Edit Profile</span>
+            <span class="changePassword">Change Password</span>
+            <a href="{{ url('clubhouse/magazine') }}">Magazine</span>
           <h6>{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}</h6>
 
           <div class="row userDetailActions">
