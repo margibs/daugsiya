@@ -20,7 +20,7 @@
 		</div> 
 
 	   <div class="row">
-	   			<ul id="dropdown2" class="dropdown-content">
+	   			<ul id="dropdown2" class="dropdown-content" data-id="{{ $selectedRoom->id }}">
 				 	@foreach($chatrooms as $room)
 				    	<li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
 				    @endforeach
@@ -143,6 +143,7 @@
 
 <script>
 
+
 	var profileUrl = '{{ url("profile") }}';
 	var publicUrl = '{{ asset("") }}';
 	 var imageUrl = '{{ asset("uploads") }}';
@@ -222,7 +223,39 @@
 	    		)
 	   		});
    		});
+
+   	//get all chatroom
+   		$(page).on('appShow', function(){
+   			room_id = $(page).find('#dropdown2').data('id');
+   			$.ajax({
+   				  url : BASE_URL+'/mobile/getChatroom/'+room_id,
+		          type : 'GET',
+		          dataType : 'json',
+		          success : function(data){
+		          	console.log(data);
+
+			   		$(page).find('.chatBox .body ul').html('');
+			   		$.each(data, function() {
+			   			 $(page).find('.chatBox .body ul').append(
+				          $('<li>')
+				              .append(
+				                $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+				                )
+				              .append(
+				                  $('<span>').text(this.message)
+				                )
+				        );
+			   		});
+		          },
+		          error: function(error)
+		          {
+		          	console.log(error.responseText);
+		          }
+   			});
+   		});
   });
+
+
 
 App.controller('userDetails', function(page, request){
 			 this.transition = 'slide-left';
@@ -332,112 +365,116 @@ App.controller('userDetails', function(page, request){
 
    });
 
-				setTimeout(function(){
-					friendFavGameUl = $(page).find('#friendFavGameUl').html('');
-              		friendPlayedGameUl = $(page).find('#friendPlayedGameUl').html('');
+		setTimeout(function(){
+			friendFavGameUl = $(page).find('#friendFavGameUl').html('');
+      		friendPlayedGameUl = $(page).find('#friendPlayedGameUl').html('');
 
-              		$.ajax({
-              			url : profileUrl+'/viewFriendProfile',
-                  		data : { user_id : USER_ID, other_person : request.user_id, _token : CSRF_TOKEN },
-                  		dataType : 'json',
-                  		type : 'POST',
-                  		success : function(data){
-                  			//console.log(data);
-                  			
-                  			$(page).find('#friendDetailContainer').show().addClass('dataLoaded');
-                  			//$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
-                  			$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/5050/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
+      		$.ajax({
+      			url : profileUrl+'/viewFriendProfile',
+          		data : { user_id : USER_ID, other_person : request.user_id, _token : CSRF_TOKEN },
+          		dataType : 'json',
+          		type : 'POST',
+          		success : function(data){
+          			//console.log(data);
+          			
+          			$(page).find('#friendDetailContainer').show().addClass('dataLoaded');
+          			//$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
+          			$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/5050/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
 
-                  			friendName = data.user_detail.firstname+' '+data.user_detail.lastname;
-             				$(page).find('#friendDetailContainer h6').text(friendName);
+          			friendName = data.user_detail.firstname+' '+data.user_detail.lastname;
+     				$(page).find('#friendDetailContainer h6').text(friendName);
 
 
-             				/*****************UNFRIEND AND FAVOURITE GAMES AND GAMES YOU PLAYED********************/
-				            $(page).on('click', '#messageUser', function(){
-				                App.load('privateMessage', { user_id : request.user_id, name : friendName});
-				            });
+     				/*****************UNFRIEND AND FAVOURITE GAMES AND GAMES YOU PLAYED********************/
+		            $(page).on('click', '#messageUser', function(){
+		                App.load('privateMessage', { user_id : request.user_id, name : friendName});
+		            });
 
-				              friend_id = data.friend.friend_id;
+		              friend_id = data.friend.friend_id;
 
-				              $.each(data.favorites, function(){
-				                       $(friendFavGameUl) 
-				                        .append(
-				                          $('<li>').addClass('col s2')
-				                            .append(
-				                              $('<a href="#">')
-				                                .append(
-				                                    $('<img>').attr('src', imageUrl+'/'+this['icon_feature_image'])
-				                                  )
-				                              )
-				                                
-				                          )
-				                  });
-				                  
-				                  $.each(data.played_games, function(){
-				                      $(friendPlayedGameUl)
-				                        .append(
-				                          $('<li>').addClass('col s2')
-				                            .append(
-				                              $('<a href="#">')
-				                                .append(
-				                                    $('<img>').attr('src', imageUrl+'/'+this['icon_feature_image'])
-				                                  )
-				                              )
-				                                
-				                          )
-				                  });
-				             /***************** UNFRIEND AND FAVOURITE GAMES AND GAMES YOU PLAYED ********************/
+		              $.each(data.favorites, function(){
+		                       $(friendFavGameUl) 
+		                        .append(
+		                          $('<li>').addClass('col s2')
+		                            .append(
+		                              $('<a href="#">')
+		                                .append(
+		                                    $('<img>').attr('src', imageUrl+'/'+this['icon_feature_image'])
+		                                  )
+		                              )
+		                                
+		                          )
+		                  });
+		                  
+		                  $.each(data.played_games, function(){
+		                      $(friendPlayedGameUl)
+		                        .append(
+		                          $('<li>').addClass('col s2')
+		                            .append(
+		                              $('<a href="#">')
+		                                .append(
+		                                    $('<img>').attr('src', imageUrl+'/'+this['icon_feature_image'])
+		                                  )
+		                              )
+		                                
+		                          )
+		                  });
+		             /***************** UNFRIEND AND FAVOURITE GAMES AND GAMES YOU PLAYED ********************/
 
-				             
-				             /******************DISPLAY BUTTON ACCORDING TO RELATIONSHIP ****************/
-				             	 relation = data.friend.relation;
-                  				friend_id = data.friend.friend_id;
+		             
+		             /******************DISPLAY BUTTON ACCORDING TO RELATIONSHIP ****************/
+		             	 relation = data.friend.relation;
+          				friend_id = data.friend.friend_id;
 
-                  				if(relation != 2){
+          				if(relation != 2){
 
-					                    actionBtn = $(page).find('#toggleRelationship').data('other_person', request.user_id);
+			                    actionBtn = $(page).find('#toggleRelationship').data('other_person', request.user_id);
 
-					                    if(relation != 1){
-					                        $(actionBtn).data('friend_id', friend_id);
-					                    }
+			                    if(relation != 1){
+			                        $(actionBtn).data('friend_id', friend_id);
+			                    }
 
-					                    if(relation == 1){
-					                      $(actionBtn).text('Add Friend').data('action', 1);
-					                    }else if(relation == 3){
-					                      $(actionBtn).text('Cancel Friend Request').data('action', 2);
-					                    }else if(relation == 4){
-					                      $(actionBtn).text('Accept Friend Request').data('action', 3);
+			                    if(relation == 1){
+			                      $(actionBtn).text('Add Friend').data('action', 1);
+			                    }else if(relation == 3){
+			                      $(actionBtn).text('Cancel Friend Request').data('action', 2);
+			                    }else if(relation == 4){
+			                      $(actionBtn).text('Accept Friend Request').data('action', 3);
 
-					                    }else if(relation == 5){
-					                      $(actionBtn).text('Unfriend').data('action', 4);
-					                    }
+			                    }else if(relation == 5){
+			                      $(actionBtn).text('Unfriend').data('action', 4);
+			                    }
 
-					                    $('#profileBtn').append(actionBtn);
+			                    $('#profileBtn').append(actionBtn);
 
-					                  }else{
-					                  	$(page).find('#toggleRelationship').hide();
-					                  }
+			                  }else{
+			                  	$(page).find('#toggleRelationship').hide();
+			                  }
 
-				             /******************DISPLAY BUTTON ACCORDING TO RELATIONSHIP ****************/
-				          
-             				//hide pageLoading after successfull
-             				$(page).find('.pageLoading').hide();
-              				$(page).find('#friendDetailContainer').show();
+		             /******************DISPLAY BUTTON ACCORDING TO RELATIONSHIP ****************/
+		          
+     				//hide pageLoading after successfull
+     				$(page).find('.pageLoading').hide();
+      				$(page).find('#friendDetailContainer').show();
 
-                  		},
-                  		error: function(error){
-                  			console.log(error.responseText);
-                  		}
-              		});
+          		},
+          		error: function(error){
+          			console.log(error.responseText);
+          		}
+      		});
 
-				},2000);
-			});
-		});
-
+		},2000);
+	});
+});
+	
+	/*App.back(function(){
+		alert("Hello World");
+	});*/
 
   	App.load('chatroom');
 
   function sendMessage(message) {
+  	console.log(message);
   	thePage = App.getPage(); 	
  	   $(thePage).find('.chatBox .body ul').append(
             $('<li>')

@@ -17,7 +17,8 @@
         "geoip2/geoip2": "~2.0",
         "dirkgroenen/Pinterest-API-PHP": "^0.2.10",
         "jdavidbakr/laravel-cache-garbage-collector": "^1.0",
-        "yajra/laravel-datatables-oracle": "^6.10"
+        "yajra/laravel-datatables-oracle": "^6.10",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

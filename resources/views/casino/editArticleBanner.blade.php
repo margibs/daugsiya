@@ -48,6 +48,7 @@
   <input id="image_url" type='hidden' name='image_url' value="{{ $articleBanner->image_url }}">
 	<input type="hidden" name="banner_type" value="1">
   <input type="hidden" name="article" value="{{$redirect}}">
+  <input type="text" name="redirect_link" placeholder="Redirect Link" value="{{ $articleBanner->redirect_link }}"> 
   <select name="casino_id" placeholder="Casino">
       <option value="0">N/A</option>
       @foreach($casinos as $c)

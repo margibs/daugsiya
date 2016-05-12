@@ -625,7 +625,7 @@ class UserController extends Controller
         $session_id = Session::getId();
 
         // dd($selectedRoom->room_messages);
-
+        
         return view('clubhouse/chatroom', compact('user', 'chatrooms', 'unread_messages_count', 'user_notification_count', 'selectedRoom', 'global_notification_count', 'session_id'));
     }
 
@@ -814,6 +814,55 @@ class UserController extends Controller
         }
 
         return view('clubhouse.magazine', compact('questions', 'questionpage'));
+    }
+
+  public function getChatroomMobile($id = null) {
+          $user = $this->user;
+
+        $chatroom = Chat_Room::with('room_messages')->find($id);
+
+       /* $user->myMessages = $this->getInbox();
+
+
+        $unread_messages_count = count($user->unread_messages()->groupBy('from')->get());
+
+        $global_notification_count = $this->getGlobalNotificationCount();
+
+        $user_notification_count = $this->getUserNotificationCount();
+
+
+        $selectedRoom = false;
+
+        if($chatrooms && count($chatrooms) > 0){
+            $selectedRoom = $chatrooms[0];
+
+                if($chatname){
+
+                    foreach($chatrooms as $chatroom){
+
+                        if($chatroom->name == $chatname){
+                            $selectedRoom = $chatroom;
+                            
+                            break;
+                        }
+                    }
+
+                }
+
+            $user_read = Userchat_Read::firstOrCreate([ 'user_id' => $user->id, 'chat_room_id' => $selectedRoom->id ]);
+            $user_read->last_read = new DateTime();
+            $user_read->save();
+            }
+
+        $selectedRoom->room_messages = $selectedRoom->room_messages()->take(10)->orderBy('created_at','DESC')->get()->reverse();
+        $session_id = Session::getId();
+
+       //dd($chatrooms);*/
+        return json_encode($chatroom->room_messages);
+
+        // dd($selectedRoom->room_messages);
+
+        //return view('clubhouse/chatroom', compact('user', 'chatrooms', 'unread_messages_count', 'user_notification_count', 'selectedRoom', 'global_notification_count', 'session_id'));
     }
 
     

@@ -367,8 +367,10 @@ class CasinoController extends Controller
 
     public function newArticleBanner()
     {
+        
+        $casinos = Casino::all();
         $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
-        return view('casino.newArticleBanner',compact('priority_list'));
+        return view('casino.newArticleBanner',compact('priority_list', 'casinos'));
     }
 
     public function editArticleBanner(Request $request, $id)
@@ -410,6 +412,9 @@ class CasinoController extends Controller
             'countries' => 'required',
         ];
 
+
+
+
         //Validate input
         $validator = Validator::make($request->all(), $validate_rules );
 
@@ -419,6 +424,23 @@ class CasinoController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
+
+        if($id == 0 )
+        {
+                $image_link = CasinoBanner::searchImageLink($request->input('image_link'));
+                if($image_link) {
+
+                     $validate_rules = [
+                    'image_link' => 'Image Link Already Exist'
+                ];
+                    
+                     return redirect($redirect)
+                                ->withErrors($validate_rules)
+                                ->withInput();
+                }
+        }
+
+     
 
                 //check if new post or edit post
         if($id != 0)
@@ -430,12 +452,16 @@ class CasinoController extends Controller
             $casinoBanner = new CasinoBanner;
         }
 
+       
+
         $casinoBanner->image_link = $request->input('image_link');
         $casinoBanner->banner_type = $request->input('banner_type');
         $casinoBanner->show_banner = $request->input('show_banner') ? $request->input('show_banner') : 0 ;
         $casinoBanner->image_url = $request->input('image_url');
         $casinoBanner->priority = $request->input('priority');
         $casinoBanner->casino_id = $request->input('casino_id');
+        //ADD COLUMN REDIRECT LINK
+        $casinoBanner->redirect_link = $request->input('redirect_link');
         $casinoBanner->save();
 
         CasinoBannerCountry::where('casino_banner_id','=',$casinoBanner->id)->delete();
@@ -569,8 +595,9 @@ class CasinoController extends Controller
 
     public function newSkyScraperBanner()
     {
+        $casinos = Casino::all();
         $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
-        return view('casino.newSkyScraperBanner',compact('priority_list'));
+        return view('casino.newSkyScraperBanner',compact('priority_list', 'casinos'));
     }
 
     public function editSkyScraperBanner(Request $request, $id)
@@ -621,6 +648,24 @@ class CasinoController extends Controller
                         ->withInput();
         }
 
+
+        if($id == 0 )
+        {
+                $image_link = CasinoBanner::searchImageLink($request->input('image_link'));
+                if($image_link) {
+
+                     $validate_rules = [
+                    'image_link' => 'Image Link Already Exist'
+                ];
+                    
+                     return redirect($redirect)
+                                ->withErrors($validate_rules)
+                                ->withInput();
+                }
+        }
+
+
+
                 //check if new post or edit post
         if($id != 0)
         {
@@ -637,6 +682,7 @@ class CasinoController extends Controller
         $casinoBanner->image_url = $request->input('image_url');
         $casinoBanner->priority = $request->input('priority');
         $casinoBanner->casino_id = $request->input('casino_id');
+        $casinoBanner->redirect_link = $request->input('redirect_link');
         $casinoBanner->save();
 
         CasinoBannerCountry::where('casino_banner_id','=',$casinoBanner->id)->delete();
