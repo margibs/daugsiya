@@ -1,8 +1,11 @@
 
 @extends('clubhouse.layout')
-	
+  
 @section('custom-styles')
 <style type="text/css">
+  body {
+    background: #fff url(http://susanwins.com/uploads/51107_mobilefronthouse.jpg) no-repeat center top;
+  }
   .bgwrapper{
     padding-top: 100px;
   }
@@ -89,36 +92,47 @@
   .benefits ul{
         margin-top: 30px;
   }
+  form input[type=text], form input[type=password], form input[type=email]{
+    background: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    width: 95%;
+    font-family: 'Work Sans';
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+  }
 </style>
 
 @endsection
 
  @section('navbar-title', 'Login')
 
-	@section('content')
+  @section('content')
 
      <div class="app-page" data-page="main">
     <div class="app-topbar"></div>
   <div class="app-content">
-            <div class="panel z-depth-1">                 
-       <div class="row">
-          <form class="col s12" action="{{ url('login/post') }}" method="POST">
-          {!! csrf_field() !!}
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="email" type="text" class="validate" name="email">
-                <label for="email">Enter Your Email</label>
-              </div>
-              <div class="input-field col s12">
-                <input id="password" type="password" class="validate" name="password">
-                <label for="password">Enter Your Password</label>
-              </div>
-              <button class="waves-effect waves-light btn" type="Submit">Let me in</button>
-            </div>
-          </form>
-        </div>
+                   
+               <div class="row">
+                  <form class="col s12" action="{{ url('login/post') }}" method="POST">
+                  {!! csrf_field() !!}
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input id="email" type="text" class="validate" name="email" placeholder="Email">
+                        
+                      </div>
+                      <div class="input-field col s12">
+                        <input id="password" type="password" class="validate" name="password" placeholder="Password">
+                      <!--   <label for="password">Enter Your Password</label> -->
+                      </div>
+                      <button class="waves-effect waves-light btn" type="Submit">Let me in</button>
+                    </div>
+                  </form>
+                </div>
               
-        </div>
+        
   </div>
   </div>
 
@@ -126,21 +140,21 @@
 
 
 <!-- <form action="{{ url('login/post') }}" method="POST" class="form-horizontal">
-    		 		
-    					{!! csrf_field() !!}
-    		
-    										<div class="form-group">
-    											<label for="">Enter your Email</label>
-    												<input type="text" name="email">
-    										</div>
-    										<div class="form-group">
-    											<label for="">Your Password</label>
-    												<input type="password" name="password">
-    										</div>
-    										<input type="checkbox" name="remember" checked="" style="display:none;">
-    										<button type="submit">Let me in</button>
-    		
-    									</form> -->
+            
+              {!! csrf_field() !!}
+        
+                        <div class="form-group">
+                          <label for="">Enter your Email</label>
+                            <input type="text" name="email">
+                        </div>
+                        <div class="form-group">
+                          <label for="">Your Password</label>
+                            <input type="password" name="password">
+                        </div>
+                        <input type="checkbox" name="remember" checked="" style="display:none;">
+                        <button type="submit">Let me in</button>
+        
+                      </form> -->
 
 
 

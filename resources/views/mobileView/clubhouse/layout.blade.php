@@ -12,7 +12,8 @@
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link rel="stylesheet" href="{{ asset('css/materialize.min.css') }}">
    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-   <link rel="stylesheet" href="{{ asset('css/mobileLayout.css') }}">   
+   <link rel="stylesheet" href="{{ asset('css/mobileLayout.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mobileFront.css') }}">   
    
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -28,80 +29,127 @@
     @if(isset($session_id))
        <input type="hidden" value="{{ $session_id }}" id="sessionId">
       @endif
-   <nav>
 
-   <div class="nav-wrapper">
-   
-     <a href="javascript:;" class="brand-logo"> <img class="logo" src="http://susanwins.com/uploads/52424_logo.png" alt="Logo"> </a>
-      @if(isset($user))
-        <a href="javascript:;" data-activates="mobileSideNav" class="button-collapse" id="mobileSideNavButton"><i class="material-icons">menu</i></a>
-       <ul class="side-nav" id="mobileSideNav">
-         <li><a href="{{ url('clubhouse/home') }}"><img src="http://susanwins.com/uploads/38368_clubhouseicon.png"> Home</a></li>
-         <li><a href="javascript:;"><img src="http://susanwins.com/uploads/64163_chaticon.png"> Messages</a></li>
-         <li><a href="javascript:;"><img src="http://susanwins.com/uploads/83444_notificationicon.png"> All Notifications</a></li>
-         <li><a href="javascript:;"><img src="http://susanwins.com/uploads/43069_friendicon.png"> Friend Requests</a></li>
-         <li><a href="{{ url('logout') }}"><img src="http://susanwins.com/uploads/34338_logouticon.png"> Logout</a></li>
-       </ul>
-      @endif
-      
-   </div>
-
-   <div class="nav-lower-wrapper">
-          <a href="javascript:;" class="waves-effect back_button" id="backButton"><i class="material-icons">chevron_left</i> <span>Back</span></a>
-         <!--  <h5 id="navbarTitle">All messages <span>(123)</span></h5> -->
-          <h5 id="navbarTitle"></h5>
+         <header>
+      <div class="row no-gutters">
+        <div class="col-xs-24">
+           <a href="javascript:;" class="waves-effect back_button" id="backButton"><i class="material-icons">chevron_left</i> </a>
+          <a href="#"> <img src="http://susanwins.com/uploads/52424_logo.png" alt=""> </a>
+        </div>
       </div>
-       </nav>
-        <ul class="bottomNotification z-depth-1">
-                              
-                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png"> </a> </li>
-                        <li> 
-                          <a href="javascript:;" id="messagesMenu"> 
-                            <span id="unreadMessageNotification" class="notifCounter">
+    </header>
 
-                            @if(isset($unread_messages_count) && $unread_messages_count > 0)
-                                <span class="notifcount animated bounce bounceInUp">{{ $unread_messages_count }}</span>
-                              @endif
-                                                          </span>
-                            <img src="http://susanwins.com/uploads/64163_chaticon.png">
-                          </a> 
+    <footer>
+      <ul>
+        <li> <a href="{{ url('/') }}"> <i class="ion-home"></i> </a> </li>
+        <li> <div id="messagesMenu"> <i class="ion-chatbubbles"></i>
+               <span id="unreadMessageNotification" class="notifCounter">
+  
+                           @if(isset($unread_messages_count) && $unread_messages_count > 0)
+                               <span class="notifcount">{{ $unread_messages_count }}</span>
+                             @endif
+                </span>
+  
+        </div> </li>
+        <li> <div id="globalNotifMenu"> <i class="ion-android-notifications"></i>
+                  
+                  <span id="unreadGlobalNotification" class="notifCounter">
+  
+                            @if(isset($global_notification_count) && $global_notification_count > 0)
+                               <span class="notifcount">{{ $global_notification_count }}</span>
+                             @endif
+                  </span>
+
+        </div> </li>
+        <li> <div id="notificationMenu"> <i class="ion-android-happy"></i>
+
+                <span id="unreadUserNotification" class="notifCounter">
+  
+                            @if(isset($user_notification_count) && $user_notification_count > 0)
+                                 <span class="notifcount   animated bounce bounceInUp"> 
+                                       {{ $user_notification_count }}
+                                     </span>
+                               @endif
+                </span>
+        </div> </li>
+        <li> <a href="{{ url('/notifications') }}"> <i class="ion-power"></i> </a> </li>
+      </ul>
+    </footer>
+
+  <!--  <nav>
+  
+  <div class="nav-wrapper">
+  
+    <a href="javascript:;" class="brand-logo"> <img class="logo" src="http://susanwins.com/uploads/52424_logo.png" alt="Logo"> </a>
+     @if(isset($user))
+       <a href="javascript:;" data-activates="mobileSideNav" class="button-collapse" id="mobileSideNavButton"><i class="material-icons">menu</i></a>
+      <ul class="side-nav" id="mobileSideNav">
+        <li><a href="{{ url('clubhouse/home') }}"><img src="http://susanwins.com/uploads/38368_clubhouseicon.png"> Home</a></li>
+        <li><a href="javascript:;"><img src="http://susanwins.com/uploads/64163_chaticon.png"> Messages</a></li>
+        <li><a href="javascript:;"><img src="http://susanwins.com/uploads/83444_notificationicon.png"> All Notifications</a></li>
+        <li><a href="javascript:;"><img src="http://susanwins.com/uploads/43069_friendicon.png"> Friend Requests</a></li>
+        <li><a href="{{ url('logout') }}"><img src="http://susanwins.com/uploads/34338_logouticon.png"> Logout</a></li>
+      </ul>
+     @endif
+     
+  </div>
+  
+  <div class="nav-lower-wrapper">
+         <a href="javascript:;" class="waves-effect back_button" id="backButton"><i class="material-icons">chevron_left</i> <span>Back</span></a>
+        <h5 id="navbarTitle">All messages <span>(123)</span></h5>
+         <h5 id="navbarTitle"></h5>
+     </div>
+      </nav>
+       <ul class="bottomNotification z-depth-1">
+                             
+                       <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png"> </a> </li>
+                       <li> 
+                         <a href="javascript:;" id="messagesMenu"> 
+                           <span id="unreadMessageNotification" class="notifCounter">
+  
+                           @if(isset($unread_messages_count) && $unread_messages_count > 0)
+                               <span class="notifcount animated bounce bounceInUp">{{ $unread_messages_count }}</span>
+                             @endif
+                                                         </span>
+                           <img src="http://susanwins.com/uploads/64163_chaticon.png">
+                         </a> 
+                       </li>
+  
+                       <li> 
+  
+                         <a href="javascript:;" id="globalNotifMenu">                       
+                           <span id="unreadGlobalNotification" class="notifCounter">
+  
+                            @if(isset($global_notification_count) && $global_notification_count > 0)
+                               <span class="notifcount   animated bounce bounceInUp">{{ $global_notification_count }}</span>
+                             @endif
+                                                           </span>
+                       
+                           <img src="http://susanwins.com/uploads/83444_notificationicon.png">
+                         </a> 
                         </li>
-
-                        <li> 
-
-                          <a href="javascript:;" id="globalNotifMenu">                       
-                            <span id="unreadGlobalNotification" class="notifCounter">
-
-                             @if(isset($global_notification_count) && $global_notification_count > 0)
-                                <span class="notifcount   animated bounce bounceInUp">{{ $global_notification_count }}</span>
-                              @endif
-                                                            </span>
-                        
-                            <img src="http://susanwins.com/uploads/83444_notificationicon.png">
+                       
+                       <li> 
+                         <a href="javascript:;" id="notificationMenu"> 
+                          <span id="unreadUserNotification" class="notifCounter">
+  
+                            @if(isset($user_notification_count) && $user_notification_count > 0)
+                                 <span class="notifcount   animated bounce bounceInUp"> 
+                                       {{ $user_notification_count }}
+                                     </span>
+                               @endif
+                                                           </span>
+                          <img src="http://susanwins.com/uploads/43069_friendicon.png">
                           </a> 
-                         </li>
-                        
-                        <li> 
-                          <a href="javascript:;" id="notificationMenu"> 
-                           <span id="unreadUserNotification" class="notifCounter">
-
-                             @if(isset($user_notification_count) && $user_notification_count > 0)
-                                  <span class="notifcount   animated bounce bounceInUp"> 
-                                        {{ $user_notification_count }}
-                                      </span>
-                                @endif
-                                                            </span>
-                           <img src="http://susanwins.com/uploads/43069_friendicon.png">
-                           </a> 
-                        </li>
-
-                        <li style="margin-right: 6px;"> 
-                          <a href="http://susanwins.com/logout"> 
-                           <img src="http://susanwins.com/uploads/34338_logouticon.png">
-                          </a> 
-                        </li>
-
-                      </ul>
+                       </li>
+  
+                       <li style="margin-right: 6px;"> 
+                         <a href="http://susanwins.com/logout"> 
+                          <img src="http://susanwins.com/uploads/34338_logouticon.png">
+                         </a> 
+                       </li>
+  
+                     </ul> -->
 <!--    <div class="nav-wrapper">
  <a href="javascript:;" class="waves-effect waves-light btn back_button" style="display:none" id="backButton"><i class="material-icons">chevron_left</i></a>
 <a href="javascript:;" class="brand-logo"> @yield('navbar-title') </a>

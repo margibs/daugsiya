@@ -180,6 +180,16 @@
 		$(page).on('appShow', function(){
 			$(page).find('#peopleContent').show();
 			$('.drag-target:eq(1)').show();
+
+			chatBox = $(page).find('.chatBox');
+                chatBoxOffsetTop = chatBox.offset().top;
+                chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
+
+                alert(chatBoxOffsetTop);
+                alert(chatBoxFooterOffsetTop);
+                  
+            $(page).find('.chatBox .body').css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
+
 		});
 		$(page).on('appForward', function(){
 			$(page).find('#peopleContent').hide();
