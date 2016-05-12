@@ -688,7 +688,8 @@ class UserController extends Controller
                         $questionpage.= '</div> ';
                     $questionpage.= '</div> ';
                     $questionpage.= '<div class="choiceContainer" data-id="'.$q->id.'">';
-                        $answer = $q->answer()->where('user_id', $user->id)->first();
+                    //CHECK IF ANSWER ALREADDY
+                    $answer = $q->answer()->where('user_id', $user->id)->first();
                     if($answer){
                         $questionpage.='<div class="row">';
                             $questionpage.='<div class="col s12">';
@@ -700,6 +701,58 @@ class UserController extends Controller
                             $questionpage.='</div>';
                         $questionpage.='</div>';
                     $questionpage.= '</div> ';
+
+                    //check if the follow up answer already
+                    $follow_up_answered = $q->choices()->where('follow_id', '!=', 0)->whereExists(function($query) use($user){
+                        $query->select('id')
+                        ->from('question_user_answers')
+                        ->whereRaw('question_user_answers.question_id = question_choices.follow_id')
+                        ->where('question_user_answers.user_id', $user->id);
+                    })->first();
+
+                if($follow_up_answered){
+                    //CHECK IF 
+                    $follow_up_answer = $follow_up_answered->follow_up->answer()->where('user_id', $user->id)->first();
+                    if($follow_up_answer){
+                         $questionpage.= '<div>';
+                            $questionpage .= '<h4>'.$follow_up_answered->follow_up->question.'</h4>';
+                                $questionpage.= '<div class="choiceContainer">';
+                                    $questionpage.='You answered '.$follow_up_answer->choice->choice;
+                            $questionpage.='</div>';
+                        $questionpage.='</div>';
+                    }
+                    
+                 }else{
+
+                    $follow_up = $answer->choice->follow_up;
+
+                    if($follow_up){
+                            $questionpage.= '<div class="follow_up_'.$follow_up->id.'">';
+                            $questionpage .= '<h4>'.$follow_up->question.'</h4>';
+                                $questionpage.= '<div class="choiceContainer" data-id="'.$follow_up->id.'">';
+                                $questionpage.= '<ul class="questionContainer" data-id="'.$follow_up->id.'">';
+                                    foreach($follow_up->choices as $chos) {
+                                        $questionpage.='<div class="row">';
+                                        $questionpage.='<div class="col s12">';
+                                            $questionpage.='<div class="btnBox">';
+                                                $questionpage.='<div class="btnBody">';
+                                                $questionpage.='<a class="waves-effect waves-light btn col s12 chooseAnswer" data-id="'.$chos->id.'" data-response="'.$chos->response.'" >'.$chos->choice.'</a>';
+                                                $questionpage.='</div>';
+                                            $questionpage.='</div>';
+                                        $questionpage.='</div>';
+                                    $questionpage.='</div>';
+
+                                    }
+                                $questionpage.= '</ul>';
+                            $questionpage.='</div>';
+                        $questionpage.='</div>';
+
+
+                     }
+                 }
+                        
+
+            
                     }
                     else 
                     {
@@ -726,7 +779,7 @@ class UserController extends Controller
                             if($ch->follow_up){
                                 $questionpage.= '<div class="follow_up follow_up_'.$ch->follow_up->id.'">';
                                 $questionpage .= '<h4>'.$ch->follow_up->question.'</h4>';
-                                    $questionpage.= '<div class="choiceContainer data-id="'.$ch->follow_up->id.'">';
+                                    $questionpage.= '<div class="choiceContainer" data-id="'.$ch->follow_up->id.'">';
                                     $questionpage.= '<ul class="questionContainer" data-id="'.$ch->follow_up->id.'">';
                                         foreach($ch->follow_up->choices as $cho) {
                                             $questionpage.='<div class="row">';

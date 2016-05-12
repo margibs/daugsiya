@@ -47,6 +47,8 @@
             $(page).find('.follow_up_'+follow_id).css('display', 'block');
           }
         sendMagazine(question_id, choice_id);
+        
+
       });
     });
   }
