@@ -26,7 +26,7 @@ use DateTime;
 use Validator;
 use Hash;
 use Session;
-use Agent;
+use App\Http\Controllers\Agent;
 
 use Yajra\Datatables\Datatables;
 
@@ -335,7 +335,7 @@ class UserController extends Controller
                $questionpage .= '<p>'.$q->question.'</p><ul>';
 
                $answer = $q->answer()->where('user_id', $user->id)->first();
-                
+                //retrieve answer check if already answered else choices
                if($answer){
 
                 $questionpage.= '<li> <a href="javascript:;">You answered '.$answer->choice->choice.'</a></li>';
@@ -662,17 +662,105 @@ class UserController extends Controller
     }
 
     public function mobileMagazine($name) {
-     /*   $response = ['route' => $name];*/
-        /*return json_encode($response);*/
+        $user = $this->user;
+        $questions = Question::where('follow_up', 0)->get();
 
-      /*  $Agent = new Agent();
-        if ($Agent->isMobile()) {
-           //return json_encode(['data' => 'is mobileView']);
+        $choices = [];
+
+        $questionpage = '';
+
+
+        foreach($questions as $k=>$q){
+
+        $questionpage.= '<div class="app-page" data-page="question_'.$q->id.'">';
+            $questionpage.= '<div class="app-topbar"></div>';
+                $questionpage.= '<div class="app-content">';
+                    $questionpage.= '<div class="row">';
+                        $questionpage.= '<div class="col s12">';
+                            $questionpage.= '<ul class="messageList">';
+                                $questionpage.= '<li>';
+                                    $questionpage.= '<img src="'.asset('images/default_profile_picture.png').'" alt="">';
+                                            $questionpage.= '<div class="msgContent">';
+                                                $questionpage.= '<div class="info"><p>'.$q->question.'</p></div>';
+                                            $questionpage.= '</div>';
+                                $questionpage.= '</li>  ';
+                            $questionpage.= '</ul>';
+                        $questionpage.= '</div> ';
+                    $questionpage.= '</div> ';
+                    $questionpage.= '<div class="choiceContainer" data-id="'.$q->id.'">';
+                        $answer = $q->answer()->where('user_id', $user->id)->first();
+                    if($answer){
+                        $questionpage.='<div class="row">';
+                            $questionpage.='<div class="col s12">';
+                                $questionpage.='<div class="btnBox">';
+                                    $questionpage.='<div class="btnBody">';
+                                    $questionpage.='You answered '.$answer->choice->choice;
+                                    $questionpage.='</div>';
+                                $questionpage.='</div>';
+                            $questionpage.='</div>';
+                        $questionpage.='</div>';
+                    $questionpage.= '</div> ';
+                    }
+                    else 
+                    {
+                        foreach($q->choices as $c) {
+
+                            $questionpage.='<div class="row">';
+                                $questionpage.='<div class="col s12">';
+                                    $questionpage.='<div class="btnBox">';
+                                        $questionpage.='<div class="btnBody">';
+                                            $questionpage.='<a class="waves-effect waves-light btn col s12 chooseAnswer" data-follow-id="'.$c->follow_id.'" data-id="'.$c->id.'" data-response="'.$c->response.'" >'.$c->choice.'</a>';
+                                        $questionpage.='</div>';
+                                    $questionpage.='</div>';
+                                $questionpage.='</div>';
+                            $questionpage.='</div>';
+                        }
+
+                         $questionpage.='</div>';
+
+                        /***************** check the follow-up question *************************/
+
+
+                        foreach($q->choices as $ch) {
+
+                            if($ch->follow_up){
+                                $questionpage.= '<div class="follow_up follow_up_'.$ch->follow_up->id.'">';
+                                $questionpage .= '<h4>'.$ch->follow_up->question.'</h4>';
+                                    $questionpage.= '<div class="choiceContainer data-id="'.$ch->follow_up->id.'">';
+                                    $questionpage.= '<ul class="questionContainer" data-id="'.$ch->follow_up->id.'">';
+                                        foreach($ch->follow_up->choices as $cho) {
+                                            $questionpage.='<div class="row">';
+                                            $questionpage.='<div class="col s12">';
+                                                $questionpage.='<div class="btnBox">';
+                                                    $questionpage.='<div class="btnBody">';
+                                                    $questionpage.='<a class="waves-effect waves-light btn col s12 chooseAnswer" data-id="'.$cho->id.'" data-response="'.$cho->response.'" >'.$cho->choice.'</a>';
+                                                    $questionpage.='</div>';
+                                                $questionpage.='</div>';
+                                            $questionpage.='</div>';
+                                        $questionpage.='</div>';
+
+                                        }
+                                    $questionpage.= '</ul>';
+                                $questionpage.='</div>';
+                            $questionpage.='</div>';
+                            }
+                        }
+                    }
+                   
+
+                if(isset($questions[$k+1])){
+                    $questionpage.='<button class="waves-effect waves-light btn col s12 app-button" data-target="question_'.$questions[$k+1]->id.'">Next</button>';
+                }
+
+                
+            $questionpage.= '</div>';
+
+        $questionpage.= '</div>';
+   
+   
         }
-        else {
-            return json_encode(['data' => 'not mobileView']);
-        }*/
-        return view('mobileView.clubhouse.magazine');
+
+        return view('clubhouse.magazine', compact('questions', 'questionpage'));
     }
 
     

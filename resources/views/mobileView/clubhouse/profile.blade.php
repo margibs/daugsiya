@@ -22,8 +22,6 @@
                 
                      <img src="{{ $user->user_detail->profile_picture  ? url().'/user_uploads/user_'.$user->id.'/'.$user->user_detail->profile_picture : url().'/user_uploads/default_image/default_01.png' }}" alt="" id="picPreview">
                 
-               
-               
             </div>
                <label>
                   <span> + </span>
@@ -32,8 +30,12 @@
             </div>
 
         </div>
+           <a class="editProfile">Edit Profile</a>
+            <a class="changePassword">Change Password</a>
           <h6>{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}</h6>
+
           <div class="row userDetailActions">
+
                   
           <div class="col s6"><span class="app-button" data-target="yourFriends"><span class="icon ion-person-stalker"></span> <span>{{ count($user->myFriends) }} </span></span></div>
           <div class="col s6"><span class="app-button" data-target="yourMessages" data-target-args='{ "count" : "{{ count($user->myMessages) }}" }'><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></span></div>
@@ -224,6 +226,92 @@
      </div>
 </div>
 
+
+
+<div class="app-page" data-page="edit-profile">
+  <div class="app-topbar">
+    <div class="app-title">Contact</div>
+  </div>
+    <div class="app-content">
+         <form action="{{ url('clubhouse/profile/userDetails') }}" method="POST">
+          @if(session('userDetailsErrors'))
+            <ul class="formMessage errorlist">
+            @foreach(session('userDetailsErrors') as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+          @endif
+
+          @if(session('userDetailsSuccessMessage'))
+            <div class="formMessage successMessage">{{ session('userDetailsSuccessMessage')}}</div>
+          @endif
+        {!! csrf_field() !!}
+          <div class="form-group">
+            <label for="">Firstname</label>
+            <input type="text" name="firstname" class="form-control" value="{{ isset($user->user_detail) ? $user->user_detail->firstname : '' }}" placeholder="Firstname">
+          </div>
+          <div class="form-group">
+            <label for="">Lastname</label>
+            <input type="text" name="lastname" class="form-control" value="{{ isset($user->user_detail) ? $user->user_detail->lastname : '' }}" placeholder="Lastname">
+          </div>
+          <div class="form-group">
+            <label for="">Address</label>
+            <textarea name="address" cols="30" rows="5"  placeholder="Address">{{ isset($user->user_detail) ? $user->user_detail->address : '' }}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="">Phone Number</label>
+            <input type="text" name="phone_no" class="form-control" value="{{ isset($user->user_detail) ? $user->user_detail->phone_no || '' : '' }}"  placeholder="Phone Number">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="waves-effect waves-light btn">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="app-page" data-page="edit-password">
+  <div class="app-topbar">
+    <div class="app-title">Contact</div>
+  </div>
+    <div class="app-content">
+          <div class="box2 good keybox">
+            <form action="{{ url('clubhouse/profile/changePassword') }}" method="POST">           
+                @if(session('changePasswordErrors'))
+                  <ul class="formMessage errorlist">
+                  @foreach(session('changePasswordErrors') as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                  </ul>
+                @endif
+
+                @if(session('successMessage'))
+                  <div class="formMessage successMessage">{{ session('successMessage')}}</div>
+                @endif
+              {!! csrf_field() !!}
+                <div class="form-group">
+                  <label for="">Current Password</label>
+                  <input type="password" name="current_password" class="form-control" placeholder="Current Password">
+                </div>
+                <div class="form-group">
+                  <label for="">New Password</label>
+                  <input type="password" name="password" class="form-control" placeholder="New Password">
+                </div>
+                <div class="form-group">
+                  <label for="">Confirm New Password</label>
+                  <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm New Password">
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="waves-effect waves-light btn">Submit</button>
+                </div>
+              </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 @endsection
 
 @section('app-js')
@@ -247,6 +335,13 @@
       var baseUrl = '{{ url() }}';
       var publicUrl = '{{ asset("") }}';
       var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+
+   /*   FIRST_NAME = "{{ $user->user_detail->firstname }}";
+      LAST_NAME = "{{ $user->user_detail->lastname }}";*/
+
+
+      //console.log(FIRST_NAME);
+
 
 
         function changeFriendOnlineStatusCount(page, FriendId, add){
@@ -455,6 +550,35 @@
      
       App.controller('main', function (page) {
             this.transition = 'slide-right';
+
+      /***********edit progile ************************/
+          $(page).on('click', '.editProfile', function(){
+            //data_user = $(this).attr('data-user');
+              //alert(data_user);
+              //console.log(data_user);
+              //console.log(this.user_id);
+              App.load('edit-profile');
+          })
+
+          App.controller('edit-profile', function(page){
+            this.transition = 'slide-left';
+              $(page).on('appShow', function(){
+              })
+          });
+
+      /***********edit progile ************************/
+
+      /************** change password ***********************/
+
+      $(page).on('click', '.changePassword', function(){
+          App.load('edit-password');
+      })
+
+      App.controller('edit-password', function(page){
+          this.transition = "slide-left";
+
+      })
+      /************** change password ***********************/
 
           cropModal = $('#cropModal');
 

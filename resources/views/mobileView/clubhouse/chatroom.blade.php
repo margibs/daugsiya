@@ -7,9 +7,6 @@
 
 <div class="app-page" data-page="chatroom">
 <div class="app-topbar"></div>
-
-    {!! csrf_field() !!}
- 	
   	<div class="app-content">
   		<div class="body" id="peopleContent">
 		  <ul class="side-nav" id="mobile-demo">
@@ -41,7 +38,7 @@
 			                @if($selectedRoom)
 								@foreach($selectedRoom->room_messages as $msg)
 								<li>
-			                    	<img src="{{$msg->user->user_detail->profile_picture ? asset('').'/user_uploads/user_'.$msg->user->user_detail->user_id.'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}">
+			                    	<img src="{{$msg->user->user_detail->profile_picture ? asset('').'/user_uploads/user_'.$msg->user->user_detail->user_id.'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" class="chatProfPic" data-id="{{ $msg->user->user_detail->user_id }}">
 			                    	<span>{{ $msg->message }}</span>
 			                	</li>
 								@endforeach
@@ -60,6 +57,85 @@
   	</div>
 </div>
 
+
+<div class="app-page" data-page="userDetails">
+<div class="app-topbar"></div>
+  <div class="app-content">
+           
+
+             <div class="pageLoading">
+                <div class="preloaderContainer">
+                      <div class="preloader-wrapper big active">
+                      <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div><div class="gap-patch">
+                          <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+             </div>
+              <div id="friendDetailContainer" style="display:none">
+                      <div class="userDetailBackground"></div>
+    <div class="userDetail">
+        <div class="upperHalf">
+            <div class="imgContainer">
+        <div class="changePicButtonContainer z-depth-1">
+            <a href="javascript:;" class="changePicButton">
+                
+                     <img src="" alt="" id="friendProfilePic">
+                
+               
+               
+            </a>
+            </div>
+
+        </div>
+          <h6></h6>
+          <div class="row userDetailActions">
+
+                <div class="col s6"><span class="actionButton">Unfriend</span></div>
+                <div class="col s6"><span id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></span></div>
+          
+          </div>
+        </div>
+        <div class="lowerHalf">
+
+
+            <div class="listFav">
+                <p class="favTitle">Favourite Games</p>
+                 <ul class="row" id="friendFavGameUl">
+
+              
+            </ul>
+            </div>
+            <div class="listFav">
+                <p class="favTitle">Games you've played</p>
+                 <ul class="row" id="friendPlayedGameUl">
+              
+            </ul>
+            </div>
+           
+        </div>
+    </div>
+                      <div id="confirmModal" class="modal">
+                      <div class="modal-content">
+                        <h5></h5>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="javascript:;" class=" modal-action modal-close waves-effect waves-green btn-flat confirmUnfriend">Yes</a>
+                        <a href="javascript:;" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+                      </div>
+                    </div>
+              </div>
+     </div>
+</div>
+
+
+
 @endsection
 
 @section('script')
@@ -67,7 +143,9 @@
 
 <script>
 
-	
+	var profileUrl = '{{ url("profile") }}';
+	var publicUrl = '{{ asset("") }}';
+	 var imageUrl = '{{ asset("uploads") }}';
 
   App.controller('chatroom', function (page){
     $(page)
@@ -85,6 +163,139 @@
 				//console.log(MESSAGE);
 			}
 			
+		});
+
+
+		$(page).on('click', '.chatProfPic', function(){
+
+			user_id = $(this).attr('data-id');
+
+			App.load('userDetails', { user_id : user_id });
+			//App.load('userDetails');
+
+		})
+
+		App.controller('userDetails', function(page, request){
+			 this.transition = 'slide-left';
+				$(page).on('appShow', function(){
+				$('#navbarTitle').text('Friend Details');
+				//alert(JSON.stringify(request));
+
+				//Hide the pageloading
+				$(page).find('.pageLoading').show();
+              	$(page).find('#friendDetailContainer').hide();
+
+				setTimeout(function(){
+					friendFavGameUl = $(page).find('#friendFavGameUl').html('');
+              		friendPlayedGameUl = $(page).find('#friendPlayedGameUl').html('');
+
+              		$.ajax({
+              			url : profileUrl+'/viewFriendProfile',
+                  		data : { user_id : USER_ID, other_person : request.user_id, _token : CSRF_TOKEN },
+                  		dataType : 'json',
+                  		type : 'POST',
+                  		success : function(data){
+                  			//console.log(data);
+                  			
+                  			$(page).find('#friendDetailContainer').show().addClass('dataLoaded');
+                  			//$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
+                  			$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/5050/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
+
+                  			friendName = data.user_detail.firstname+' '+data.user_detail.lastname;
+             				$(page).find('#friendDetailContainer h6').text(friendName);
+
+
+             				/*****************UNFRIEND AND FAVOURITE GAMES AND GAMES YOU PLAYED********************/
+				            $(page).on('click', '#messageUser', function(){
+				                App.load('privateMessage', { user_id : request.user_id, name : friendName});
+				            });
+
+				              friend_id = data.friend.friend_id;
+
+				              $(page).on('click', '.actionButton', function(){
+				                      
+				                      theModal = $(page).find('#confirmModal');
+				                      $(theModal).find('h5').text('Are you sure to unfriend '+friendName+' ?');
+				                        $(theModal).data('friend_id', request.user_id).data('id', friend_id).openModal();
+				                     });
+
+				              $.each(data.favorites, function(){
+				                       $(friendFavGameUl) 
+				                        .append(
+				                          $('<li>').addClass('col s2')
+				                            .append(
+				                              $('<a href="#">')
+				                                .append(
+				                                    $('<img>').attr('src', imageUrl+'/'+this['icon_feature_image'])
+				                                  )
+				                              )
+				                                
+				                          )
+				                  });
+				                  
+				                  $.each(data.played_games, function(){
+				                      $(friendPlayedGameUl)
+				                        .append(
+				                          $('<li>').addClass('col s2')
+				                            .append(
+				                              $('<a href="#">')
+				                                .append(
+				                                    $('<img>').attr('src', imageUrl+'/'+this['icon_feature_image'])
+				                                  )
+				                              )
+				                                
+				                          )
+				                  });
+				             /***************** UNFRIEND AND FAVOURITE GAMES AND GAMES YOU PLAYED ********************/
+
+				             
+				             /******************DISPLAY BUTTON ACCORDING TO RELATIONSHIP ****************/
+				             	 relation = data.friend.relation;
+                  				friend_id = data.friend.friend_id;
+
+                  				if(relation != 2){
+
+					                  /*  actionBtn = $('<button type="button">').data('other_person', theUser);
+
+					                    if(relation != 1){
+					                        $(actionBtn).data('friend_id', friend_id);
+					                    }*/
+
+					                    if(relation == 1){
+					                     /* $(actionBtn).text('Add Friend').data('action', 1);*/
+					                     alert('add friend');
+					                    }else if(relation == 3){
+					                    	alert('cancel friend request');
+					                      /*$(actionBtn).text('Cancel Friend Request').data('action', 2);*/
+					                    }else if(relation == 4){
+					                      /*$(actionBtn).text('Accept Friend Request').data('action', 3);*/
+
+					                      alert('Accept Friend Request');
+					                    }else if(relation == 5){
+					                     /* $(actionBtn).text('Unfriend').data('action', 4);*/
+					                     alert('Unfriend');
+					                    }
+
+					                   /* $('#profileBtn').append(actionBtn);*/
+
+					                  }else{
+					                  	alert('ako ni');
+					                  }
+
+				             /******************DISPLAY BUTTON ACCORDING TO RELATIONSHIP ****************/
+				          
+             				//hide pageLoading after successfull
+             				$(page).find('.pageLoading').hide();
+              				$(page).find('#friendDetailContainer').show();
+
+                  		},
+                  		error: function(error){
+                  			console.log(error.responseText);
+                  		}
+              		});
+
+				},2000);
+			});
 		});
 
    		socket.on('display_people', function(data){
@@ -157,7 +368,7 @@
   		 $(thePage).find('.chatBox .body ul').append(
           $('<li>')
               .append(
-                $('<img>').attr('src',data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : DEFAULT_IMAGE )
+                $('<img>').attr('src',data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : DEFAULT_IMAGE ).attr('data-id', data.user.user_id).addClass('chatProfPic')
                 )
               .append(
                   $('<span>').text(data.message)
