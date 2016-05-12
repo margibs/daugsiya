@@ -1058,7 +1058,7 @@ london = moment.tz(timeZone);
         if(data)
         {
           readUserNotifications();
-          $(theButton).bind('ckick', readUserNotifications);
+          $(theButton).bind('click', readUserNotifications);
         }
 
         $('#myNotifications').html('');

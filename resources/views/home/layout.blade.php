@@ -755,7 +755,7 @@
     <script src="{{ asset('js/tagging.js') }}"></script>
     <!--<script src="{{ elixir('js/custom/main.js') }}"></script>-->
   <script>
-
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   $(document).ready(function(){
 
     // $.ajaxSetup({
@@ -793,7 +793,7 @@
 
 
 
-    // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     var comment_connected = false;
     var login_success = false;
     var tempComment = null;

@@ -3,6 +3,7 @@
 @section('custom-styles')
 <link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
  <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+ <link rel="stylesheet" href="{{ asset('css/jrate.css') }}">
  <style>
  </style>
 @endsection
@@ -49,7 +50,7 @@
                  <ul class="row">
 
                   @foreach($user->favorites as $favorite)
-                    <li class="col s2 rateGame" data-args='{ "totalRating" : "{{ $favorite->gameRating['totalRating'] }}" , "post" : "{{ $favorite->id }}" , "slug" : "{{ $favorite->slug }}", "background_image" : "{{ $favorite->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $favorite->icon_feature_image }}"></li>
+                    <li class="col s2 rateGame" data-args='{ "user_rating" : "{{ $favorite->user_rating ? $favorite->user_rating->rating : 0 }}", "totalRating" : "{{ $favorite->gameRating['totalRating'] }}" , "post" : "{{ $favorite->id }}" , "slug" : "{{ $favorite->slug }}", "background_image" : "{{ $favorite->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $favorite->icon_feature_image }}"></li>
                   @endforeach
               
             </ul>
@@ -59,7 +60,8 @@
                  <ul class="row">
 
                    @foreach($user->played_games as $played_game)
-                    <li class="col s2"><img src="{{ asset('uploads') }}/{{ $played_game->icon_feature_image }}"></li>
+                    <li class="col s2 rateGame" data-args='{ "user_rating" : "{{ $played_game->user_rating ? $played_game->user_rating->rating : 0 }}", "totalRating" : "{{ $played_game->gameRating['totalRating'] }}" , "post" : "{{ $played_game->id }}" , "slug" : "{{ $played_game->slug }}", "background_image" : "{{ $played_game->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $played_game->icon_feature_image }}"></li>
+                    
                   @endforeach
               
             </ul>
@@ -69,7 +71,8 @@
                  <ul class="row">
 
                   @foreach($user->unplayed_games as $unplayed_game)
-                    <li class="col s2"><img src="{{ asset('uploads') }}/{{ $unplayed_game->icon_feature_image }}"></li>
+
+                   <li class="col s2 rateGame" data-args='{ "user_rating" : "{{ $unplayed_game->user_rating ? $unplayed_game->user_rating->rating : 0 }}", "totalRating" : "{{ $unplayed_game->gameRating['totalRating'] }}" , "post" : "{{ $unplayed_game->id }}" , "slug" : "{{ $unplayed_game->slug }}", "background_image" : "{{ $unplayed_game->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $unplayed_game->icon_feature_image }}"></li>
                   @endforeach
               
             </ul>
@@ -91,12 +94,20 @@
   </div>
      <div id="rateModal" class="modal">
     <div class="modal-content">
-       <div class="ratingArea">
-           <input type="hidden" step="0.5" id="backingfld" class="rating">
-                <div class="rateit" data-rateit-backingfld="#backingfld" data-rateit-resetable="false" data-rateit-ispreset="true" id="rateMe"></div> 
-       </div>
+    <h4></h4>
+      <div id="jRate">
+           
+
+      </div>
         <button type="button" class="buttonone" id="playGame"> <i class="fa fa-play"></i> </button>
                                 <button type="button"><a href="javascript:;" id="goToGame"> <i class="fa fa-book"></i> </a></button>
+    </div>
+  </div>
+     <div id="selectCasinoModal" class="modal">
+    <div class="modal-content">
+    <h4>Select from these casinos:</h4>
+          <ul id="selectCasino">
+          </ul>
     </div>
   </div>
 
@@ -317,6 +328,7 @@
 @section('app-js')
 <script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
 <script src="{{ asset('js/jquery.rateit.min.js') }}"></script>
+<script src="{{ asset('js/jonasRate.js') }}"></script>
 <script>
 
 
@@ -591,16 +603,97 @@
               });
 
              
-
+              ratingAJAX = false;
             $(page).on('click', '.rateGame', function(){
 
                 args = JSON.parse($(this).attr('data-args'));
                 console.log(args);
                   theModal = $('#rateModal');
+                  theModal.data('post_id', args.post);
+                  rating = parseInt(args.user_rating) || 0;
 
-                $(theModal).find('#playGame').unbind('click').bind('click', function(){
-                    /*alert(args.post);*/
+                  if(rating > 0){
+                    theModal.find('h4').text('My Rating');
+                  }else{
+                     theModal.find('h4').text('My Rating - NOT RATED');
+                  }
+
+                  theModal.find("#jRate").jRate(rating, function(val){
+
+                    if(val && !ratingAJAX){
+                      ratingAJAX = true;
+                            $.ajax({
+          type : 'POST',
+          url: gameExpUrl+'/rateGame',
+          data : { rating : val, user_id : userId , post_id : args.post , _token : CSRF_TOKEN },
+          dataType : 'json',
+          success : function(data){
+            ratingAJAX = false;
+                                theModal.find('h4').text('Thanks for rating!');
+                    setTimeout(function(){ theModal.find('h4').text('My Rating') }, 1000);
+          },error : function(xhr){
+            console.log(xhr.responseText);
+          }
+
+        });
+                    }
+
+                  });
+
+
+    var playNowAJAX = false;
+    
+    $(theModal).find('#playGame').unbind('click').bind('click', function(){
+      
+      post_id = $(theModal).data('post_id');
+      if(post_id){
+          $('#selectCasinoModal').openModal();
+           if(!playNowAJAX){
+          playNowAJAX = true;
+      $.ajax({
+        type : 'POST',
+        url : gameExpUrl+'/playNow',
+        data : { _token : CSRF_TOKEN, post_id : post_id },
+        dataType : 'json',
+        success : function(data){
+          console.log(data);
+
+          $('#selectCasino').html('');
+          playNowAJAX = false;
+
+          if(data && data.length){
+            
+            $.each(data, function(){
+
+              casino = this.casino;
+              $('#selectCasino').append(
+                  $('<li>')
+                      .append(
+                        $('<a href="'+baseUrl+'/'+casino.id+'" target="_blank">')
+                            .append(
+                              $('<img alt="">').attr('src', '{{url("uploads")}}/'+casino.claim_image)
+                              )
+                        )
+                )
+            });
+          }else{
+            $('#selectCasino').append($('<li>').text('No Casino Available'));
+          }
+          
+        },error : function(xhr){
+          console.log(xhr.responseText);
+        }
+      });
+      }
+    }
+      
+            /*<li><a href="http://daugsiya.dev/3" target="_blank"><img alt="" src="http://daugsiya.dev/uploads/13553_hardrock2.jpg"></a></li>*/
+       /*                  
+
+     
+      }*/
                 });
+
                 $(theModal).find('#goToGame').attr('href', baseUrl+'/'+args.slug);
  
 

@@ -219,8 +219,7 @@ public function searchHashGame(Request $request){
     }
 
     public function playNow(Request $request){
-
-        $post = Post::find($request->post_id);
+        $post = Post::findOrFail($request->post_id);
 
         $category = $post->categories_with_casino()->first();
 

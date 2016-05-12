@@ -5,8 +5,8 @@ left: 0;
     position: absolute;
 }
 
-.pageModal{
-    border:1px solid #ccc;
+.pageModal .app-content{
+    border:10px solid #ccc;
 }
 
 .app-page .app-content{
@@ -308,10 +308,11 @@ display: inline-block !important;
 }
 
 .messageList li .msgContent{
-    position: absolute;
+    position: relative;
     left: 0;
-        right: 0;
+    right: 0;
     margin-left: 80px;
+
 }
 
 .messageList li .msgContent .info h6{
@@ -488,6 +489,11 @@ display: inline-block !important;
     background: rgba(0, 0, 0, 0.73);
 }
 
+#rateModal h4{
+    text-align: center;
+    color:#fff;
+}
+
 #rateModal button,
 #rateModal button a{
         border: none;
@@ -553,6 +559,40 @@ display: inline-block !important;
 
 .follow_up{
     display: none;
+}
+#selectCasino{
+        text-align: center;
+}
+#selectCasino li{
+        width: 31%;
+        display: inline-block;
+}
+
+
+
+#selectCasino li img{
+       width: 95%;
+    margin: auto;
+    display: block;
+}
+
+#selectCasino li:first-child:nth-last-child(1) {
+    width: 50%;
+}
+
+#selectCasino li:first-child:nth-last-child(2),
+#selectCasino li:first-child:nth-last-child(2) ~ li {
+    width: 48%;
+}
+
+#selectCasino li:first-child:nth-last-child(3),
+#selectCasino li:first-child:nth-last-child(3) ~ li {
+      width: 30%;
+}
+
+#selectCasino li:first-child:nth-last-child(4),
+#selectCasino li:first-child:nth-last-child(4) ~ li {
+       width: 48%;
 }
 
 /* .userDetail .imgContainer{

@@ -97,8 +97,8 @@
           <h6></h6>
           <div class="row userDetailActions">
 
-                <div class="col s6"><span class="actionButton">Unfriend</span></div>
-                <div class="col s6"><span id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></span></div>
+                <div class="col s8"><span class="actionButton" id="toggleRelationship">Unfriend</span></div>
+                <div class="col s4"><span id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></span></div>
           
           </div>
         </div>
@@ -146,6 +146,8 @@
 	var profileUrl = '{{ url("profile") }}';
 	var publicUrl = '{{ asset("") }}';
 	 var imageUrl = '{{ asset("uploads") }}';
+   var friendUrl = '{{ url("friends") }}';
+
 
   App.controller('chatroom', function (page){
     $(page)
@@ -175,7 +177,47 @@
 
 		})
 
-		App.controller('userDetails', function(page, request){
+		$(page).on('appShow', function(){
+			$(page).find('#peopleContent').show();
+			$('.drag-target:eq(1)').show();
+		});
+		$(page).on('appForward', function(){
+			$(page).find('#peopleContent').hide();
+			$('.drag-target:eq(1)').hide();
+		});
+
+		
+
+   		socket.on('display_people', function(data){
+
+    	//console.log('display_people');
+    	//console.log(data);
+    	var count = Object.keys(data).length;
+ 		//console.log(count);
+ 		$(page).find('#people_count').html('');
+ 		$(page)	
+   			.find('#people_count').append('<span> ' + count + ' people are talking now</span>');
+
+   			$(page)
+    		.find('#mobile-demo').html('');
+    		//console.log(BASE_URL);
+	   		$.each(data, function() {
+	   			$(page)
+	    		.find('#mobile-demo').append(
+	    				$('<li>').append(
+	    					$('<div>').addClass('chip').append(
+	    						$('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE)
+	    					)
+	    					.append(
+			                  $('<span>').text(this.name)
+			                )
+	    				)
+	    		)
+	   		});
+   		});
+  });
+
+App.controller('userDetails', function(page, request){
 			 this.transition = 'slide-left';
 				$(page).on('appShow', function(){
 				$('#navbarTitle').text('Friend Details');
@@ -184,6 +226,104 @@
 				//Hide the pageloading
 				$(page).find('.pageLoading').show();
               	$(page).find('#friendDetailContainer').hide();
+
+
+   $(page).find('#toggleRelationship').on('click', function(){
+
+              		   	theButton = this;
+
+    other_person = $(this).data('other_person');
+    action = $(this).data('action');
+    friend_id = $(this).data('friend_id');
+
+
+    if(action){
+
+        if(other_person && action == 1){
+
+	           $.ajax({
+
+			          url : friendUrl+'/addFriend',
+			          data : { friend_id : other_person, _token : CSRF_TOKEN },
+			          type : 'POST',
+			          dataType : 'json',
+			          success : function(data){
+
+			            $(theButton).text('Cancel Friend Request').data('action', 2).data('other_person', other_person).data('friend_id', data.id);
+
+			            socket.emit('send_addFriend_request', { from : userId, to : other_person, id : data.id });
+
+			          },error : function(xhr){
+			            console.log(xhr.responseText);
+			          }
+
+			      });
+
+        }else if(action == 2 && friend_id && other_person){
+
+				          $.ajax({
+
+				          url : friendUrl+'/cancelFriendRequest',
+				          data : { id : friend_id, _token : CSRF_TOKEN },
+				          type : 'POST',
+				          dataType : 'json',
+				          success : function(deleted){
+				     
+				              $(theButton).text('Add Friend').data('action', 1).data('other_person', other_person);
+
+
+				          },error : function(xhr){
+				            console.log(xhr.responseText);
+				          }
+
+				      });
+        }else if(action == 3 && friend_id && other_person){
+          $.ajax({
+
+            url : friendUrl+'/acceptFriendRequest',
+            data : { id : friend_id , _token : CSRF_TOKEN },
+            type : 'POST',
+            dataType : 'json',
+            success : function(data){
+
+              if(data){
+                socket.emit('friend_request_accepted', { other_person : other_person });
+              }
+
+              $(theButton).data('action', 4).data('other_person', other_person).data('friend_id', friend_id).text('Unfriend');
+
+
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+
+          });
+
+        }else if(action == 4 && friend_id && other_person){
+
+        	$.ajax({
+
+            url : friendUrl+'/unFriend',
+            data : { id : friend_id , _token : CSRF_TOKEN },
+            type : 'POST',
+            dataType : 'json',
+            success : function(data){
+
+              $(theButton).data('action', 1).data('other_person', other_person).text('Add Friend');
+
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+
+          });
+
+        }
+
+
+    }
+
+
+   });
 
 				setTimeout(function(){
 					friendFavGameUl = $(page).find('#friendFavGameUl').html('');
@@ -211,13 +351,6 @@
 				            });
 
 				              friend_id = data.friend.friend_id;
-
-				              $(page).on('click', '.actionButton', function(){
-				                      
-				                      theModal = $(page).find('#confirmModal');
-				                      $(theModal).find('h5').text('Are you sure to unfriend '+friendName+' ?');
-				                        $(theModal).data('friend_id', request.user_id).data('id', friend_id).openModal();
-				                     });
 
 				              $.each(data.favorites, function(){
 				                       $(friendFavGameUl) 
@@ -255,31 +388,27 @@
 
                   				if(relation != 2){
 
-					                  /*  actionBtn = $('<button type="button">').data('other_person', theUser);
+					                    actionBtn = $(page).find('#toggleRelationship').data('other_person', request.user_id);
 
 					                    if(relation != 1){
 					                        $(actionBtn).data('friend_id', friend_id);
-					                    }*/
-
-					                    if(relation == 1){
-					                     /* $(actionBtn).text('Add Friend').data('action', 1);*/
-					                     alert('add friend');
-					                    }else if(relation == 3){
-					                    	alert('cancel friend request');
-					                      /*$(actionBtn).text('Cancel Friend Request').data('action', 2);*/
-					                    }else if(relation == 4){
-					                      /*$(actionBtn).text('Accept Friend Request').data('action', 3);*/
-
-					                      alert('Accept Friend Request');
-					                    }else if(relation == 5){
-					                     /* $(actionBtn).text('Unfriend').data('action', 4);*/
-					                     alert('Unfriend');
 					                    }
 
-					                   /* $('#profileBtn').append(actionBtn);*/
+					                    if(relation == 1){
+					                      $(actionBtn).text('Add Friend').data('action', 1);
+					                    }else if(relation == 3){
+					                      $(actionBtn).text('Cancel Friend Request').data('action', 2);
+					                    }else if(relation == 4){
+					                      $(actionBtn).text('Accept Friend Request').data('action', 3);
+
+					                    }else if(relation == 5){
+					                      $(actionBtn).text('Unfriend').data('action', 4);
+					                    }
+
+					                    $('#profileBtn').append(actionBtn);
 
 					                  }else{
-					                  	alert('ako ni');
+					                  	$(page).find('#toggleRelationship').hide();
 					                  }
 
 				             /******************DISPLAY BUTTON ACCORDING TO RELATIONSHIP ****************/
@@ -297,35 +426,6 @@
 				},2000);
 			});
 		});
-
-   		socket.on('display_people', function(data){
-
-    	//console.log('display_people');
-    	//console.log(data);
-    	var count = Object.keys(data).length;
- 		//console.log(count);
- 		$(page).find('#people_count').html('');
- 		$(page)	
-   			.find('#people_count').append('<span> ' + count + ' people are talking now</span>');
-
-   			$(page)
-    		.find('#mobile-demo').html('');
-    		//console.log(BASE_URL);
-	   		$.each(data, function() {
-	   			$(page)
-	    		.find('#mobile-demo').append(
-	    				$('<li>').append(
-	    					$('<div>').addClass('chip').append(
-	    						$('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE)
-	    					)
-	    					.append(
-			                  $('<span>').text(this.name)
-			                )
-	    				)
-	    		)
-	   		});
-   		});
-  });
 
 
   	App.load('chatroom');

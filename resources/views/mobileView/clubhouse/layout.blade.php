@@ -132,10 +132,8 @@
 
     @yield('content')
 
-      <div class="app-page pageModal" data-page="myMessages">
+      <div class="app-page" data-page="myMessages">
       <div class="app-topbar"></div>
-  <div class="app-content">
-
     <div class="app-content defaultBg">
 
       <div class="pageLoading">
@@ -159,46 +157,39 @@
                      </ul>
               </div>
       </div>     
-      </div>
 </div>
       <div class="app-page" data-page="myGlobalNotifs">
       <div class="app-topbar"></div>
-  <div class="app-content">
-
     <div class="app-content defaultBg">
 
-      <!-- <div class="pageLoading">
-                <div class="preloaderContainer">
-                      <div class="preloader-wrapper big active">
-                      <div class="spinner-layer spinner-red-only">
-                        <div class="circle-clipper left">
-                          <div class="circle"></div>
-                        </div><div class="gap-patch">
-                          <div class="circle"></div>
-                        </div><div class="circle-clipper right">
-                          <div class="circle"></div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-             </div> -->
+     <div class="pageLoading">
+               <div class="preloaderContainer">
+                     <div class="preloader-wrapper big active">
+                     <div class="spinner-layer spinner-red-only">
+                       <div class="circle-clipper left">
+                         <div class="circle"></div>
+                       </div><div class="gap-patch">
+                         <div class="circle"></div>
+                       </div><div class="circle-clipper right">
+                         <div class="circle"></div>
+                       </div>
+                     </div>
+                   </div>
+               </div>
+            </div>
 
               <div id="yourGlobalNotifs" class="col s12">
 
-              wwww
             <ul class="messageList">             
                      </ul>
               </div>
       </div>     
-      </div>
 </div>
       <div class="app-page" data-page="myUserNotifs">
       <div class="app-topbar"></div>
-  <div class="app-content">
 
     <div class="app-content defaultBg">
-            zzzz
-      <!-- <div class="pageLoading">
+       <div class="pageLoading">
                 <div class="preloaderContainer">
                       <div class="preloader-wrapper big active">
                       <div class="spinner-layer spinner-red-only">
@@ -212,18 +203,17 @@
                       </div>
                     </div>
                 </div>
-             </div> -->
+             </div>
 
               <div id="yourUserNotifs" class="col s12">
             <ul class="messageList">             
                      </ul>
               </div>
       </div>     
-      </div>
 </div>
       <div class="app-page" data-page="privateMessage">
       <div class="app-topbar"></div>
-  <div class="app-content">
+  <div class="app-content defaultBg">
                      <div class="pageLoading">
                 <div class="preloaderContainer">
                       <div class="preloader-wrapper big active">
@@ -293,6 +283,8 @@
     $(function(){
 
       timeZone = 'Europe/London';
+
+      london = moment.tz(timeZone);
 
       $('.timestamp').each(function(){
       timestamp = this;
@@ -373,52 +365,261 @@
           });
 
 
+      function readUserNotifs(){
+                    $.ajax({
+                      url : profileUrl+'/readFriendRequests',
+                      data : { user_id : userId, _token : CSRF_TOKEN },
+                      dataType : 'json',
+                      type : 'POST',
+                      success : function(data){
 
+                      },error : function(xhr){
+                            console.log(xhr.responseText);
+                          }
+                      });
+      }
 
-            socket.on('post_recommendGame_notification', function(friend){
+            function readGlobalNotifs(){
+        $.ajax({
+            url : notifUrl+'/readGlobalNotifications',
+            data : { _token : CSRF_TOKEN },
+            dataType : 'json',
+            type : 'POST',
+            success : function(data){
+             
+             console.log('readGlobalNotification');
+             console.log(data);
 
-        console.log('post_recommendGame_notification');
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+        });
+    }
 
-         span = $('<span>').addClass('notifcount animated bounce bounceInUp');
+    socket.on('post_recommendGame_notification', function(friend){
+            
+
+            if(App.current() == 'myUserNotifs'){
+
+              readUserNotifs();
+
+              thePage = App.getPage();
+                   $(thePage).find('#yourUserNotifs .messageList').prepend(
+                      $('<li>').append(
+                $('<a href="'+baseUrl+'/'+friend.game.slug+'">')
+                    .append(
+                          $('<img>').attr('src', friend.user.user_detail.profile_picture ? baseUrl+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+                    )
+                        .append(
+                            $('<div>').addClass('msgContent')
+                                .append(
+                                    $('<div>').addClass('info')
+                                        .append(
+                                          $('<h6>').text(friend.user.user_detail.firstname+' '+friend.user.user_detail.lastname+' recommended you to play. ')
+                                            )
+                                            .append(
+                                              $('<span>').addClass('timestamp').livestamp(london.format())
+                                              )
+                                          )
+                                .append(
+                                    $('<p>').text('Click to Play')
+                                  )
+                                    )
+                              )
+                    );
+            }else{
+                  span = $('<span>').addClass('notifcount animated bounce bounceInUp');
                 notifcount = 1;
                 if($('#unreadUserNotification').find('.notifcount').length){
                   notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
                 }
 
                 $('#unreadUserNotification').html('').append($(span).text(notifcount));
- 
+            }
 
       });
 
        socket.on('post_accepted_friend_notification', function(friend){
 
-          span = $('<span>').addClass('notifcount animated bounce bounceInUp');
+        if(App.current() == 'myUserNotifs'){
+               readUserNotifs();
+            thePage = App.getPage();
+
+
+            $(thePage).find('#yourUserNotifs .messageList').prepend(
+                  $('<li>')
+            .append(
+              $('<img>').attr('src', friend.user.profile_picture ? baseUrl+'/'+friend.user.profile_picture : defaultProfilePic )
+            )
+            .append(
+              $('<div>').addClass('msgContent')
+                  .append(
+                      $('<div>').addClass('info')
+                      .append(
+                        $('<h6>').text('You and '+friend.user.user_detail.firstname+' '+friend.user.user_detail.lastname+' are now friends!')
+                          )
+
+                        .append(
+                          $('<span>').addClass('timestamp').livestamp(moment.tz(london.format() ))
+                          )
+                        )
+                      .append(
+                          $('<div>').addClass('actionList').data('user', friend.user.user_detail.user_id)
+                      .append(
+                        $('<button>').text('Message').addClass('pmFriend').data('user', friend.user.user_detail.user_id).data('name', friend.user.user_detail.firstname)
+                      )
+                    )
+                  )
+            );
+
+
+          }else{
+
+               span = $('<span>').addClass('notifcount animated bounce bounceInUp');
               notifcount = 1;
               if($('#unreadUserNotification').find('.notifcount').length){
                 notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
               }
 
               $('#unreadUserNotification').html('').append($(span).text(notifcount));   
+          }
+
+         
 
        });
 
              socket.on('post_global_notification', function(notification){
 
+          if(notification && App.current() == 'myGlobalNotifs'){
 
-          console.log('post_global_notification');
-          console.log(notification);
+              thePage = App.getPage();
 
-          if(notification){
+              readGlobalNotifs();
+
+               li = $('<li>');
+
+                container = $(thePage).find('#yourGlobalNotifs .messageList');
 
 
-            span = $('<span>').addClass('notifcount');
+                      if(notification.type == 1){
+
+                        container.prepend(
+                          $(li)
+                              .append(
+                                $('<a href="'+baseUrl+'/'+notification.game.slug+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text('New Game has Added!')
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(london.format())
+                                                  )
+                                            )
+                                        )
+                                )
+                          );
+
+                      }else if(notification.type == 2){
+                        
+                         container.prepend(
+                          $(li)
+                              .append(
+                                $('<a href="'+baseUrl+'/clubhouse/chatroom/'+notification.room.name+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text('New Chatroom Created!')
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(london.format())
+                                                  )
+                                            )
+                                        )
+                                )
+                          );
+
+                      }else if(notification.type == 3){
+
+                      container.prepend(
+                          $(li)
+                              .append(
+                                $('<a href="'+baseUrl+'/clubhouse/chatroom/'+notification.room.name+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text(notification.moderator.user_detail.firstname+' '+notification.moderator.user_detail.lastname+' is now in '+notification.room.name)
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(london.format())
+                                                  )
+                                            )
+                                        )
+                                )
+                          );
+
+                      }else if(notification.type == 4){
+
+
+                              var a = $('<a href="'+baseUrl+'/'+notification.custom_notification.link+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text(notification.custom_notification.description)
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(london.format())
+                                                  )
+                                            )
+                                        )
+
+                  if(notification.custom_notification.image){
+
+
+                                a = $('<a href="'+baseUrl+'/'+notification.custom_notification.link+'">')
+
+                                      .append($('<img>').attr('src', baseUrl+'/uploads/'+notification.custom_notification.image))
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text(notification.custom_notification.description)
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(london.format())
+                                                  )
+                                            )
+                                        )
+                  }
+     
+
+                         container.prepend(
+                          $(li)
+                              .append(
+                                a
+                                )
+                              );
+
+                      }
+
+
+          }else{
+                        span = $('<span>').addClass('notifcount animated bounce bounceInUp');
               notifcount = 1;
               if($('#unreadGlobalNotification').find('.notifcount').length){
                 notifcount = parseInt($('#unreadGlobalNotification').find('.notifcount').text())+1;
               }
 
               $('#unreadGlobalNotification').html('').append($(span).text(notifcount));
-
           }
 
 
@@ -427,59 +628,208 @@
 
       socket.on('post_custom_notification', function(notification){
 
+         if(App.current() == 'myGlobalNotifs' && notification){
+               thePage = App.getPage();
+
+               readGlobalNotifs();
+
+               li = $('<li>');
+
+                container = $(thePage).find('#yourGlobalNotifs .messageList');
+
+                $.each(notification, function(){
+
+                    data = this;
+                      var a = $('<a href="'+baseUrl+'/'+data.custom_notification.link+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text(data.custom_notification.description)
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(london.format())
+                                                  )
+                                            )
+                                        )
+
+                  if(data.custom_notification.image){
+
+
+                                a = $('<a href="'+baseUrl+'/'+data.custom_notification.link+'">')
+
+                                      .append($('<img>').attr('src', baseUrl+'/uploads/'+data.custom_notification.image))
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text(data.custom_notification.description)
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(london.format())
+                                                  )
+                                            )
+                                        )
+                  }
+     
+
+                         container.prepend(
+                          $(li)
+                              .append(
+                                a
+                                )
+                              );
+                  });
+
+         }else{
+
             $.each(notification, function(){
 
-              data = this;
+                data = this;
 
 
-              span = $('<span>').addClass('notifcount');
-              notifcount = 1;
-              if($('#unreadGlobalNotification').find('.notifcount').length){
-                notifcount = parseInt($('#unreadGlobalNotification').find('.notifcount').text())+1;
-              }
+                span = $('<span>').addClass('notifcount animated bounce bounceInUp');
+                notifcount = 1;
+                if($('#unreadGlobalNotification').find('.notifcount').length){
+                  notifcount = parseInt($('#unreadGlobalNotification').find('.notifcount').text())+1;
+                }
 
-              $('#unreadGlobalNotification').html('').append($(span).text(notifcount));
+                $('#unreadGlobalNotification').html('').append($(span).text(notifcount));
 
-            });
+              });
+         }
+
+
+              
+
+
+
 
       });
    socket.on('post_friendTag_notification', function(data){
 
-          span = $('<span>').addClass('notifcount');
-      notifcount = 1;
 
-      if($('#unreadUserNotification').find('.notifcount').length)
-      {
-        notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
-      }
+              if(App.current() == 'myUserNotifs'){
 
-      $('#unreadUserNotification').html('').append($(span).text(notifcount));
+              readUserNotifs();
+
+              thePage = App.getPage();
+
+                 data_url = data.content;
+
+                      if(data.type == 3 || data.type == 2){
+                        data_url = data.content.slug;
+                      }
+
+                      data_url = baseUrl+'/'+data_url;
+
+                       $(thePage).find('#yourUserNotifs .messageList').prepend(
+                        $('<li>').append(
+                            $('<a href="'+data_url+'">')
+                                .append(
+                                      $('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+                                )
+                                    .append(
+                                        $('<div>').addClass('msgContent')
+                                            .append(
+                                                $('<div>').addClass('info')
+                                                    .append(
+                                                      $('<h6>').text(data.user.user_detail.firstname+' '+data.user.user_detail.lastname+' tagged you in a comment. ')
+                                                        )
+                                                        .append(
+                                                          $('<span>').addClass('timestamp').livestamp(london.format() )
+                                                          )
+                                                      )
+                                                )
+                          )
+                      );
+
+
+            }else{
+
+              span = $('<span>').addClass('notifcount animated bounce bounceInUp');
+                notifcount = 1;
+
+                if($('#unreadUserNotification').find('.notifcount').length)
+                {
+                  notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
+                }
+
+                $('#unreadUserNotification').html('').append($(span).text(notifcount));
+            }
+
+
       });
 
 
 socket.on('post_addFriend_request', function(request_id, request){
 
-    console.log('post_addFriend_request');
-    console.log(request);
 
-          span = $('<span>').addClass('notifcount');
-        notifcount = 1;
+          if(App.current() == 'myUserNotifs'){
 
-      if($('#unreadUserNotification').find('.notifcount').length)
-      {
-        notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
-      }
+              readUserNotifs();
 
-      $('#unreadUserNotification').html('').append($(span).text(notifcount));
+              thePage = App.getPage();
+
+
+              requestHtml = $('<li>').attr('id', 'friend-request-'+request.user_id)
+            .append(
+              $('<img>').attr('src', request.profile_picture ? baseUrl+'/'+request.profile_picture : defaultProfilePic )
+            )
+            .append(
+              $('<div>').addClass('msgContent')
+                  .append(
+                      $('<div>').addClass('info')
+                      .append(
+                        $('<h6>').text(request.name)
+                          )
+
+                        .append(
+                          $('<span>').addClass('timestamp').livestamp(london.format() )
+                          )
+                        )
+                    .append(
+                          $('<div>').addClass('actionList')
+                      .append(
+                        $('<button>').text('Accept').addClass('acceptFriend').data('id', request_id).data('user', request.user_id).data('name', request.name)
+                      )
+                      .append(
+                        $('<button>').text('Decline').addClass('declineFriend').data('id', request_id)
+                      )
+                    )
+                  );
+
+
+              if($(thePage).find('#friend-request-'+request.user_id).length){
+                     $(thePage).find('#friend-request-'+request.user_id).replaceWith(requestHtml);
+              }else{
+                 $(thePage).find('#yourUserNotifs .messageList').prepend(requestHtml);
+              }
+
+              
+
+
+            }else{
+
+                      span = $('<span>').addClass('notifcount animated bounce bounceInUp');
+                    notifcount = 1;
+
+                  if($('#unreadUserNotification').find('.notifcount').length)
+                  {
+                    notifcount = parseInt($('#unreadUserNotification').find('.notifcount').text())+1;
+                  }
+
+                  $('#unreadUserNotification').html('').append($(span).text(notifcount));
+            }
+
+
 
   });
 
 
-              socket.on('post_private_message', function(message){
-          console.log('you got a private message!');
-        /*  console.log(profileImage);*/
-          console.log(publicUrl+'/'+message.from.profile_picture );
-          console.log(message);
+    socket.on('post_private_message', function(message){
           thePage = App.getPage();
 
           if(message.to == userId){
@@ -500,7 +850,7 @@ socket.on('post_addFriend_request', function(request_id, request){
             }else{
 
 
-                 span = $('<span>').addClass('notifcount');
+                 span = $('<span>').addClass('notifcount animated bounce bounceInUp');
         notifcount = 1;
                     if($('#unreadMessageNotification').find('.notifcount').length)
                     {
@@ -515,17 +865,452 @@ socket.on('post_addFriend_request', function(request_id, request){
       });
 
             App.controller('myGlobalNotifs', function(page, request){
-                 this.transition = 'slide-left';
+                  this.transition = 'slide-left';
+                  this.restorable = false;
+                     $(page).on('appShow', function(){
+                        $('#navbarTitle').text('All Notifications');
+
+                    });
+
+                    $(page).find('.pageLoading').show();
+                    $(page).find('#yourGlobalNotifs').hide();
+
+
+                    setTimeout(function(){
+                        $.ajax({
+                              url : notifUrl+'/getGlobalNotifications',
+                              data : { _token : CSRF_TOKEN },
+                              dataType : 'json',
+                              type : 'POST',
+                              success : function(data){
+
+
+              if($('#unreadGlobalNotification').find('.notifcount').text()){
+
+                  $('#unreadGlobalNotification').find('.notifcount').remove();
+                  
+                $.ajax({
+                    url : notifUrl+'/readGlobalNotifications',
+                    data : { _token : CSRF_TOKEN },
+                    dataType : 'json',
+                    type : 'POST',
+                    success : function(data){
+             
+                        console.log('readGlobalNotification');
+                        console.log(data);
+
+                    },error : function(xhr){
+                          console.log(xhr.responseText);
+                        }
+                    });
+                 }
+
+                    container = $(page).find('.messageList');
+
+                    $.each(data, function(){
+
+                      notification = this;
+
+
+                      li = $('<li>');
+
+
+                      if(notification.type == 1){
+
+                        container.append(
+                          $(li)
+                              .append(
+                                $('<a href="'+baseUrl+'/'+notification.game.slug+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text('New Game has Added!')
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(moment.tz(notification.created_at, timeZone).format() )
+                                                  )
+                                            )
+                                        )
+                                )
+                          );
+
+                      }else if(notification.type == 2){
+                        
+                         container.append(
+                          $(li)
+                              .append(
+                                $('<a href="'+baseUrl+'/clubhouse/chatroom/'+notification.room.name+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text('New Chatroom Created!')
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(moment.tz(notification.created_at, timeZone).format() )
+                                                  )
+                                            )
+                                        )
+                                )
+                          );
+
+                      }else if(notification.type == 3){
+
+                      container.append(
+                          $(li)
+                              .append(
+                                $('<a href="'+baseUrl+'/clubhouse/chatroom/'+notification.room.name+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text(notification.moderator.user_detail.firstname+' '+notification.moderator.user_detail.lastname+' is now in '+notification.room.name)
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(moment.tz(notification.created_at, timeZone).format() )
+                                                  )
+                                            )
+                                        )
+                                )
+                          );
+
+                      }else if(notification.type == 4){
+
+
+                              var a = $('<a href="'+baseUrl+'/'+notification.custom_notification.link+'">')
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text(notification.custom_notification.description)
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(moment.tz(notification.created_at, timeZone).format() )
+                                                  )
+                                            )
+                                        )
+
+                  if(notification.custom_notification.image){
+
+
+                                a = $('<a href="'+baseUrl+'/'+notification.custom_notification.link+'">')
+
+                                      .append($('<img>').attr('src', baseUrl+'/uploads/'+notification.custom_notification.image))
+                                      .append(
+                                        $('<div>').addClass('msgContent')
+                                          .append(
+                                            $('<div>').addClass('info')
+                                                .append(
+                                                    $('<h6>').text(notification.custom_notification.description)
+                                                  )
+                                                .append(
+                                                    $('<span>').addClass('timestamp').livestamp(moment.tz(notification.created_at, timeZone).format() )
+                                                  )
+                                            )
+                                        )
+                  }
+     
+
+                         container.append(
+                          $(li)
+                              .append(
+                                a
+                                )
+                              );
+
+                      }
+
+
+
+                    });
+                                
+                               $(page).find('.pageLoading').hide();
+                                 $(page).find('#yourGlobalNotifs').show();
+
+                              },error : function(xhr){
+                                console.log(xhr.responseText);
+                              }
+                          });
+                      }, 2000);
 
             });
             App.controller('myUserNotifs', function(page, request){
-                 this.transition = 'slide-left';
+                  this.transition = 'slide-left';
+                  this.restorable = false;
+
+                  $(page).on('appShow', function(){
+                        $('#navbarTitle').text('Friend Requests');
+                        });
+
+                   $(page).find('.pageLoading').show();
+                    $(page).find('#youUserNotifs').hide();
+
+                        $(page).on('click', '.acceptFriend', function(){
+
+      data_id = $(this).data('id');
+      user = $(this).data('user');
+      name = $(this).data('name');
+      $(this).parents('li').find('.actionList').html('')
+
+        .append(
+            $('<span>').text('Request accepted! ').css('font-size', '12px')
+
+              .append(
+                $('<button>').text('Message').data('user', user).data('name', name).addClass('pmFriend')
+                )
+          );
+
+      $.ajax({
+        url : friendUrl+'/acceptFriendRequest',
+        data : { _token : CSRF_TOKEN, id : data_id },
+        type : 'POST',
+        dataType : 'json',
+        success : function(data){
+          if(data){
+                  socket.emit('friend_request_accepted', { other_person : user });
+                }
+        },error : function (xhr){
+          console.log(xhr.responseText);
+        }
+
+      });
+
+    });
+
+  $(page).on('click', '.pmFriend', function(){
+
+    user = $(this).data('user');
+      name = $(this).data('name');
+
+          App.load('privateMessage', { user_id : user, name : name});
+  });
+    
+    $(page).on('click', '.declineFriend', function(){
+
+        data_id = $(this).data('id');
+
+        $(this).parents('li').remove();
+
+         $.ajax({
+            url : friendUrl+'/cancelFriendRequest',
+            data : { _token : CSRF_TOKEN, id : data_id },
+            type : 'POST',
+            dataType : 'json',
+            success : function(data){
+              console.log(data);
+            },error : function (xhr){
+              console.log(xhr.responseText);
+            }
+
+          });
+
+    });
+
+                 setTimeout(function(){
+                        $.ajax({
+                              url : profileUrl+'/getFriendRequests',
+                              data : { user_id : userId, _token : CSRF_TOKEN },
+                              dataType : 'json',
+                              type : 'POST',
+                              success : function(data){
+
+
+                 if($('#unreadUserNotification').find('.notifcount').text()){
+
+                  $('#unreadUserNotification').find('.notifcount').remove();
+                      $.ajax({
+                      url : profileUrl+'/readFriendRequests',
+                      data : { user_id : userId, _token : CSRF_TOKEN },
+                      dataType : 'json',
+                      type : 'POST',
+                      success : function(data){
+
+                      },error : function(xhr){
+                            console.log(xhr.responseText);
+                          }
+                      });
+                 }
+
+          container = $(page).find('.messageList');
+
+        $.each(data, function(){
+
+          li = $('<li>');
+
+          request = this;
+          if(request.type == 0)
+          {
+
+            $(li).attr('id', 'friend-request-'+request.user_id)
+            .append(
+              $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+            )
+            .append(
+              $('<div>').addClass('msgContent')
+                  .append(
+                      $('<div>').addClass('info')
+                      .append(
+                        $('<h6>').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname)
+                          )
+
+                        .append(
+                          $('<span>').addClass('timestamp').livestamp(moment.tz(request.created_at, timeZone).format() )
+                          )
+                        )
+                    .append(
+                          $('<div>').addClass('actionList')
+                      .append(
+                        $('<button>').text('Accept').addClass('acceptFriend').data('id', request.id).data('user', request.user_id).data('name', request.user.user_detail.firstname)
+                      )
+                      .append(
+                        $('<button>').text('Decline').addClass('declineFriend').data('id', request.id)
+                      )
+                    )
+                  );
+
+          }
+          else if(request.type == 1)
+          {
+             $(li)
+            .append(
+              $('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
+            )
+            .append(
+              $('<div>').addClass('msgContent')
+                  .append(
+                      $('<div>').addClass('info')
+                      .append(
+                        $('<h6>').text('You and '+request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' are now friends!')
+                          )
+
+                        .append(
+                          $('<span>').addClass('timestamp').livestamp(moment.tz(request.created_at, timeZone).format() )
+                          )
+                        )
+                      .append(
+                          $('<div>').addClass('actionList').data('user', request.user.user_detail.user_id)
+                      .append(
+                         $('<button>').text('Message').addClass('pmFriend').data('user', request.user.user_detail.user_id).data('name', request.user.user_detail.firstname)
+                      )
+                    )
+                  );
+
+          }
+          else if(request.type == 2)
+          {
+
+            $(li).append(
+                $('<a href="'+baseUrl+'/'+request.game.slug+'">')
+                    .append(
+                          $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                    )
+                        .append(
+                            $('<div>').addClass('msgContent')
+                                .append(
+                                    $('<div>').addClass('info')
+                                        .append(
+                                          $('<h6>').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' recommended you to play. ')
+                                            )
+                                            .append(
+                                              $('<span>').addClass('timestamp').livestamp(moment.tz(request.created_at, timeZone).format() )
+                                              )
+                                          )
+                                .append(
+                                    $('<p>').text('Click to Play')
+                                  )
+                                    )
+              );
+          }
+          else if(request.type == 3)
+          {
+
+            $(li).append(
+                $('<a href="'+baseUrl+'/all_games">')
+                    .append(
+                          $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                    )
+                        .append(
+                            $('<div>').addClass('msgContent')
+                                .append(
+                                    $('<div>').addClass('info')
+                                        .append(
+                                          $('<h6>').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
+                                            )
+                                            .append(
+                                              $('<span>').addClass('timestamp').livestamp(moment.tz(request.created_at, timeZone).format() )
+                                              )
+                                          )
+                                    )
+              );
+          }
+          else if(request.type == 5)
+          {
+
+            $(li).append(
+                $('<a href="'+baseUrl+'/'+request.postslug+'">')
+                    .append(
+                          $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                    )
+                        .append(
+                            $('<div>').addClass('msgContent')
+                                .append(
+                                    $('<div>').addClass('info')
+                                        .append(
+                                          $('<h6>').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
+                                            )
+                                            .append(
+                                              $('<span>').addClass('timestamp').livestamp(moment.tz(request.created_at, timeZone).format() )
+                                              )
+                                          )
+                                    )
+              );
+          }
+          else if(request.type == 4)
+          {
+
+          $(li).append(
+                $('<a href="'+baseUrl+'/'+request.categoryslug+'">')
+                    .append(
+                          $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                    )
+                        .append(
+                            $('<div>').addClass('msgContent')
+                                .append(
+                                    $('<div>').addClass('info')
+                                        .append(
+                                          $('<h6>').text(request.user.user_detail.firstname+' '+request.user.user_detail.lastname+' tagged you in a comment. ')
+                                            )
+                                            .append(
+                                              $('<span>').addClass('timestamp').livestamp(moment.tz(request.created_at, timeZone).format() )
+                                              )
+                                          )
+                                    )
+              );
+          }
+
+          container.append(li);
+
+        });
+                                    
+                               $(page).find('.pageLoading').hide();
+                                 $(page).find('#youUserNotifs').show();
+
+                              },error : function(xhr){
+                                console.log(xhr.responseText);
+                              }
+                          });
+                      }, 2000);
 
             });
 
               App.controller('myMessages', function(page, request){
                 this.transition = 'slide-left';
-
+                  this.restorable = false;
                 $(page).on('appShow', function(){
                         $('#navbarTitle').text('Messages');
 
@@ -615,8 +1400,7 @@ socket.on('post_addFriend_request', function(request_id, request){
               });
 
               App.controller('privateMessage', function (page, request) {
-            this.transition = 'explode-in';
-              this.restorable = false;
+            this.transition = 'slide-left';
               $(page).on('appDestroy', function(){
                 $('.bottomNotification').show();
               });
@@ -728,19 +1512,40 @@ socket.on('post_addFriend_request', function(request_id, request){
         
 
         $('#messagesMenu').on('click', function(){
-            if(App.current() != 'myMessages'){
-              App.load('myMessages');
-            }
+
+
+              if(App.current() != 'myMessages'){
+                    try{
+                        App.back('myMessages');
+
+                    }catch(e){
+                      App.load('myMessages');
+                    }
+              }
+
+
         });        
         $('#globalNotifMenu').on('click', function(){
+
             if(App.current() != 'myGlobalNotifs'){
-              App.load('myGlobalNotifs');
-            }
+                    try{
+                        App.back('myGlobalNotifs');
+
+                    }catch(e){
+                      App.load('myGlobalNotifs');
+                    }
+              }
         });
         $('#notificationMenu').on('click', function(){
+
             if(App.current() != 'myUserNotifs'){
-              App.load('myUserNotifs');
-            }
+                    try{
+                        App.back('myUserNotifs');
+
+                    }catch(e){
+                      App.load('myUserNotifs');
+                    }
+              }
         });
 
 
