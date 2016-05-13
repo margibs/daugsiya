@@ -27,6 +27,7 @@ use Validator;
 use Hash;
 use Session;
 use App\Http\Controllers\Agent;
+use Jenssegers\Agent\Agent as MediumAgent;
 
 use Yajra\Datatables\Datatables;
 
@@ -663,8 +664,14 @@ class UserController extends Controller
         return json_encode($chatroom->room_messages);
     }
 
-    public function mobileMagazine($name) {
-        $user = $this->user;
+    public function mobileMagazine() {
+
+        
+        $Agent = new MediumAgent();
+
+        if($Agent->isMobile()){
+
+                  $user = $this->user;
         $questions = Question::where('follow_up', 0)->get();
 
         $choices = [];
@@ -816,6 +823,12 @@ class UserController extends Controller
         }
 
         return view('clubhouse.magazine', compact('questions', 'questionpage'));
+
+        }else{
+             Abort(404);
+        }
+
+      
     }
 
   public function getChatroomMobile($id = null) {
@@ -823,7 +836,6 @@ class UserController extends Controller
 
         $chatroom = Chat_Room::with('room_messages')->find($id);
 
-        //
         $data = $chatroom->room_messages()->orderBy('created_at','DESC')->take(10)->get();
         
 
@@ -852,7 +864,7 @@ class UserController extends Controller
         } 
 
         return json_encode($data);
-        
+ 
 
     }    
 

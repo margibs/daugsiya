@@ -263,7 +263,7 @@ class ClubhouseController extends Controller
 
         $global_notification_count = $this->getGlobalNotificationCount();
 
-        $posts = Post::where('status',1)->orderBy('posts.id','ASC')->get();
+        $posts = Post::select('slug', 'thumb_feature_image')->where('status',1)->orderBy('posts.id','ASC')->get();
 
         $session_id = Session::getId();
 

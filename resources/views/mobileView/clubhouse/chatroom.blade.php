@@ -6,8 +6,7 @@
 
 
 <div class="app-page" data-page="chatroom">
-<div class="app-topbar"></div>
-  	<div class="app-content">
+  	<div class="app-content" data-no-scroll>
   		<div class="body" id="peopleContent">
 		  <ul class="side-nav" id="mobile-demo">
                <li>
@@ -19,7 +18,8 @@
              </ul> 
 		</div> 
 
-	   <div class="row scroll">
+	   <div class="row">
+	   			<div class="chatroomHeader">
 	   			<ul id="dropdown2" class="dropdown-content" data-id="{{ $selectedRoom->id }}">
 				 	@foreach($chatrooms as $room)
 				    	<li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
@@ -31,6 +31,7 @@
 							 <a href="#" data-activates="mobile-demo" class="button-collapse2">{{ $selectedRoom->name }}<span id="people_count"></span></a>
 						</p>
 					</center>
+	   			</div>
 					 	
 				<div class="chatBox">
 		            <div class="body">
@@ -47,7 +48,7 @@
 		                   <div class="triggers">
 		                      	<a href="javscript:;" class="sendMessage" id="sendChat"><i class="fa fa-paper-plane"></i></a>
 		            		</div>
-		                    	<textarea name="" placeholder="Type Message" id="chatRoomTextarea"></textarea>
+		                    	<textarea name="" placeholder="Connecting to server..." id="chatRoomTextarea" disabled="disabled"></textarea>
 		            </div>
 		        </div>
 			</div>
@@ -141,12 +142,70 @@
 
 <script>
 
+(function(window, document, $){
+		var profileUrl = '{{ url("profile") }}';
 
-	var profileUrl = '{{ url("profile") }}';
 	var publicUrl = '{{ asset("") }}';
 	 var imageUrl = '{{ asset("uploads") }}';
    var friendUrl = '{{ url("friends") }}';
 
+
+$.fn.initBan = function(time){
+
+        function millisToMinutesAndSeconds(millis) {
+          var minutes = Math.floor(millis / 60000);
+          var seconds = ((millis % 60000) / 1000).toFixed(0);
+          return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+        }
+
+        function countRemaining(input){
+
+          remaining_time = $(input).data('remaining_time');
+
+          remaining_time = remaining_time - 1000;
+
+          if(remaining_time > 0){
+
+            $(input).data('remaining_time', remaining_time);
+            $(input).removeData('remaining_time').data('remaining_time', remaining_time);
+             $(input).attr('placeholder' ,'Banned for '+millisToMinutesAndSeconds(remaining_time)).attr('disabled', 'disabled');
+
+          }else{
+            clearInterval($(input).data('time_interval'));
+            $(input).attr('placeholder', 'Type Message').removeAttr('disabled');
+          }
+
+          
+
+        }
+
+        return this.each(function(){
+
+          input = this;
+
+          $(input).attr('disabled', 'disabled');
+
+          $(input).removeData('remaining_time').data('remaining_time', time);
+
+          $(input).attr('placeholder' ,'Banned for '+millisToMinutesAndSeconds(time));
+
+          if($(input).data('time_interval')){
+
+            clearInterval($(input).data('time_interval'));
+
+          }
+
+          $(input).data('time_interval', 
+
+            setInterval(countRemaining, 1000, input)
+
+            )
+
+
+
+        });
+
+      }
 
   App.controller('chatroom', function (page){
     $(page)
@@ -165,6 +224,8 @@
 			}
 			
 		});
+
+			
 
 
 		$(page).on('click', '.chatProfPic', function(){
@@ -185,6 +246,50 @@
                 chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
                   
             $(page).find('.chatBox .body').css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
+
+            chatTextarea = $(page).find('#chatRoomTextarea');
+            chatTextarea.attr('disabled', 'disabled').attr('placeholder', 'Connecting to server...');
+
+            socket.on('room_connected', function(banned){
+            	/*console.log(banned && userId == banned.user_id &&  == banned.room_id);*/
+            	console.log(ROOM_ID);
+            	console.log(banned);
+	      if(banned && USER_ID == banned.user_id && ROOM_ID == banned.room_id){
+	        chatTextarea.initBan(banned.time);
+
+	      }else{
+	        chatTextarea.removeAttr('disabled').attr('placeholder', 'Type Message');
+	      }
+
+	   });
+
+             socket.on('user_banned', function(data, room_id){
+      if(data.user_id == USER_ID && ROOM_ID == room_id ){
+        chatTextarea.initBan(data.time);
+
+      }
+
+   });
+
+    socket.on('disconnect', function(){
+
+    	chatTextarea.attr('placeholder', 'Disconnected. Connecting to Server...').attr('disabled', 'disabled');
+    });
+    socket.on('connect', function(){
+
+    	chatTextarea.removeAttr('disabled').attr('placeholder', 'Type Message');
+    });
+
+
+   socket.on('lift_ban', function(user_id, room_id){
+      if(user_id == USER_ID && ROOM_ID == room_id ){
+        
+        clearInterval(chatTextarea.data('time_interval'));
+        chatTextarea.attr('placeholder', 'Type Message').removeAttr('disabled');
+
+      }
+
+   });
 
 		});
 		$(page).on('appForward', function(){
@@ -235,7 +340,7 @@
 		          type : 'GET',
 		          dataType : 'json',
 		          success : function(data){
-		          	//console.log(data);
+
 			   		$(page).find('.chatBox .body ul').html('');
 			   		$.each(data, function() {
 			   			 $(page).find('.chatBox .body ul').prepend(
@@ -582,7 +687,6 @@ App.controller('userDetails', function(page, request){
   });
 
   thePage = App.getPage();
-  console.log(thePage);
 
   function getData(data){
      App.dialog({
@@ -596,6 +700,8 @@ App.controller('userDetails', function(page, request){
                     }
                 });
   }	
+
+})(window, document, jQuery);
 
 </script>
 

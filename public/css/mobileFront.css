@@ -84,7 +84,7 @@
       color: #AD0303;
       position: relative;
    }
-   footer ul li span.notifCount{
+   footer ul li span span.notifCount{
       background: red;
       font-size: 16px;
       position: absolute;
