@@ -13,9 +13,9 @@
     background: #fff url(http://susanwins.com/uploads/51107_mobilefronthouse.jpg) no-repeat center top;
   }
   .collection{
-    border: none;
-    margin-bottom: 90px;
-    margin-top: 103px;
+border: none;
+    padding-bottom: 67px;
+    margin: 0;
   }
   .collection .collection-item{
     background: transparent;

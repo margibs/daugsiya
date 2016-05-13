@@ -626,7 +626,7 @@ class UserController extends Controller
         $session_id = Session::getId();
 
         // dd($selectedRoom->room_messages);
-
+        
         return view('clubhouse/chatroom', compact('user', 'chatrooms', 'unread_messages_count', 'user_notification_count', 'selectedRoom', 'global_notification_count', 'session_id'));
     }
 
@@ -827,6 +827,15 @@ class UserController extends Controller
         }
 
       
+    }
+
+  public function getChatroomMobile($id = null) {
+          $user = $this->user;
+
+        $chatroom = Chat_Room::with('room_messages')->find($id);
+
+        return json_encode($chatroom->room_messages);
+
     }
 
     

@@ -38,4 +38,14 @@ class CasinoBanner extends Model
     						->get();
     	return $data;
     }
+
+    public static function searchImageLink($image_link) 
+    {
+        $data = DB::table('casino_banners')
+                    ->select('casino_banners.image_link')
+                    ->where('casino_banners.image_link', '=', $image_link)
+                    ->get();
+        return $data;
+    }
+
 }

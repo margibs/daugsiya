@@ -11,6 +11,8 @@ left: 0;
 
 .app-page .app-content{
         position: relative;
+            position: relative;
+    padding-top: 75px;
 }
 
 
@@ -46,15 +48,6 @@ nav .logo{
            height: 50px;
 }
 
-.app-topbar{
-     top: 0;
-    left: 0;
-    width: 100%;
-    height: 112px;
-    pointer-events: none;
-    z-index: -1;
-    position: relative;
-}
 
 .panel{
     border-radius:  4px;
@@ -138,7 +131,7 @@ display: inline-block !important;
 }
 
 .userDetail .upperHalf{
-      height: 312px;
+    height: 366px;
         background: #CEBDA8;
     position: relative;
     float: left;
@@ -198,6 +191,7 @@ display: inline-block !important;
 .userDetail .upperHalf{
     font-weight: bold;
     font-family: 'Work Sans';
+        padding-top: 62px;
 }
 
 .userDetail .upperHalf .userDetailActions{
@@ -287,6 +281,7 @@ display: inline-block !important;
 
 .messageList{
     margin:0;
+        padding-bottom: 67px;
 }
 .messageList li{
     position: relative;
@@ -385,7 +380,12 @@ display: inline-block !important;
 }
 
 .pageLoading .preloaderContainer{
-        margin: auto;
+      margin: auto;
+    position: absolute;
+    top: 50%;
+    margin-top: -48px;
+    left: 50%;
+    margin-left: -32px;
 }
 .pageLoading .preloaderContainer .preloader-wrapper{
         display: block;
@@ -418,6 +418,13 @@ display: inline-block !important;
     float: left;
         margin-top: 10px;
 }
+
+.chatBox textarea[disabled="disabled"]{
+        background: #F7F7F7;
+    color: #fff;
+    cursor:not-allowed;
+}
+
 .chatBox ul li img{
         width: 33px;
     border-radius: 50%;
@@ -441,6 +448,7 @@ display: inline-block !important;
     line-height: 18px;
     float: left;
     display: block;
+    word-break: break-all;
 }
 
 .chatBox ul li span.alt{
@@ -588,6 +596,14 @@ display: inline-block !important;
 #selectCasino li:first-child:nth-last-child(4),
 #selectCasino li:first-child:nth-last-child(4) ~ li {
        width: 48%;
+}
+
+.userDetail{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 67px;
 }
 
 /* .userDetail .imgContainer{

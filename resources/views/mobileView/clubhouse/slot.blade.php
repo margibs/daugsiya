@@ -5,7 +5,9 @@
 @endsection
 <style>	
 	#slotsList{
-		text-align: center;
+	    text-align: center;
+    margin: 0;
+    padding-bottom: 67px;
 	}
 
 	#slotsList li{
