@@ -11,6 +11,7 @@ use App\Channel;
 use App\User;
 use App\Channel_Message;
 use App\Private_Message;
+use Input;
 
 class MessageController extends Controller
 {
@@ -188,4 +189,65 @@ class MessageController extends Controller
     {
         //
     }
+
+    public function getPaginatePrivateMessage(Request $request) {
+         $user = User::find($request->user_id);
+        $other_person = User::with('user_detail')->find($request->other_person);
+
+       // $other_person->user_detail->profile_picture = 'user_uploads/user_'.$request->user_id.'/'.$other_person->user_detail->profile_picture;
+
+        $private_messages = $user->private_messages()->where('to', $request->other_person);
+        $conversation = $user->recieved_private_messages()->where('from', $request->other_person)->union($private_messages)->orderBy('created_at', 'DESC')->take(10)->get();
+
+        $user->recieved_private_messages()->where('from', $request->other_person)->update(['read' => 1]);
+
+        $data['other_person'] = $other_person;
+        $data['conversation'] = $conversation;
+        $data['unread'] = $user->unread_messages()->count();
+        $data['read'] = $user->read_messages()->count();
+
+        //dd($other_person->user_detail->profile_picture);
+
+        echo json_encode($data);
+    }
+
+    public function postPaginatePrivateMessage(Request $request) {
+         $user = User::find($request->user_id);
+        $other_person = User::with('user_detail')->find($request->other_person);
+
+       // $other_person->user_detail->profile_picture = 'user_uploads/user_'.$request->user_id.'/'.$other_person->user_detail->profile_picture;
+
+        $private_messages = $user->private_messages()->where('to', $request->other_person);
+        $conversation = $user->recieved_private_messages()->where('from', $request->other_person)->union($private_messages)->orderBy('created_at', 'DESC')->skip($request->end)->take(10)->get();
+
+        $user->recieved_private_messages()->where('from', $request->other_person)->update(['read' => 1]);
+
+        $data['other_person'] = $other_person;
+        $data['conversation'] = $conversation;
+        $data['unread'] = $user->unread_messages()->count();
+        $data['read'] = $user->read_messages()->count();
+
+        //dd($other_person->user_detail->profile_picture);
+
+        if(count($data) == 0)
+        {
+            return json_encode(['done' => 1]);
+        }
+
+        echo json_encode($data);
+    }
+
+    /* $user = $this->user;
+        $chatroom = Chat_Room::with('room_messages')->where('id',Input::get('room_id'))->first();
+
+      /*  $chatroom->room_messages = $chatroom->room_messages()->take(10)->offset(Input::get('page')*10)->orderBy('created_at','DESC')->get();*/
+      /*
+       $data  = $chatroom->room_messages()->skip(Input::get('end'))->take(10)->orderBy('created_at','DESC')->get();
+
+        if(count($data) == 0) {
+            //$data['length'] = 0;
+            return json_encode(['done' => 1]);
+        } 
+
+        return json_encode($data);*/
 }
