@@ -31,20 +31,24 @@
             </div>
 
         </div>
-           <span class="editProfile">Edit Profile</span>
-            <span class="changePassword">Change Password</span>
-            <a href="{{ url('clubhouse/magazine') }}">Magazine</span>
+          
           <h6>{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}</h6>
-
+          
           <div class="row userDetailActions">
 
                   
           <div class="col s6"><span class="app-button" data-target="yourFriends"><span class="icon ion-person-stalker"></span> <span>{{ count($user->myFriends) }} </span></span></div>
           <div class="col s6"><span class="app-button" data-target="yourMessages" data-target-args='{ "count" : "{{ count($user->myMessages) }}" }'><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></span></div>
           </div>
+
         </div>
         <div class="lowerHalf">
-
+            
+            <div class="row userButtons">
+                 <span class="editProfile">View Profile</span>
+                  <span class="changePassword">Change Password</span>
+                  <a href="{{ url('clubhouse/magazine') }}">About you</span></a>
+            </div>
 
             <div class="listFav">
                 <p class="favTitle">Favourite Games</p>
