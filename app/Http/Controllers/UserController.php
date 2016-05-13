@@ -30,6 +30,8 @@ use App\Http\Controllers\Agent;
 
 use Yajra\Datatables\Datatables;
 
+use Input;
+
 
 class UserController extends Controller
 {
@@ -821,44 +823,12 @@ class UserController extends Controller
 
         $chatroom = Chat_Room::with('room_messages')->find($id);
 
-       /* $user->myMessages = $this->getInbox();
+        //
+        $data = $chatroom->room_messages()->orderBy('created_at','DESC')->take(10)->get();
+        
 
 
-        $unread_messages_count = count($user->unread_messages()->groupBy('from')->get());
-
-        $global_notification_count = $this->getGlobalNotificationCount();
-
-        $user_notification_count = $this->getUserNotificationCount();
-
-
-        $selectedRoom = false;
-
-        if($chatrooms && count($chatrooms) > 0){
-            $selectedRoom = $chatrooms[0];
-
-                if($chatname){
-
-                    foreach($chatrooms as $chatroom){
-
-                        if($chatroom->name == $chatname){
-                            $selectedRoom = $chatroom;
-                            
-                            break;
-                        }
-                    }
-
-                }
-
-            $user_read = Userchat_Read::firstOrCreate([ 'user_id' => $user->id, 'chat_room_id' => $selectedRoom->id ]);
-            $user_read->last_read = new DateTime();
-            $user_read->save();
-            }
-
-        $selectedRoom->room_messages = $selectedRoom->room_messages()->take(10)->orderBy('created_at','DESC')->get()->reverse();
-        $session_id = Session::getId();
-
-       //dd($chatrooms);*/
-        return json_encode($chatroom->room_messages);
+        return json_encode($data);
 
         // dd($selectedRoom->room_messages);
 
@@ -866,5 +836,24 @@ class UserController extends Controller
     }
 
     
+    public function paginateChatroom()
+    {
+
+        $user = $this->user;
+        $chatroom = Chat_Room::with('room_messages')->where('id',Input::get('room_id'))->first();
+
+      /*  $chatroom->room_messages = $chatroom->room_messages()->take(10)->offset(Input::get('page')*10)->orderBy('created_at','DESC')->get();*/
+
+       $data  = $chatroom->room_messages()->skip(Input::get('end'))->take(10)->orderBy('created_at','DESC')->get();
+
+        if(count($data) == 0) {
+            //$data['length'] = 0;
+            return json_encode(['done' => 1]);
+        } 
+
+        return json_encode($data);
+        
+
+    }    
 
 }

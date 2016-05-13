@@ -399,6 +399,8 @@ Route::group(['middleware' => 'ClubMiddleware'], function()
 	//ROUTE FOR GET CHATROOM
 	Route::get('mobile/getChatroom/{id}', 'UserController@getChatroomMobile');
 
+	Route:post('mobile/paginate/getchatroom', 'UserController@paginateChatroom');
+
 });
 
 
