@@ -31,6 +31,8 @@ use Jenssegers\Agent\Agent as MediumAgent;
 
 use Yajra\Datatables\Datatables;
 
+use Input;
+
 
 class UserController extends Controller
 {
@@ -834,10 +836,36 @@ class UserController extends Controller
 
         $chatroom = Chat_Room::with('room_messages')->find($id);
 
-        return json_encode($chatroom->room_messages);
+        $data = $chatroom->room_messages()->orderBy('created_at','DESC')->take(10)->get();
+        
 
+
+        return json_encode($data);
+
+        // dd($selectedRoom->room_messages);
+
+        //return view('clubhouse/chatroom', compact('user', 'chatrooms', 'unread_messages_count', 'user_notification_count', 'selectedRoom', 'global_notification_count', 'session_id'));
     }
 
     
+    public function paginateChatroom()
+    {
+
+        $user = $this->user;
+        $chatroom = Chat_Room::with('room_messages')->where('id',Input::get('room_id'))->first();
+
+      /*  $chatroom->room_messages = $chatroom->room_messages()->take(10)->offset(Input::get('page')*10)->orderBy('created_at','DESC')->get();*/
+
+       $data  = $chatroom->room_messages()->skip(Input::get('end'))->take(10)->orderBy('created_at','DESC')->get();
+
+        if(count($data) == 0) {
+            //$data['length'] = 0;
+            return json_encode(['done' => 1]);
+        } 
+
+        return json_encode($data);
+ 
+
+    }    
 
 }

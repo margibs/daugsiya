@@ -1448,12 +1448,15 @@ socket.on('post_addFriend_request', function(request_id, request){
               });
 
               App.controller('privateMessage', function (page, request) {
-            this.transition = 'slide-left';
+           		 this.transition = 'slide-left';
+
               $(page).on('appDestroy', function(){
                 $('.bottomNotification').show();
               });
               $(page).on('appShow', function(){
                 $('.bottomNotification').hide();
+
+
                 chatBox = $(page).find('.chatBox');
                 chatBoxOffsetTop = chatBox.offset().top;
                 chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
@@ -1504,7 +1507,7 @@ socket.on('post_addFriend_request', function(request_id, request){
 
                       setTimeout(function(){
                               $.ajax({
-                                url : messageUrl+'/getPrivateMessages',
+                                url : messageUrl+'/getPaginatePrivateMessage',
                                 data : { user_id : userId , other_person : request.user_id , _token : CSRF_TOKEN },
                                 dataType : 'json',
                                 type : 'POST',
@@ -1536,7 +1539,7 @@ socket.on('post_addFriend_request', function(request_id, request){
                                      
                                       }
 
-                                     $(page).find('.chatBox .body ul').append(
+                                     $(page).find('.chatBox .body ul').prepend(
                                         li.append(span)
                                         );
 
@@ -1552,6 +1555,71 @@ socket.on('post_addFriend_request', function(request_id, request){
                                 }
                               });
                         }, 2000);
+
+                      /************* start pagination ********************/
+                      	var CurrentScroll = 0;
+   				 		var messageIndex = 10;
+   				 		var scrollAjax = false;
+			    		$(page).find('.chatBox .body').scroll(function(e){
+			    			body = $(this);
+					    	var NextScroll = body.scrollTop();
+
+					      //console.log(NextScroll);
+					  
+					      if (NextScroll > CurrentScroll){
+					         //down-ward scrolling 
+					         console.log("down");
+					      }
+					      else if(NextScroll == 0 && !scrollAjax){
+					         // upward-scrolling 
+								//console.log("up");
+								scrollAjax = true;
+								$.ajax({
+						      	url: messageUrl+'/postPaginatePrivateMessage',
+						      	type: 'POST',
+						      	data: { end: messageIndex, user_id : userId , other_person : request.user_id , _token : CSRF_TOKEN },
+						      	dataType: 'json',
+						      	success: function(data) {
+						      		//console.log(data);
+						      		   $.each(data.conversation, function(){
+
+                                      li = $('<li>');
+
+                                      span = $('<span>').text(this.message);
+
+                                      if(this.from != userId){
+
+                                        $(li).append(                        
+                                          $('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+                                        );
+
+                                      }else{
+
+                                       
+                                        $(span).addClass('alt');
+
+                                     
+                                      }
+
+                                     $(page).find('.chatBox .body ul').prepend(
+                                        li.append(span)
+                                        );
+
+
+
+                                    });
+						      	},
+						      	error: function(error) {
+						      		console.log(error.responseText);
+						      	}
+						      });
+					      }
+					      CurrentScroll = NextScroll; 
+					   });
+
+                      /************* end pagination ********************/
+
+
                   };
               });
 

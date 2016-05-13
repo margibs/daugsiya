@@ -20,7 +20,6 @@
 
 	   <div class="row">
 	   			<div class="chatroomHeader">
-
 	   			<ul id="dropdown2" class="dropdown-content" data-id="{{ $selectedRoom->id }}">
 				 	@foreach($chatrooms as $room)
 				    	<li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
@@ -37,14 +36,12 @@
 				<div class="chatBox">
 		            <div class="body">
 		                <ul>
-			                @if($selectedRoom)
-								@foreach($selectedRoom->room_messages as $msg)
+			               
 								<li>
-			                    	<img src="{{$msg->user->user_detail->profile_picture ? asset('').'/user_uploads/user_'.$msg->user->user_detail->user_id.'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" class="chatProfPic" data-id="{{ $msg->user->user_detail->user_id }}">
-			                    	<span>{{ $msg->message }}</span>
+			                    	<img src="{{ asset('/images/default_profile_picture.png') }}" class="chatProfPic" data-id="">
+			                    	<span></span>
 			                	</li>
-								@endforeach
-							@endif
+								
 		            	</ul>
 		            </div>
 		            <div class="chatFooter">
@@ -332,6 +329,11 @@ $.fn.initBan = function(time){
 
    	//get all chatroom
    		$(page).on('appShow', function(){
+
+   			room_id = $(page).find('#dropdown2').data('id');
+   			var is_loading = false; // initialize is_loading by false to accept new loading
+			var limit = 4; // limit items per page
+		
    			room_id = $(page).find('#dropdown2').data('id');
    			$.ajax({
    				  url : BASE_URL+'/mobile/getChatroom/'+room_id,
@@ -341,7 +343,7 @@ $.fn.initBan = function(time){
 
 			   		$(page).find('.chatBox .body ul').html('');
 			   		$.each(data, function() {
-			   			 $(page).find('.chatBox .body ul').append(
+			   			 $(page).find('.chatBox .body ul').prepend(
 				          $('<li>')
 				              .append(
 				                $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
@@ -351,12 +353,70 @@ $.fn.initBan = function(time){
 				                )
 				        );
 			   		});
+			   		$(page).find('.chatBox .body').scrollTop( $(page).find('.chatBox .body ul')[0].scrollHeight);
+
 		          },
 		          error: function(error)
 		          {
 		          	console.log(error.responseText);
 		          }
    			});
+
+
+   			$(document).ready(function(){
+   				 var CurrentScroll = 0;
+   				 var messageIndex = 10;
+   				 var scrollAjax = false;
+			    $(".chatBox .body").scroll(function(e){
+
+			   		body = $(this);
+			    	var NextScroll = body.scrollTop();
+
+			      //console.log(NextScroll);
+			  
+			      if (NextScroll > CurrentScroll){
+			         //down-ward scrolling 
+			         console.log("down");
+			      }
+			      else if(NextScroll == 0 && !scrollAjax){
+			         // upward-scrolling 
+						//console.log("up");
+						scrollAjax = true;
+						$.ajax({
+				      	url: BASE_URL+'/mobile/paginate/getchatroom',
+				      	type: 'POST',
+				      	data: {start: 10, end: messageIndex, room_id: room_id, _token : CSRF_TOKEN },
+				      	dataType: 'json',
+				      	success: function(data) {
+				      		if(data.done != 1)
+				      		{
+				      			messageIndex = messageIndex + 10;
+					      		//console.log(data);
+					      		scrollAjax = false;
+					      		
+						   		$.each(data, function() {
+						   			 $(page).find('.chatBox .body ul').prepend(
+							          $('<li>')
+							              .append(
+							                $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+							                )
+							              .append(
+							                  $('<span>').text(this.message)
+							                )
+							        );
+						   		});
+						   		body.scrollTop(1);
+				      		}
+				      	},
+				      	error: function(error) {
+				      		console.log(error.responseText);
+				      	}
+				      });
+			      }
+			      CurrentScroll = NextScroll; 
+			   });
+			});
+			
    		});
   });
 
