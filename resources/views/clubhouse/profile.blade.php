@@ -125,6 +125,23 @@ height: 372px;
 #cropperH input[type="range"]{
       background: #000;
 }
+
+#profileBtn{
+    position: absolute;
+    bottom: -13px;
+    left: 20px;
+
+}
+#profileBtn button{
+    border-radius: 50px;
+    background: #FF8315;
+    border: none;
+    padding: 8px 22px;
+    color: #fff;
+    font-family: Roboto;
+    font-weight: 600;
+    cursor: pointer;
+}
 </style>
 
    <!--  <div class="container background-container" style="width: 1280px !important; margin-top: 40px; padding:0">
@@ -1036,7 +1053,7 @@ height: 372px;
                                       <!-- <a  data-target="#friendProfile" id="friendprofopen" class="subModalToggle viewFriendProfile toggle-good">  <i class="fa fa-user"></i> </a> -->
                                     </div>
                                     <div class="msgImgcont">
-                                      <img src="{{ $fr->friend->user_detail->profile_picture ? asset('').'/'.$fr->friend->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="">
+                                      <img src="{{ $fr->friend->user_detail->userPicture5050() }}" class="viewProfile" alt="">
                                     </div>
                                    <!--  <h6> {{ ucwords( $fr->friend->user_detail->firstname.' '.$fr->friend->user_detail->lastname ) }} </h6> -->
                                     <h6> {{ ucwords( $fr->friend->user_detail->firstname ) }} </h6>
@@ -1067,7 +1084,8 @@ height: 372px;
                               <li data-user="{{ $msg->from_user->user_detail->user_id }}" style="text-align:left;">
                                 <a href="javascript:;" class="subModalToggle pmFriend toggle-good" data-target="#pmBox"><span class="offline" id="friend-message-online-status-{{ $msg->from_user->user_detail->user_id }}"></span>
                                 <div class="msgImgcont" style="float: left;">
-                                  <img src="{{ $msg->from_user->user_detail->profile_picture ? asset('').'/'.$msg->from_user->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="">
+                                   <img src="{{ $msg->from_user->user_detail->userPicture5050() }}" alt=""> 
+
                                 </div>
                               <h6> {{ ucwords($msg->from_user->user_detail->firstname.' '.$msg->from_user->user_detail->lastname ) }} <em> 3:36pm </em></h6>
                               <p> {{ $msg->message }} </p></a>
@@ -1082,7 +1100,6 @@ height: 372px;
         </div>
       </div>
 
-      <div class="friendprofilebox" >
           <div class="friendProfile" id="friendProfile">
               <div class="divContainer">          
                       <div class="imgContainer">
@@ -1094,6 +1111,8 @@ height: 372px;
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/whale/128.jpg" id="viewFriendProfilePic">
                       </div>
                       <h6 id="viewFriendProfileName"> Samantha Wilson </h6>
+                            <div id="profileBtn">
+                        </div>
                       </div>
                       	<div class="moredetailsbox">
 	                      <p> Favorite Games  </p>
@@ -1132,7 +1151,6 @@ height: 372px;
 	                    </div>
                 </div>
           </div>
-      </div>
       <div class="cropperContainer">
       <i class="fa fa-times"></i>
           <div id="cropperH"></div>
@@ -1370,6 +1388,8 @@ $('#lastTvStep').on('click', '.cd-prev', function(){
   $('#mirror').click(function(e){
     $('#profilePic').click();   
   });
+
+  
 
   // $('.maginterviewmain').vTicker('init', {
   //     speed: 600, 
@@ -1718,6 +1738,7 @@ var $uploadCrop;
       var imageUrl = '{{ asset("uploads") }}';
       var publicUrl = '{{ asset("") }}';
       var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+      var friendUrl = '{{ url("friends") }}';
 
       /*
 
@@ -1974,24 +1995,152 @@ var $uploadCrop;
           }
       });*/
 
+      /***************** START BUTTON FOR ADD CANCEL AND SEND REQUEST ***********************/
+      $('#profileBtn').on('click', 'button', function(){
 
-      $('#myFriends').on('click','.viewFriendProfile', function(){
+    other_person = $(this).data('other_person');
+    action = $(this).data('action');
+    friend_id = $(this).data('friend_id');
+
+    $(this).attr('disabled', 'disabled');
+
+    if(action){
+
+        if(other_person && action == 1){
+
+          addFriend(other_person);
+        }else if(action == 2 && friend_id && other_person){
+          cancelFriendRequest(friend_id, other_person);
+        }else if(action == 3 && friend_id && other_person){
+          acceptFriendRequest(friend_id, other_person);
+        }else if(action == 4 && friend_id && other_person){
+          unFriend(friend_id, other_person);
+        }
+
+
+    }
+
+
+   });
+
+   function unFriend(friend_id, other_person){
+      $.ajax({
+
+            url : friendUrl+'/unFriend',
+            data : { id : friend_id , _token : CSRF_TOKEN },
+            type : 'POST',
+            dataType : 'json',
+            success : function(data){
+
+              new_button = $('<button>').data('action', 1).data('other_person', other_person).text('Add Friend');
+
+              $('#profileBtn').find('button').replaceWith(new_button);
+
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+
+          });
+   }
+
+   function acceptFriendRequest(friend_id, other_person){
+          
+          $.ajax({
+
+            url : friendUrl+'/acceptFriendRequest',
+            data : { id : friend_id , _token : CSRF_TOKEN },
+            type : 'POST',
+            dataType : 'json',
+            success : function(data){
+
+              if(data){
+                socket.emit('friend_request_accepted', { other_person : other_person });
+              }
+
+              new_button = $('<button>').data('action', 4).data('other_person', other_person).data('friend_id', friend_id).text('Unfriend');
+
+              $('#profileBtn').find('button').replaceWith(new_button);
+
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+
+          });
+
+   }
+
+   function cancelFriendRequest(friend_id, other_person){
+
+      $.ajax({
+
+          url : friendUrl+'/cancelFriendRequest',
+          data : { id : friend_id, _token : CSRF_TOKEN },
+          type : 'POST',
+          dataType : 'json',
+          success : function(deleted){
+              
+             new_button = $('<button>').data('action', 1).data('other_person', other_person).text('Add Friend');
+
+            $('#profileBtn').find('button').replaceWith(new_button);
+
+          },error : function(xhr){
+            console.log(xhr.responseText);
+          }
+
+      });
+
+   }
+
+
+   function addFriend(other_person){
+      console.log(' add this friend '+other_person);
+
+      $.ajax({
+
+          url : friendUrl+'/addFriend',
+          data : { user_id : userId, friend_id : other_person, _token : CSRF_TOKEN },
+          type : 'POST',
+          dataType : 'json',
+          success : function(data){
+            console.log(data);
+
+            new_button = $('<button>').data('action', 2).data('other_person', other_person).data('friend_id', data.id).text('Cancel Friend Request');
+             socket.emit('send_addFriend_request', { from : userId, to : other_person, id : data.id });
+            $('#profileBtn').find('button').replaceWith(new_button);
+
+          },error : function(xhr){
+            console.log(xhr.responseText);
+          }
+
+      });
+   }
+
+      /***************** END BUTTON FOR ADD CANCEL AND SEND REQUEST ***********************/
+
+        $('#friendList .msgImgcont img').click(function() {        
+            $(".friendProfile ").fadeIn('fast');
+        });
+
+
+      $('#myFriends').on('click','.viewProfile', function(){
 
           modal = $('#friendProfile');
 
           if(!modal.hasClass('loading')){
 
             $(modal).addClass('loading');
-            theUser = $(this).parent().data('user');
+            theUser = $(this).parents('li').find('.options').data('user');
             $(modal).find('.divContainer').hide();
             loading = $('<div>').addClass('loadContainer').text('Loading');
             $(modal).append(loading);
             $('#profileFavorites').html('');
             $('#profilePlayedGames').html('');
-
+            $('#profileBtn').html('');
+      
             $.ajax({
               url : profileUrl+'/viewFriendProfile',
               data : { user_id : userId, other_person : theUser , _token : CSRF_TOKEN },
+              //data : formData,
               dataType : 'json',
               type : 'POST',
               success : function(data){
@@ -2002,8 +2151,37 @@ var $uploadCrop;
                   $(modal).find('.divContainer').show();
                   $(loading).remove();
                   modal.removeClass('loading');
-                  $('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+                  //$('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+                  $('#viewFriendProfilePic').attr('src', getImage(data, null)  )
                   $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
+
+                   $('#pm-user').data('user', data.user_detail.user_id).find('.message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox');
+
+                  relation = data.friend.relation;
+                  friend_id = data.friend.friend_id;
+
+                  if(relation != 2){
+
+                    actionBtn = $('<button type="button">').data('other_person', theUser);
+
+                    if(relation != 1){
+                        $(actionBtn).data('friend_id', friend_id);
+                    }
+
+                    if(relation == 1){
+                      $(actionBtn).text('Add Friend').data('action', 1);
+                    }else if(relation == 3){
+                      $(actionBtn).text('Cancel Friend Request').data('action', 2);
+                    }else if(relation == 4){
+                      $(actionBtn).text('Accept Friend Request').data('action', 3);
+                    }else if(relation == 5){
+                      $(actionBtn).text('Unfriend').data('action', 4);
+                    }
+
+                    $('#profileBtn').append(actionBtn);
+
+                  };
+
                   $.each(data.favorites, function(){
                      $('#profileFavorites')
                         .append(
@@ -2040,6 +2218,15 @@ var $uploadCrop;
           }     
 
       });
+
+       function getImage(data, size) {
+
+      if(size === null) {
+          return data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic;  
+      }
+      return data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+size+'/'+data.user_detail.profile_picture : defaultProfilePic;
+       //data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic
+    }
 
 
 
