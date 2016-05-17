@@ -667,12 +667,16 @@
                           
                           <div class="msgImgcont">
                                
-                                  <!-- <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" /> -->
-                                  @if($msg->user->user_detail->profile_picture == '')
-                                      <img src ="{{asset('user_uploads')}}/default_image/default_01.png" > 
-                                  @else
-                                      <img src ="{{asset('user_uploads')}}/user_{{$msg->user->id}}/{{$msg->user->user_detail->profile_picture }}" > 
-                                   @endif
+                              <!--     <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" /> -->
+                            <!--   
+                            @if($msg->user->user_detail->profile_picture == '')
+                                <img src ="{{asset('user_uploads')}}/default_image/default_01.png" > 
+                            @else
+                                <img src ="{{asset('user_uploads')}}/user_{{$msg->user->id}}/{{$msg->user->user_detail->profile_picture }}" > 
+                             @endif  -->
+                               
+
+                              <img src ="{{ $msg->user->user_detail->userPicture5050() }}" >
 
 
                               </div>
@@ -845,7 +849,7 @@
         .append(
           $('<li>') 
             .append(
-              $('<img>').attr('src', this.profile_picture ? publicUrl+'/'+this.profile_picture : defaultProfilePic )
+              $('<img>').attr('src', publicUrl+'/'+this.profile_picture )
 
               )
           )
@@ -1101,7 +1105,11 @@
                   $(modal).find('.divContainer').show();
                   $(loading).remove();
                   modal.removeClass('loading');
-                  $('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+                  //$('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+                  //element = "#viewFriendProfilePic";
+                  //getImage(data, "default", element);
+                  $("#viewFriendProfilePic").attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+                  //$("#viewFriendProfilePic").attr('src', getImageAppend(this, 2020))
                   $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
 
                   $('#pm-user').data('user', data.user_detail.user_id).find('.message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox');
@@ -1168,6 +1176,37 @@
 
       });
 
+    //concat function 
+    function getImage(data, size, element) {
+      image_size = "";
+      if(size == 5050) {
+        image_size = size;
+      }
+      else if(size == 2020) {
+         image_size = size;
+      }
+      else if(size == 4545) {
+        image_size = size;
+      }
+      else if(size == "default") {
+
+        return  $(element).attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+
+      } 
+
+      return  $(element).attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+image_size+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+       
+    }
+
+    function getImageAppend(data, size) {
+
+      if(size === null) {
+          return data.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_detail.user_id+'/'+data.user.user_detail.profile_picture : defaultProfilePic;  
+      }
+      return data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+size+'/'+data.user_detail.profile_picture : defaultProfilePic;
+       //data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic
+    }
+
   function changeChatroom(data){
 
     console.log('changeChatroom');
@@ -1202,7 +1241,10 @@
                   .append(
                       $('<div>').addClass('msgImgcont')
                           .append(
-                            $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+this.user.user_detail.user_id+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
+                            //$('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+this.user.user_detail.user_id+'/5050/'+this.user.user_detail.profile_picture : defaultProfilePic )
+                           /* element = ".msgImgcont";
+                            getImage(this, 5050, element);*/
+                            $('<img>').attr('src', getImageAppend(this , 2020) )
                           )
                     )
                   
@@ -1320,7 +1362,7 @@
 
                   $('<div>').addClass('msgImgcont')
                     .append(
-                      $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic )
+                      $('<img>').attr('src', publicUrl+'/'+data.user.profile_picture  )
                     )
                   )
                 

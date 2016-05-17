@@ -1,6 +1,28 @@
+.app-page{
+left: 0;
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+
+.pageModal .app-content{
+    border:10px solid #ccc;
+}
+
+.app-page .app-content{
+        position: relative;
+            position: relative;
+    padding-top: 75px;
+}
+
+
 nav{
     box-shadow: none;
     height:112px;
+}
+
+.defaultBg{
+    background: #fff;
 }
 
 nav .nav-wrapper{
@@ -26,13 +48,6 @@ nav .logo{
            height: 50px;
 }
 
-.app-topbar{
-        position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 112px;
-}
 
 .panel{
     border-radius:  4px;
@@ -116,7 +131,7 @@ display: inline-block !important;
 }
 
 .userDetail .upperHalf{
-      height: 312px;
+    height: 366px;
         background: #CEBDA8;
     position: relative;
     float: left;
@@ -176,6 +191,7 @@ display: inline-block !important;
 .userDetail .upperHalf{
     font-weight: bold;
     font-family: 'Work Sans';
+        padding-top: 62px;
 }
 
 .userDetail .upperHalf .userDetailActions{
@@ -187,7 +203,8 @@ display: inline-block !important;
     font-size: 22px;
 }
 
-.userDetail .upperHalf .userDetailActions a{
+.userDetail .upperHalf .userDetailActions .app-button,
+.userDetail .upperHalf .userDetailActions #messageUser{
     color:#fff;
    font-size: 18px;
 }
@@ -201,7 +218,8 @@ display: inline-block !important;
 }
 
 
-.userDetail .upperHalf .userDetailActions a .icon{
+.userDetail .upperHalf .userDetailActions .app-button .icon,
+.userDetail .upperHalf .userDetailActions #messageUser .icon{
         font-size: 45px;
     vertical-align: middle;
     padding-right: 4px;
@@ -263,6 +281,7 @@ display: inline-block !important;
 
 .messageList{
     margin:0;
+        padding-bottom: 67px;
 }
 .messageList li{
     position: relative;
@@ -284,10 +303,11 @@ display: inline-block !important;
 }
 
 .messageList li .msgContent{
-    position: absolute;
+    position: relative;
     left: 0;
-        right: 0;
+    right: 0;
     margin-left: 80px;
+
 }
 
 .messageList li .msgContent .info h6{
@@ -326,20 +346,20 @@ display: inline-block !important;
         display: inline-block;
 }
 
-#yourFriendSorting li a{
+#yourFriendSorting li div{
         color: #000;
     padding: 8px 14px;
         border-radius: 5px;
 }
 
-#yourFriendSorting li a.active{
+#yourFriendSorting li div.active{
         background: #F7E3E4;
 }
 
-#yourFriendSorting li a .countOnline{
+#yourFriendSorting li div .countOnline{
     color:#36A719;
 }
-#yourFriendSorting li a .countOffline
+#yourFriendSorting li div .countOffline
 {
     color:#D0CBC8;
 }
@@ -349,17 +369,23 @@ display: inline-block !important;
 }
 
 .pageLoading{
-position: fixed;
+    position: absolute;
     z-index: 997;
     width: 100%;
     height: 100%;
-    top: 112px;
+    top: 0;
     bottom: 0;
     background: #fff;
+    float: left;
 }
 
 .pageLoading .preloaderContainer{
-        margin: auto;
+      margin: auto;
+    position: absolute;
+    top: 50%;
+    margin-top: -48px;
+    left: 50%;
+    margin-left: -32px;
 }
 .pageLoading .preloaderContainer .preloader-wrapper{
         display: block;
@@ -392,6 +418,13 @@ position: fixed;
     float: left;
         margin-top: 10px;
 }
+
+.chatBox textarea[disabled="disabled"]{
+        background: #F7F7F7;
+    color: #fff;
+    cursor:not-allowed;
+}
+
 .chatBox ul li img{
         width: 33px;
     border-radius: 50%;
@@ -415,6 +448,7 @@ position: fixed;
     line-height: 18px;
     float: left;
     display: block;
+    word-break: break-all;
 }
 
 .chatBox ul li span.alt{
@@ -426,10 +460,11 @@ position: fixed;
 }
 
 .chatBox .chatFooter{
-        position: absolute;
+    position: absolute;
     width: 100%;
-    bottom: 0;
+       bottom: 67px;
     height: 70px;
+
 }
 
 .chatBox .chatFooter .triggers{
@@ -460,6 +495,115 @@ position: fixed;
 #rateModal{
         opacity: 1;
     background: rgba(0, 0, 0, 0.73);
+}
+
+#rateModal h4{
+    text-align: center;
+    color:#fff;
+}
+
+#rateModal button,
+#rateModal button a{
+        border: none;
+    background: transparent;
+
+    color: #fff;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-size: 50px;
+    font-weight: 500;
+    width: 49%;
+    text-align: center;
+}
+
+
+
+
+.notifcount{
+  background: red;
+    font-size: 16px;
+    position: absolute;
+    top: 0;
+    border-radius: 6px;
+    padding: 2px 4px;
+    color: #fff;
+    font-family: Roboto;
+    font-weight: 600;
+}
+
+.bottomNotification{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-radius: 20px;
+    z-index: 996;
+    margin: 1em;
+    padding: 5px 15px;
+    background: rgb(244,244,244);
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, rgba(244, 244, 244, 0.94) 0%, rgba(255, 255, 255, 0.82) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(244,244,244,1)), color-stop(100%,rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(244, 244, 244, 0.94) 0%,rgba(255, 255, 255, 0.82) 100%);
+    background: -o-linear-gradient(top, rgba(244, 244, 244, 0.94) 0%,rgba(255, 255, 255, 0.82) 100%);
+    background: -ms-linear-gradient(top, rgba(244, 244, 244, 0.94) 0%,rgba(255, 255, 255, 0.82) 100%);
+    background: linear-gradient(to bottom, rgba(244, 244, 244, 0.94) 0%,rgba(255, 255, 255, 0.82) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f4f4', endColorstr='#ffffff',GradientType=0 );
+}
+
+.bottomNotification .notifCounter{
+    position: relative;
+    display: inline-block;
+    float: right;
+}
+
+.bottomNotification li{
+    display: inline-block;
+}
+
+.follow_up{
+    display: none;
+}
+#selectCasino{
+        text-align: center;
+}
+#selectCasino li{
+        width: 31%;
+        display: inline-block;
+}
+
+
+
+#selectCasino li img{
+       width: 95%;
+    margin: auto;
+    display: block;
+}
+
+#selectCasino li:first-child:nth-last-child(1) {
+    width: 50%;
+}
+
+#selectCasino li:first-child:nth-last-child(2),
+#selectCasino li:first-child:nth-last-child(2) ~ li {
+    width: 48%;
+}
+
+#selectCasino li:first-child:nth-last-child(3),
+#selectCasino li:first-child:nth-last-child(3) ~ li {
+      width: 30%;
+}
+
+#selectCasino li:first-child:nth-last-child(4),
+#selectCasino li:first-child:nth-last-child(4) ~ li {
+       width: 48%;
+}
+
+.userDetail{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 67px;
 }
 
 /* .userDetail .imgContainer{

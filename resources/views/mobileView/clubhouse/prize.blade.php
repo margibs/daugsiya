@@ -5,19 +5,32 @@
 <style type="text/css">
 
 .roulette {
-  position: absolute;
-  margin: 0 auto;
-  width: 560px;
-  height: 560px;
+/*   position: absolute;
+margin: 0 auto;
+width: 560px;
+height: 560px;
 
-      left: -280px;
-/*   left: 653px;
-top: 180px; */
-  background-color: transparent;
-  background-size: 560px 560px;
-  background-image: url(../images/clubhouse/sharpwheel.png);
-  border-radius: 300px;
-  z-index: 2;
+    left: -280px;
+background-color: transparent;
+background-size: 560px 560px;
+background-image: url(../images/clubhouse/sharpwheel.png);
+border-radius: 300px;
+z-index: 2; */
+
+position: relative;
+    /* margin: 0 auto; */
+    width: 145%;
+    /* height: 100%; */
+    top: 0;
+    left: -74%;
+    bottom: 0%;
+    padding-bottom: 145%;
+    /* right: -50%; */
+    background-color: transparent;
+    background-size: 100% 100%;
+    background-image: url(../images/clubhouse/sharpwheel.png);
+    border-radius: 300px;
+    z-index: 2;
 }
 
 .spinner {
@@ -26,14 +39,18 @@ top: 180px; */
   font-weight: bold;
   border: none;
   position: absolute;
-  width: 205px;
-  height: 205px;
+  /* width: 205px;
+  height: 205px; */
  /*  top: 357px;
  left: 830px; */
 
-   left: -103px;
-    top: 178px;
-
+   /* left: -103px;
+    top: 178px; */
+	
+	width: 51%;
+    height: 36%;
+    left: -26%;
+    top: 32%;
   border-radius: 100%;
   z-index: 2;
   
@@ -54,14 +71,16 @@ top: 180px; */
 }
 
 .bgwrapper{
-	    position: absolute;
     width: 100%;
     float: left;
-    /* overflow: hidden; */
     left: 0;
-    top: 112px;
-    overflow: hidden;
+    /* top: 112px; */
+    /* overflow: hidden; */
     bottom: 0;
+    position: relative;
+    height: auto;
+
+
 
 }
 
@@ -88,8 +107,8 @@ top: 180px; */
   position: absolute;
   width: 0; 
   height: 0; 
-        top: 91px;
-    left: 204px;
+   top: 44%;
+    left: 99%;
 border-bottom: 10px solid transparent;
     border-top: 10px solid transparent;
     border-left: 10px solid #fff;
@@ -113,8 +132,13 @@ border-bottom: 10px solid transparent;
   /*   top: 387px;
   left: 807px; */
 
-      top: 187px;
-    left: 135px;
+    /*   top: 187px;
+        left: 135px; */
+
+            top: 50%;
+    left: 50%;
+    margin-top: -116px;
+    margin-left: -115px;
     background: rgb(196,3,7);
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2M0MDMwNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiMjAwMDIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
     background: -moz-linear-gradient(top,  rgb(255, 255, 255) 0%, rgba(241, 241, 241, 0.94) 100%);
@@ -230,21 +254,24 @@ border-bottom: 10px solid transparent;
 }
 .congrats{
     position: absolute;
-    top: 0px;
+    top: 50%;
     left: 0px;
+    bottom: 0;
     z-index: -5;
     visibility: hidden;
     text-align: center;
-    height: 100%;
     width: 100%;
+    float: left;
     color: rgb(255, 255, 255);
-    padding: 138px 20px 0px 20px;
+    height: 295px;
     font-family: "Work Sans";
     font-weight: 600;
+    margin-top: -147.5px;
+    word-wrap: break-word;
     background: rgba(0, 0, 0, 0.83);
 }
 .congrats h3{
-	font-size: 40px;
+	font-size: 24px;
 	text-shadow: 0px 0px 14px rgb(0, 0, 0);
 }
 .congrats a{
@@ -318,6 +345,12 @@ border-bottom: 10px solid transparent;
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
              App.controller('main', function(page){
+
+             	 $(page).on('appShow', function(){
+                        $('#navbarTitle').text('Prizeroom');
+
+                        });
+
 
              		$(page).find('.entercode a').click(function() { 
 

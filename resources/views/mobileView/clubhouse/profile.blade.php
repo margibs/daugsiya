@@ -3,9 +3,11 @@
 @section('custom-styles')
 <link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
  <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+ <link rel="stylesheet" href="{{ asset('css/jrate.css') }}">
  <style>
  </style>
 @endsection
+
 
 @section('content')
 
@@ -17,13 +19,11 @@
         <div class="upperHalf">
             <div class="imgContainer">
         <div class="changePicButtonContainer z-depth-1" id="uploadBtn">
-            <a href="javascript:;" class="changePicButton">
+            <div class="changePicButton">
                 
                      <img src="{{ $user->user_detail->profile_picture  ? url().'/user_uploads/user_'.$user->id.'/'.$user->user_detail->profile_picture : url().'/user_uploads/default_image/default_01.png' }}" alt="" id="picPreview">
                 
-               
-               
-            </a>
+            </div>
                <label>
                   <span> + </span>
                 </label>
@@ -31,11 +31,16 @@
             </div>
 
         </div>
+           <span class="editProfile">Edit Profile</span>
+            <span class="changePassword">Change Password</span>
+            <a href="{{ url('clubhouse/magazine') }}">Magazine</span>
           <h6>{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}</h6>
+
           <div class="row userDetailActions">
+
                   
-          <div class="col s6"><a href="javascript:;" class="app-button" data-target="yourFriends"><span class="icon ion-person-stalker"></span> <span>{{ count($user->myFriends) }} </span></a></div>
-          <div class="col s6"><a href="javscript:;" class="app-button" data-target="yourMessages" data-target-args='{ "count" : "{{ count($user->myMessages) }}" }'><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></a></div>
+          <div class="col s6"><span class="app-button" data-target="yourFriends"><span class="icon ion-person-stalker"></span> <span>{{ count($user->myFriends) }} </span></span></div>
+          <div class="col s6"><span class="app-button" data-target="yourMessages" data-target-args='{ "count" : "{{ count($user->myMessages) }}" }'><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></span></div>
           </div>
         </div>
         <div class="lowerHalf">
@@ -46,7 +51,7 @@
                  <ul class="row">
 
                   @foreach($user->favorites as $favorite)
-                    <li class="col s2 rateGame" data-args='{ "totalRating" : "{{ $favorite->gameRating['totalRating'] }}" , "post" : "{{ $favorite->id }}" , "slug" : "{{ $favorite->slug }}", "background_image" : "{{ $favorite->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $favorite->icon_feature_image }}"></li>
+                    <li class="col s2 rateGame" data-args='{ "user_rating" : "{{ $favorite->user_rating ? $favorite->user_rating->rating : 0 }}", "totalRating" : "{{ $favorite->gameRating['totalRating'] }}" , "post" : "{{ $favorite->id }}" , "slug" : "{{ $favorite->slug }}", "background_image" : "{{ $favorite->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $favorite->icon_feature_image }}"></li>
                   @endforeach
               
             </ul>
@@ -56,7 +61,8 @@
                  <ul class="row">
 
                    @foreach($user->played_games as $played_game)
-                    <li class="col s2"><img src="{{ asset('uploads') }}/{{ $played_game->icon_feature_image }}"></li>
+                    <li class="col s2 rateGame" data-args='{ "user_rating" : "{{ $played_game->user_rating ? $played_game->user_rating->rating : 0 }}", "totalRating" : "{{ $played_game->gameRating['totalRating'] }}" , "post" : "{{ $played_game->id }}" , "slug" : "{{ $played_game->slug }}", "background_image" : "{{ $played_game->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $played_game->icon_feature_image }}"></li>
+                    
                   @endforeach
               
             </ul>
@@ -66,7 +72,8 @@
                  <ul class="row">
 
                   @foreach($user->unplayed_games as $unplayed_game)
-                    <li class="col s2"><img src="{{ asset('uploads') }}/{{ $unplayed_game->icon_feature_image }}"></li>
+
+                   <li class="col s2 rateGame" data-args='{ "user_rating" : "{{ $unplayed_game->user_rating ? $unplayed_game->user_rating->rating : 0 }}", "totalRating" : "{{ $unplayed_game->gameRating['totalRating'] }}" , "post" : "{{ $unplayed_game->id }}" , "slug" : "{{ $unplayed_game->slug }}", "background_image" : "{{ $unplayed_game->thumb_feature_image }}" }'><img src="{{ asset('uploads') }}/{{ $unplayed_game->icon_feature_image }}"></li>
                   @endforeach
               
             </ul>
@@ -75,7 +82,9 @@
         </div>
     </div>
 
-     <div id="cropModal" class="modal">
+      </div>
+</div>
+         <div id="cropModal" class="modal">
     <div class="modal-content">
         <div id="cropperH"></div>
 
@@ -84,34 +93,35 @@
       <a class="waves-effect waves-light btn" id="doneCropping">Save</a>
     </div>
   </div>
-
-      </div>
-</div>
-    
      <div id="rateModal" class="modal">
     <div class="modal-content">
-      <img src="" alt="" id="backGroundModal">
-       <div class="ratingArea">
-           <input type="hidden" step="0.5" id="backingfld" class="rating">
-                <div class="rateit" data-rateit-backingfld="#backingfld" data-rateit-resetable="false" data-rateit-ispreset="true" id="rateMe"></div> 
-       </div>
+    <h4></h4>
+      <div id="jRate">
+           
 
+      </div>
+        <button type="button" class="buttonone" id="playGame"> <i class="fa fa-play"></i> </button>
+                                <button type="button"><a href="javascript:;" id="goToGame"> <i class="fa fa-book"></i> </a></button>
     </div>
-    <div class="modal-footer">
-      <a class="waves-effect waves-light" id="doneCropping">Close</a>
+  </div>
+     <div id="selectCasinoModal" class="modal">
+    <div class="modal-content">
+    <h4>Select from these casinos:</h4>
+          <ul id="selectCasino">
+          </ul>
     </div>
   </div>
 
 
 <div class="app-page" data-page="yourFriends">
 <div class="app-topbar"></div>
-  <div class="app-content">
+  <div class="app-content defaultBg">
          <div class="row">
               <div class="col s12">
                 <ul id="yourFriendSorting">
-                    <li><a href="javascript:;" class="active">All <span class="countAll">(<span id="countAll"></span>)</span></a></li>
-                    <li><a href="javascript:;">Online <span class="countOnline">(<span id="countOnline"></span>)</span></a></li>
-                    <li><a href="javascript:;">Offline <span class="countOffline">(<span id="countOffline"></span>)</span></a></li>
+                    <li><div class="active">All <span class="countAll">(<span id="countAll"></span>)</span></div></li>
+                    <li><div>Online <span class="countOnline">(<span id="countOnline"></span>)</span></div></li>
+                    <li><div>Offline <span class="countOffline">(<span id="countOffline"></span>)</span></div></li>
 
                 </ul>
               </div>
@@ -133,7 +143,7 @@
 
 <div class="app-page" data-page="yourMessages">
 <div class="app-topbar"></div>
-  <div class="app-content">
+  <div class="app-content defaultBg">
               <div id="myMessages" class="col s12">
             <ul class="messageList">
                    @foreach($user->myMessages as $msg)
@@ -191,8 +201,8 @@
           <h6></h6>
           <div class="row userDetailActions">
 
-                <div class="col s6"><a href="javascript:;" class="actionButton">Unfriend</a></div>
-                <div class="col s6"><a href="javscript:;" id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></a></div>
+                <div class="col s6"><span class="actionButton">Unfriend</span></div>
+                <div class="col s6"><span id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></span></div>
           
           </div>
         </div>
@@ -228,15 +238,102 @@
      </div>
 </div>
 
+
+
+<div class="app-page" data-page="edit-profile">
+  <div class="app-topbar">
+    <div class="app-title">Contact</div>
+  </div>
+    <div class="app-content">
+         <form action="{{ url('clubhouse/profile/userDetails') }}" method="POST">
+          @if(session('userDetailsErrors'))
+            <ul class="formMessage errorlist">
+            @foreach(session('userDetailsErrors') as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+          @endif
+
+          @if(session('userDetailsSuccessMessage'))
+            <div class="formMessage successMessage">{{ session('userDetailsSuccessMessage')}}</div>
+          @endif
+        {!! csrf_field() !!}
+          <div class="form-group">
+            <label for="">Firstname</label>
+            <input type="text" name="firstname" class="form-control" value="{{ isset($user->user_detail) ? $user->user_detail->firstname : '' }}" placeholder="Firstname">
+          </div>
+          <div class="form-group">
+            <label for="">Lastname</label>
+            <input type="text" name="lastname" class="form-control" value="{{ isset($user->user_detail) ? $user->user_detail->lastname : '' }}" placeholder="Lastname">
+          </div>
+          <div class="form-group">
+            <label for="">Address</label>
+            <textarea name="address" cols="30" rows="5"  placeholder="Address">{{ isset($user->user_detail) ? $user->user_detail->address : '' }}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="">Phone Number</label>
+            <input type="text" name="phone_no" class="form-control" value="{{ isset($user->user_detail) ? $user->user_detail->phone_no || '' : '' }}"  placeholder="Phone Number">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="waves-effect waves-light btn">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="app-page" data-page="edit-password">
+  <div class="app-topbar">
+    <div class="app-title">Contact</div>
+  </div>
+    <div class="app-content">
+          <div class="box2 good keybox">
+            <form action="{{ url('clubhouse/profile/changePassword') }}" method="POST">           
+                @if(session('changePasswordErrors'))
+                  <ul class="formMessage errorlist">
+                  @foreach(session('changePasswordErrors') as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                  </ul>
+                @endif
+
+                @if(session('successMessage'))
+                  <div class="formMessage successMessage">{{ session('successMessage')}}</div>
+                @endif
+              {!! csrf_field() !!}
+                <div class="form-group">
+                  <label for="">Current Password</label>
+                  <input type="password" name="current_password" class="form-control" placeholder="Current Password">
+                </div>
+                <div class="form-group">
+                  <label for="">New Password</label>
+                  <input type="password" name="password" class="form-control" placeholder="New Password">
+                </div>
+                <div class="form-group">
+                  <label for="">Confirm New Password</label>
+                  <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm New Password">
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="waves-effect waves-light btn">Submit</button>
+                </div>
+              </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 @endsection
 
 @section('app-js')
 <script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
 <script src="{{ asset('js/jquery.rateit.min.js') }}"></script>
+<script src="{{ asset('js/jonasRate.js') }}"></script>
 <script>
 
 
- $(document).on('ready', function(){
+ (function(window, document, $){
 
       var gameExpUrl = '{{ url("gameExp") }}';
       var profileUrl = '{{ url("profile") }}';
@@ -248,112 +345,17 @@
       var userName = $('#userId').data('name');
       var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
       var imageUrl = '{{ asset("uploads") }}';
+      var baseUrl = '{{ url() }}';
       var publicUrl = '{{ asset("") }}';
       var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
 
-     /* App.controller('yourFriends', function(page){
-
-        $(page).find('#yourFriendTab').tabs();
-      });*/
+   /*   FIRST_NAME = "{{ $user->user_detail->firstname }}";
+      LAST_NAME = "{{ $user->user_detail->lastname }}";*/
 
 
-      /*App.populator('userDetails', function(page, request){
-           this.transition = 'slide-left';
-            $('#backButton').show().attr('data-load', 'yourFriends');
-
-            if(request.user_id){
-
-                                  $(page).on('click', '#profileBtn button', function(){
-
-                      other_person = $(this).data('other_person');
-                      action = $(this).data('action');
-                      friend_id = $(this).data('friend_id');
-
-                      $(this).attr('disabled', 'disabled');
-
-                      if(action){
-
-                        ajaxUrl = false;
-                        data = false;
-
-                          if(other_person && action == 1){
-
-                            ajaxUrl = friendUrl+'/addFriend';
-                              data =  { user_id : userId, friend_id : other_person };
-
-                          }else if(action == 2 && friend_id){
-
-                             ajaxUrl = friendUrl+'/cancelFriendRequest';
-                              data = { id : friend_id };
-                          }else if(action == 3 && friend_id && other_person){
-                              ajaxUrl = friendUrl+'/acceptFriendRequest';
-                              data = { id : friend_id };
-                          }else if(action == 4 && friend_id && other_person){
-                            ajaxUrl = friendUrl+'/unFriend';
-                              data = { id : friend_id };
-                          }
+      //console.log(FIRST_NAME);
 
 
-                          if(data && ajaxUrl){
-                            alert(JSON.stringify(data) + ' '+ajaxUrl);
-                          }
-
-
-                      }
-
-
-                     });
-              setTimeout(function(){
-                $('.pageLoading').show();
-              $('.userDetail').hide();
-
-                                $.ajax({
-                  url : profileUrl+'/viewFriendProfile',
-                  data : { user_id : userId, other_person : request.user_id, _token : CSRF_TOKEN },
-                  dataType : 'json',
-                  type : 'POST',
-                  success : function(data){
-                    console.log(data);
-                      $('.pageLoading').hide();
-              $('.userDetail').show();
-                    $('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  )
-                       $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
-                       relation = data.friend.relation;
-                      friend_id = data.friend.friend_id;
-
-                       if(relation != 2){
-
-                        actionBtn = $('<button type="button">').data('other_person', request.user_id);
-
-                        if(relation != 1){
-                            $(actionBtn).data('friend_id', friend_id);
-                        }
-
-                        if(relation == 1){
-                          $(actionBtn).text('Add Friend').data('action', 1);
-                        }else if(relation == 3){
-                          $(actionBtn).text('Cancel Friend Request').data('action', 2);
-                        }else if(relation == 4){
-                          $(actionBtn).text('Accept Friend Request').data('action', 3);
-                        }else if(relation == 5){
-                          $(actionBtn).text('Unfriend').data('action', 4);
-                        }
-
-                        $('#profileBtn').html('').append(actionBtn);
-
-                      };
-
-
-
-                  },error : function(xhr){
-                    console.log(xhr.responseText);
-                  }
-                });
-              }, 2000);
-
-
-            }
-      });*/
 
         function changeFriendOnlineStatusCount(page, FriendId, add){
 
@@ -405,8 +407,8 @@
                  if(request.user_id && !$(page).find('#friendDetailContainer').hasClass('dataLoaded')){
 
               setTimeout(function(){
-                $('.pageLoading').show();
-              $('#friendDetailContainer').hide();
+                $(page).find('.pageLoading').show();
+              $(page).find('#friendDetailContainer').hide();
 
 
               friendFavGameUl = $(page).find('#friendFavGameUl').html('');
@@ -420,8 +422,8 @@
                   success : function(data){
                     console.log(data);
 
-                     $('.pageLoading').hide();
-              $('#friendDetailContainer').show().addClass('dataLoaded');
+                     $(page).find('.pageLoading').hide();
+              $(page).find('#friendDetailContainer').show().addClass('dataLoaded');
 
               $(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  );
 
@@ -562,6 +564,37 @@
       App.controller('main', function (page) {
             this.transition = 'slide-right';
 
+      /***********edit progile ************************/
+          $(page).on('click', '.editProfile', function(){
+            //data_user = $(this).attr('data-user');
+              //alert(data_user);
+              //console.log(data_user);
+              //console.log(this.user_id);
+              App.load('edit-profile');
+          })
+
+          App.controller('edit-profile', function(page){
+            this.transition = 'slide-left';
+              $(page).on('appShow', function(){
+              })
+          });
+
+      /***********edit progile ************************/
+
+      /************** change password ***********************/
+
+      $(page).on('click', '.changePassword', function(){
+          App.load('edit-password');
+      })
+
+      App.controller('edit-password', function(page){
+          this.transition = "slide-left";
+
+      })
+      /************** change password ***********************/
+
+          cropModal = $('#cropModal');
+
             $(page).on('appShow', function(){
                 $('#navbarTitle').text('Profileroom');
             });
@@ -571,34 +604,119 @@
               });
 
              
-
+              ratingAJAX = false;
             $(page).on('click', '.rateGame', function(){
 
                 args = JSON.parse($(this).attr('data-args'));
                 console.log(args);
+                  theModal = $('#rateModal');
+                  theModal.data('post_id', args.post);
+                  rating = parseInt(args.user_rating) || 0;
 
-                $('#backGroundModal').attr('src', publicUrl+'uploads/'+args.background_image);
-                $('#rateMe').bind('rated', function() { alert('rating: ' + $(this).rateit('value')); });  
+                  if(rating > 0){
+                    theModal.find('h4').text('My Rating');
+                  }else{
+                     theModal.find('h4').text('My Rating - NOT RATED');
+                  }
 
-                $('#rateModal').openModal();
+                  theModal.find("#jRate").jRate(rating, function(val){
+
+                    if(val && !ratingAJAX){
+                      ratingAJAX = true;
+                            $.ajax({
+          type : 'POST',
+          url: gameExpUrl+'/rateGame',
+          data : { rating : val, user_id : userId , post_id : args.post , _token : CSRF_TOKEN },
+          dataType : 'json',
+          success : function(data){
+            ratingAJAX = false;
+                                theModal.find('h4').text('Thanks for rating!');
+                    setTimeout(function(){ theModal.find('h4').text('My Rating') }, 1000);
+          },error : function(xhr){
+            console.log(xhr.responseText);
+          }
+
+        });
+                    }
+
+                  });
+
+
+    var playNowAJAX = false;
+    
+    $(theModal).find('#playGame').unbind('click').bind('click', function(){
+      
+      post_id = $(theModal).data('post_id');
+      if(post_id){
+          $('#selectCasinoModal').openModal();
+           if(!playNowAJAX){
+          playNowAJAX = true;
+      $.ajax({
+        type : 'POST',
+        url : gameExpUrl+'/playNow',
+        data : { _token : CSRF_TOKEN, post_id : post_id },
+        dataType : 'json',
+        success : function(data){
+          console.log(data);
+
+          $('#selectCasino').html('');
+          playNowAJAX = false;
+
+          if(data && data.length){
+            
+            $.each(data, function(){
+
+              casino = this.casino;
+              $('#selectCasino').append(
+                  $('<li>')
+                      .append(
+                        $('<a href="'+baseUrl+'/'+casino.id+'" target="_blank">')
+                            .append(
+                              $('<img alt="">').attr('src', '{{url("uploads")}}/'+casino.claim_image)
+                              )
+                        )
+                )
+            });
+          }else{
+            $('#selectCasino').append($('<li>').text('No Casino Available'));
+          }
+          
+        },error : function(xhr){
+          console.log(xhr.responseText);
+        }
+      });
+      }
+    }
+      
+            /*<li><a href="http://daugsiya.dev/3" target="_blank"><img alt="" src="http://daugsiya.dev/uploads/13553_hardrock2.jpg"></a></li>*/
+       /*                  
+
+     
+      }*/
+                });
+
+                $(theModal).find('#goToGame').attr('href', baseUrl+'/'+args.slug);
+ 
+
+                theModal.openModal();
             });
           
           $(page).on('click', '#uploadBtn', function(e){
                            e.stopPropagation();
-                            $('#profilePic').click();
+                            $('#profilePic').trigger('click');
                       });
 
                       var $uploadCrop;
 
               function readFile(input) {
 
-                 $(page).find('#cropModal').openModal();
+                 cropModal.openModal();
 
                 if (input.files && input.files[0]) {
                         var reader = new FileReader();
                         
                         reader.onload = function (e) {
-                                    $(page).find('#imageView').hide();
+                                    cropModal.find('#imageView').hide();
                        
 
                           $uploadCrop.croppie('bind', {
@@ -634,7 +752,7 @@
 
 
               uploadCropAjax = false;
-              $uploadCrop = $(page).find('#cropperH').croppie({
+              $uploadCrop = cropModal.find('#cropperH').croppie({
                    
                          viewport: {
                             width: 150,
@@ -650,7 +768,7 @@
                       });
 
               $(page).on('change','#profilePic', function () { readFile(this); });
-              $(page).on('click','#doneCropping', function (ev) {
+              cropModal.on('click','#doneCropping', function (ev) {
                 $uploadCrop.croppie('result', {
                   type: 'canvas',
                   size: 'viewport',
@@ -675,7 +793,7 @@
                           success : function(data){
                             console.log(data);
                             uploadCropAjax = false;
-                              $(page).find('#cropModal').closeModal();
+                              $('#cropModal').closeModal();
                             $(page).find('#picPreview').attr('src',resp );
                           },error : function(xhr){
                             console.log(xhr.responseText);
@@ -695,7 +813,7 @@
               }
              
 
- });
+ })(window, document, jQuery);
 
 </script>
 @endsection

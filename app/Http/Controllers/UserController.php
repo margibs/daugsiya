@@ -26,8 +26,12 @@ use DateTime;
 use Validator;
 use Hash;
 use Session;
+use App\Http\Controllers\Agent;
+use Jenssegers\Agent\Agent as MediumAgent;
 
 use Yajra\Datatables\Datatables;
+
+use Input;
 
 
 class UserController extends Controller
@@ -334,7 +338,7 @@ class UserController extends Controller
                $questionpage .= '<p>'.$q->question.'</p><ul>';
 
                $answer = $q->answer()->where('user_id', $user->id)->first();
-                
+                //retrieve answer check if already answered else choices
                if($answer){
 
                 $questionpage.= '<li> <a href="javascript:;">You answered '.$answer->choice->choice.'</a></li>';
@@ -624,7 +628,7 @@ class UserController extends Controller
         $session_id = Session::getId();
 
         // dd($selectedRoom->room_messages);
-
+        
         return view('clubhouse/chatroom', compact('user', 'chatrooms', 'unread_messages_count', 'user_notification_count', 'selectedRoom', 'global_notification_count', 'session_id'));
     }
 
@@ -660,6 +664,208 @@ class UserController extends Controller
         return json_encode($chatroom->room_messages);
     }
 
+    public function mobileMagazine() {
+
+        
+        $Agent = new MediumAgent();
+
+        if($Agent->isMobile()){
+
+                  $user = $this->user;
+        $questions = Question::where('follow_up', 0)->get();
+
+        $choices = [];
+
+        $questionpage = '';
+
+
+        foreach($questions as $k=>$q){
+
+        $questionpage.= '<div class="app-page" data-page="question_'.$q->id.'">';
+            $questionpage.= '<div class="app-topbar"></div>';
+                $questionpage.= '<div class="app-content">';
+                    $questionpage.= '<div class="row">';
+                        $questionpage.= '<div class="col s12">';
+                            $questionpage.= '<ul class="messageList">';
+                                $questionpage.= '<li>';
+                                    $questionpage.= '<img src="'.asset('images/default_profile_picture.png').'" alt="">';
+                                            $questionpage.= '<div class="msgContent">';
+                                                $questionpage.= '<div class="info"><p>'.$q->question.'</p></div>';
+                                            $questionpage.= '</div>';
+                                $questionpage.= '</li>  ';
+                            $questionpage.= '</ul>';
+                        $questionpage.= '</div> ';
+                    $questionpage.= '</div> ';
+                    $questionpage.= '<div class="choiceContainer" data-id="'.$q->id.'">';
+                    //CHECK IF ANSWER ALREADDY
+                    $answer = $q->answer()->where('user_id', $user->id)->first();
+                    if($answer){
+                        $questionpage.='<div class="row">';
+                            $questionpage.='<div class="col s12">';
+                                $questionpage.='<div class="btnBox">';
+                                    $questionpage.='<div class="btnBody">';
+                                    $questionpage.='You answered '.$answer->choice->choice;
+                                    $questionpage.='</div>';
+                                $questionpage.='</div>';
+                            $questionpage.='</div>';
+                        $questionpage.='</div>';
+                    $questionpage.= '</div> ';
+
+                    //check if the follow up answer already
+                    $follow_up_answered = $q->choices()->where('follow_id', '!=', 0)->whereExists(function($query) use($user){
+                        $query->select('id')
+                        ->from('question_user_answers')
+                        ->whereRaw('question_user_answers.question_id = question_choices.follow_id')
+                        ->where('question_user_answers.user_id', $user->id);
+                    })->first();
+
+                if($follow_up_answered){
+                    //CHECK IF 
+                    $follow_up_answer = $follow_up_answered->follow_up->answer()->where('user_id', $user->id)->first();
+                    if($follow_up_answer){
+                         $questionpage.= '<div>';
+                            $questionpage .= '<h4>'.$follow_up_answered->follow_up->question.'</h4>';
+                                $questionpage.= '<div class="choiceContainer">';
+                                    $questionpage.='You answered '.$follow_up_answer->choice->choice;
+                            $questionpage.='</div>';
+                        $questionpage.='</div>';
+                    }
+                    
+                 }else{
+
+                    $follow_up = $answer->choice->follow_up;
+
+                    if($follow_up){
+                            $questionpage.= '<div class="follow_up_'.$follow_up->id.'">';
+                            $questionpage .= '<h4>'.$follow_up->question.'</h4>';
+                                $questionpage.= '<div class="choiceContainer" data-id="'.$follow_up->id.'">';
+                                $questionpage.= '<ul class="questionContainer" data-id="'.$follow_up->id.'">';
+                                    foreach($follow_up->choices as $chos) {
+                                        $questionpage.='<div class="row">';
+                                        $questionpage.='<div class="col s12">';
+                                            $questionpage.='<div class="btnBox">';
+                                                $questionpage.='<div class="btnBody">';
+                                                $questionpage.='<a class="waves-effect waves-light btn col s12 chooseAnswer" data-id="'.$chos->id.'" data-response="'.$chos->response.'" >'.$chos->choice.'</a>';
+                                                $questionpage.='</div>';
+                                            $questionpage.='</div>';
+                                        $questionpage.='</div>';
+                                    $questionpage.='</div>';
+
+                                    }
+                                $questionpage.= '</ul>';
+                            $questionpage.='</div>';
+                        $questionpage.='</div>';
+
+
+                     }
+                 }
+                        
+
+            
+                    }
+                    else 
+                    {
+                        foreach($q->choices as $c) {
+
+                            $questionpage.='<div class="row">';
+                                $questionpage.='<div class="col s12">';
+                                    $questionpage.='<div class="btnBox">';
+                                        $questionpage.='<div class="btnBody">';
+                                            $questionpage.='<a class="waves-effect waves-light btn col s12 chooseAnswer" data-follow-id="'.$c->follow_id.'" data-id="'.$c->id.'" data-response="'.$c->response.'" >'.$c->choice.'</a>';
+                                        $questionpage.='</div>';
+                                    $questionpage.='</div>';
+                                $questionpage.='</div>';
+                            $questionpage.='</div>';
+                        }
+
+                         $questionpage.='</div>';
+
+                        /***************** check the follow-up question *************************/
+
+
+                        foreach($q->choices as $ch) {
+
+                            if($ch->follow_up){
+                                $questionpage.= '<div class="follow_up follow_up_'.$ch->follow_up->id.'">';
+                                $questionpage .= '<h4>'.$ch->follow_up->question.'</h4>';
+                                    $questionpage.= '<div class="choiceContainer" data-id="'.$ch->follow_up->id.'">';
+                                    $questionpage.= '<ul class="questionContainer" data-id="'.$ch->follow_up->id.'">';
+                                        foreach($ch->follow_up->choices as $cho) {
+                                            $questionpage.='<div class="row">';
+                                            $questionpage.='<div class="col s12">';
+                                                $questionpage.='<div class="btnBox">';
+                                                    $questionpage.='<div class="btnBody">';
+                                                    $questionpage.='<a class="waves-effect waves-light btn col s12 chooseAnswer" data-id="'.$cho->id.'" data-response="'.$cho->response.'" >'.$cho->choice.'</a>';
+                                                    $questionpage.='</div>';
+                                                $questionpage.='</div>';
+                                            $questionpage.='</div>';
+                                        $questionpage.='</div>';
+
+                                        }
+                                    $questionpage.= '</ul>';
+                                $questionpage.='</div>';
+                            $questionpage.='</div>';
+                            }
+                        }
+                    }
+                   
+
+                if(isset($questions[$k+1])){
+                    $questionpage.='<button class="waves-effect waves-light btn col s12 app-button" data-target="question_'.$questions[$k+1]->id.'">Next</button>';
+                }
+
+                
+            $questionpage.= '</div>';
+
+        $questionpage.= '</div>';
+   
+   
+        }
+
+        return view('clubhouse.magazine', compact('questions', 'questionpage'));
+
+        }else{
+             Abort(404);
+        }
+
+      
+    }
+
+  public function getChatroomMobile($id = null) {
+          $user = $this->user;
+
+        $chatroom = Chat_Room::with('room_messages')->find($id);
+
+        $data = $chatroom->room_messages()->orderBy('created_at','DESC')->take(10)->get();
+        
+
+
+        return json_encode($data);
+
+        // dd($selectedRoom->room_messages);
+
+        //return view('clubhouse/chatroom', compact('user', 'chatrooms', 'unread_messages_count', 'user_notification_count', 'selectedRoom', 'global_notification_count', 'session_id'));
+    }
+
     
+    public function paginateChatroom()
+    {
+
+        $user = $this->user;
+        $chatroom = Chat_Room::with('room_messages')->where('id',Input::get('room_id'))->first();
+
+      /*  $chatroom->room_messages = $chatroom->room_messages()->take(10)->offset(Input::get('page')*10)->orderBy('created_at','DESC')->get();*/
+
+       $data  = $chatroom->room_messages()->skip(Input::get('end'))->take(10)->orderBy('created_at','DESC')->get();
+
+        if(count($data) == 0) {
+            //$data['length'] = 0;
+            return json_encode(['done' => 1]);
+        } 
+
+        return json_encode($data);
+ 
+
+    }    
 
 }

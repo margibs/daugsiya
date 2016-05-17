@@ -301,6 +301,7 @@ Route::group(['middleware' => 'UserCheck'], function()
 	Route::get('admin/article/get','HomeImagesController@articleGet');
 	Route::get('admin/skypscrapper/get','HomeImagesController@skypscrapperGet');
 	Route::get('admin/home-adds/get', 'HomeImagesController@anyDataCasino');
+	
 
 });
 
@@ -319,6 +320,8 @@ Route::group(['middleware' => 'ClubMiddleware'], function()
 
 	Route::get('clubhouse/home', 'ClubhouseController@home');
 	Route::get('clubhouse/profile', 'UserController@profile');
+	Route::get('clubhouse/magazine', 'UserController@mobileMagazine');
+
 	Route::post('clubhouse/profile/changePassword', 'UserController@changePassword');
 	Route::post('clubhouse/profile/userDetails', 'UserController@userDetails');
 	Route::get('clubhouse/findPeople', 'UserController@findPeople');
@@ -390,6 +393,15 @@ Route::group(['middleware' => 'ClubMiddleware'], function()
 
 	//Tour AJAX
 	Route::post('endTour', 'UserController@endTour');
+
+	//ROUTE FOR GET CHATROOM
+	Route::get('mobile/getChatroom/{id}', 'UserController@getChatroomMobile');
+
+	Route::post('mobile/paginate/getchatroom', 'UserController@paginateChatroom');
+
+	Route::post('message/getPaginatePrivateMessage', 'MessageController@getPaginatePrivateMessage');
+	Route::post('message/postPaginatePrivateMessage', 'MessageController@postPaginatePrivateMessage');
+
 
 });
 

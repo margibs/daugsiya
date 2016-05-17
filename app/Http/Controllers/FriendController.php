@@ -17,7 +17,9 @@ class FriendController extends Controller
 
     public function addFriend(Request $request){
 
-        $friend = Friend::firstOrCreate([ 'user_id'=> $request->user_id, 'friend_id' => $request->friend_id ]);
+      $user_id = Auth::user()->id;
+
+        $friend = Friend::firstOrCreate([ 'user_id'=> $user_id, 'friend_id' => $request->friend_id ]);
 
         echo json_encode($friend);
     }
