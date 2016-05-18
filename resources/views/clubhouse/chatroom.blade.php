@@ -831,6 +831,7 @@
    var messageUrl = '{{ url("message") }}';
    var sessionUrl = '{{ url("session") }}';
    var defaultProfilePic = publicUrl+'/user_uploads/default_image/default_01.png';
+   var BASE_URL = $('meta[name="baseURL"]').attr('content');
     
 
     last_room_id = $('#roomDetails').data('id');
@@ -845,11 +846,13 @@
     $('#chatPopulation').text(data.length);
     $('#peopleList').html('');
     $.each(data, function(){
+      console.log(this.profile_picture);
       $('#peopleList')
         .append(
           $('<li>') 
             .append(
-              $('<img>').attr('src', publicUrl+'/'+this.profile_picture )
+              //$('<img>').attr('src', publicUrl+'/'+this.profile_picture )
+              $('<img>').attr('src', getImage(this.profile_picture, this.user_id, 2020) )
 
               )
           )
@@ -1108,8 +1111,8 @@
                   //$('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
                   //element = "#viewFriendProfilePic";
                   //getImage(data, "default", element);
-                  $("#viewFriendProfilePic").attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
-                  //$("#viewFriendProfilePic").attr('src', getImageAppend(this, 2020))
+                  //$("#viewFriendProfilePic").attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+                  $("#viewFriendProfilePic").attr('src', getImage(data.user_detail.profile_picture, data.user_detail.user_id, null))
                   $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
 
                   $('#pm-user').data('user', data.user_detail.user_id).find('.message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox');
@@ -1177,7 +1180,7 @@
       });
 
     //concat function 
-    function getImage(data, size, element) {
+   /* function getImage(data, size, element) {
       image_size = "";
       if(size == 5050) {
         image_size = size;
@@ -1197,15 +1200,19 @@
       return  $(element).attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+image_size+'/'+data.user_detail.profile_picture : defaultProfilePic  )
        
     }
+*/
+    
 
-    function getImageAppend(data, size) {
+      /********************** START GET IMAGE ******************************************************************************/
+    function getImage(profile_picture ,user_id, size) {
 
       if(size === null) {
-          return data.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_detail.user_id+'/'+data.user.user_detail.profile_picture : defaultProfilePic;  
+          return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
       }
-      return data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+size+'/'+data.user_detail.profile_picture : defaultProfilePic;
-       //data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic
+       return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
     }
+
+  /********************** END GET IMAGE ******************************************************************************/
 
   function changeChatroom(data){
 
@@ -1244,7 +1251,7 @@
                             //$('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+this.user.user_detail.user_id+'/5050/'+this.user.user_detail.profile_picture : defaultProfilePic )
                            /* element = ".msgImgcont";
                             getImage(this, 5050, element);*/
-                            $('<img>').attr('src', getImageAppend(this , 2020) )
+                            $('<img>').attr('src', getImage(this.user.user_detail.profile_picture, this.user.user_detail.user_id, null) )
                           )
                     )
                   
@@ -1434,7 +1441,9 @@
                                     .append(
                                         $('<div>').addClass('msgImgcont')
                                           .append(
-                                            $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+item.user.user_detail.user_id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
+                                           // $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+item.user.user_detail.user_id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
+                                           //data.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_detail.user_id+'/'+data.user.user_detail.profile_picture : defaultProfilePic;  
+                                            $('<img>').attr('src',  getImage(item.user.user_detail.profile_picture, item.user.user_detail.user_id, 5050) )
                                           )
                                       )
                                   )

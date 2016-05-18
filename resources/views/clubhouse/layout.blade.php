@@ -188,7 +188,7 @@
 
                       <ul class="topicons">
                               
-                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/80737_clubhouseicon.png" /> </a> </li>
+                        <li> <a href="http://susanwins.dev/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/80737_clubhouseicon.png" /> </a> </li>
                         <li> 
                           <a href="javascript:;" id="messagesMenu"> 
                             <span id="unreadMessageNotification">
@@ -268,7 +268,7 @@
             @if($user->user_detail->profile_picture == "")
                  <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ '/user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
             @else
-                <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ 'user_uploads/user_'}}{{$user->id}}/5050/{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+                <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
             @endif
       
       <!--  <img src ="{{asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview">  -->
@@ -596,6 +596,7 @@ london = moment.tz(timeZone);
 
       });
 
+
        socket.on('post_accepted_friend_notification', function(friend){
 
           span = $('<span>').addClass('notifcount');
@@ -605,8 +606,8 @@ london = moment.tz(timeZone);
               }
 
               $('#unreadUserNotification').html('').append($(span).text(notifcount));
-
-
+          console.log("Post friend request");
+          console.log(friend.profile_picture);
           $('#myNotifications').prepend(
               $('<li>').append(
                         $('<a href="javascript:;">').addClass('unread')
@@ -1072,7 +1073,8 @@ london = moment.tz(timeZone);
           {
             button = $('<a href="javascript:;">')
             .append(
-              $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+              //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+              $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
             )
             .append(
               $('<p>')
@@ -1568,12 +1570,14 @@ $(document).on('click', '.pmFriend', function(){
              $.each(inbox, function(){
 
               msg = this;
+             /* console.log("Testing for id");
+              console.log(msg);*/
 
                 button = $('<a href="javascript:;">').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox')
                               .append(
-                                $('<img>').attr('src', msg.from_user.user_detail.profile_picture ? publicUrl+'/'+ msg.from_user.user_detail.profile_picture : defaultProfilePic )
-
-
+                                //$('<img>').attr('src', msg.from_user.user_detail.profile_picture ? publicUrl+'/'+ msg.from_user.user_detail.profile_picture : defaultProfilePic )
+                                //CHAMGES CALL A FUNCTION GET IMAGE
+                                $('<img>').attr('src', getImage(msg.from_user.user_detail.profile_picture,  msg.from_user.user_detail.user_id, 5050) )
                                 )
 
                               .append(
@@ -1612,6 +1616,18 @@ $(document).on('click', '.pmFriend', function(){
         
     });
 
+  /********************** START GET IMAGE ******************************************************************************/
+  function getImage(profile_picture ,user_id, size) {
+
+      if(size === null) {
+          return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+      }
+       return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+    }
+
+  /********************** END GET IMAGE ******************************************************************************/
+
+
   $('#myMessages').on('click', 'li a', function(){
 
       $('#unreadMessageNotification').html('');
@@ -1623,9 +1639,9 @@ $(document).on('click', '.pmFriend', function(){
 
   });
 
-   $('#userMenu').click(function(){
+   /*$('#userMenu').click(function(){
       $('.profileBox').toggle();
-    });
+    });*/
 
     $('#messagesMenu').click(function(){
       $('.messageNotifBox').toggle();
@@ -1965,6 +1981,7 @@ interact('.draggable')
       }
   });
 
+  
 
   </script>
     <script src="{{ asset('js/clubhouse/croppie.js') }}"></script>

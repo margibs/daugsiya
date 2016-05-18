@@ -47,8 +47,7 @@
 	{!! csrf_field() !!}
   <input id="image_url" type='hidden' name='image_url' value="{{ $articleBanner->image_url }}">
 	<input type="hidden" name="banner_type" value="2">
-  <input type="hidden" name="banner_type" value="2">
-  <input type="hidden" name="sykycrapper" value="{{$redirect}}">
+  <input type="text" name="redirect_link" placeholder="Redirect Link" value="{{ $articleBanner->redirect_link }}"> 
   <select name="casino_id" placeholder="Casino">
       <option value="0">N/A</option>
       @foreach($casinos as $c)

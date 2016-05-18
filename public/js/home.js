@@ -1462,7 +1462,9 @@ $(function(){
 
 					button = $('<a href="javascript:;">').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox')
 					.append(
-						$('<img>').attr('src', msg.from_user.user_detail.profile_picture ? BASE_URL+'/'+ msg.from_user.user_detail.profile_picture : defaultProfilePic )
+						//CHAMGES CALL A FUNCTION GET IMAGE
+						//$('<img>').attr('src', msg.from_user.user_detail.profile_picture ? BASE_URL+'/'+ msg.from_user.user_detail.profile_picture : defaultProfilePic )
+						$('<img>').attr('src', getImage(msg.from_user.user_detail.profile_picture,  msg.from_user.user_detail.user_id, 5050) )
 					)
 					.append(
 						$('<p>')
@@ -1494,6 +1496,18 @@ $(function(){
 			}
 		});
 	});
+
+
+	  /********************** START GET IMAGE ******************************************************************************/
+  	function getImage(profile_picture ,user_id, size) {
+
+      if(size === null) {
+          return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+      }
+       return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+    }
+
+  /********************** END GET IMAGE ******************************************************************************/
 
 	$('#myMessages').on('click', 'li a', function(){
 		$('#unreadMessageNotification').html('');
@@ -1579,7 +1593,10 @@ $(function(){
 							//   )
 							.append(
 								/*$('<img src="'+( userImage ? BASE_URL+'/user_uploads/user_'+userId+'/'+userImage : defaultProfilePic) +'">')*/
-								$('<img src="'+( userProfileImage ? BASE_URL+'/'+userImage : defaultProfilePic) +'">')
+								//$('<img src="'+( userProfileImage ? BASE_URL+'/'+userImage : defaultProfilePic) +'">')
+								//CALL GET IMAGE 
+								$('<img>').attr('src', getImage(userProfileImage, userId, 4545) )
+
 
 							)
 						)
@@ -1747,10 +1764,13 @@ $(function(){
 									.append(
 										$('<a href="javascript:;">')
 										// .append(
-										//   $('<img src="img/assets/chat-avatar-shine.png">').addClass('shine')
+										//   $('<img src="img/assets/chat-avatar-shine.png">').addClass('shine')	
 										//   )
 										.append(
-											$('<img src="'+(this.user.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user.id+'/'+this.user.user_detail.profile_picture : defaultProfilePic) +'">')
+											//$('<img src="'+(this.user.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user.id+'/'+this.user.user_detail.profile_picture : defaultProfilePic) +'">')
+											//CALL GET IMAGE FUNCTION
+											$('<img>').attr('src', getImage(this.user.user_detail.profile_picture, this.user.id, 4545) )
+											
 										)
 									)
 								)
@@ -1783,7 +1803,7 @@ $(function(){
 
 		$('#chatBoxPanel').find('.body').scrollTop($('#chatBoxPanel').find('.body')[0].scrollHeight);
 	}
-
+	
 	// END FUNCTIONS
 
 });
