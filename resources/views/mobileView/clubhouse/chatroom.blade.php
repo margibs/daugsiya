@@ -19,19 +19,42 @@
 		</div> 
 
 	   <div class="row">
-	   			<div class="chatroomHeader">
-	   			<ul id="dropdown2" class="dropdown-content" data-id="{{ $selectedRoom->id }}">
-				 	@foreach($chatrooms as $room)
-				    	<li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
-				    @endforeach
-				</ul>
-					<a class="btn dropdown-button" href="#!" data-activates="dropdown2">{{ $selectedRoom->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
-					<center>	
-						<p style="color: red">	  
-							 <a href="#" data-activates="mobile-demo" class="button-collapse2">{{ $selectedRoom->name }}<span id="people_count"></span></a>
-						</p>
-					</center>
-	   			</div>
+	   			<!-- <div class="chatroomHeader">
+           <div class="fixed-action-btn horizontal click-to-toggle" style="top: 80px; left: 24px;">
+                      <a class="btn-floating btn-large red">
+                        <i class="material-icons" data-id="{{ $selectedRoom->id }}" >chat_bubble_outline</i>
+                      </a>
+                      <ul>
+                        @foreach($chatrooms as $room)
+                        <li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}" class="btn-floating">{{ $room->name }}<span class="badge"></span></a></li>
+                        <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                        @endforeach
+                      </ul>
+                    </div> -->
+
+                <!-- menu 1 -->
+               <ul id="dropdown2" class="dropdown-content" data-id="{{ $selectedRoom->id }}">
+                @foreach($chatrooms as $room)
+                  <li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
+                @endforeach
+              </ul>
+              <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons" data-id="{{ $selectedRoom->id }}">chat_bubble_outline</i>{{ $selectedRoom->name }}  <a href="#" data-activates="mobile-demo" class="button-collapse2"><span id="people_count"></span></a></div>
+                  <div class="collapsible-body">
+                  <p>
+                    @foreach($chatrooms as $room)
+                      <a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a>
+                  @endforeach
+                  </p>
+                  </div>
+              </li>
+            </ul>
+                           
+                <!-- end menu 1-->
 					 	
 				<div class="chatBox">
 		            <div class="body">
@@ -317,7 +340,8 @@ $.fn.initBan = function(time){
 	    		.find('#mobile-demo').append(
 	    				$('<li>').append(
 	    					$('<div>').addClass('chip').append(
-	    						$('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE)
+	    						//$('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE)
+                  $('<img>').attr('src', getImage(this.profile_picture, this.user_id, 4545))
 	    					)
 	    					.append(
 			                  $('<span>').text(this.name)
@@ -343,10 +367,13 @@ $.fn.initBan = function(time){
 
 			   		$(page).find('.chatBox .body ul').html('');
 			   		$.each(data, function() {
+              //console.log("testing for image");
+              //console.log(this.user.user_detail.profile_picture);
 			   			 $(page).find('.chatBox .body ul').prepend(
 				          $('<li>')
 				              .append(
-				                $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+				                //$('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+                        $('<img>').attr('src', getImage(this.user.user_detail.profile_picture, this.user.user_detail.user_id, 4545) ).attr('data-id', this.user_id).addClass('chatProfPic')
 				                )
 				              .append(
 				                  $('<span>').text(this.message)
@@ -398,7 +425,8 @@ $.fn.initBan = function(time){
 						   			 $(page).find('.chatBox .body ul').prepend(
 							          $('<li>')
 							              .append(
-							                $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+							                //$('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+                              $('<img>').attr('src', getImage(this.user.user_detail.profile_picture, this.user.user_detail.user_id, 4545)).attr('data-id', this.user_id).addClass('chatProfPic')
 							                )
 							              .append(
 							                  $('<span>').text(this.message)
@@ -544,7 +572,8 @@ App.controller('userDetails', function(page, request){
           			
           			$(page).find('#friendDetailContainer').show().addClass('dataLoaded');
           			//$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
-          			$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/5050/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
+          			//$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/5050/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
+                $(page).find('#friendProfilePic').attr('src', getImage(data.user_detail.profile_picture, data.user_detail.user_id, 5050));
 
           			friendName = data.user_detail.firstname+' '+data.user_detail.lastname;
      				$(page).find('#friendDetailContainer h6').text(friendName);
@@ -677,7 +706,8 @@ App.controller('userDetails', function(page, request){
   		 $(thePage).find('.chatBox .body ul').append(
           $('<li>')
               .append(
-                $('<img>').attr('src',data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : DEFAULT_IMAGE ).attr('data-id', data.user.user_id).addClass('chatProfPic')
+                //$('<img>').attr('src',data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : DEFAULT_IMAGE ).attr('data-id', data.user.user_id).addClass('chatProfPic')
+                $('<img>').attr('src', getImage(data.user.profile_picture, data.user.user_id, 4545)).attr('data-id', data.user.user_id).addClass('chatProfPic')
                 )
               .append(
                   $('<span>').text(data.message)

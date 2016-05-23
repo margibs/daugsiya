@@ -500,7 +500,7 @@ $(document).on('click', '.pmFriend', function(){
 	_this = this;
 
 	user_id = $(this).attr('data-user') ? $(this).attr('data-user') : $(this).parent().attr('data-user');
-	alert('user_id');
+	//alert('user_id');
 	if(user_id){
 
 		thePmCb = getPmCb(user_id);

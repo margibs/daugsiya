@@ -1040,11 +1040,13 @@
 
     
   @if(isset($user))
-      @if($user->user_detail->profile_picture == "")
-          <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{'user_uploads/default_image/default_01.png'}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
-      @else
-          <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{'user_uploads/user_'.$user->user_detail->user_id.'/'.$user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
-      @endif
+    <!--   @if($user->user_detail->profile_picture == "")
+        <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{'user_uploads/default_image/default_01.png'}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
+    @else
+        <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{'user_uploads/user_'.$user->user_detail->user_id.'/'.$user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
+    @endif -->
+
+    <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
     
   @endif
   @if(isset($session_id))

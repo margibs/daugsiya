@@ -448,6 +448,10 @@ display: inline-block !important;
         margin-top: 10px;
 }
 
+#chatRoomTextarea{
+      background: #F7F7F7;
+}
+
 .chatBox textarea[disabled="disabled"]{
         background: #F7F7F7;
     color: #fff;

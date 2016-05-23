@@ -312,6 +312,8 @@ Route::post('casino/ajax/get_casino','PageController@ajaxGetCasino');
 Route::post('casino/ajax/get_article_banner','PageController@ajaxGetArticleBanner');
 
 
+
+
 Route::group(['middleware' => 'ClubMiddleware'], function()
 {
 

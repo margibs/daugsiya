@@ -15,6 +15,9 @@
   <div class="app-topbar"></div>
   <div class="app-content">
           <div class="userDetailBackground"></div>
+
+        
+        
     <div class="userDetail">
         <div class="upperHalf">
             <div class="imgContainer">
@@ -135,7 +138,7 @@
 
                        <li class="app-button col s4" data-target="userDetails" data-target-args='{ "user_id" : "{{ $fr->friend->user_detail->user_id }}" }' id="friend_li_{{ $fr->friend->user_detail->user_id }}">
                             <span class="user_online_status offline" id="friend-online-status-{{ $fr->friend->user_detail->user_id }}"></span>
-                            <img src="{{ $fr->friend->user_detail->profile_picture ? asset('').'/'.$fr->friend->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="">
+                            <img src="{{ $fr->friend->user_detail->userPicture5050()  }}" alt="">
                             <span class="userName">{{ ucwords( $fr->friend->user_detail->firstname ) }}</span>
                           </li>
                    @endforeach
@@ -152,7 +155,7 @@
             <ul class="messageList">
                    @foreach($user->myMessages as $msg)
                         <li class="app-button" data-target="privateMessage" data-target-args='{ "user_id" : "{{ $msg->from_user->user_detail->user_id }}", "name" : "{{ ucwords($msg->from_user->user_detail->firstname) }}" }'>
-                          <img src="{{ $msg->from_user->user_detail->profile_picture ? asset('').'/'.$msg->from_user->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="">
+                          <img src="{{ $msg->from_user->user_detail->userPicture5050() }}" alt="">
                           <div class="msgContent">
                               <div class="info"><h6>{{ ucwords($msg->from_user->user_detail->firstname) }} </h6><span class="timestamp" data-datetime="{{ $msg->created_at }}"><span class="livetime"></span></span></div>
                               <p> {{ $msg->message }} </p>
@@ -429,7 +432,8 @@
                      $(page).find('.pageLoading').hide();
               $(page).find('#friendDetailContainer').show().addClass('dataLoaded');
 
-              $(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  );
+              //$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  );
+              $(page).find('#friendProfilePic').attr('src', getImage(data.user_detail.profile_picture, data.user_detail.user_id, 5050) );
 
               friendName = data.user_detail.firstname+' '+data.user_detail.lastname;
               $(page).find('#friendDetailContainer h6').text(friendName);

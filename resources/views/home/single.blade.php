@@ -1913,7 +1913,8 @@ If you're already a member, welcome back!
                                       .append(
                                         $('<div>').addClass('msgImgcont')
                                             .append(
-                                              $('<img>').attr('src', f.friend.user_detail.profile_picture ? BASE_URL+'/'+ f.friend.user_detail.profile_picture : defaultProfilePic )
+                                              //$('<img>').attr('src', f.friend.user_detail.profile_picture ? BASE_URL+'/'+ f.friend.user_detail.profile_picture : defaultProfilePic )
+                                              $('<img>').attr('src', getImage(f.friend.user_detail.profile_picture, f.friend.user_detail.user_id, 5050) )
                                               )
                                         )
                                       .append(
@@ -1945,6 +1946,18 @@ If you're already a member, welcome back!
         
 
       });
+
+
+    /********************** START GET IMAGE ******************************************************************************/
+    function getImage(profile_picture ,user_id, size) {
+
+      if(size === null) {
+          return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+      }
+       return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+    }
+
+  /********************** END GET IMAGE ******************************************************************************/
 
       $('#recommendBtn').on('click', function(){
 

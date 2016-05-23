@@ -835,7 +835,7 @@
     
 
     last_room_id = $('#roomDetails').data('id');
-    last_room_name = $('#roomDetails').data('name');
+    last_room_name = $('#roomDetails').data('name');  
     last_room_description = $('#roomDetails').data('description');
 
    socket.on('display_people', function(data){
@@ -1321,7 +1321,8 @@
                     $('<div>').addClass('msgImgcont')
 
                       .append(
-                        $('<img>').attr('src', userImage ? publicUrl+'/'+userImage : defaultProfilePic )
+                        //$('<img>').attr('src', userImage ? publicUrl+'/'+userImage : defaultProfilePic )
+                        $('<img>').attr('src', getImage(userImage, userId, 5050) )
                       )
                     )
               )       
@@ -1369,7 +1370,8 @@
 
                   $('<div>').addClass('msgImgcont')
                     .append(
-                      $('<img>').attr('src', publicUrl+'/'+data.user.profile_picture  )
+                      //$('<img>').attr('src', publicUrl+'/'+data.user.profile_picture  )
+                      $('<img>').attr('src', getImage(data.user.profile_picture, data.user.user_id, 5050)  )
                     )
                   )
                 

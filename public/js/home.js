@@ -199,7 +199,8 @@ $(function(){
 			  $('<li>').append(
 							$('<a href="'+data_url+'">')
 							.append(
-								$('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+'/'+datat.user_id+"/"+data.user.user_detail.profile_picture : defaultProfilePic )
+								//$('<img>').attr('src', data.user.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+'/'+datat.user_id+"/"+data.user.user_detail.profile_picture : defaultProfilePic )
+								$('<img>').attr('src', getImage(data.user.user_detail.profile_picture, data.user.user_detail.user_id, 5050))
 							)
 							.append(
 								$('<p>')
@@ -253,7 +254,8 @@ $(function(){
 		  $('<li>').append(
 		    $('<a href="'+BASE_URL+'/'+friend.game.slug+'">').addClass('unread')
 		    .append(
-		      $('<img>').attr('src', friend.user.user_detail.profile_picture ? BASE_URL+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+		      //$('<img>').attr('src', friend.user.user_detail.profile_picture ? BASE_URL+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+		      $('<img>').attr('src', getImage(friend.user.user_detail.profile_picture, friend.user.user_detail.user_id, 5050) )
 		    )
 		    .append(
 		      $('<p>')
@@ -286,7 +288,8 @@ $(function(){
 		  $('<li>').append(
 		    $('<a href="javascript:;">').addClass('unread')
 		    .append(
-		      $('<img>').attr('src', friend.profile_picture ? BASE_URL+'/'+friend.profile_picture : defaultProfilePic )
+		      //$('<img>').attr('src', friend.profile_picture ? BASE_URL+'/'+friend.profile_picture : defaultProfilePic )
+		      $('<img>').attr('src', getImage(friend.profile_picture, friend.user_id, 5050))
 		    )
 		    .append(
 		      $('<p>')
@@ -455,7 +458,8 @@ $(function(){
 		requestHtml =  $('<li>').attr('id','friend-request-'+request.user_id).append(
 			$('<a href="javascript:;">').addClass('unread')
 			.append(
-				$('<img>').attr('src', request.profile_picture ? BASE_URL+'/'+request.profile_picture : defaultProfilePic )
+				//$('<img>').attr('src', request.profile_picture ? BASE_URL+'/'+request.profile_picture : defaultProfilePic )
+				$('<img>').attr('src', getImage(request.profile_picture, request.user_id, 5050))
 			)
 			.append(
 				$('<p>')
@@ -537,7 +541,8 @@ $(function(){
 					.append(
 						$('<a href="javascript:;">').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox').addClass('unread')
 						.append(
-							$('<img>').attr('src', message.from.profile_picture ? BASE_URL+'/'+ message.from.profile_picture : defaultProfilePic )
+							//$('<img>').attr('src', message.from.profile_picture ? BASE_URL+'/'+ message.from.profile_picture : defaultProfilePic )
+							$('<img>').attr('src', getImage(message.from.profile_picture, message.from.user_id, 5050) )
 						)
 						.append(
 							$('<p>')
@@ -840,7 +845,8 @@ $(function(){
 					.append(
 						$('<a href="javascript:;">')
 						.append(
-							$('<img src="'+( data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic) +'">')
+							//$('<img src="'+( data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic) +'">')
+							$('<img src="'+( getImage(data.user.profile_picture, data.user.user_id, 5050) ) +'">')
 						)
 					)
 				)
@@ -1084,7 +1090,9 @@ $(function(){
 					{
 						button = $('<a href="javascript:;">')
 						.append(
-							$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+							//$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+							$('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
+
 						)
 						.append(
 							$('<p>')
@@ -1112,7 +1120,8 @@ $(function(){
 						$(li).append(
 							$('<a href="javascript:;">')
 							.append(
-							$('<img>').attr('src', request.user.profile_picture ? BASE_URL+'/'+request.user.profile_picture : defaultProfilePic )
+							//$('<img>').attr('src', request.user.profile_picture ? BASE_URL+'/'+request.user.profile_picture : defaultProfilePic )
+							$('<img>').attr('src', getImage(request.user.profile_picture, request.user.user_id, 5050) )
 							)
 							.append(
 								$('<p>')
@@ -1135,7 +1144,8 @@ $(function(){
 						$(li).append(
 							$('<a href="'+BASE_URL+'/'+request.game.slug+'">')
 							.append(
-								$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+								//$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+								$('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
 							)
 							.append(
 								$('<p>')
@@ -1156,7 +1166,8 @@ $(function(){
 						$(li).append(
 							$('<a href="'+BASE_URL+'/all_games">')
 							.append(
-								$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+								//$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+								$('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
 							)
 							.append(
 								$('<p>')
@@ -1171,7 +1182,8 @@ $(function(){
 						$(li).append(
 							$('<a href="'+BASE_URL+'/'+request.postslug+'">')
 							.append(
-								$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+								//$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+								$('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
 							)
 							.append(
 								$('<p>')
@@ -1186,7 +1198,8 @@ $(function(){
 						$(li).append(
 							$('<a href="'+BASE_URL+'/'+request.categoryslug+'">')
 							.append(
-								$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+								//$('<img>').attr('src', request.user.user_detail.profile_picture ? BASE_URL+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+								$('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
 							)
 							.append(
 								$('<p>')
@@ -1334,7 +1347,8 @@ $(function(){
 							if(this.from != userId)
 							{
 								$(li).append(                        
-									$('<img>').attr('src', data.other_person.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+									//$('<img>').attr('src', data.other_person.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )
+									$('<img>').attr('src', getImage(data.other_person.user_detail.profile_picture, data.other_person.user_detail.user_id, 5050))                        
 								);
 							}
 							else

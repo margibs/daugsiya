@@ -387,11 +387,9 @@
 
      @if(isset($user))
      <!--  <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}"> -->
-            @if($user->user_detail->profile_picture == "")
-                 <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ '/user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
-            @else
+    
                 <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
-            @endif
+     
       
       <!--  <img src ="{{asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview">  -->
     @endif
@@ -399,7 +397,7 @@
    <input type="hidden" value="{{ $session_id }}" id="sessionId">
   @endif
     @yield('background-content')
-      <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
+      <div class="pmBox draggable" id="pmBox" data-id="1" style="margin-left: 6px;">        
           <div class="divContainer">
             <div class="header"></div>
               <div class="body">
@@ -448,6 +446,8 @@
     <script src="{{ asset('js/CSSPlugin.min.js') }}"></script> 
     <script src="{{ asset('js/TweenLite.min.js') }}"></script> 
     <script src="{{ asset('js/clubhouse.plugins.js') }}"></script>
+
+    <div class="chatbox-panel" id="chatBoxPanel"></div>
     
     <script>
 
@@ -705,7 +705,8 @@ london = moment.tz(timeZone);
                 $('<li>').append(
                           $('<a href="'+baseUrl+'/'+friend.game.slug+'">').addClass('unread')
                             .append(
-                              $('<img>').attr('src', friend.user.user_detail.profile_picture ? publicUrl+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+                              //$('<img>').attr('src', friend.user.user_detail.profile_picture ? publicUrl+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+                              $('<img>').attr('src', getImage(friend.user.user_detail.profile_picture, friend.user.user_detail.user_id, 5050) )
                               )
                             .append(
                               $('<p>')
@@ -740,7 +741,8 @@ london = moment.tz(timeZone);
               $('<li>').append(
                         $('<a href="javascript:;">').addClass('unread')
                           .append(
-                            $('<img>').attr('src', friend.profile_picture ? publicUrl+'/'+friend.profile_picture : defaultProfilePic )
+                            //$('<img>').attr('src', friend.profile_picture ? publicUrl+'/'+friend.profile_picture : defaultProfilePic )
+                            $('<img>').attr('src', getImage(friend.profile_picture, friend.user_id, 5050) )
                             )
                           .append(
                             $('<p>')
@@ -1155,7 +1157,8 @@ london = moment.tz(timeZone);
         $('<li>').append(
               $('<a href="'+data_url+'">')
               .append(
-                $('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+                //$('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+                $('<img>').attr('src', getImage(data.user.user_detail.profile_picture, data.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1230,7 +1233,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="javascript:;">')
               .append(
-              $('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
+              //$('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
+              $('<img>').attr('src', getImage(request.user.profile_picture, request.user.user_id, 5050))
               )
               .append(
                 $('<p>')
@@ -1253,7 +1257,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="'+baseUrl+'/'+request.game.slug+'">')
               .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+               // $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1274,7 +1279,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="'+baseUrl+'/all_games">')
               .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                  $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1289,7 +1295,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="'+baseUrl+'/'+request.postslug+'">')
               .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                  $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1304,7 +1311,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="'+baseUrl+'/'+request.categoryslug+'">')
               .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+               // $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                 $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1343,7 +1351,8 @@ london = moment.tz(timeZone);
     requestHtml =  $('<li>').attr('id','friend-request-'+request.user_id).append(
                         $('<a href="javascript:;">').addClass('unread')
                           .append(
-                            $('<img>').attr('src', request.profile_picture ? publicUrl+'/'+request.profile_picture : defaultProfilePic )
+                            //$('<img>').attr('src', request.profile_picture ? publicUrl+'/'+request.profile_picture : defaultProfilePic )
+                            $('<img>').attr('src', getImage(request.profile_picture, request.user_id, 5050))
                             )
                           .append(
                             $('<p>')
@@ -1460,7 +1469,11 @@ london = moment.tz(timeZone);
 
 /*$(document).on('click', '.pmFriend', function(){
 
-         modal = $('#pmBox');
+      console.log($(this).parent('li').data('user'));
+
+       //modal = $('#pmBox').clone().insertAfter('#pmBox');
+       //modal = $('#pmBox');
+       modal = $('#pmBox').clone();
 
          $(this).removeClass('unread');
 
@@ -1481,6 +1494,18 @@ london = moment.tz(timeZone);
 
             $(modal).append(loading);
             $('#pmMessageContent').html('');
+
+        /*    $(modal).find('.divContainer').show();
+            $(loading).remove();
+            modal.removeClass('loading');
+
+
+*/
+
+
+
+
+
             $.ajax({
               url : messageUrl+'/getPrivateMessages',
               data : { user_id : userId , other_person : theUser , _token : CSRF_TOKEN },
@@ -1507,7 +1532,8 @@ london = moment.tz(timeZone);
                     if(this.from != userId){
 
                       $(li).append(                        
-                        $('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+                        //$('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )
+                        $('<img>').attr('src', getImage(data.other_person.user_detail.profile_picture, data.other_person.user_detail.user_id, 5050) )                        
                       );
 
                     }else{
@@ -1533,6 +1559,8 @@ london = moment.tz(timeZone);
                 console.log(xhr.responseText);
               }
             });
+
+
           } 
 
       });*/
@@ -1549,7 +1577,8 @@ london = moment.tz(timeZone);
 
               $('#pmMessageContent').append(
                       $('<li>').append(
-                        $('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+message.from.profile_picture : defaultProfilePic )
+                        //$('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+message.from.profile_picture : defaultProfilePic )
+                        $('<img>').attr('src', getImage(message.from.profile_picture, message.from.user_id, 5050))
                       )
                       .append(
                           $('<span>').text(message.message)
@@ -1577,7 +1606,8 @@ london = moment.tz(timeZone);
                         .append(
                             $('<a href="javascript:;">').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox').addClass('unread')
                               .append(
-                                $('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+ message.from.profile_picture : defaultProfilePic )
+                                //$('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+ message.from.profile_picture : defaultProfilePic )
+                                $('<img>').attr('src', getImage(message.from.profile_picture, message.from.user_id, 5050) )
                                 )
 
                               .append(
@@ -1660,7 +1690,6 @@ london = moment.tz(timeZone);
 
   $('#messagesMenu').one('click', function(){
 
-
     $('#myMessages').html('').append($('<li style="border:none;">').addClass('loading').append('<div class="typing-indicator"><span></span><span></span><span></span></div><p> Loading... </p>'));
         
         $.ajax({
@@ -1725,7 +1754,7 @@ london = moment.tz(timeZone);
 
                   $('#myMessages').append(
 
-                      $('<li>').attr('id', 'inbox-user-'+msg.from_user.user_detail.user_id).attr('data-user', msg.from_user.user_detail.user_id)
+                      $('<li>').addClass('data-message').attr('id', 'inbox-user-'+msg.from_user.user_detail.user_id).attr('data-user', msg.from_user.user_detail.user_id)
                         .append(
                             button
                           )
