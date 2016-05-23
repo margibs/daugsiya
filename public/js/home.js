@@ -3,10 +3,6 @@
 $(function(){
 
 	// window.onresize = function(){ location.reload(); }
-	
-	BASE_URL = $('meta[name="baseURL"]').attr('content');
-	CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-	socket = io.connect(BASE_URL+':8891');
 	defaultProfilePic = BASE_URL+'/user_uploads/default_image/default_01.png';
 
 	USER_UPLOADS = 'user_uploads/user_';
@@ -216,11 +212,9 @@ $(function(){
       });
 
       socket.on('post_userActivity', function(data){
-      		/*alert(JSON.stringify(data));*/
 
       	type = data.type;
       	p = $('<p></p>');
-      		alert(type);
       	full_name = data.user.user_detail.firstname+' '+data.user.user_detail.lastname;
       	if(type == 1){
       		$(p).html(full_name+' added <a href="'+BASE_URL+'/'+data.content.slug+'"  style="text-decoration:none;">'+data.content.name+'</a> as a new Favorite');
@@ -502,7 +496,7 @@ $(function(){
 		}
 	});
 
-	socket.on('post_private_message', function(message){
+	/*socket.on('post_private_message', function(message){
 
 		console.log('you got a private message!');
 		console.log(profileImage);
@@ -563,7 +557,7 @@ $(function(){
 				$('<span>').addClass('notifcount').text($('#myMessages li a.unread').length)
 			);
 		}
-	});
+	});*/
 
 	socket.on('open_current_room', function(room){
 		if(room)
@@ -1035,10 +1029,10 @@ $(function(){
 		});
 	});
 
-	$(document).on('click','.pmFriend', function(){
+/*	$(document).on('click','.pmFriend', function(){
 		$('.pmBox').css('display','block');
 		$('.messageNotifBox ').hide();
-	});
+	});*/
 
 		$(document).mouseup(function (e)
 	{
@@ -1221,7 +1215,7 @@ $(function(){
 
 	});
 
-	$('#sendPrivateMessage').on('submit', function(e){
+	/*$('#sendPrivateMessage').on('submit', function(e){
 
 		e.preventDefault();
 		theUser = $(this).data('user');
@@ -1258,7 +1252,7 @@ $(function(){
 				}
 			});
 		}
-	});
+	});*/
 
 	$('.chatCommon').each(function(){
 
@@ -1289,7 +1283,7 @@ $(function(){
 
 	});
 
-	$(document).on('click', '.pmFriend', function(){
+	/*$(document).on('click', '.pmFriend', function(){
 
 		modal = $('#pmBox');
 
@@ -1363,7 +1357,7 @@ $(function(){
 				}
 			});
 		}
-	});
+	});*/
 
 
   

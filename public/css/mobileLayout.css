@@ -13,6 +13,7 @@ left: 0;
         position: relative;
             position: relative;
     padding-top: 75px;
+        overflow-x: hidden;
 }
 
 
@@ -46,6 +47,17 @@ nav .nav-lower-wrapper{
 
 nav .logo{
            height: 50px;
+}
+
+.loginFooter{
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-size: 26px;
+    padding: 10px;
+    font-family: "Work Sans";
+    color: rgb(154, 10, 14);
+    font-weight: 800;
 }
 
 
@@ -122,6 +134,23 @@ display: inline-block !important;
     vertical-align: top;
 }
 
+.userButtons{
+    float: left;
+    width: 100%;
+    background-color: #887D70;
+    padding: 8px;
+    text-align: center;
+}
+
+.userButtons span,
+.userButtons a{
+        background: #fff;
+    padding: 5px;
+    color: #777777;
+    border-radius: 8px;
+    margin: 0 4px;
+}
+
 .userDetailBackground{
     background: #E3D6C6;
     position: fixed;
@@ -131,7 +160,7 @@ display: inline-block !important;
 }
 
 .userDetail .upperHalf{
-    height: 366px;
+    height: 358px;
         background: #CEBDA8;
     position: relative;
     float: left;
@@ -604,6 +633,108 @@ display: inline-block !important;
     left: 0;
     width: 100%;
     padding-bottom: 67px;
+}
+
+.commentsContainer textarea{
+    border: 1px solid #fff;
+    border-radius: 3px;
+    padding: 18px 20px;
+    font-size: 15px;
+        background-color: #fff;
+    font-family: 'Work sans', Arial, Helvetica;
+    -moz-box-shadow: 0 5px 4px -4px #f6e2b8;
+    -webkit-box-shadow: 0 5px 4px -4px #f6e2b8;
+    box-shadow: 0 5px 4px -4px #f6e2b8;
+    height: 100px;
+    resize : none;
+        float: left;
+    margin-bottom: 5px;
+}
+
+.commentsContainer textarea[disabled="disabled"]{
+        background-color: rgb(235, 235, 228);
+}
+
+.commentsContainer button{
+     border: 1px solid #b1423a;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 25px;
+    padding: 5px;
+    text-decoration: none;
+    display: inline-block;
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+    color: #FFFFFF;
+    background-color: #C9625B;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#C9625B), to(#d20202));
+    background-image: -webkit-linear-gradient(top, #C9625B, #d20202);
+    background-image: -moz-linear-gradient(top, #C9625B, #d20202);
+    background-image: -ms-linear-gradient(top, #C9625B, #d20202);
+    background-image: -o-linear-gradient(top, #C9625B, #d20202);
+    background-image: linear-gradient(to bottom, #C9625B, #d20202);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#C9625B, endColorstr=#d20202);
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-family: 'Work Sans';
+    font-weight: 600;
+}
+
+.replyArea{
+    position: relative;
+    width: 100%;
+    float: left;
+    padding: 0 6px 15px 0;
+}
+
+.commentsContainer ul li .replyArea ul.replyList{
+    margin: 0;
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+}
+
+.replyArea form{
+        float: left;
+    width: 100%;
+    margin-right: -65px;
+    padding-right: 65px;
+}
+
+.replyArea .toggleReply{
+    float: right;
+    text-align: center;
+    width: 65px;
+}
+
+.replyArea textarea{
+    float: left;
+    width: 100%;
+    height: 40px;
+    padding: 8px 15px;
+}
+.replyArea button.replyBtn{
+     width: 65px;
+    position: absolute;
+    right: 0;
+        font-size: 18px;
+}
+
+#commentList li{
+
+        display: inline-block;
+    padding: 6px;
+        float: left;
+    width: 100%;
+}
+
+#commentList > li:not(:last-child){
+    border-bottom: 1px solid #ccc;
+}
+
+#commentList li.temporary{
+    background-color: #ccc;
+    opacity: 0.5;
 }
 
 /* .userDetail .imgContainer{

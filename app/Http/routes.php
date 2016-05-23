@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'PageController@home');
+use Jenssegers\Agent\Agent as Agent;
+$Agent = new Agent();
 
 Route::get('get/me/token', function () {
 
@@ -358,6 +359,7 @@ Route::group(['middleware' => 'ClubMiddleware'], function()
 	//Message AJAX
 
 	Route::post('message/getPrivateMessages', 'MessageController@getPrivateMessages');
+	Route::post('message/getPrivateMessageReadCount', 'MessageController@getPrivateMessageReadCount');
 	Route::post('message/sendPrivateMessage', 'MessageController@sendPrivateMessage');
 	Route::post('message/getInbox', 'MessageController@getInbox');
 
@@ -421,6 +423,17 @@ Route::get('logout', 'ClubhouseController@getLogout');
 // Route::post('register', 'Auth\AuthController@postRegister');
 
 //Single BLog
-Route::get('{category}','PageController@category');
-Route::get('{category}/{slug?}','PageController@single');
+
+if ($Agent->isMobile()) {
+    // you're a mobile device
+   	Route::get('/', 'MobileController@home');
+	Route::get('{category}','MobileController@category');
+	Route::get('{category}/{slug?}','MobileController@single');
+}else{
+	Route::get('/', 'PageController@home');
+	Route::get('{category}','PageController@category');
+	Route::get('{category}/{slug?}','PageController@single');
+
+}
+
 

@@ -7,7 +7,7 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">    
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="google-site-verification" content="ZsovtY5ezCxnStSn3xVYrsyYw7Jdt3pUHDhlV-qwKTY" />
-    
+    <meta name="baseURL" content="{{ url('') }}" />
     <link rel="shortcut icon" href="{{ asset('images/susanfav.png') }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -138,6 +138,128 @@
       }
     }
     </style>
+
+
+      <!-- private messaging -->
+  <style>
+    
+      .chatbox-panel{
+      position: fixed;
+      bottom: 0;
+      z-index: 99;
+      width: 1184px;
+      right: 10%;
+      }
+
+      .chatbox-container{
+      position: relative;
+      z-index: 1;
+      bottom: 0;
+      right: 0;
+      float: right;
+      margin-left: 4px;
+      width: 275px;
+      height: 36px;
+      }
+      
+    .sendPrivateMessage{
+        text-align:   left;
+      }
+
+        .chatbox .messagesContent{
+              padding: 10px 13px;
+    border: 1px solid #D4CCCC;
+    -moz-box-shadow: 0 0 10px -5px #000;
+    -webkit-box-shadow: 0 0 10px -5px #000;
+    box-shadow: 0 0 10px -5px #000;
+    height: 200px;
+    overflow-y: scroll;
+    width:100%;
+        }
+
+
+      .inactivebox i{
+        float: right;
+    margin: 2px;
+    color: #DE6466;
+    cursor: pointer;
+      }
+      
+      .chatbox .triggers{
+            position: absolute;
+            right: 1px;
+      }
+      .chatbox .triggers i {
+            display: block;
+    font-size: 22px;
+    padding: 4px;
+    margin: 11px;
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+      }
+
+    .chatbox .sendPrivateMessage textarea{
+         width: 100%;
+    border: none;
+    padding: 10px;
+    margin-bottom: -3px;
+    font-family: Roboto;
+    padding-right: 44px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    resize: none;
+      }
+
+      .chatbox .messagesContent li{
+            overflow: hidden;
+        padding-bottom: 3px;
+        margin-bottom: 6px;
+      }
+
+      .chatbox .messagesContent img{
+            width: 33px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 14px;
+    /* margin-left: 15px; */
+    margin-bottom: -85px;
+      }
+
+      .chatbox .messagesContent li span{
+     font-family: Roboto,Helvetica,Arial,sans-serif;
+    text-align: left;
+    font-size: 14px;
+    padding: 6px 20px;
+    /* margin-right: 20px; */
+    font-weight: 500;
+    margin-left: 36px;
+    margin-top: 0;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    line-height: 18px;
+    float: left;
+    display: block;
+      }
+
+      .chatbox .messagesContent li span.alt{
+            background: #BA7FEC;
+    display: inline-block;
+    float: right!important;
+    /* margin-left: 50px!important; */
+    color: #FFFFFF;
+      }
+
+      .pmMiniChat .head {
+            height: 34px;
+      }
+
+            .chatbox{
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
+      }
+  </style>
   </head>
 <body>
 
@@ -319,6 +441,8 @@
                 </div>
             </div>
       </div>
+
+      <div class="chatbox-panel" id="chatBoxPanel"></div>
 	
     <script src="{{ asset('js/jquery-1.12.0.js') }}"></script>
     <script src="{{ asset('js/CSSPlugin.min.js') }}"></script> 
@@ -345,9 +469,11 @@
        })();*/
 
     </script>
+      <script src="{{ asset('js/sockets.io.js') }}"></script>
         <script> 
             var myFriends = '<?php echo isset($myFriends) && count($myFriends) > 0 ? json_encode($myFriends) : "" ?>';
             var onlineFriendsList = [];
+              var socket = io.connect('{{ url('') }}:8891');
     </script>
     <script src="{{ asset('js/ezslots.js') }}"></script>   
     <script src="{{ asset('js/jquery.unveil.js') }}"></script>   
@@ -366,13 +492,15 @@
     <script src="{{ asset('js/moment-timezone.min.js') }}"></script> 
     <script src="{{ asset('js/livestamp.min.js') }}"></script> 
 
-  <script src="{{ asset('js/sockets.io.js') }}"></script>
+
+
+  <script src="{{ asset('js/privateMessaging.js') }}"></script>
 
 
   <script>
 
 
-  var socket = io.connect('{{ url('') }}:8891');
+
   var loginPage = false;
 
     $.fn.preload = function() {
@@ -1258,7 +1386,7 @@ london = moment.tz(timeZone);
   });
 
 
-  $('#sendPrivateMessage').on('submit', function(e){
+ /* $('#sendPrivateMessage').on('submit', function(e){
         e.preventDefault();
           theUser = $(this).data('user');
           message = $('#privateMessageTextarea').val();
@@ -1291,7 +1419,7 @@ london = moment.tz(timeZone);
 
           }
 
-      });
+      });*/
   $('.chatCommon').each(function(){
 
         var txt = $(this),
@@ -1330,7 +1458,7 @@ london = moment.tz(timeZone);
         .replace(/'/g, "&#039;");
   }
 
-$(document).on('click', '.pmFriend', function(){
+/*$(document).on('click', '.pmFriend', function(){
 
          modal = $('#pmBox');
 
@@ -1407,9 +1535,9 @@ $(document).on('click', '.pmFriend', function(){
             });
           } 
 
-      });
+      });*/
 
-      socket.on('post_private_message', function(message){
+      /*socket.on('post_private_message', function(message){
           console.log('you got a private message!');
           console.log(profileImage);
           console.log(publicUrl+'/'+message.from.profile_picture );
@@ -1473,7 +1601,7 @@ $(document).on('click', '.pmFriend', function(){
 
              
           }
-      });
+      });*/
 
   
   $('#myNotifications').on('click', '.acceptFriend', function(){

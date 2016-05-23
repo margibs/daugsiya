@@ -16,8 +16,7 @@ right:-200px; */
   width: 200px;
     height: auto;
     background: #fff;
-    border: 1px solid #ccc;
-        float: left;
+    border: 1px solid #ccc
 }
 
 .searchResultDiv .body li,
@@ -31,10 +30,12 @@ right:-200px; */
   text-transform: capitalize;
 }
 
-.dummyTextarea:empty::before{
+ .dummyTextarea:not(.hasText)::before{
       content: attr(placeholder);
     color: #9aa2ab;
-}
+    pointer-events: none;
+    position: absolute;
+} 
 
 .viewPersonContainer{
  position: absolute;
