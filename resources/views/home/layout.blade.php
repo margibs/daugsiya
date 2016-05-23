@@ -76,31 +76,6 @@
       margin-bottom: -3px;
       font-family: Roboto;
       }
-      .chatbox-panel{
-      position: fixed;
-      bottom: 0;
-      z-index: 99;
-      width: 1184px;
-      right: 10%;
-      }
-
-      .chatbox-container{
-      position: relative;
-      z-index: 1;
-      bottom: 0;
-      right: 0;
-      float: right;
-      margin-left: 4px;
-      width: 275px;
-      height: 36px;
-      }
-
-      .chatbox{
-      position: absolute;
-      z-index: 1;
-      bottom: 0;
-      left: 0;
-      }
 
       .main{
       pointer-events: none;
@@ -453,11 +428,439 @@
                   mask: url("data:image/svg+xml;utf8,<svg version="1.1" xmlns="http:// www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop></linearGradient><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeMask)"></rect></mask></svg>#slotMachineFadeMask");
       }*/
   </style>
+        <style>
+        .pmBox{
+       /* overflow: hidden; */
+      /* top: 120px; */
+      border-radius: 5px;
+      width: 370px;
+      text-align: center;
+      padding: 0 0 13px 0;
+      /* display: none; */
+      -moz-box-shadow: 0 0 30px -10px #000;
+      -webkit-box-shadow: 0 0 30px -10px #000;
+      box-shadow: 0 0 30px -10px #000;
+      height: 490px;
+      overflow: hidden;
+      position: fixed;
+      -moz-box-shadow: 0 3px 6px 1px #7F7F7F;
+      -webkit-box-shadow: 0 3px 6px 1px #7F7F7F;
+      box-shadow: 0 3px 6px 1px #7F7F7F;
+      border: none;
+      background: #979797;
+      display:block;
+      }
+      .pmBox ul li{
+      overflow: hidden;
+      padding-bottom: 3px;
+          margin-bottom: 6px;
+      }
+      .pmBox ul li img{
+      width: 33px;
+      border-radius: 50%;
+      float: left;
+      margin-right: 14px;
+      margin-left: 15px;
+      margin-bottom: -85px;
+      }
+      .pmBox ul li span, .bigChatBox .body #messageContent li span{
+      font-family: Roboto,Helvetica,Arial,sans-serif;
+      text-align: left;
+      font-size: 14px;
+      padding: 6px 20px;
+      margin-right: 20px;
+      font-weight: 500;
+      margin-left: 61px;
+      margin-top: 0;
+      background: rgb(255, 255, 255);
+      border-radius: 20px;
+      line-height: 18px;
+      float: left;
+      display: block;
+      }
+      #sendPrivateMessage{
+        text-align: left;
+      }
+
+    .pmBox ul li span.alt{
+     background: #BA7FEC;
+    display: inline-block;
+    float: right!important;
+    margin-left: 50px!important;
+    color: #FFFFFF;
+      }
+      .pmBox .body h2{
+      background: rgb(140,2,5);
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+      background: -moz-linear-gradient(top, rgb(49, 49, 49) 0%, rgb(6, 6, 6)  100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(49, 49, 49)), color-stop(100%,rgb(6, 6, 6) ));
+      background: -webkit-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: -o-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: -ms-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: linear-gradient(to bottom, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c0205', endColorstr='#ba0034',GradientType=0 );
+      -moz-box-shadow: 0 0 10px -3px #000;
+      -webkit-box-shadow: 0 0 10px -3px #000;
+      box-shadow: 0 2px 10px -3px #000;
+      font-family: Roboto;
+      padding: 11px;
+      font-size: 20px;
+      font-weight: 600;
+      -moz-box-shadow: 0 0 10px -1px #000;
+      -webkit-box-shadow: 0 0 10px -1px #000;
+      box-shadow: 0 0 10px -1px #000;
+      position: relative;
+      z-index: 2;
+      color: #FFFFFF;
+      text-shadow: 0px 1px 2px rgb(109, 9, 9);
+      }
+      .pmBox .body{
+        background: #EDEDED;
+        padding-bottom: 10px;
+      }
+      .pmBox .body h2 i{
+      float: right;
+      color: #B5B2B2;
+      margin: 1px;
+      cursor: pointer;
+      }
+      .pmBox .body h2 span.online{
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      background: green;
+      border-radius: 50%;
+      margin-right: 2px;
+      }
+      .pmBox  .footer{
+        margin-top: 10px;
+        border-top: 1px solid #E8E8E8;
+        margin-top: -1px;
+      }
+      .pmBox .triggers {
+      position: absolute;
+      bottom: 16px;
+      right: 19px;
+      z-index: 2;
+      }
+      .pmBox .arrow_box {
+      right: -139px;
+      top: 4px;
+      z-index: 101;
+      }
+      .pmBox textarea {
+      border: 1px solid transparent;
+      padding: 18px;
+      width: 84%;
+      height: 60px;
+      font-family: 'Work Sans';
+      font-size: 16px;
+      font-weight: 500;
+      min-height: 60px;
+      -moz-box-shadow: 0 0 7px -3px #D8D8D8;
+      -webkit-box-shadow: 0 0 7px -3px #D8D8D8;
+      box-shadow: 0 0 7px -3px #D8D8D8;
+      padding-right: 80px;
+      margin: 1px 0 -3px 0;
+      }
   
+    .pmBox textarea:focus{
+      outline: none;
+    }
+
+
+      .pmBox .footer{
+      position: relative;
+      }
+      .pmBox #tooltip {
+      position: absolute;
+      top: 276px;
+      z-index: 100;
+      right: 20px;
+      height: 200px;
+      }
+      .pmBox  #tooltip ul {
+      text-align: left;
+      }
+      .pmBox #tooltip ul li img{
+      width: 32px!important;
+      margin: 5px!important;
+      float: none!important;
+      }
+
+      .pmBox .triggers i {
+      font-size: 27px;
+      margin-left: 3px;
+      color: #807C7C;
+      cursor: pointer;
+      border-left: 1px solid #ddd;
+      padding-left: 12px;
+      display: block;
+
+      }
+      .pmBox .common {
+      min-height: 15px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      overflow: hidden;
+      }
+       .pmBox .body ul{
+        padding-top: 15px;
+      }
+
+        .pmFooter{
+        background: rgb(255,255,255);
+        
+      }
+      .pmFooter p{
+        font-family: roboto;
+        font-size: 11px;
+        color: #C9C5C5;
+        background: #EDEDED;
+        padding: 8px 0 9px 0;
+      }
+
+      .pmBox .messagesContent{
+        overflow-y: scroll;
+    width: auto;
+    height: 355px;
+}
+      }
+  </style>
+
+  <!-- private messaging -->
+  <style>
+    
+      .chatbox-panel{
+      position: fixed;
+      bottom: 0;
+      z-index: 99;
+      width: 1184px;
+      right: 10%;
+      }
+
+      .chatbox-container{
+      position: relative;
+      z-index: 1;
+      bottom: 0;
+      right: 0;
+      float: right;
+      margin-left: 4px;
+      width: 275px;
+      height: 36px;
+      }
+
+    .sendPrivateMessage{
+        text-align:   left;
+      }
+
+        .chatbox .messagesContent{
+              padding: 10px 13px;
+    border: 1px solid #D4CCCC;
+    -moz-box-shadow: 0 0 10px -5px #000;
+    -webkit-box-shadow: 0 0 10px -5px #000;
+    box-shadow: 0 0 10px -5px #000;
+    height: 200px;
+    overflow-y: scroll;
+    width:100%;
+        }
+
+
+      .inactivebox i{
+        float: right;
+    margin: 2px;
+    color: #DE6466;
+    cursor: pointer;
+      }
+      
+      .chatbox .triggers{
+            position: absolute;
+            right: 1px;
+      }
+      .chatbox .triggers i {
+            display: block;
+    font-size: 22px;
+    padding: 4px;
+    margin: 11px;
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+      }
+
+    .chatbox .sendPrivateMessage textarea{
+         width: 100%;
+    border: none;
+    padding: 10px;
+    margin-bottom: -3px;
+    font-family: Roboto;
+    padding-right: 44px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    resize: none;
+      }
+
+      .chatbox .messagesContent li{
+            overflow: hidden;
+        padding-bottom: 3px;
+        margin-bottom: 6px;
+      }
+
+      .chatbox .messagesContent img{
+            width: 33px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 14px;
+    /* margin-left: 15px; */
+    margin-bottom: -85px;
+      }
+
+      .chatbox .messagesContent li span{
+     font-family: Roboto,Helvetica,Arial,sans-serif;
+    text-align: left;
+    font-size: 14px;
+    padding: 6px 20px;
+    /* margin-right: 20px; */
+    font-weight: 500;
+    margin-left: 36px;
+    margin-top: 0;
+    background: rgb(255, 255, 255);
+    border-radius: 20px;
+    line-height: 18px;
+    float: left;
+    display: block;
+      }
+
+      .chatbox .messagesContent li span.alt{
+            background: #BA7FEC;
+    display: inline-block;
+    float: right!important;
+    /* margin-left: 50px!important; */
+    color: #FFFFFF;
+      }
+
+      .pmMiniChat .head {
+            height: 34px;
+      }
+
+            .chatbox{
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
+      }
+
+      .chatSmContainerParent{
+        float: right;
+        width: 40px;
+        height: 36px;
+            position: relative;
+      }
+
+      .chatSmContainerParent .chatSmContainerBtn{
+          position: relative;
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: #C50D12;
+          background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+          background: -moz-linear-gradient(top, #C50D12 0%, #A20807 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C50D12), color-stop(100%,#A20807));
+          background: -webkit-linear-gradient(top, #C50D12 0%,#A20807 100%);
+          background: -o-linear-gradient(top, #C50D12 0%,#A20807 100%);
+          background: -ms-linear-gradient(top, #C50D12 0%,#A20807 100%);
+          background: linear-gradient(to bottom, #C50D12 0%,#A20807 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C50D12', endColorstr='#A20807',GradientType=0 );
+          border: 1px solid #BC0C0F;
+          color: #fff;
+          font-size: 25px;
+          padding: 5px 8px;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+      }
+
+      .chatSmContainerParent .chatSmContainer{
+        position: absolute;
+        bottom: 35px;
+            right: 0;
+            display: none;
+      }
+
+      .chatSmContainerParent .chatSmContainer .smInner{
+        float: left;
+        width: 100%;
+        position: relative;
+        background: #C50D12;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #C50D12 0%, #A20807 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C50D12), color-stop(100%,#A20807));
+        background: -webkit-linear-gradient(top, #C50D12 0%,#A20807 100%);
+        background: -o-linear-gradient(top, #C50D12 0%,#A20807 100%);
+        background: -ms-linear-gradient(top, #C50D12 0%,#A20807 100%);
+        background: linear-gradient(to bottom, #C50D12 0%,#A20807 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C50D12', endColorstr='#A20807',GradientType=0 );
+        border: 1px solid #BC0C0F;
+        padding: 5px 0;
+        font-size: 14px;
+      }
+      .chatSmContainerParent .chatSmContainer .smInner li{
+        float: left;
+        width: 100%;
+        padding: 4px;
+        padding-right: 18px;
+        position: relative;
+        cursor: pointer;
+      }
+      .chatSmContainerParent .chatSmContainer .smInner li a{
+           max-width: 193px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+        float: left;
+        color: #fff;
+        text-decoration: none;
+        font-family: 'Roboto';
+      }
+
+      .chatSmContainerParent .chatSmContainer .smInner li:hover{
+            background-color: #9C0E11;
+      }
+
+      .chatSmContainerParent .chatSmContainer .smInner li .closeSm{
+       position: absolute;
+        right: 3px;
+        color: #DE6466;
+        cursor: pointer;
+      }
+  </style>
   </head>
 <body>
 
-  
+
+  <!--  <div class="pmBoxContainer">
+     <div class="pmBox draggable">        
+           <div class="divContainer">
+             <div class="header"></div>
+               <div class="body">
+                 <h2> <i class="ion-android-close"></i><i class="ion-minus"></i> <span class="online"></span> <b class="pmName"> </b> </h2>
+                 <ul class="messagesContent"></ul>
+               </div>
+               <div class="pmFooter">
+                     <div class="arrow_box pmArrowbox" style="display:none;"></div>  
+                     <div class="tooltip pmTooltip" style="display:none;">
+    
+                       </div>
+    
+                     <div class="triggers">
+                       <i class="fa fa-paper-plane pmTrigger"></i>
+                     </div>
+                     <p> Press enter to send message</p>
+                     <form class="sendPrivateMessage">
+                         <textarea class="privateMessageTextarea" placeholder="Type Message"  ></textarea>
+                     </form>
+                 </div>
+             </div>
+     </div> 
+   </div>  -->
   
  @if(Auth::check())
 
@@ -649,48 +1052,48 @@
   @endif
   @yield('homecontent')
   @yield('singlecontent') 
-  <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
-        <div class="divContainer">
-          <div class="header"></div>
-            <div class="body">
-              <h2> <i class="fa fa-times"></i> <span class="online"></span> <b id="pmName"> </b> </h2>
-              <ul class="messagesContent" id="pmMessageContent">
-              </ul>
-            </div>
-            <div class="pmFooter">
-                  <div class="arrow_box pmArrowbox" style="display:none;"></div>  
-                  <div id="tooltip pmTooltip" style="display:none;">
-
-                    <ul>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                        <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                    </ul>
-
-                    </div>
-
-                  <div class="triggers">
-                    
-                    <i class="fa fa-smile-o pmTrigger"></i>
-                    <i class="fa fa-paper-plane"></i>
-                  </div>
-                  <form id="sendPrivateMessage">
-                      <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message"  ></textarea>
-                  </form>
-              </div>
-          </div>
-  </div> 
+ <!--  <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
+       <div class="divContainer">
+         <div class="header"></div>
+           <div class="body">
+             <h2> <i class="fa fa-times"></i> <span class="online"></span> <b id="pmName"> </b> </h2>
+             <ul class="messagesContent" id="pmMessageContent">
+             </ul>
+           </div>
+           <div class="pmFooter">
+                 <div class="arrow_box pmArrowbox" style="display:none;"></div>  
+                 <div id="tooltip pmTooltip" style="display:none;">
+ 
+                   <ul>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                   </ul>
+ 
+                   </div>
+ 
+                 <div class="triggers">
+                   
+                   <i class="fa fa-smile-o pmTrigger"></i>
+                   <i class="fa fa-paper-plane"></i>
+                 </div>
+                 <form id="sendPrivateMessage">
+                     <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message"  ></textarea>
+                 </form>
+             </div>
+         </div>
+ </div>  -->
 
       
   <div class="overlay"></div>
@@ -730,8 +1133,12 @@
     </script>
     <!--<script src="{{ asset('js/jquery.m.flip.js') }}"></script>   -->
     <!-- <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js"></script> -->
+    <script src="{{ asset('js/sockets.io.js') }}"></script>
     <script> 
             var myFriends = '<?php echo isset($myFriends) && count($myFriends) > 0 ? json_encode($myFriends) : "" ?>';
+              BASE_URL = $('meta[name="baseURL"]').attr('content');
+              CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            socket = io.connect(BASE_URL+':8891');
     </script>
     <script src="{{ asset('js/ezslots.js') }}"></script>   
     <!-- <script src="{{ asset('js/jquery.bttrlazyloading.min.js') }}"></script>   -->
@@ -743,7 +1150,7 @@
     <script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>  
     <script src="{{ asset('js/interact.min.js') }}"></script> 
     <script src="{{ asset('js/jquery.bxslider.min.js') }}"></script>
-    <script src="{{ asset('js/sockets.io.js') }}"></script>
+    
     
     <script src="{{ asset('js/gameSearch.js') }}"></script> 
     <script src="{{ asset('js/moment.min.js') }}"></script> 
@@ -753,6 +1160,7 @@
     <script src="{{ asset('js/jquery.slotmachine.js') }}"></script>
     <script src="{{ asset('js/jquery.caret.js') }}"></script>
     <script src="{{ asset('js/tagging.js') }}"></script>
+    <script src="{{ asset('js/privateMessaging.js') }}"></script>
     <!--<script src="{{ elixir('js/custom/main.js') }}"></script>-->
   <script>
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

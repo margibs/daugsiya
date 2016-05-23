@@ -1,32 +1,34 @@
  
   @import url(https://fonts.googleapis.com/css?family=Work+Sans:900,800,500);
-  @import url(https://fonts.googleapis.com/css?family=Candal);
+  /*@import url(https://fonts.googleapis.com/css?family=Candal);*/
+  @import url(https://fonts.googleapis.com/css?family=Roboto:500,900);
 
    @media (min-width: 1200px){
       .container {
           width: 1190px!important;
           overflow: visible;
       }
-    }
-  .container{
-    position: relative;
-  }
-  .topMargin{
-    margin-top: 69px;
-    padding: 0;
-  }
-  body{    
-    padding: 0;
-  }
-  .row{
-    margin-bottom: 0;
-  }
-   .row.no-gutters {
+      }
+      .container{
+      position: relative;
+      overflow: hidden;
+      }
+      .topMargin{
+      margin-top: 75px;
+      padding: 0;
+      }
+      body{    
+      padding: 0;
+      }
+      .row{
+      margin-bottom: 0;
+      }
+      .row.no-gutters {
       margin-right: 0;
       margin-left: 0;
-    }
-    .row.no-gutters > [class^="col-"],
-    .row.no-gutters > [class*=" col-"] {
+      }
+      .row.no-gutters > [class^="col-"],
+      .row.no-gutters > [class*=" col-"] {
       padding-right: 0;
       padding-left: 0;
     } 
@@ -84,7 +86,7 @@
       color: #AD0303;
       position: relative;
    }
-   footer ul li span span.notifCount{
+   footer ul li span.notifCount{
       background: red;
       font-size: 16px;
       position: absolute;
@@ -105,7 +107,7 @@
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9a6d26', endColorstr='#ac854c',GradientType=0 );
       width: 100%;      
       padding: 9px;
-      margin-top: 106px;
+      margin-top: 10px;
       overflow: hidden;
       position: relative;
     }
@@ -128,7 +130,7 @@
     }
 
     #postcontent{
-      margin-top: 38px;
+      margin-top: 117px;
       padding: 5px 18px;
       background: rgb(255, 255, 250) none repeat scroll 0% 0%;
     }
@@ -221,11 +223,10 @@
     .round{
       display: inline-block;
       width: 50px;
-      height: 222px;
-      background: red;
-      border-radius: 57%/28%;
+      height: 372px;
+       border-radius: 92%/28%;
       margin-bottom: -132px;
-      padding: 7px;
+      padding: 9px;
       background: #9a6d26;
       background: -moz-linear-gradient(left, #9a6d26 0%, #fff7be 28%, #e2bb82 67%, #ac854c 100%);
       background: -webkit-linear-gradient(left, #9a6d26 0%,#fff7be 28%,#e2bb82 67%,#ac854c 100%);
@@ -234,21 +235,21 @@
     }
 
     .round2{
-      background: #fff url(http://susanwins.com/uploads/34812_mobile-about-purple.png) no-repeat top center;
-      border-radius: 54%/26%;
-      height: 230px;
-      padding-top: 20px;
-      -moz-box-shadow: 0px 0px 10px 3px #6C5252 inset;
-      -webkit-box-shadow: 0px 0px 10px 3px #6C5252 inset;
-      box-shadow: 0px 0px 10px 3px #6C5252 inset;
+      background: #fff;
+      -moz-box-shadow: 0px 0px 5px 3px #C3C3C3 inset;
+      -webkit-box-shadow: 0px 0px 5px 3px #C3C3C3 inset;
+      box-shadow: 0px 0px 5px 3px #C3C3C3 inset;
       border: 1px solid #C2C04A;
-    }
+      padding-top: 1px;
+      border-radius: 48%/11%;
+      height: 500px;
+      }
     .round2 h1, .round2 h2{
       margin: 0;
       text-align: center;
       font-family: 'Work Sans';
-      color: #fff;            
-      text-shadow: 0px 3px 1px #831A86;
+      color: #970c0b;            
+  /*    text-shadow: 0px 3px 1px #831A86;*/
     }
     .round2 h2{
        font-size: 43px;
@@ -256,11 +257,31 @@
       font-weight: 800;
       margin-top: -1px;
     }
-    .round h1{
-     font-size: 24px;
-    font-weight: 700;
+    .round2 h1{
+      font-size: 31px;
+      font-weight: 900;
+      float: left;
+      margin: 28px 73px 15px 9px;
     }
-
+     .round2 img{
+      right: -65px;
+      top: 45px;
+      position: absolute;
+      width: 200px;
+      z-index: 2;
+     }
+    .round2 ul{
+      clear: both;
+    }
+    .round2 ul li{
+      background: #fdf2ba;
+      color: #970c0b;
+      font-family: Roboto,Arial,Helvetica,sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 6px 10px;
+      margin: 6px 10px;
+    }
     .ellipse{
       width: 100%;
     }
@@ -371,8 +392,7 @@
     .thickgolddivider{
       background: transparent linear-gradient(to bottom, #CCA932 0%, #E0D294 27%, #FFFCE2 51%, #FFFCE2 100%) repeat scroll 0% 0%;
       border-radius: 2px;
-      border-top: 1px solid #DDD;
-      margin-top: 10px;
+      border-top: 1px solid #DDD;      
       margin-bottom: -84px;
       width: 100%;
       position: absolute;
@@ -444,7 +464,8 @@
         position: relative;
         width: 104.6%;
         margin-left: -7px;
-        margin-top: -15px
+        margin-top: -15px;
+        z-index: 20;
     }
     .latestgamescontent{
       background: #986c1c;
@@ -543,7 +564,7 @@
       font-size: 15px;
       margin-top: 4px;
     }
-    .commentsContainer ul li a{
+    .commentsContainer ul li a.toggleReply {
        font-family: Roboto;
       text-decoration: none;
       font-size: 17px;
@@ -623,7 +644,6 @@ display:        inline-block;
 position:         relative;
 
 width: 100%;
-margin-top: 22px;
 
 -webkit-border-radius:  8px;
 -moz-border-radius:   8px;
@@ -771,20 +791,46 @@ text-shadow: rgba(255,255,255,.3) 0 1px 0, rgba(0,0,0,0.15) 0 .18em .15em;
 
 
 /********** MEDIA QUERIES *************/
-@media(max-width: 360px){
+@media(min-width: 360px){
   .round2{
-    background: none;
+    background: #fff;
     padding-top: 1px;
+    border-radius: 48%/11%;
+    height: 500px;
+  }
+  .round2 h1{
+    font-size: 33px;
+    font-weight: 900;
+    float: left;    
+    margin: 26px 100px 10px 20px;
   }
   .round2 img{
-    width: 100%;
-    height: auto;
+    right: -58px;
+    top: 39px;
+    position: absolute;
+    width: 220px;
+    z-index: 2;
   }
   .round{
     padding: 9px;
+    height: 325px;
+    border-radius: 94%/30%;
+  }
+  .round2 ul li{
+    font-size: 19px;
+  }
+  .thickgolddivider{
+        margin-top: 9px;
   }
   .thickgolddivider p{
     font-size: 18px;
     margin: 10px 0px;
   }
+  #categoryContainer{
+        top: 26px;
+  }
+   #maincontainer {
+      margin-top: 20px;
+  }
 }
+

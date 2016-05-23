@@ -122,7 +122,9 @@ background: rgba(190, 19, 19, 0.92);
 height: 372px; 
 }
 
-#cropperH input[type="range"]{
+#cropperH input[type="range"]::-webkit-slider-runnable-track,
+#cropperH input[type="range"]::-ms-fill-upper
+{
       background: #000;
 }
 

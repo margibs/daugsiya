@@ -138,9 +138,12 @@ Room.prototype.leaveUser = function(user_id){
       break;
     }
   }
-
-  if(userIndex){
+  console.log(userIndex);
+  if(userIndex>=0){
+    console.log('userIndex');
+    console.log(chatroom2[this.index()].people);
     chatroom2[this.index()].people.splice(userIndex, 1);
+     console.log(chatroom2[this.index()].people);
   }
 }
 
@@ -286,6 +289,8 @@ User.prototype.joinRoom = function(room){
 User.prototype.getRooms = function(){
 
   index = this.index();
+  console.log('inside getRooms');
+  console.log(index);
   if(index >=0 && users[index]){
 
     rooms = [];
@@ -298,6 +303,8 @@ User.prototype.getRooms = function(){
 
     return rooms;
   }
+
+  console.log('**');
 }
 
 User.prototype.leaveRoom = function(room_id){
@@ -565,7 +572,7 @@ io.on('connection', function (socket) {
   socket.on('send_private_message', function(data){
 
     message = new Private_Message(socket.user.data, data.to, data.message);
-    socket.broadcast.to('user_'+data.to).emit('post_private_message', message);
+    socket.broadcast.to('user_'+data.to).to('user_'+socket.user.id).emit('post_private_message', message);
 
   });
 
@@ -598,7 +605,7 @@ io.on('connection', function (socket) {
 
         banned = getUserBan(socket.user.data.user_id, socket.currentRoom.id);
 
-       io.sockets.in('room_'+room_id).emit('display_people', socket.currentRoom.getPeople(), room_id );
+      
 
 
         if(banned){
@@ -610,6 +617,8 @@ io.on('connection', function (socket) {
         socket.to('admin_'+socket.currentRoom.id).emit('display_users', socket.currentRoom.getRegularPeople() );
         socket.to('user_'+socket.user.id).emit('room_opened', { room : socket.currentRoom, people : socket.currentRoom.getPeople() }, banned);
     }
+
+     io.sockets.in('room_'+room_id).emit('display_people', socket.currentRoom.getPeople(), room_id );
 
   });
 
@@ -726,10 +735,8 @@ io.on('connection', function (socket) {
 
             }else{
             
-            
-            user_id = socket.user.id;
-            console.log('user disconnected '+user_id);
-            socket.user.removeUser();
+
+            myRooms = socket.user.getRooms();
 
             if(socket.currentRoom){
 
@@ -751,7 +758,36 @@ io.on('connection', function (socket) {
           socket.broadcast.to('room_'+socket.currentRoom.id).emit('display_people', socket.currentRoom.getPeople(), socket.currentRoom.id );
 
 
-              }
+              }else if(myRooms && myRooms.length){
+
+                for(i=0;i<myRooms.length;i++){
+
+                    lRoom = myRooms[i];
+
+                      lRoom.leaveUser(socket.user.id);
+                      socket.user.leaveRoom(lRoom.id);
+
+                      if(socket.user.isAdmin){
+
+                        socket.leave('admin_'+lRoom.id);
+
+                      }
+
+
+                        socket.broadcast.to('admin_'+lRoom.id).emit('display_users', lRoom.getRegularPeople() );
+                      
+
+                      socket.leave('room_'+lRoom.id);
+
+                      socket.broadcast.to('room_'+lRoom.id).emit('display_people', lRoom.getPeople(), lRoom.id );
+
+                }
+
+            }
+
+          user_id = socket.user.id;
+            console.log('user disconnected '+user_id);
+            socket.user.removeUser();
 
               socket.broadcast.to('friend_'+user_id).emit('friendOffline', user_id);
               console.log('friendOffline');

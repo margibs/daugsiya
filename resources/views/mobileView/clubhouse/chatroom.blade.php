@@ -46,7 +46,7 @@
 		            </div>
 		            <div class="chatFooter">
 		                   <div class="triggers">
-		                      	<a href="javscript:;" class="sendMessage" id="sendChat"><i class="fa fa-paper-plane"></i></a>
+		                      	<span class="sendMessage" id="sendChat"><i class="fa fa-paper-plane"></span></a>
 		            		</div>
 		                    	<textarea name="" placeholder="Connecting to server..." id="chatRoomTextarea" disabled="disabled"></textarea>
 		            </div>

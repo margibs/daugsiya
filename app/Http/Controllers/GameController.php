@@ -27,7 +27,7 @@ class GameController extends Controller
 
             'post_id' => $request->post_id,
             'user_id' => $request->user_id,
-            'type' => 1
+            'type' => 2
 
          ]);
          /*
