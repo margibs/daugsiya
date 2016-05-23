@@ -17,6 +17,10 @@
 						li = $('<li>');
 							container.append(li);
 
+					if(!value){
+						value = _this.attr('data-value');
+					}
+
 						setTimeout(function(){
 
 								d = li.width()+'px';

@@ -572,7 +572,7 @@ io.on('connection', function (socket) {
   socket.on('send_private_message', function(data){
 
     message = new Private_Message(socket.user.data, data.to, data.message);
-    socket.broadcast.to('user_'+data.to).emit('post_private_message', message);
+    socket.broadcast.to('user_'+data.to).to('user_'+socket.user.id).emit('post_private_message', message);
 
   });
 

@@ -12,6 +12,7 @@ use App\User;
 use App\Channel_Message;
 use App\Private_Message;
 use Input;
+use Auth;
 
 class MessageController extends Controller
 {
@@ -85,6 +86,13 @@ class MessageController extends Controller
         //dd($other_person->user_detail->profile_picture);
 
         echo json_encode($data);
+    }
+
+    function getPrivateMessageReadCount(Request $request){
+
+        $user = Auth::user();
+        $count = $user->unread_messages()->where('from', $request->other_person)->count();
+        echo json_encode($count);
     }
 
     public function sendPrivateMessage(Request $request){
