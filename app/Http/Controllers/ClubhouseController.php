@@ -18,6 +18,7 @@ use App\Global_Notification;
 use App\Model\Post;
 use Session;
 use App\Friend;
+use AWeberAPI;
 
 class ClubhouseController extends Controller
 {
@@ -26,6 +27,9 @@ class ClubhouseController extends Controller
 	protected $loginPath = '/login';
     protected $old_session_id;
 	 use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+     public  $application;
+     public $account;
 
 
     protected function authenticated(Request $request, $user){
@@ -288,5 +292,54 @@ class ClubhouseController extends Controller
         
         return view('clubhouse.prize', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count', 'session_id', 'myFriends'));
     }
+
+    public function aweberApi() {
+         
+       $this->connect();
+         
+    }
+
+    public function connect() {
+         $appID = '0701ff65';
+        $consumerKey = 'Ak9V4ZZ4OCGavgygp54H9055';
+        $consumerSecret = 'xlKjAbONuqfapGvDpBFD9QGYMp70moCLevR6P7ht';
+        $accessKey = '0701ff65';
+        //$accessSecret = 'AzbeW9Lqzxzl1WsnjZ3qT66d|hDjPOZZxBD7BzRz31bgKK4acCKBWyOowieNoOHYI|Aqcl64ygKsRCrwUdlN3P3EMI|kqbrKzDZ323CtisDDZ5OMeIc0iVOQzP3mJ9MMvsN|cdabsd|';
+
+
+        $authorize_url = "https://auth.aweber.com/1.0/oauth/authorize_app/AzbeW9Lqzxzl1WsnjZ3qT66d|hDjPOZZxBD7BzRz31bgKK4acCKBWyOowieNoOHYI|Aqcl64ygKsRCrwUdlN3P3EMI|kqbrKzDZ323CtisDDZ5OMeIc0iVOQzP3mJ9MMvsN|cdabsd|";
+        $callbackURL = 'http://susanwins.com';
+
+        # create new instance of AWeberAPI
+        $application = new AWeberAPI($consumerKey, $consumerSecret);
+
+        # get a request token using oob as the callback URL
+        list($requestToken, $tokenSecret) = $application->getRequestToken('oob');
+
+       echo $application->getAuthorizeUrl();
+
+
+        # turn on debug mode for more information
+        $application->adapter->debug = true;
+        $application->user->requestToken = $requestToken;
+        $application->user->tokenSecret = $tokenSecret;
+        $application->user->verifier = $authorize_url;
+        list($accessToken, $accessSecret) = $application->getAccessToken();
+       print "\n\n$accessToken \n $accessSecret\n";
+        //$application->getAccount($accessToken, $accessSecret);
+        //dd($application->id);
+
+       try {
+
+            $account = $application->getAccount($accessKey, $accessSecret);
+            $account_id = $account->id;
+            dd($account_id);
+       }
+       catch(AWeberAPIException $ex) {
+            dd($ex);
+       }
+    }
+
+   
 
 }

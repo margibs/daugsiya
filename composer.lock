@@ -4,9 +4,42 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cac24dbc361573bda9306d3f559d0d74",
-    "content-hash": "563848f3acb83d9d5b81508f416d6f36",
+    "hash": "e22f1457d13eaaf9b3d8a29a4b666e76",
+    "content-hash": "8a05b90b701055b898a92b72e53e0a71",
     "packages": [
+        {
+            "name": "aweber/aweber",
+            "version": "v1.1.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aweber/AWeber-API-PHP-Library.git",
+                "reference": "509abd47ae05f760239f2f5d12eef7ba330b111a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aweber/AWeber-API-PHP-Library/zipball/509abd47ae05f760239f2f5d12eef7ba330b111a",
+                "reference": "509abd47ae05f760239f2f5d12eef7ba330b111a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "aweber_api/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "description": "The official AWeber API client library.",
+            "homepage": "https://www.aweber.com",
+            "keywords": [
+                "api",
+                "client",
+                "email"
+            ],
+            "time": "2015-02-19 18:16:21"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",

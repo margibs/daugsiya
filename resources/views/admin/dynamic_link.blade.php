@@ -72,7 +72,7 @@ $(function() {
             { data: 'id', name: 'id' },
             { data: 'image_url', name: 'image_url' },
             { data: 'image_link', name: 'iamge_link' },
-            { data: 'banner_description', name: 'banner_description' },
+            { data: 'show_banner', name: 'show_banner' },
             { data: 'created_at', name: 'created_at' },
             { data: 'updated_at', name: 'updated_at' },
             { data: 'action', name: 'action', orderable: false, searchable: false}
@@ -89,7 +89,7 @@ $(function() {
             { data: 'id', name: 'id' },
             { data: 'image_url', name: 'image_url' },
             { data: 'image_link', name: 'iamge_link' },
-            { data: 'banner_description', name: 'banner_description' },
+            { data: 'show_banner', name: 'show_banner' },
             { data: 'created_at', name: 'created_at' },
             { data: 'updated_at', name: 'updated_at' },
             { data: 'action', name: 'action', orderable: false, searchable: false}

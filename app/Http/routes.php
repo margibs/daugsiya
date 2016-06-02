@@ -413,6 +413,10 @@ Route::post('login/post', 'ClubhouseController@postLogin');
 Route::get('signup', 'PageController@signup');
 Route::post('signup/post', 'Auth\AuthController@signup');
 Route::get('logout', 'ClubhouseController@getLogout');
+
+//Route::get('aweber/api', 'ClubhouseController@aweberApi');
+
+Route::get('aweber/api', 'AweberApiSusan@connectToAWeberAccount');
 // Authentication routes...
 /*Route::get('login', 'Auth\AuthController@getLogin');*/
 /*Route::post('login', 'Auth\AuthController@postLogin');*/
