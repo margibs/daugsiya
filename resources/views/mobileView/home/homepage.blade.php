@@ -3,12 +3,11 @@
 
 @section('homecontentResposnive')
 
+
+
 <div class="app-page" data-page="main">
     <div class="app-content" data-no-scroll>
       <style type="text/css">
-  #planeMachine1, #planeMachine2, #planeMachine3{
-        height: 116px;
-  }
   .round{
     height: 372px;
     border-radius: 92%/28%;
@@ -17,29 +16,106 @@
     position: relative;
   }
   .round2 img{
-    right: -50px;
+    right: -62px;
     position: absolute;
     width: 210px;
+    top: 36px;
   }
   #maincontainer{
-    margin-top: 55px;
+    margin-top: 0;
+  }
+  .latestgamescontent p{
+    font-family: 'Work Sans',Helvetica,Arial,sans-serif;
+    color: #D8B472;
+    font-size: 19px;
+    text-align: center;
+    font-weight: 700;
+    margin-top: -10px;
+    margin-bottom: 6px;
+    text-shadow: 0px 1px 2px rgb(99, 66, 7);
+  }
+  .latestgamescontent .inner{
+    padding:0;
+  }
+  .latestgamescontent .inner img{
+        border-radius: 1px;
+    margin-bottom: -6px;
+  }
+  @media(min-width: 360px){
+  .round2 img{
+    right: -69px;
+    position: absolute;
+    width: 230px;
+    top: 19px;
+  }
+}
+
+.carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 281px;
+    -webkit-perspective: 500px;
+    perspective: 500px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+}
+ 
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 110%;
+      margin: auto;
   }
   </style>
 
+ <div id="maincontainer">
 
-<div class="round ellipse">
-  <div class="round2 ellipse">
-    <h1> Hi! I'm Susan and I LOVE playing slots! </h1>
-    <img src="http://susanwins.com/images/single-susan.png">
-    <ul>
-      <li> Find Amazing Slot Games </li>
-      <li> Join my FREE members club </li>
-      <li> Win Fantastic Prizes! </li>
-    </ul>
-  </div>  
+
+<div class="container">
+
+<div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner">
+       {{ $isFirst=true }}
+        @foreach($home_images_all as $image) 
+            <div class="item{{ $isFirst ? ' active' : '' }}">
+              <a href="{{ $image->link }}">
+               <img src="{{ url('uploads').'/'.$image->image}} " />
+               </a>
+           </div>
+        {{ $isFirst=false }}
+        @endforeach
+    </div>
+    <!-- Carousel nav --> 
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+ <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+
+  
+    </div>
+
+    
+  </div>
 </div>
 
-<div id="maincontainer">
+
+<!-- 
+  <div class="carousel carousel-slider" id="myCarousel" >
+
+   @foreach($home_images_all as $images) 
+   <div class="carousel-item"><img src="{{ url('uploads').'/'.$images->image}} "  > <a class="testingBtn" href="{{ $images->link }}" style="position: absolute;z-index:100;top:0;pointer-events: all;">TEst </a> </div>
+
+   <a class="carousel-item" href="#one!"><img src="http://susanwins.com/uploads/86112_foxycasino01_763x364.jpg"></a>
+   <a class="carousel-item" href="#two!"><img src="http://susanwins.com/uploads/60362_ladbrokes_763x364_uk.jpg"></a>
+   <a class="carousel-item" href="#three!"><img src="http://susanwins.com/uploads/83381_mrgreen_763x364.jpg"></a>
+   <a class="carousel-item" href="#four!"><img src="http://susanwins.com/uploads/57363_foxycasino02_763x364.jpg"></a>
+
+
+   @endforeach 
+  </div> -->
+      
+
+
 
       <div class="innerfirst"> 
 
@@ -47,16 +123,21 @@
              
    
        <div id="playbig">
-            <a id="winwinwin3" class="button pink glass"> Join my Clubhouse! </a>         
+            
+             @if(isset($user))
+                <a class="button pink glass test"> Welcome! </a>
+             @else
+               <a href="{{ url('/why') }}" class="button pink glass"> Join my Clubhouse! </a>
+             @endif             
+            
           </div>     
    
         <div class="thickgolddivider">
-          <p> Know what you like? Check the categories below! </p>
+          <p> Whatever your mood, there's a game for you...  </p>
         </div>
 
           <div id="categoryContainer">
-            <div class="goldborder g1"></div>
-            <div class="goldborder g2"></div>
+         
             <div class="categories">
               <div class="row no-gutters">
 
@@ -65,7 +146,7 @@
 
                     @if(($key) % 5 == 0)
 
-                      <div class="col s4">
+                      <div class="col s4" style="padding:0;">
                     @endif
                     {!! $value !!}
                     @if(($key+1) % 5 == 0)
@@ -78,7 +159,7 @@
           </div>    
 
         <div class="bottomads">
-          <img src="http://a1.mzstatic.com/us/r30/Purple/v4/e1/e7/c6/e1e7c6c5-8ce5-9a7b-8236-695ac0eb0168/screen520x924.jpeg" alt="">
+          <img src="http://susanwins.com/uploads/60664_mrgreen_743x448_czech.jpg" alt="">
         </div>    
 <!--         <div class="biggestwins">
             <div class="inner">
@@ -90,45 +171,41 @@
         </div> -->
         <div class="latestgames"></div>
         <div class="latestgamescontent">
-          <div class="inner">
+        <p> Top Rated Games </p>
+          <div class="inner">              
               <div class="row">
 
-               @foreach($posts as $k=> $post)
-                    @if(($k) % 5 == 0)
+                 
+                  @foreach($posts as $k=> $post)
+                   {{--  @if(($k) % 5 == 0) --}}
 
-                      <div class="col s6">
-                        @endif
+                      <div class="col s4" style="padding:1px;">
+                      {{--   @endif --}}
 
                           <a href="{{url('')}}/{{$post->slug}}">                  
-                                        <img src="{{url('uploads')}}/{{$post->thumb_feature_image}}">
-                                      </a>
+                            <img src="{{url('uploads')}}/{{$post->thumb_feature_image}}">
+                          </a>
 
-                  @if(($k+1) % 5 == 0)
+                          {{-- @if(($k+1) % 5 == 0) --}} 
                       </div>
-                    @endif
-               @endforeach
-               <!--  <div class="col s6">
-                             <img src="http://susanwins.com/uploads/31332_sunset-beach.jpg" alt="">
-                             <img src="http://susanwins.com/uploads/21698_ice-hokey.jpg" alt="">
-                             <img src="http://susanwins.com/uploads/30686_hot-gems.jpg" alt="">
-                             <img src="http://susanwins.com/uploads/95958_la-chatte-rouge.jpg" alt="">
-                             <img src="http://susanwins.com/uploads/92183_jungle-boogie.jpg" alt="">
-                           </div>     
-                           <div class="col s6">
-                             <img src="http://susanwins.com/uploads/80031_azteca.jpg" alt="">
-                             <img src="http://susanwins.com/uploads/40393_monroe.jpg" alt="">
-                             <img src="http://susanwins.com/uploads/22611_spamalot.jpg" alt="">
-                             <img src="http://susanwins.com/uploads/57127_luckypanda.jpg" alt="">
-                             <img src="http://susanwins.com/uploads/11356_neptunes-kingdom.jpg" alt="">
-                           </div> -->            
+                            {{-- @endif --}}
+                       @endforeach                     
               </div>
           </div>
         </div>
         <div class="bottomads">
-          <img src="http://a1.mzstatic.com/us/r30/Purple/v4/e1/e7/c6/e1e7c6c5-8ce5-9a7b-8236-695ac0eb0168/screen520x924.jpeg" alt="">
+          <img src="http://susanwins.com/uploads/60362_ladbrokes_763x364_uk.jpg" alt="">
         </div>
-        <div class="footer"></div>
+       
       </div>
+
+          <p class="terms">
+            <a href="#">Terms &amp; Conditions</a> <a href="#"> Privacy Policy </a> Gambling is for over 
+            <br /> <img src="http://susanwins.com/uploads/48153_18-logo.gif" class="eighteen">  <a href="#"> <img src="http://susanwins.com/uploads/63793_gambleaware.gif" class="gambleaware"> </a> <br> 
+            <br /><b>Copyright © 2016 SusanWins</b>
+          </p>
+     
+
 </div>
     </div>
 </div>
@@ -136,10 +213,51 @@
 @endsection
 
 @section('app-js')
+
+
   <script>
        $(document).on('ready', function(){
 
+
+            $('.app-page').css({ 'display' : 'block' });
+            $('#mainLoading').remove();
+
+
+
+            App.controller('main', function (page) {
+
+
+              // this runs whenever a 'home' page is loaded
+              // 'page' is the HTML app-page element
+
+              $(page).on('appShow', function(){
+              /* $(page).find('.carousel').carousel({
+                   
+                  });*/
+
+
+               $(page).find('#myCarousel').bind('click.bs.carousel', function (e) {
+                  console.log('slide event!');
+              });
+               /*
+                $(page).find('#testingBtn').on('click', function(){
+                  alert("Hello World");
+                });
+              $(page).find('#myCarousel').on('slid', function(){alert("fdsaf");});
+
+                console.log($(page).find('#maincontainer'));
+
+                $(page).on('click', '#maincontainer', function(){
+                  alert('ye');
+                });*/
+              });
+
+            });
+
              App.load('main');
+
+     
+               
 
        });
   </script>

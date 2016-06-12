@@ -28,7 +28,8 @@
   }
 	.latestgames{
 	    margin-left: -7px;
-	    margin-top: 13px;
+	    margin-top: -10px;
+      margin-bottom: -2px;
 	    z-index: 22;
   	}
    .latestgamescontent .inner{
@@ -42,7 +43,9 @@
       box-shadow: 0 0;
    }
    .thickgolddivider{
+      background: #fff;
       padding: 2px 10px;
+      margin-top: 0;
    }
     .thickgolddivider .rate img{
         width: 60px;
@@ -56,6 +59,9 @@
     .thickgolddivider button{
       font-size: 21px;
     } 
+    #categoryContainer{  
+      margin-top:70px;
+    }
    .bonusCasino a{
       display: inline-block;
       padding: 5px;
@@ -70,7 +76,7 @@
       text-decoration: none;
       font-weight: 800;
       font-size: 17px;
-      background: #FFF9DE;
+      background: rgba(255, 255, 255, 0.13);
       display: block;
       padding: 6px 20px;
       border-radius: 23px;
@@ -88,35 +94,52 @@
       text-shadow: 0 0 0;
       color: #DAD3B1;
       font-weight: 400;
-      margin-top: -10px;
+      margin-top: -5px;
           float: left;
     width: 100%;
+        height: 13px;
    }
 
    .susanFace{
-   	    float: left;
+   	  float: left;
     	position: relative;
-    	padding-top: 1em;
-
+      width: 55px;
+      margin-top: 5px;
+      margin-right: 8px;
    }
 
-   .subDiv{
-   	float: left;
+   .subDiv{   	
     position: relative;
     width: 100%;
-        margin-left: -70px;
-    padding-left: 73px;
-        min-height: 89px;
+/*        margin-left: -12px;
+    padding-left: 73px;*/
+   }
+   .subDiv .rateContainer{
+      margin-top: 13px;
+      margin-left: 5px;
    }
 
    .subDiv > button{
-   	    margin-top: 26px;
+   	    margin-top: 5px;
    }
 
    .playedGame, .notPlayedGame{
    		    position: relative;
 	    float: left;
 	    width: 100%;
+   }
+   .playedGame .play, .notPlayedGame .play{
+    /* float: right; */
+    width: auto;
+    font-size: 14px;
+    padding: 4px 15px;
+    margin-top: 18px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+   }
+   .playedGame .play i, .notPlayedGame .play i{
+    margin-right: 3px;
    }
    .innerfirst{
    	height:auto;
@@ -199,42 +222,88 @@
       #recommendFriendModal .modal-content{
       	    padding: 0 16px;
       }
+      .overlay_ni_men .inner p{
+        font-weight: 600;
+        font-size: 19px!important;
+        margin: 30px 0 0px 0;
+      }
+      .overlay_ni_men .inner .glossy{
+        float: none!important;
+        display: block;
+        text-align: center;
+        width: 85%;
+        margin: 5px auto;
+        color: #fff;
+        background: rgb(152, 5, 3);
+        font-size: 21px;
+        height: auto;
+        padding: 8px;
+        border-radius: 50px;
+      }
+      .casinolist{
+        position: absolute;
+        top:-6%;
+        left: 0;
+        z-index: 999;
+      }
+      .casinolist li, .casinolist li a{
+        display: inline-block;
+            margin: 0 1px;
+      }
+      .casinolist li a img{
+          width: 150%;
+          border-radius: 10px;
+      }
+
+      footer ul {
+        padding: 33px 0 0 0!important;
+      }
+      footer ul li span{
+        position: static!important;
+      }
+      .casino_youtube a{
+        display: inline;
+      }
+      .casino_youtube a img{
+        width: auto!important;
+        border-radius: 10px;
+      }
 /********** MEDIA QUERIES *************/
 @media(min-width: 360px){  
-  .round2 .featimg{
-    height: auto;
-    } 
-   .thickgolddivider{
-      margin-top: -1px;
-   }
-  .thickgolddivider .rate img{
-        width: 60px;
-  }
+      .round2 .featimg{
+        height: auto;
+        } 
+       .thickgolddivider{
+          margin-top: -1px;
+       }
+    .thickgolddivider .rate img{
+      width: 60px;
+    }
     .thickgolddivider .rate i{
-         font-size: 57px;
-    color: #CA3A3A;
-    position: relative;
-    top: -10px;
+      font-size: 57px;
+      color: #CA3A3A;
+      position: relative;
+      top: -10px;
     }
     .thickgolddivider button{
-      font-size: 21px;
+      font-size: 18px;
     }
-   #maincontainer{
-      margin-top: -3px;
-      padding: 1px 9px;
-     }
-    #postcontent {
-      margin-top: 113px;
-  }
+    #maincontainer{
+         margin-top: -3px;
+    padding: 1px 2px;
+    }
+    .thickgolddivider p{
+          margin: 0px 0 2px 0;
+    }
+
 
 }
 </style>
 
-<div class="round ellipse">
-  <div class="round2 ellipse">
- 	 <img src="http://susanwins.com/uploads/67780_mobileheader.png" class="featimg" />
-  </div>  
+<div class="featImgDiv">
+  <img src="{{ url('images/mobileHeaders')}}/mh_{{substr($post->feat_image_url, 0, -3)}}jpg" class="featimg" />
 </div>
+
 
 <div id="maincontainer" data-post="{{ $post->id }}">
  
@@ -246,69 +315,84 @@
             <a id="gogogo2" class="button pink glass"> Play Now! </a>         
         </div>     --> 
 
-        <div class="thickgolddivider gameExp">
-   		@if(isset($user))
-				
-
-   		@if($played_game)
-         <div class="playedGame">
-
-          <img src="http://daugsiya.dev/images/happySusan.png" alt="" class="susanFace">          
-           	<div id="ratingDiv" class="subDiv" data-value="{{ $gameRating['totalRating'] }}">
-           	</div>
-                    <p id="ratingPlayedNotif"> You've Played it! Please Rate it!</p>
-         </div>
-   		@else
-		<div class="notPlayedGame">
-
-          <img src="http://susanwins.com/images/sadSusan.png" alt="" class="susanFace">
-          	<div class="subDiv"><button type="button" class="added" id="playedGame"> <i class="ion-checkmark-round"></i> Add to Played List </button></div>          	 
-                    <p> Not Played Yet</p>
-         </div>
-         <div class="playedGame"  style="display:none">
-
-          <img src="http://daugsiya.dev/images/happySusan.png" alt="" class="susanFace">          
-           	<div id="ratingDiv" class="subDiv">
-           	</div>
-                    <p id="ratingPlayedNotif"> You've Played it! Please Rate it!</p>
-         </div>
-   		@endif
-				
-         
-
-         @if($favorite)
-				<button type="button" class="added" data-id="{{ $favorite->id }}" id="removeToFavorite"> <i class="ion-close-round"></i> Remove to Favourites </button>
-         @else
-				<button type="button" class="added" id="addToFavorite"> <i class="ion-ios-heart"></i> Add to Favourites </button>
-         @endif
-         
-         
-         @else
-
-               <div class="notPlayedGame">
-
-          <img src="http://susanwins.com/images/sadSusan.png" alt="" class="susanFace">
-          	<div class="subDiv"><button type="button" class="added toggleLoginModal" id="playedGame"> <i class="ion-checkmark-round"></i> Add to Played List </button></div>          	 
-                    <p> Not Played Yet</p>
-         </div>
-         <button type="button" class="added toggleLoginModal" id="addToFavorite"> <i class="ion-ios-heart"></i> Add to Favourites </button>
-       <!--   <a href="#"> <i class="ion-checkmark"></i> Not Played </a> -->
-       
-   		@endif
-   		 </div>
         
+         <div class="thickgolddivider gameExp">
+                      @if(isset($user))
+                        
+
+                      @if($played_game)
+                         <div class="playedGame">
+
+                          <img src="http://susanwins.com/images/happySusan.png" alt="" class="susanFace">          
+                           @if(isset($user))
+                               @if($favorite)
+                                <button type="button" class="play" data-id="{{ $favorite->id }}" id="removeToFavorite"> <i class="ion-close-round"></i> Remove </button>
+                                 @else
+                                <button type="button" class="play" id="addToFavorite"> <i class="ion-ios-heart"></i> Fave </button>
+                                 @endif
+                            @endif  
+
+                          
+                            <div id="ratingDiv" class="subDiv" data-value="{{ $gameRating['totalRating'] }}"></div>
+                            <p id="ratingPlayedNotif"> You've Played it!</p>
+                         </div>
+                      @else
+                        <div class="notPlayedGame">
+
+                          <!-- <img src="http://susanwins.com/images/sadSusan.png" alt="" class="susanFace"> -->
+                            <div class="subDiv"><button type="button" class="added" id="playedGame"> <i class="ion-checkmark-round"></i> Add to Played List </button></div>            
+                                    <p> Not Played Yet</p>
+                         </div>
+                         <div class="playedGame"  style="display:none">
+
+                          <img src="http://susanwins.com/images/happySusan.png" alt="" class="susanFace">          
+                              @if(isset($user))
+                               @if($favorite)
+                                <button type="button" class="play" data-id="{{ $favorite->id }}" id="removeToFavorite"> <i class="ion-close-round"></i> Remove </button>
+                                 @else
+                                <button type="button" class="play" id="addToFavorite"> <i class="ion-ios-heart"></i> Fave </button>
+                                 @endif
+                            @endif  
+                            <div id="ratingDiv" class="subDiv"></div>
+                            <p id="ratingPlayedNotif"> You've Played it! Please Rate it!</p>
+                         </div>
+                      @endif
+        
+         
+
+      
+                         
+                         @else
+
+                               <div class="notPlayedGame">
+
+                          <!-- <img src="http://susanwins.com/images/sadSusan.png" alt="" class="susanFace"> -->
+                            <div class="subDiv"><button type="button" class="added toggleLoginModal" id="playedGame"> <i class="ion-checkmark-round"></i> Add to Played List </button></div>             
+                                    <p> Not Played Yet</p>
+                         </div>
+                       
+                       <!--   <a href="#"> <i class="ion-checkmark"></i> Not Played </a> -->
+                       
+                  @endif
+       </div>
+             
 
         <div id="categoryContainer">
-            <div class="goldborder g1"></div>
-            <div class="goldborder g2"></div>
-             
+            
+              
             <div id="postcontent">
-	
+
+          
+
+	         <!--   
+               <button type="button" class="added toggleLoginModal" id="addToFavorite"> <i class="ion-ios-heart"></i> Add to Favourites </button>
+ -->
+                  <button class="play" id="showCasino"> Play Game </button>
 
              <h1>  {{$post->title}} </h1>
              <span> Written by Susan &nbsp;&nbsp;&nbsp;</span><span class="commentCount"> <i class="ion-ios-chatbubble"></i> {{ $post->total_comments()->count() }}</span>
              
-             
+            <!--  
              <ul class="contentSociallinks">
                  <li>
                    <span id="api_count" data-url="{{url('')}}/{{$post->slug}}"></span>
@@ -334,13 +418,13 @@
                    </a>
                  </li>
               	 @if(isset($user))
-                                    <li>
-                              <button id="recommendToFriend" type="button"> <i class="ion-android-happy"></i> Recommend to Friends</button>
-                            </li>
-                            @endif
-              </ul>
+                       <li>
+                  <button id="recommendToFriend" type="button"> <i class="ion-android-happy"></i> Recommend to Friends</button>
+                </li>
+                @endif
+              </ul> -->
 
-              {{$post->introduction}}
+             <b>{{$post->introduction}}</b>
             {!!$post->content!!}
              
              
@@ -380,11 +464,11 @@
         
         <div class="latestgames"></div>
         <div class="latestgamescontent">
-          <div class="bonusCasino" style="display:none">
+          <ul class="bonusCasino" style="display:none">
              @foreach($casino_lists2 as $k => $v) 
-                                    {!! $v !!}
-                                    @endforeach
-          </div>
+              {!! $v !!}
+              @endforeach
+          </ul>
 
           <div class="inner">
 
@@ -395,7 +479,8 @@
 					<ul id="commentList">
 						 @foreach($comments as $comment)
 							<li>
-		                    <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->id.'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar" />
+		                   <!--  <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->id.'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar" /> -->
+                         <img src="{{$comment->user->user_detail->userPicture5050() }}" class="avatar" />
 		                    <p class="name"> {{$comment->user->user_detail->firstname.' '.$comment->user->user_detail->lastname }} </p>
 		                    <p class="comment">{!! $comment->content !!} </p>
 		                    <div class="replyArea">
@@ -403,7 +488,8 @@
 
 				                     @foreach($comment->post_replies as $reply)
 										<li>
-					                        <img src="{{$reply->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$reply->user->id.'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar" />
+					                       <!--  <img src="{{$reply->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$reply->user->id.'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar" /> -->
+                                   <img src="{{$reply->user->user_detail->userPicture5050() }}" class="avatar" />
 					                        <p class="name"> {{$reply->user->user_detail->firstname.' '.$reply->user->user_detail->lastname }} </p>
 					                        <p class="comment"> {!! $reply->content !!} </p>
 					                      </li>
@@ -457,29 +543,24 @@
               <h2> Top Categories </h2>
 
               <div class="row">
-                <div class="col s4" style="padding: 0;">
-                   <img src="http://susanwins.com/uploads/48873_fantasy.png" alt="">
-                  <img src="http://susanwins.com/uploads/52845_seasonal.png" alt="">
-                  <img src="http://susanwins.com/uploads/41272_tropical.png" alt="">
-                  <img src="http://susanwins.com/uploads/88737_sorcery.png" alt="">
-                </div>     
-                <div class="col s4" style="padding: 0;">
-                   <img src="http://susanwins.com/uploads/48873_fantasy.png" alt="">
-                  <img src="http://susanwins.com/uploads/52845_seasonal.png" alt="">
-                  <img src="http://susanwins.com/uploads/41272_tropical.png" alt="">
-                  <img src="http://susanwins.com/uploads/88737_sorcery.png" alt="">
-                </div>            
-                <div class="col s4" style="padding: 0;">
-                   <img src="http://susanwins.com/uploads/48873_fantasy.png" alt="">
-                  <img src="http://susanwins.com/uploads/52845_seasonal.png" alt="">
-                  <img src="http://susanwins.com/uploads/41272_tropical.png" alt="">
-                  <img src="http://susanwins.com/uploads/88737_sorcery.png" alt="">
-                </div>            
+              <ul class="row gameList">
+                 @foreach($category_randomizer as $key => $value)
+
+                    @if(($key) % 5 == 0)
+
+                      <div class="col s4" style="padding:0;">
+                    @endif
+                    {!! $value !!}
+                    @if(($key+1) % 5 == 0)
+                      </div>
+                    @endif
+                    @endforeach
+              </ul>           
               </div>
           </div>
         </div>
         <div class="bottomads">
-          <img src="http://a1.mzstatic.com/us/r30/Purple/v4/e1/e7/c6/e1e7c6c5-8ce5-9a7b-8236-695ac0eb0168/screen520x924.jpeg" alt="">
+          <img src="http://susanwins.com/uploads/86112_foxycasino01_763x364.jpg" alt="">
         </div>
         <div class="footer"></div>
       </div>
@@ -494,6 +575,17 @@
           <button class="recommendBtn" id="recommendBtn" type="button"> <i class="ion-android-happy"> </i> Recommend Game</button>
 			    </div>
 			  </div>
+
+        <div id="selectCasinoModal" class="modal">
+          <div class="modal-content">
+          <h4>Select from these casinos:</h4>
+                <ul id="selectCasino">
+             @foreach($casino_lists as $k => $v) 
+              {!! $v !!}
+              @endforeach
+                    </ul>
+          </div>
+        </div>
 		
 		@if(!isset($user))
 			<div id="loginModal" class="modal">
@@ -504,6 +596,15 @@
 		@endif
 	</div>
 </div>
+
+  <div id="casino_after_youtube" style="display: none;">
+    <div class="casino_youtube">
+      <p> Play this game at </p>
+      @foreach($casino_lists_orig as $casino_list)      
+        <a href="{{ $casino_list->link_desktop }}" target="_blank"><img src="{{url('uploads')}}/{{$casino_list->image_url}}" width="100px;" height="100px;"></a>
+      @endforeach
+    </div>
+  </div>
 
 @endsection
 
@@ -516,6 +617,9 @@
 @section('app-js')
   <script>
        $(document).on('ready', function(){
+
+            $('.app-page').css({ 'display' : 'block' });
+            $('#mainLoading').remove();
 
 
        		App.controller('main', function(page){

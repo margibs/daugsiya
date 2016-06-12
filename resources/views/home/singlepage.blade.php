@@ -14,7 +14,9 @@
 
 
 <style type="text/css">
-
+body{
+	margin-top: 100px;
+}
 .no-gutter > [class*='col-'] {
 padding-right:0;
 padding-left:0;
@@ -23,12 +25,78 @@ padding-left:0;
 width: 100%;
 height: 280px;
 }
+
+
+      .oval-speech {
+          position: absolute;
+          width: 258px;
+          padding: 30px 21px;
+          margin: 2.5em auto 50px;
+          margin-left: -149px;
+          z-index: 2;
+          text-align: center;
+          color: #fff;
+          background: #FFFFFF;
+          -webkit-border-top-left-radius: 220px 120px;
+          -webkit-border-top-right-radius: 220px 120px;
+          -webkit-border-bottom-right-radius: 220px 120px;
+          -webkit-border-bottom-left-radius: 220px 120px;
+          -moz-border-radius: 220px / 120px;
+          border-radius: 318px / 184px;
+          border: 4px solid #e8c38a;
+          -moz-transform: rotate(-6deg);
+          -webkit-transform: rotate(-6deg);
+          transform: rotate(-6deg);
+          -moz-box-shadow: 0 0 14px -3px #949494;
+          -webkit-box-shadow: 0 0 14px -3px #949494;
+          box-shadow: 0 0 14px -3px #949494;
+      }
+      .oval-speech p {
+        font-family: 'Work Sans',Roboto,Arial,Helvetica,sans-serif;
+        font-size: 27px;
+        font-weight: 900;
+        color: #000000;
+      }
+      .oval-speech p a{
+        text-decoration: none;
+        color: #C12726;
+        display: block;
+        font-size: 27px;
+      }
 .reels{
 padding: 0 53px 0 67px;
-margin-top: 13px;
+margin-top: 19px;
 height: 244px;
 overflow: hidden;
 }
+.reels p{
+color: white;
+padding: 4px 0;
+background: rgb(226,39,39);
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UyMjcyNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNiMDBmMGYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  rgba(226,39,39,1) 0%, rgba(176,15,15,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,39,39,1)), color-stop(100%,rgba(176,15,15,1)));
+background: -webkit-linear-gradient(top,  rgba(226,39,39,1) 0%,rgba(176,15,15,1) 100%);
+background: -o-linear-gradient(top,  rgba(226,39,39,1) 0%,rgba(176,15,15,1) 100%);
+background: -ms-linear-gradient(top,  rgba(226,39,39,1) 0%,rgba(176,15,15,1) 100%);
+background: linear-gradient(to bottom,  rgba(226,39,39,1) 0%,rgba(176,15,15,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e22727', endColorstr='#b00f0f',GradientType=0 );
+
+-moz-box-shadow: inset 0 0 10px -3px #000;
+-webkit-box-shadow: inset 0 0 10px -3px #000;
+box-shadow: inset 0 0 10px -3px #000;
+
+position: relative;
+text-align: center;
+width: 102%;
+margin-left: -8px;
+font-family: 'Work Sans';
+font-weight: 600;
+text-shadow: 0px 2px 2px rgb(102, 3, 3);
+color: #FFD4D4;
+letter-spacing: 0.5px;
+}
+
 .reels img{
 border-right: 2px solid #040404;
 }
@@ -38,17 +106,28 @@ font-family: Roboto;
 margin-left: 40px;
 margin-top: 20px;
 }
-
+.rellimg{
+      margin: 12px 14px 12px 19px;
+}
 .sidebar .sidebarInner{
-background: #c20f14;
-padding: 12px 14px 12px 19px;
-margin-top: -57px;
+
+      background: linear-gradient(to right, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
+    border: 2px solid #F3CD7C;
+
+
+/*background: #c20f14;*/
+/*padding: 12px 14px 12px 19px;*/
+margin-top: -61px;
 border-radius: 4px;
 overflow: hidden;
 }
-.sidebar .susan{
-margin-top: 60px;
-}
+ .sidebar .susan{
+      top: -40px;
+          margin-top: 60px;
+    position: relative;
+    left: 7px;
+    z-index: 3;
+      }
 .sidebar h3{
 padding: 0 0px 0px 0px;
 margin: 3px 0 15px 2px;
@@ -57,6 +136,17 @@ color: #9a0a0e;
 font-weight: 800;
 font-size: 30px;
 border-bottom: 1px solid #b00c0c;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#820a0a+0,970c0b+51,820a0a+100 */
+background: #820a0a; /* Old browsers */
+background: -moz-linear-gradient(left,  #820a0a 0%, #970c0b 51%, #820a0a 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #820a0a 0%,#970c0b 51%,#820a0a 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #820a0a 0%,#970c0b 51%,#820a0a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#820a0a', endColorstr='#820a0a',GradientType=1 ); /* IE6-9 */
+
+    margin-top: 0;
+    padding: 10px 10px 0 10px;
+    
 }
 .sidebar .rellimg img{
 width: 100%;
@@ -362,6 +452,7 @@ padding: 33px 0px 10px 14px;
 
 .commentRelativeBox{
 margin-top: -55px;
+height: 1490px;
 }
 .related .outer .inner .comments .button_example{
 font-size: 20px;
@@ -474,10 +565,14 @@ background: #dc4a38;
 position: absolute;
 right: 30px;
 }
-.left{
-position: absolute;
-z-index: 2;
-}
+  .left{
+/*      position: absolute;*/
+  z-index: 2;
+  }
+
+  .terms {
+    margin-top: 3px;
+  }
 
 
 
@@ -510,9 +605,10 @@ top: -41px;
 margin-left: 0;
 }
 #playbig .button{
-text-align: center;
-font: 33px/0.9em 'Work Sans',sans-serif;
-padding: .2em .6em;
+ text-align: center;
+font-size: 33px;
+padding: .3em .6em;
+line-height: 28px;
 }
 
 .reply-list{
@@ -662,7 +758,37 @@ width: 100%;
 border-radius: 5px;
 }
 
-
+@media(min-width: 1600px){
+.container {
+  width: 1230px;
+}
+.reels {
+padding: 0 57px 0 71px;
+margin-top: 0;
+height: 260px;
+overflow: hidden;
+}
+.reels img{
+	height: 260px;
+}
+.featImg {
+    position: relative;
+    margin-top: 55px;
+    margin-left: 47px;
+    width: 92%;
+}
+.featImg img {
+    width: 890px;
+    height: 203px;
+  margin-bottom: 20px;
+}
+.singlePostBG{
+	    top: 731px;
+}
+#wrapper{
+	top: 562px;
+}
+}
 
 @media(max-width: 1199px){
 .right{
@@ -699,133 +825,339 @@ left: 11px;
  margin: -1px 27px 20px 37px;
 }
 }
-@media(max-width: 991px){
-.featImg {
-margin-top: 32px;
-margin-left: 31px;
-width: 92.7%;
-}
-.reels {
-padding: 0 29px 0 48px;
-margin-top: 8px;
-height: 156px;
-}
-#wrapper {
-top: 326px;
-left: -13px;
-}
-#wrapper a {
-width: 60px;
-height: 35px;
-}
-.singlePostBG{
-top: 440px;
-}
-.content {
-margin-top: 111px;
-}
-.content h2{
-margin: 10px 31px 0px 49px;
-}
-.content p{
-margin: 30px 41px 0px 60px;
-}
-.contentSociallinks {
-margin-left: 53px;
-}
-.singleFooter{
-left: 3px;
-}
-.commentsReel{
-top: 29px;
-left: 6px;
-}
-.related .outer .inner ul li {
-width: 24%;
-}
-.randombutton, .claimbutton{
-width: 50%;
-}
-#playedGame{
-right: 40px;
-}
-#playbig{
-right: 90px;  
-}
-#playbig a {
-width: 119px!important;
-height: 60px!important;
-}
-#playbig .button {
-font: 25px/0.9em 'Work Sans',sans-serif;
-}
-#playbig {
-top: -13px;
-}
-.latestMain .gameList {
-    margin: -1px 18px 20px 29px;
-}
-}
-@media(max-width: 768px){
-.related .outer .inner ul li {
-width: 24%;
-}
-}
-@media(max-width: 766px){
-.right {
-display: none;
-}
-.left {
-left: auto;
-}
-.singlePostBG {
-top: 568px;
-}
-.reels {
-padding: 0 40px 0 57px;
-margin-top: 12px;
-height: 197px;
-}
-.featImg {           
-margin-left: 36px;
-width: 92.4%;
-margin-top: 40px;
-}
-#wrapper{
-top: 419px;
-}
-.content {
-margin-top: 150px;
-}
-.content p {
-margin: 30px 53px 0px 60px;
-}
-.commentsReel{
-top: 30px;
-left: 4px;
-width: 100.2%;
-}
-.related{
-width: 97.6%;
-left: 11px;
-top: 65px;
-}
-.singleFooter{
-left: 1px;
-}
-.related .outer .inner ul li {
-width: 23%;
-}
+ @media(max-width: 1199px){
+          body {
+              margin-top: 80px;
+          }
+          .singelTopReel{
+                height: auto;
+          }
+          .right{
+          right:2px; 
+          width: 25%;
+          }
+          .left{
+          left: -19px;
+          }
+          .content p img{
+            height: auto;
+          }
 
-}
+          .featImg img{
+            height: auto;
+            width: 100%;
+            margin-bottom: 0;
+          }
+          .featImg{
+             margin-top: 42px;
+             margin-left: 35px
+          width: 92.5%;
+          }
+          .fave{
+            font-size: 17px;
+          }
+          .reels {
+           padding: 0 40px 0 58px;
+            margin-top: 13px;
+            height: 196px;
+          }
+          .singlePostBG{
+          top: 569px;
+          }
+          .content{
+          margin-top: 150px;
+          }
+          #wrapper{
+          top: 427px;
+          }
+          .related{
+          top: 57px;
+          left: 11px;
+          }
+          .gameExp{
+          top: 62px!important;
+          }
+          #playedText{
+            padding: 9px 9px 9px 21px;
+            left: 40%;
+          }
+          .susanExpression {    
+            left: 35%;
+          }
+          .moveLeft {
+            left: 39%;
+            top: -12px;
+          }
+          .content p{
+            margin: 31px 56px 0px 65px;
+          }
+          .content h2{
+                padding: 20px 0 20px 0;
+          }
+          .contentSociallinks {
+              margin-left: 62px;
+          }
+          .played{
+            padding: 9px 9px 9px 69px;
+            width: 410px;
+          }
+          .noplayed{
+            padding: 9px 9px 9px 31px;
+            width: 187px;
+          }
+          #playbig{
+          top: -25px;
+          }
+         
+          #playbig .button{
+          font: 30px/0.9em 'Work Sans',sans-serif;
+          padding: .1em .6em;
+          font-weight: 600;
+          }
+          #playbig a {
+          width: 130px!important;
+          height: 70px!important;
+          }
+         .casinolist li a img{
+          width: 150px!important;
+          }
+          .casino_yes{
+           margin-left: 216px;
+          }
+          .pointingSusan{
+            bottom: -10px;
+            width: 89%;
+            left: 49px;
+          }
+          .pointingSusan a{
+            float: none;
+            position: absolute;
+            bottom: 30px;
+            right: -51px;
+          }
+          .content {
+              margin-top: 140px;
+          }
+          .oval-speech-border p{
+            margin:0!important;
+          }
+          .hidethenshow{
+            left: 208px;
+            top: 13px;
+          }
+          .hidethenshowtwo{
+            top: 114px;
+            left: 274px;
+            width: 156px!important;
+          }
+    }
+    @media(max-width: 991px){
+      header .logo{
+        margin-top: 7px;
+      }
+        .featImg {
+        margin-top: 42px;
+        margin-left: 35px;
+        width: 92.7%;
+        }
+        #addToFavorite span, #removeToFavorite span, #playedGame span {
+            top: -7px;
+        }
+        .right{
+          display: none;
+        }
+        .reels {
+       padding: 0 40px 0 58px;
+        margin-top: 14px;
+        height: 195px;
+        }
+        #wrapper {
+        top: 421px;
+        left: -13px;
+        }
+        #wrapper a {
+        width: 60px;
+        height: 35px;
+        }
+        .singlePostBG {
+          top: 556px;
+        }
+       .content {
+          margin-top: 131px;
+          padding: 0 10px;
+        }
+        .content h2 {
+        margin: 10px 60px;
+      }
+        .content p{
+        margin: 30px 41px 0px 60px;
+        }
+        .contentSociallinks {
+        margin-left: 53px;
+        }
+        .singleFooter{
+        left: 3px;
+        height: auto;
+        }
+        .commentsReel{
+        top: 29px;
+        left: 6px;
+        }
+        .related .outer .inner ul li {
+        width: 24%;
+        }
+        .randombutton, .claimbutton{
+        width: 50%;
+        }
+        .gameExp {
+        top: 62px!important;
+        }
+        .fave{
+          font-size: 17px;
+          padding: 2px 12px;
+        }
+        .fave img{
+        width: 27px;
+        }
+        .fave span {
+        top: -8px;
+        }
+        #addToFavorite, #removeToFavorite{
+        left: 36px;  
+        }
+        #playedGame{
+        right: 23px;
+
+        }
+        #playbig{
+        right: 125px;  
+        }
+        #playbig a {
+        width: 119px!important;
+        height: 60px!important;
+        }
+        #playbig .button {
+        font: 25px/0.9em 'Work Sans',sans-serif;
+        font-weight: 600;
+        }
+        #playbig {
+        top: -13px;
+        }
+        .popupheading{
+        font-size: 23px!important;
+        margin-bottom: 10px!important;
+        }
+        #recommendToFriend{
+        top: 11px;  
+        }
+        .musicStar {
+          top: 115px;
+        }
+        .longtermStar {
+        top: 101px;
+        }
+        .funStar {
+        top: 101px;
+        }
+        .graphicStar {
+         top: 103px;
+        }      
+        .totalcontainer .innertotalcontainer img {
+        width: 100px;
+        }
+        .commentsReel {
+          top: 21px;
+          left: 4px;
+        }
+        .latestMain .gameList {
+          margin: -1px 19px 20px 37px;
+        }
+        .singleFooter{
+              bottom: -30px;
+              left: 1px;
+        }
+    }
+    @media(max-width: 768px){
+      .related .outer .inner ul li {
+      width: 24%;
+      }
+      .right {
+      display: none;
+      }
+      .left {
+      left: auto;
+      }
+      .singlePostBG {
+      top: 568px;
+      }
+      .reels {
+      padding: 0 40px 0 57px;
+      margin-top: 12px;
+      height: 197px;
+      }
+      .featImg {           
+      margin-left: 36px;
+      width: 92.4%;
+      margin-top: 40px;
+      }
+      #wrapper{
+      top: 419px;
+      }
+      .content {
+      margin-top: 150px;
+      }
+      .content p {
+      margin: 30px 53px 0px 60px;
+      }
+      .commentsReel{
+      top: 30px;
+      left: 4px;
+      width: 100.2%;
+      }
+      .related{
+      width: 97.6%;
+      left: 11px;
+      top: 65px;
+      }
+      .singleFooter{
+      left: 1px;
+      }
+      .related .outer .inner ul li {
+      width: 23%;
+      }
+    }
 
 #planeMachine2, #planeMachine3, #planeMachine4, #planeMachine5{
 	height: 238px;
-	padding-top: 16px;
 }
+.simpleFooter{
+  -moz-box-shadow: 0px 2px 4px -1px #000000;
+  -webkit-box-shadow: 0px 2px 4px -1px #000000;
+  box-shadow: 0px 2px 4px -1px #000000;
+  width: 96%;
+  margin-top: -12px;
+  margin-left: 18px;
 
+  background: rgb(218,179,114);
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…IgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+  background: -moz-linear-gradient(left, rgb(162, 119, 33) 0%, rgb(162, 119, 33) 7%, rgba(255,255,252,1) 52%, rgb(162, 119, 33) 89%, rgb(162, 119, 33)100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgb(162, 119, 33)), color-stop(7%,rgb(162, 119, 33)), color-stop(52%,rgba(255,255,252,1)), color-stop(89%,rgb(162, 119, 33)), color-stop(100%,rgba(182,132,26,1)));
+  background: -webkit-linear-gradient(left, rgb(162, 119, 33) 0%,rgb(162, 119, 33) 7%,rgba(255,255,252,1) 52%,rgb(162, 119, 33) 89%,rgb(162, 119, 33)100%);
+  background: -o-linear-gradient(left, rgb(162, 119, 33) 0%,rgb(162, 119, 33) 7%,rgba(255,255,252,1) 52%,rgb(162, 119, 33) 89%,rgb(162, 119, 33)100%);
+  background: -ms-linear-gradient(left, rgb(162, 119, 33) 0%,rgb(162, 119, 33) 7%,rgba(255,255,252,1) 52%,rgb(162, 119, 33) 89%,rgb(162, 119, 33)100%);
+  background: linear-gradient(to right, rgb(162, 119, 33) 0%,rgb(162, 119, 33) 7%,rgba(255,255,252,1) 52%,rgb(162, 119, 33) 89%,rgb(162, 119, 33) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dab372', endColorstr='#b6841a',GradientType=1 );
+}
+@media(max-width: 1366px){
+    .simpleFooter{
+          width: 95.9%;
+    }
+    .commentRelativeBox{
+            height: 1361px;
+    }
+ }
 </style>
-      <div class="recommendBox">
+     <div class="recommendBox">
           
           <div class="recommendFriends">
               <i class="fa fa-times"></i>
@@ -844,7 +1176,7 @@ width: 23%;
       <div class="col-xs-24 col-lg-24 col-lg-24 col-lg-24">
        
 
-        <div class="col-xs-24 col-sm-19 col-md-19 col-lg-19 left" id="main">
+        <div class="col-xs-24 col-sm-24 col-md-19 col-lg-19 left" id="main">
 
           <img src="{{ url('images/responsive/singleTopReel.png') }}" class="singelTopReel" />
           <img src="{{ url('images/responsive/singlePostBG.png') }}" class="singlePostBG">
@@ -928,7 +1260,7 @@ width: 23%;
               </div>       
           </div>
 
-       <div class="commentRelativeBox" style="height: 1678px;">
+       <div class="commentRelativeBox">
 
            
 
@@ -965,7 +1297,8 @@ width: 23%;
 
                           <div class="comment-parent">
 
-                            <img src="{{$comment->user->user_detail->profile_picture ? url('').'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
+                            <!-- <img src="{{$comment->user->user_detail->profile_picture ? url('').'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar"> -->
+                            <img src="{{$comment->user->user_detail->userPicture5050()  }}" class="avatar">
                             <span class="timestamp" data-datetime="{{ $comment->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                             <div class="comment-info">{{$comment->user->email}}</div>
                             <div class="comment-content">{!! $comment->content !!}</div>
@@ -974,7 +1307,8 @@ width: 23%;
                             <div class="reply-list" id="reply-to-{{$comment->id}}">
                               @foreach($comment->category_replies as $reply)
                               <div class="replies-parent">
-                                <img src="{{$reply->user->user_detail->profile_picture ? url('').'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
+                                <!-- <img src="{{$reply->user->user_detail->profile_picture ? url('').'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar"> -->
+                                <img src="{{$reply->user->user_detail->userPicture5050() }}" class="avatar">
                                 <span class="timestamp" data-datetime="{{ $reply->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                                 <div class="reply-info">{{$reply->user->email}}</div>
                                 <div class="reply-content">{!! $reply->content !!}</div>
@@ -1099,15 +1433,20 @@ width: 23%;
                     </div>
                 </div>
 
-                <img src="http://www.susanwins.com/images/responsive/singleFooter.png" class="singleFooter">
+                <!-- <img src="http://www.susanwins.com/images/responsive/singleFooter.png" class="singleFooter"> -->
             </div>
 
 
-
+             <div class="simpleFooter"></div>
         </div>
 
-            <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 right">
+            <div class="col-xs-24 col-sm-24 col-md-5 col-lg-5 right">
                <div class="sidebar">
+                @if(!isset($user))                
+                	<blockquote class="oval-speech bounceIn animated">
+                      <p> You're Missing All the Fun! <a href="{{ url('/signup') }}"> Signup Now </a> </p>
+                    </blockquote>
+                    @endif
                   <img src="{{ url('images/single-susan.png') }}" alt="" class="susan">
                       <div class="sidebarInner">
                         <h3> <img src="http://susanwins.com/uploads/28532_sidebartext.png" alt=""> </h3>
@@ -1118,6 +1457,14 @@ width: 23%;
 
         
               </div>
+
+
+               <div class="col-xs-24">
+                    <p class="terms">
+                      <a href="#">Terms & Conditions</a> <a href="#"> Privacy Policy </a> Gambling is for over <img src="http://susanwins.com/uploads/48153_18-logo.gif" class="eighteen" />  <a href="#"> <img src="http://susanwins.com/uploads/63793_gambleaware.gif" class="gambleaware" /> </a> <br /> <b>Copyright &copy; <?php echo date("Y") ?> SusanWins</b>
+                    </p>
+              </div>
+
             </div>  
         </div>
     </div>
@@ -1399,6 +1746,7 @@ contentHeight = $(contents_here).outerHeight() +'px';
 
     }
 
+    var random_sidebar_order_number = {{$random_sidebar_order_number}};
 
     function sideBarAJAX(){
 
@@ -1413,9 +1761,9 @@ contentHeight = $(contents_here).outerHeight() +'px';
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
           $.ajax({
-                          type: 'post',
+                          type: 'get',
                           url: "{{url('home/ajax_get_ads_posts_init')}}",
-                          data: {_token: CSRF_TOKEN, 'contentOffset' :contentOffset },
+                          data: {'contentOffset' :contentOffset, 'random_sidebar_order_number' : random_sidebar_order_number, 'get_casino_category' : 43},
                           success : dfr.resolve, 
                           error : function(xhr){
 
@@ -1574,24 +1922,24 @@ contentHeight = $(contents_here).outerHeight() +'px';
 	    var result2 = $(".related").height();           
 	    	console.log(result2);
 
-	      if ( width > 1199 ) {
-	        var relatedAddition = 245;
-	      }
-	      else if ( width > 991 && width < 1200 ) {
-	        var relatedAddition = 205;
-	      }
-	      else if( width > 767 && width < 992 ){
-	        var relatedAddition = 170;
-	      }
-	      else if( width > 765 && width < 767 ){
-	        var relatedAddition = 210;
-	      }
-	      else if( width < 766 ){
-	        var relatedAddition = 210;
-	      }
+	      // if ( width > 1199 ) {
+	      //   var relatedAddition = 245;
+	      // }
+	      // else if ( width > 991 && width < 1200 ) {
+	      //   var relatedAddition = 205;
+	      // }
+	      // else if( width > 767 && width < 992 ){
+	      //   var relatedAddition = 170;
+	      // }
+	      // else if( width > 765 && width < 767 ){
+	      //   var relatedAddition = 210;
+	      // }
+	      // else if( width < 766 ){
+	      //   var relatedAddition = 210;
+	      // }
 	    
-	      	console.log(relatedAddition);
-	    $(".commentRelativeBox").height(result2 + relatedAddition );
+	      	// console.log(relatedAddition);
+	    $(".commentRelativeBox").height(result2 + 37);
 	}
 /*   var width = $(window).width(); 
     var height = $(window).height(); 

@@ -3,7 +3,42 @@
 
 @section('content-list')
 
+<style>
+   .collapsible, .collapsible-header{
+     border: none;
+     box-shadow: 0 0 0;
+     background: #fff;
+   }
+   .collapsible-body ul li a{
+    font-size: 20px;
+    /* margin: 20px 10px; */
+    background: rgb(183, 10, 10);
+    width: 100%;
+    display: block;
+    color: #fff;
+    padding: 10px;
+    }
+    .collapsible-body ul li a i{
+      margin-right: 10px;
+    }
 
+    div[data-page="chatroom"] .chatBox{
+          padding-top: 65px;
+    }
+    
+
+   em {
+    font-style: italic;
+    color: #bfcaca;
+    font-size: xx-small;
+}
+
+.body {
+
+    padding-bottom: 150px;
+}
+
+</style>
 
 <div class="app-page" data-page="chatroom">
   	<div class="app-content" data-no-scroll>
@@ -18,20 +53,45 @@
              </ul> 
 		</div> 
 
+    @section('content-menu')
+       <a href="#" class="waves-effect back_button button-collapse" data-activates="slide-out" ><i class="ion-navicon"></i>  </a>
+@endsection
+
 	   <div class="row">
-	   			<div class="chatroomHeader">
-	   			<ul id="dropdown2" class="dropdown-content" data-id="{{ $selectedRoom->id }}">
-				 	@foreach($chatrooms as $room)
-				    	<li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
-				    @endforeach
-				</ul>
-					<a class="btn dropdown-button" href="#!" data-activates="dropdown2">{{ $selectedRoom->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
-					<center>	
-						<p style="color: red">	  
-							 <a href="#" data-activates="mobile-demo" class="button-collapse2">{{ $selectedRoom->name }}<span id="people_count"></span></a>
-						</p>
-					</center>
-	   			</div>
+	   		<!--   <div class="chatroomHeader">
+        <ul id="dropdown2" class="dropdown-content" data-id="{{ $selectedRoom->id }}">
+                   @foreach($chatrooms as $room)
+                      <li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
+                    @endforeach
+                </ul>
+                  <a class="btn dropdown-button" href="#!" data-activates="dropdown2">{{ $selectedRoom->name }}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                  <center>  
+                    <p style="color: red">    
+                       <a href="#" data-activates="mobile-demo" class="button-collapse2">{{ $selectedRoom->name }}<span id="people_count"></span></a>
+                    </p>
+                  </center>
+        </div> -->
+            <!-- menu 1 -->
+          <div style="position:fixed;z-index: 2;width: 100%;top: 41px;">
+              <ul id="dropdown2" class="dropdown-content" data-id="{{ $selectedRoom->id }}">
+                @foreach($chatrooms as $room)
+                  <li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}">{{ $room->name }}<span class="badge"></span></a></li>
+                @endforeach
+              </ul>
+              <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                  <div class="collapsible-header"><i class="ion-chevron-down" data-id="{{ $selectedRoom->id }}"></i> {{ $selectedRoom->name }}  <a data-activates="mobile-demo" class="button-collapse2" style="    margin-left: 20px;"><span id="people_count"></span></a></div>
+                  <div class="collapsible-body">
+                  <ul>
+                    @foreach($chatrooms as $room)
+                      <li><a href="{{ url('clubhouse/chatroom') }}/{{$room->name}}"><i class="ion-chatbubble"></i> {{ $room->name }}</a></li>
+                    @endforeach
+                  </ul>
+                  </div>
+                </li>
+              </ul>
+          </div>
+      <!-- end menu 1-->
 					 	
 				<div class="chatBox">
 		            <div class="body">
@@ -39,6 +99,7 @@
 			               
 								<li>
 			                    	<img src="{{ asset('/images/default_profile_picture.png') }}" class="chatProfPic" data-id="">
+                            <em><span></span><em>
 			                    	<span></span>
 			                	</li>
 								
@@ -46,7 +107,7 @@
 		            </div>
 		            <div class="chatFooter">
 		                   <div class="triggers">
-		                      	<span class="sendMessage" id="sendChat"><i class="fa fa-paper-plane"></span></a>
+		                      	<span class="sendMessage" id="sendChat"><i class="fa fa-paper-plane"></i></span>
 		            		</div>
 		                    	<textarea name="" placeholder="Connecting to server..." id="chatRoomTextarea" disabled="disabled"></textarea>
 		            </div>
@@ -143,6 +204,11 @@
 <script>
 
 (function(window, document, $){
+
+
+      $('.app-page').css({ 'display' : 'block' });
+        $('#mainLoading').remove();
+        
 		var profileUrl = '{{ url("profile") }}';
 
 	var publicUrl = '{{ asset("") }}';
@@ -235,17 +301,51 @@ $.fn.initBan = function(time){
 			App.load('userDetails', { user_id : user_id });
 			//App.load('userDetails');
 
-		})
+		});
+
+    $(page).on('appLayout', function(){
+        chatBox = $(page).find('.chatBox');
+
+        chatBody = chatBox.find('.body');
+                chatBoxOffsetTop = chatBody.offset().top;
+                chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
+                  
+            //chatBody.css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
+            chatBody.css('height', 50+'%');
+            chatBody.scrollTop(chatBody[0].scrollHeight);
+    });
+
+    function messageChecker(message) {
+      result = message.indexOf(".com");
+      image = message.indexOf(".jpg");
+      if(result != -1) {
+          console.log(true);
+          console.log(message);
+          console.log(result);
+          return "<p><a target='_blank' href='"+message+"' style='text-decoration: none;'>"+message+"</a></p>";
+      }
+      else {
+          console.log(false);
+          console.log(message);
+          console.log(result);
+          return "<p>"+message+"</p>";
+      }
+     
+    }
+
 
 		$(page).on('appShow', function(){
 			$(page).find('#peopleContent').show();
 			$('.drag-target:eq(1)').show();
 
-			chatBox = $(page).find('.chatBox');
-                chatBoxOffsetTop = chatBox.offset().top;
-                chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
+			       chatBox = $(page).find('.chatBox');
+
+            chatBody = chatBox.find('.body');
+            chatBoxOffsetTop = chatBody.offset().top;
+            chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
                   
-            $(page).find('.chatBox .body').css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
+            chatBody.css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
+            chatBody.scrollTop(chatBody[0].scrollHeight);
 
             chatTextarea = $(page).find('#chatRoomTextarea');
             chatTextarea.attr('disabled', 'disabled').attr('placeholder', 'Connecting to server...');
@@ -317,10 +417,12 @@ $.fn.initBan = function(time){
 	    		.find('#mobile-demo').append(
 	    				$('<li>').append(
 	    					$('<div>').addClass('chip').append(
-	    						$('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE)
+	    						//$('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE)
+                   $('<img>').attr('src', getImage(this.profile_picture, this.user_id, 5050))
 	    					)
 	    					.append(
 			                  $('<span>').text(this.name)
+                        //$('<span>').append(messageChecker(this.name))
 			                )
 	    				)
 	    		)
@@ -345,12 +447,19 @@ $.fn.initBan = function(time){
 			   		$.each(data, function() {
 			   			 $(page).find('.chatBox .body ul').prepend(
 				          $('<li>')
+                  
+                     
 				              .append(
-				                $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+				               // $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+                         $('<img>').attr('src', getImage(this.user.user_detail.profile_picture, this.user.user_detail.user_id, 5050) ).attr('data-id', this.user_id).addClass('chatProfPic')
 				                )
 				              .append(
-				                  $('<span>').text(this.message)
-				                )
+                          $('<span>').append(messageChecker(this.message))
+                           .append(
+                            $('<em>').text(FULL_NAME)
+                            )
+                               .append($('<em></em>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))
+    				                )
 				        );
 			   		});
 			   		$(page).find('.chatBox .body').scrollTop( $(page).find('.chatBox .body ul')[0].scrollHeight);
@@ -398,11 +507,29 @@ $.fn.initBan = function(time){
 						   			 $(page).find('.chatBox .body ul').prepend(
 							          $('<li>')
 							              .append(
-							                $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+							               // $('<img>').attr('src', this.profile_picture ? BASE_URL+'/user_uploads/user_'+this.user_id+'/'+this.profile_picture : DEFAULT_IMAGE ).attr('data-id', this.user_id).addClass('chatProfPic')
+                               $('<img>').attr('src', getImage(this.user.user_detail.profile_picture, this.user.user_detail.user_id, 5050)).attr('data-id', this.user_id).addClass('chatProfPic')
 							                )
-							              .append(
-							                  $('<span>').text(this.message)
-							                )
+							             /* .append(
+							                 //$('<span>').text(this.message)
+                                //$('<span>').append(messageChecker(this.message))
+                               //messageChecker(this.mess)
+							                )*/
+                            //.append(
+                           /*     $('<span>').append(messageChecker(this.message))
+                                 .append(
+                              $('<em>').text(FULL_NAME)
+                              )
+                                 .append($('<em></em>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))
+                              )*/
+
+                          .append(
+                            $('<span>').append(messageChecker(this.message))
+                             .append(
+                              $('<em>').text(FULL_NAME)
+                              )
+                                 .append($('<em></em>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))
+                              )
 							        );
 						   		});
 						   		body.scrollTop(1);
@@ -544,7 +671,8 @@ App.controller('userDetails', function(page, request){
           			
           			$(page).find('#friendDetailContainer').show().addClass('dataLoaded');
           			//$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
-          			$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/5050/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
+          			//$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user_detail.user_id+'/5050/'+data.user_detail.profile_picture : DEFAULT_IMAGE  );
+                   $(page).find('#friendProfilePic').attr('src', getImage(data.user_detail.profile_picture, data.user_detail.user_id, 5050));
 
           			friendName = data.user_detail.firstname+' '+data.user_detail.lastname;
      				$(page).find('#friendDetailContainer h6').text(friendName);
@@ -668,6 +796,23 @@ App.controller('userDetails', function(page, request){
 
   }
 	
+    function messageChecker(message) {
+      result = message.indexOf(".com");
+      image = message.indexOf(".jpg");
+      if(result != -1) {
+          console.log(true);
+          console.log(message);
+          console.log(result);
+          return "<p><a target='_blank' href='"+message+"' style='text-decoration: none;'>"+message+"</a></p>";
+      }
+      else {
+          console.log(false);
+          console.log(message);
+          console.log(result);
+          return "<p>"+message+"</p>";
+      }
+     
+    }
 
   socket.on('post_chatroom_message', function(data){
   	//var page = App.getPage();
@@ -677,11 +822,21 @@ App.controller('userDetails', function(page, request){
   		 $(thePage).find('.chatBox .body ul').append(
           $('<li>')
               .append(
-                $('<img>').attr('src',data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : DEFAULT_IMAGE ).attr('data-id', data.user.user_id).addClass('chatProfPic')
+                //$('<img>').attr('src',data.user.profile_picture ? BASE_URL+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : DEFAULT_IMAGE ).attr('data-id', data.user.user_id).addClass('chatProfPic')
+                 $('<img>').attr('src', getImage(data.user.profile_picture, data.user.user_id, 5050)).attr('data-id', data.user.user_id).addClass('chatProfPic')
                 )
-              .append(
+             /* .append(
                   $('<span>').text(data.message)
-                )
+                  //$('<span>').append(messageChecker(data.message))
+                )*/
+                
+                .append(
+                  $('<span>').append(messageChecker(this.message))
+                   .append(
+                    $('<em>').text(FULL_NAME)
+                    )
+                       .append($('<em></em>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))
+                    )
         );
 	 }
   });
@@ -702,6 +857,26 @@ App.controller('userDetails', function(page, request){
   }	
 
 })(window, document, jQuery);
+
+
+$('textarea').focus(function() {
+   $("footer").hide();
+   $(".chatBox .chatFooter").css(
+      "bottom","0"
+   );
+   $(".body").css(
+      "padding-bottom", "110px"
+    );
+}).blur(function() {
+   $("footer").show();
+   $(".chatBox .chatFooter").css(
+      "bottom","60px"
+   );
+    $(".body").css(
+      "padding-bottom", "150px"
+    );
+});
+
 
 </script>
 

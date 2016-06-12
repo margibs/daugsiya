@@ -23,16 +23,33 @@
 	    margin-top: 13px;
 	    z-index: 22;
   	}
+    .latestgamescontent{
+          padding: 0 15px 13px 11px;
+    }
    .latestgamescontent .inner{
 	    background: #FDF6E9;
 	    box-shadow: 0px 0px 10px 3px #DCB76B inset;
 	    border: 1px solid #A07019;
+      padding: 0;
+   }
+   .latestgamescontent .inner p.toprated{
+      font-family: 'Work Sans';
+      font-weight: 600;
+      font-size: 20px;
+      margin: 2px 10px;
+      color: #9A0A0E;
    }
    .latestgamescontent .inner img{
-      border: none;
       padding: 0;
-      box-shadow: 0 0;
+      border: 1px solid #8C900A;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      box-shadow: 0px 0px 10px -3px rgb(56, 54, 54);
    }
+     .latestgamescontent .inner img{
+        border-radius: 1px;
+    margin-bottom: -6px;
+  }
    .bonusCasino a{
       display: inline-block;
       padding: 5px;
@@ -55,10 +72,23 @@
       margin-left: 6px;
    }
    #maincontainer{
-    margin-top: 0;
+    padding: 0;
+    margin-top: -6px;
    }
    #categoryContainer {
-    top: 36px;
+    top: 0;
+    margin-top: 0;
+    margin-bottom: -39px;
+  }
+  .forComments{
+     padding: 10px 11px;
+  }
+  .forComments .inner{
+    padding: 11px;
+  }
+  .forComments img{
+        border: none!important;
+    box-shadow: 0 0 0!important;
   }
 /********** MEDIA QUERIES *************/
 @media(min-width: 360px){   
@@ -67,10 +97,6 @@
     }
    .thickgolddivider{
       margin-top: -1px;
-   }
-   #maincontainer{
-    margin-top: -3px;
-    padding: 1px 9px;
    }
    #postcontent {
     margin-top: 25px;
@@ -81,15 +107,7 @@
    .latestgames {    
       margin-top: 18px;
   }
-   .latestgamescontent{
-      padding:10px 15px 13px 12px;
-   }
-   .latestgamescontent .inner img{
-    border: none;
-   }
-   #categoryContainer{
-      top: 41px;
-   }
+
    .g2, .g1 {
     top: 10px;
   }
@@ -104,18 +122,13 @@
 }
 
 
+
 </style>
 
 
-<div class="round ellipse">
-  <div class="round2 ellipse">
-   <img src="http://susanwins.com/uploads/67780_mobileheader.png" class="featimg" />
-  </div>  
+<div class="featImgDiv">
+  <img src="http://susanwins.com/uploads/99221_633x250.jpg" class="featimg" />
 </div>
-
-   <div class="thickgolddivider">
-      <p> Check the cool games below! </p>
-    </div>
 
 <div id="maincontainer">
  
@@ -130,15 +143,17 @@
    
 
         <div id="categoryContainer">
-            <div class="goldborder g1"></div>
+       <!--      <div class="goldborder g1"></div>
             <div class="goldborder g2"></div>
-              
+               -->
              <div class="latestgamescontent">
               <div class="inner">
+                 <p class="toprated"> Top Rated Games </p>
+
                   <div class="row">
 
                    @foreach($posts as $post)
-                   <div class="col s6">
+                   <div class="col s4" style="padding: 2px;">
                    		<a href="{{url('')}}/{{$post->slug}}">                  
                             <img src="{{url('uploads')}}/{{$post->thumb_feature_image}}">
                          </a>
@@ -153,7 +168,7 @@
 
         
         <div class="latestgames"></div>
-        <div class="latestgamescontent">
+        <div class="latestgamescontent forComments">
      
           <div class="inner">
 
@@ -164,7 +179,8 @@
 					<ul id="commentList">
 						 @foreach($comments as $comment)
 							<li>
-		                    <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->id.'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar" />
+		                    <!-- <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->id.'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar" /> -->
+                        <img src="{{$comment->user->user_detail->userPicture5050() }}" class="avatar" />
 		                    <p class="name"> {{$comment->user->user_detail->firstname.' '.$comment->user->user_detail->lastname }} </p>
 		                    <p class="comment">{!! $comment->content !!} </p>
 		                    <div class="replyArea">
@@ -172,7 +188,7 @@
 
 				                     @foreach($comment->category_replies as $reply)
 										<li>
-					                        <img src="{{$reply->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$reply->user->id.'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar" />
+					                        <img src="{{$reply->user->user_detail->userPicture5050() }}" class="avatar" />
 					                        <p class="name"> {{$reply->user->user_detail->firstname.' '.$reply->user->user_detail->lastname }} </p>
 					                        <p class="comment"> {!! $reply->content !!} </p>
 					                      </li>
@@ -226,7 +242,20 @@
               <h2> Top Categories </h2>
 
                <div class="row">
-                <div class="col s4" style="padding: 0;">
+                                            <ul class="row gameList">
+                 @foreach($category_randomizer as $key => $value)
+
+                    @if(($key) % 5 == 0)
+
+                      <div class="col s4" style="padding:0;">
+                        @endif
+                        {!! $value !!}
+                        @if(($key+1) % 5 == 0)
+                          </div>
+                        @endif
+                    @endforeach
+              </ul>  
+<!--                 <div class="col s4" style="padding: 0;">
                    <img src="http://susanwins.com/uploads/48873_fantasy.png" alt="">
                   <img src="http://susanwins.com/uploads/52845_seasonal.png" alt="">
                   <img src="http://susanwins.com/uploads/41272_tropical.png" alt="">
@@ -243,13 +272,13 @@
                   <img src="http://susanwins.com/uploads/52845_seasonal.png" alt="">
                   <img src="http://susanwins.com/uploads/41272_tropical.png" alt="">
                   <img src="http://susanwins.com/uploads/88737_sorcery.png" alt="">
-                </div>            
+                </div>  -->           
               </div>
 
           </div>
         </div>
         <div class="bottomads">
-          <img src="http://a1.mzstatic.com/us/r30/Purple/v4/e1/e7/c6/e1e7c6c5-8ce5-9a7b-8236-695ac0eb0168/screen520x924.jpeg" alt="">
+          <img src="http://susanwins.com/uploads/57363_foxycasino02_763x364.jpg" alt="">
         </div>
         <div class="footer"></div>
       </div>
@@ -264,6 +293,8 @@
   <script>
        $(document).on('ready', function(){
 
+            $('.app-page').css({ 'display' : 'block' });
+            $('#mainLoading').remove();
 
        		App.controller('main', function(page){
 

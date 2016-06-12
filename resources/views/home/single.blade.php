@@ -126,38 +126,69 @@
 
       .oval-speech {
           position: absolute;
-          width: 234px;
-          padding: 35px 21px;
+          width: 258px;
+          padding: 30px 21px;
           margin: 2.5em auto 50px;
-          margin-left: -131px;
+          margin-left: -149px;
           z-index: 2;
           text-align: center;
           color: #fff;
-          background:#FFF967;
-          background: -webkit-gradient(linear, 0 0, 0 100%, from(#FFF967), to(#D8D808)); */
-          background: -moz-linear-gradient(#FFF967, #D8D808);
-          background: -o-linear-gradient(#FFF967, #D8D808);
-         background: linear-gradient(#FFF967, #D8D808);
+          background: #FFFFFF;
           -webkit-border-top-left-radius: 220px 120px;
           -webkit-border-top-right-radius: 220px 120px;
           -webkit-border-bottom-right-radius: 220px 120px;
           -webkit-border-bottom-left-radius: 220px 120px;
           -moz-border-radius: 220px / 120px;
-          border-radius: 310px / 175px;
-          border: 1px solid #FFFE07;
+          border-radius: 318px / 184px;
+          border: 4px solid #e8c38a;
           -moz-transform: rotate(-6deg);
           -webkit-transform: rotate(-6deg);
           transform: rotate(-6deg);
-
-          -moz-box-shadow: 0 0 14px -3px #000;
-          -webkit-box-shadow: 0 0 14px -3px #000;
-          box-shadow: 0 0 14px -3px #000;
+          -moz-box-shadow: 0 0 14px -3px #949494;
+          -webkit-box-shadow: 0 0 14px -3px #949494;
+          box-shadow: 0 0 14px -3px #949494;
       }
+  /*    .oval-speech:before {
+          content: "";
+          position: absolute;
+          z-index: -1;
+          bottom: -30px;
+          right: 50%;
+          height: 30px;
+          border-right: 60px solid #5a8f00;
+          background: #5a8f00;
+          -webkit-border-bottom-right-radius: 80px 50px;
+          -moz-border-radius-bottomright: 80px 50px;
+          border-bottom-right-radius: 80px 50px;
+          -webkit-transform: translate(0, -2px);
+          -moz-transform: translate(0, -2px);
+          -ms-transform: translate(0, -2px);
+          -o-transform: translate(0, -2px);
+          transform: translate(0, -2px);
+      }
+      .oval-speech:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        bottom: -30px;
+        right: 50%;
+        width: 60px;
+        height: 30px;
+        background: #fff;
+        -webkit-border-bottom-right-radius: 40px 50px;
+        -moz-border-radius-bottomright: 40px 50px;
+        border-bottom-right-radius: 40px 50px;
+        -webkit-transform: translate(-30px, -2px);
+        -moz-transform: translate(-30px, -2px);
+        -ms-transform: translate(-30px, -2px);
+        -o-transform: translate(-30px, -2px);
+        transform: translate(-30px, -2px);
+      }*/
       .oval-speech p {
         font-family: 'Work Sans',Roboto,Arial,Helvetica,sans-serif;
-        font-size: 20px;
-        font-weight: 600;
-        color: #fff;
+        font-size: 27px;
+        font-weight: 900;
+        color: #000000;
       }
       .oval-speech p a{
         text-decoration: none;
@@ -199,9 +230,17 @@
       margin-top: 20px;
       }
 
-      .sidebar .sidebarInner{
-      background: #c20f14;
-      padding: 12px 14px 12px 19px;
+.rellimg{
+      margin: 12px 14px 12px 19px;
+}
+.sidebar .sidebarInner{
+
+      background: linear-gradient(to right, #F7ECBA 0%,#ffffff 21%,#ffffff 50%,#ffffff 79%,#F7ECBA 100%);
+    border: 2px solid #F3CD7C;
+
+
+     /* background: #c20f14;*/
+  /*    padding: 12px 14px 12px 19px;*/
       margin-top: -21px;
       border-radius: 4px;
       /*overflow: hidden;*/
@@ -223,6 +262,16 @@
       font-weight: 800;
       font-size: 30px;
       border-bottom: 1px solid #b00c0c;
+
+       /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#820a0a+0,970c0b+51,820a0a+100 */
+background: #820a0a; /* Old browsers */
+background: -moz-linear-gradient(left,  #820a0a 0%, #970c0b 51%, #820a0a 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #820a0a 0%,#970c0b 51%,#820a0a 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #820a0a 0%,#970c0b 51%,#820a0a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#820a0a', endColorstr='#820a0a',GradientType=1 ); /* IE6-9 */
+
+    margin-top: 0;
+    padding: 10px 10px 0 10px;
       }
       .sidebar .rellimg img{
       width: 100%;
@@ -360,7 +409,7 @@
       margin-top: 5px;
       }
       .content p b{
-      font-weight: 500;
+      font-weight: 700;
       }
       .content p {
       font-weight: 400;
@@ -425,11 +474,13 @@
       right: 30px;
       }
       .left{
-      position: absolute;
+/*      position: absolute;*/
       z-index: 2;
       }
 
-
+      .terms {
+        margin-top: 3px;
+      }
 
 
 
@@ -585,7 +636,7 @@
       }
 
       #recommendToFriend{
-      background: #A40605;
+      background: #D03F3F;
       padding: 9px 10px;
       border-radius: 2px;
       color: #fff;
@@ -595,9 +646,6 @@
       display: block;
       position: relative;
       top: -3px;
-      -moz-box-shadow: 0px 2px 3px -2px #696969;
-      -webkit-box-shadow: 0px 2px 3px -2px #696969;
-      box-shadow: 0px 2px 3px -2px #696969;
       cursor: pointer;
       border: none;
       }
@@ -708,30 +756,30 @@ box-shadow: 0 0 10px -2px #000;
           border: 2px solid #f4d597;
           text-align: center;
           color: #333;
-         background: rgb(255,250,232);
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmFlOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM0JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZkZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(top,  rgba(255,250,232,1) 0%, rgba(255,255,255,1) 34%, rgba(255,253,249,1) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,250,232,1)), color-stop(34%,rgba(255,255,255,1)), color-stop(100%,rgba(255,253,249,1)));
-background: -webkit-linear-gradient(top,  rgba(255,250,232,1) 0%,rgba(255,255,255,1) 34%,rgba(255,253,249,1) 100%);
-background: -o-linear-gradient(top,  rgba(255,250,232,1) 0%,rgba(255,255,255,1) 34%,rgba(255,253,249,1) 100%);
-background: -ms-linear-gradient(top,  rgba(255,250,232,1) 0%,rgba(255,255,255,1) 34%,rgba(255,253,249,1) 100%);
-background: linear-gradient(to bottom,  rgba(255,250,232,1) 0%,rgba(255,255,255,1) 34%,rgba(255,253,249,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', endColorstr='#fffdf9',GradientType=0 );
+          background: rgb(255,250,232);
+          background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmFlOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjM0JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZkZjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+          background: -moz-linear-gradient(top,  rgba(255,250,232,1) 0%, rgba(255,255,255,1) 34%, rgba(255,253,249,1) 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,250,232,1)), color-stop(34%,rgba(255,255,255,1)), color-stop(100%,rgba(255,253,249,1)));
+          background: -webkit-linear-gradient(top,  rgba(255,250,232,1) 0%,rgba(255,255,255,1) 34%,rgba(255,253,249,1) 100%);
+          background: -o-linear-gradient(top,  rgba(255,250,232,1) 0%,rgba(255,255,255,1) 34%,rgba(255,253,249,1) 100%);
+          background: -ms-linear-gradient(top,  rgba(255,250,232,1) 0%,rgba(255,255,255,1) 34%,rgba(255,253,249,1) 100%);
+          background: linear-gradient(to bottom,  rgba(255,250,232,1) 0%,rgba(255,255,255,1) 34%,rgba(255,253,249,1) 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', endColorstr='#fffdf9',GradientType=0 );
 
           -webkit-border-top-left-radius: 240px 140px;
           -webkit-border-top-right-radius: 240px 140px;
           -webkit-border-bottom-right-radius: 240px 140px;
           -webkit-border-bottom-left-radius: 240px 140px;
           -moz-border-radius: 240px / 140px;
-          border-radius: 135px / 82px;
+          border-radius: 150px / 82px;
           height: 155px;
-          width: 260px;
+          width: 282px;
       }
       .oval-speech-border:before {
           content: "";
           position: absolute;
           z-index: 2;
-          bottom: -23px;
+          bottom: -22px;
           right: 50%;
           width: 50px;
           height: 23px;
@@ -767,26 +815,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
              content: "";
              position: absolute;
              z-index: 1;
-             bottom: -37px;
+             bottom: -46px;
              right: 46%;
              width: 30px;
              height: 15px;
             background: #fff;
       }
        .oval-speech-border p{
-             margin: 0;
-             padding: 0;
-             text-align: center;
-             color: red;
-             position: absolute;
-             left: 14%;
-             top: 32px;
-             width: 73%;
-             color: #ba861f;
-             font-family: 'Work Sans';
-             font-weight: 600;
-             font-size: 30px;
-             line-height: 23px;
+          margin: 0;
+          padding: 0;
+          text-align: center;
+          color: red;
+          position: absolute;
+          left: 14%;
+          top: 37px;
+          width: 73%;
+          color: #ba861f;
+          font-family: 'Work Sans';
+          font-weight: 600;
+          font-size: 32px;
+          line-height: 27px;
        }
       .pointingSusan img{
       width: auto;
@@ -837,7 +885,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         top: 82px;
       }
       .musicStar{
-        top: 140px;    
+        top: 151px;    
       }
       .longtermStar{
         top: 130px;    
@@ -987,7 +1035,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         }
 
       }
-
+     @media(max-width: 1366px){
+        .noplayed {
+            width: 34%;
+        }
+        .simpleFooter{
+              width: 95.9%;
+        }
+     }
     @media(max-width: 1199px){
           body {
               margin-top: 80px;
@@ -1012,14 +1067,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
             margin-bottom: 0;
           }
           .featImg{
-          margin-top: 41px;
-          margin-left: 38px;
+             margin-top: 42px;
+             margin-left: 35px
           width: 92.5%;
           }
+          .fave{
+            font-size: 17px;
+          }
           .reels {
-          padding: 0 41px 0 58px;
-          margin-top: 12px;
-          height: 200px;
+           padding: 0 40px 0 58px;
+            margin-top: 13px;
+            height: 196px;
           }
           .singlePostBG{
           top: 569px;
@@ -1038,9 +1096,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
           top: 62px!important;
           }
           #playedText{
-            padding: 9px 9px 9px 69px;
-            width: 410px;
+            padding: 9px 9px 9px 21px;
             left: 40%;
+          }
+          .susanExpression {    
+            left: 35%;
           }
           .moveLeft {
             left: 39%;
@@ -1099,38 +1159,54 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
           .oval-speech-border p{
             margin:0!important;
           }
+          .hidethenshow{
+            left: 208px;
+            top: 13px;
+          }
+          .hidethenshowtwo{
+            top: 114px;
+            left: 274px;
+            width: 156px!important;
+          }
     }
     @media(max-width: 991px){
+      header .logo{
+        margin-top: 7px;
+      }
         .featImg {
-        margin-top: 32px;
-        margin-left: 31px;
+        margin-top: 42px;
+        margin-left: 35px;
         width: 92.7%;
         }
         #addToFavorite span, #removeToFavorite span, #playedGame span {
             top: -7px;
         }
+        .right{
+          display: none;
+        }
         .reels {
-        padding: 0 29px 0 48px;
-        margin-top: 8px;
-        height: 156px;
+       padding: 0 40px 0 58px;
+        margin-top: 14px;
+        height: 195px;
         }
         #wrapper {
-        top: 326px;
+        top: 421px;
         left: -13px;
         }
         #wrapper a {
         width: 60px;
         height: 35px;
         }
-        .singlePostBG{
-        top: 440px;
+        .singlePostBG {
+          top: 556px;
         }
-        .content {
-        margin-top: 111px;
+       .content {
+          margin-top: 131px;
+          padding: 0 10px;
         }
-        .content h2{
-        margin: 10px 31px 0px 49px;
-        }
+        .content h2 {
+        margin: 10px 60px;
+      }
         .content p{
         margin: 30px 41px 0px 60px;
         }
@@ -1152,10 +1228,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         width: 50%;
         }
         .gameExp {
-        top: 47px!important;
+        top: 62px!important;
         }
         .fave{
-          font-size: 15px;
+          font-size: 17px;
+          padding: 2px 12px;
         }
         .fave img{
         width: 27px;
@@ -1164,13 +1241,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         top: -8px;
         }
         #addToFavorite, #removeToFavorite{
-        left: 66px;  
+        left: 36px;  
         }
         #playedGame{
-        right: 40px;
+        right: 23px;
+
         }
         #playbig{
-        right: 90px;  
+        right: 125px;  
         }
         #playbig a {
         width: 119px!important;
@@ -1178,6 +1256,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         }
         #playbig .button {
         font: 25px/0.9em 'Work Sans',sans-serif;
+        font-weight: 600;
         }
         #playbig {
         top: -13px;
@@ -1190,19 +1269,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
         top: 11px;  
         }
         .musicStar {
-        top: 92px;
+          top: 115px;
         }
         .longtermStar {
-        top: 86px;
+        top: 101px;
         }
         .funStar {
-        top: 81px;
+        top: 101px;
         }
         .graphicStar {
-         top: 81px;
+         top: 103px;
         }      
         .totalcontainer .innertotalcontainer img {
         width: 100px;
+        }
+        .commentRelativeBox{
+          margin-top: 311px;
+        }
+        .pointingSusan {
+          bottom: -348px;
+          width: 88%;
         }
     }
     @media(max-width: 768px){
@@ -1265,6 +1351,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
     margin-left: -200px;
     top: 50%;
     margin-top: -64px;
+    font-family: Roboto;
+    color: #FFF2F2;
+    font-size: 17px;
 
     padding: 30px;
     display: none;
@@ -1276,7 +1365,51 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
     -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7);
     -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
 
-}
+    background: #C50D12;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #C50D12 0%, #A20807 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C50D12), color-stop(100%,#A20807));
+    background: -webkit-linear-gradient(top, #C50D12 0%,#A20807 100%);
+    background: -o-linear-gradient(top, #C50D12 0%,#A20807 100%);
+    background: -ms-linear-gradient(top, #C50D12 0%,#A20807 100%);
+    background: linear-gradient(to bottom, #C50D12 0%,#A20807 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C50D12', endColorstr='#A20807',GradientType=0 );
+    border: 1px solid #BC0C0F;
+    line-height: 20px;
+  }
+
+  #loginModal .signup{
+    display: block;
+    color: #D23939;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Work Sans';
+    font-weight: 600;
+    text-align: center;
+    margin: 6px 0;
+    border: 1px solid #C3BF18;
+    padding: 13px;
+    border-radius: 36px;
+    background: rgb(254,252,234);
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, rgba(254,252,234,1) 0%, rgba(241,218,54,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,252,234,1)), color-stop(100%,rgba(241,218,54,1)));
+    background: -webkit-linear-gradient(top, rgba(254,252,234,1) 0%,rgba(241,218,54,1) 100%);
+    background: -o-linear-gradient(top, rgba(254,252,234,1) 0%,rgba(241,218,54,1) 100%);
+    background: -ms-linear-gradient(top, rgba(254,252,234,1) 0%,rgba(241,218,54,1) 100%);
+    background: linear-gradient(to bottom, rgba(254,252,234,1) 0%,rgba(241,218,54,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=0 );
+        margin: 10px 0;
+
+  }
+  #loginModal .login{
+    color: #F8EB8E;
+    text-decoration: none;
+    font-size: 21px;
+    margin-top: 12px;
+    display: block;
+    text-align: center;
+  }
 
 #lean_overlay {
     position: fixed;
@@ -1287,6 +1420,39 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
     width:100%;
     background: #000;
     display: none;
+}
+.simpleFooter{
+  -moz-box-shadow: 0px 2px 4px -1px #000000;
+  -webkit-box-shadow: 0px 2px 4px -1px #000000;
+  box-shadow: 0px 2px 4px -1px #000000;
+  width: 96%;
+  margin-top: -12px;
+  margin-left: 18px;
+
+  background: rgb(218,179,114);
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…IgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+  background: -moz-linear-gradient(left, rgb(162, 119, 33) 0%, rgb(162, 119, 33) 7%, rgba(255,255,252,1) 52%, rgb(162, 119, 33) 89%, rgb(162, 119, 33)100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgb(162, 119, 33)), color-stop(7%,rgb(162, 119, 33)), color-stop(52%,rgba(255,255,252,1)), color-stop(89%,rgb(162, 119, 33)), color-stop(100%,rgba(182,132,26,1)));
+  background: -webkit-linear-gradient(left, rgb(162, 119, 33) 0%,rgb(162, 119, 33) 7%,rgba(255,255,252,1) 52%,rgb(162, 119, 33) 89%,rgb(162, 119, 33)100%);
+  background: -o-linear-gradient(left, rgb(162, 119, 33) 0%,rgb(162, 119, 33) 7%,rgba(255,255,252,1) 52%,rgb(162, 119, 33) 89%,rgb(162, 119, 33)100%);
+  background: -ms-linear-gradient(left, rgb(162, 119, 33) 0%,rgb(162, 119, 33) 7%,rgba(255,255,252,1) 52%,rgb(162, 119, 33) 89%,rgb(162, 119, 33)100%);
+  background: linear-gradient(to right, rgb(162, 119, 33) 0%,rgb(162, 119, 33) 7%,rgba(255,255,252,1) 52%,rgb(162, 119, 33) 89%,rgb(162, 119, 33) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dab372', endColorstr='#b6841a',GradientType=1 );
+}
+
+.yt_container p{
+    margin-top: 110px;
+    font-family: 'Work Sans';
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: #232323;
+}
+
+@media(max-width: 1366px){
+  .simpleFooter{
+    width: 95.9%;
+  }
 }
 </style>
 
@@ -1311,7 +1477,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
       <div class="col-xs-24 col-lg-24 col-lg-24 col-lg-24">
        
 
-        <div class="col-xs-24 col-sm-19 col-md-19 col-lg-19 left" id="main">
+        <div class="col-xs-24 col-sm-24 col-md-19 col-lg-19 left" id="main">
 
           <img src="{{ url('images/responsive/singleTopReel.png') }}" class="singelTopReel" />
           <img src="{{ url('images/responsive/singlePostBG.png') }}" class="singlePostBG">
@@ -1420,84 +1586,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                   </div>
           </div> 
 
-      <!--     <div class="reels">
-                  <div class="row no-gutter">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine2" >
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                              </div>
-                          </div>
-                    </div>          
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine3">
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                              </div>
-                          </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine4">
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                          </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine5">
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-           </div> -->
-
           <div id="wrapper">
             <div class="socbtn"> 
               <a class="button fbblue serif round glass sharrre" id="share_via_facebook" data-url="http://susanwins.com/sunset-beach-online-slots-review" data-text="Share this up!"><img src="http://susanwins.com/uploads/34329_fb-button.png" style="left: 2px!important;top: -4px;"></a>
@@ -1563,7 +1651,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                         <span> Add to Favourites  </span>  
                       </a>
                 <img src="{{ url('images')}}/sadSusan.png"  class="susanExpression" />  
-                        <a href="#loginModal" class="fave" id="playedText"> Not Played Yet</a> 
+                        <a href="#loginModal" class="fave noplayed" id="playedText"> Not Played Yet</a> 
                         <a id="playedGame" class="fave" href="#loginModal">
                         <img src="http://susanwins.com/images/homepage/alreadyPlayedIcon.png" />
                         <span> Add to Played List </span>
@@ -1582,8 +1670,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                </a>
                   <img src="{{ url('images/responsive/pointingSusan.png') }}" >
                  <blockquote class="oval-speech-border">
-                 <p>Get your bonus and more. Click now!</p>
-               </blockquote>
+                   <p> Claim your bonus and Play now! </p>
+                 </blockquote>
             </div>
 
             <div class="postcontent" data-post="{{ $post->id }}">
@@ -1630,6 +1718,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                           </p>
 
                           {!!$post->content!!}
+						
+<!-- 						  <p style="position:relative;">
+						  	<span class="overlay_ni_men" style="display: block; position: absolute; z-index: 2; top: 0; width: 100%; height: 100%; text-align: center; background-color:rgba(255, 255, 255, 0.9); "><div class="outer"><div class="middle"><div class="inner"><p>Do you want to play this game?</p> <br><a href="#" class="casino_yes" track-action="56ddbe4fe6b07" track-value="Yes Count"> <div class="glossy"> Yes </div> </a> <a href="#" class="casino_no" track-action="56ddbe560574d" track-value="No Count"> <div class="glossy" style="float: left;"> No </div> </a></div></div></div> </span>						  	
+						  </p> -->
 
                           <h2> My thoughts </h2> 
                           <p style="margin-bottom: 50px;"> 
@@ -1707,7 +1799,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
 
                           <div class="comment-parent">
 
-                             <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->user_detail->user_id.'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
+                             <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->user_detail->user_id.'/5050/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
                             <span class="timestamp" data-datetime="{{ $comment->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                             <div class="comment-info">{{ ucfirst($comment->user->user_detail->firstname) }} {{ucfirst($comment->user->user_detail->lastname)}}</div>
                             <div class="comment-content">{!! $comment->content !!}</div>
@@ -1716,7 +1808,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                             <div class="reply-list" id="reply-to-{{$comment->id}}">
                               @foreach($comment->post_replies as $reply)
                               <div class="replies-parent">
-                                <img src="{{$reply->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$reply->user->user_detail->user_id.'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
+                                <img src="{{$reply->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$reply->user->user_detail->user_id.'/5050/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
                                 <span class="timestamp" data-datetime="{{ $reply->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
                                 <div class="reply-info">{{$reply->user->email}}</div>
                                 <div class="reply-content">{!! $reply->content !!}</div>
@@ -1794,17 +1886,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                     </div>
                 </div>
 
-                <img src="{{ url('images/responsive/singleFooter.png') }}" class="singleFooter">
+
+
+               <!--  <img src="{{ url('images/responsive/singleFooter.png') }}" class="singleFooter"> -->
             </div>
+
+               <div class="simpleFooter"></div>
 
         </div>
 
-            <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 right">
+          <div class="col-xs-24 col-sm-24 col-md-5 col-lg-5 right">
                <div class="sidebar">
-            @if(!isset($user))                
-                <blockquote class="oval-speech bounceIn animated">
-                      <p> You're Missing All the Fun! <a href="{{ url('/signup') }}"> Signup Now </a> </p>
-                    </blockquote>
+                    @if(!isset($user))                
+                      <blockquote class="oval-speech bounceIn animated">
+                        <p> You're Missing All the Fun! <a href="{{ url('/signup') }}"> Signup Now </a> </p>
+                      </blockquote>
                     @endif
                   <img src="{{ url('images/single-susan.png') }}" alt="" class="susan">
                       <div class="sidebarInner">
@@ -1812,26 +1908,47 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffae8', end
                          <div class="rellimg"></div>
                      </div>
                </div>
-            </div>
+          </div>
 
         
+             
+         
+
               </div>
+
+               <div class="col-xs-24">
+                    <p class="terms">
+                      <a href="#">Terms & Conditions</a> <a href="#"> Privacy Policy </a> Gambling is for over <img src="http://susanwins.com/uploads/48153_18-logo.gif" class="eighteen" />  <a href="#"> <img src="http://susanwins.com/uploads/63793_gambleaware.gif" class="gambleaware" /> </a> <br /> <b>Copyright &copy; <?php echo date("Y") ?> SusanWins</b>
+                    </p>
+              </div>
+
             </div>  
+
+            
+
         </div>
     </div>
   </div>
  <div class="popunder">
-               <img src="http://susanwins.com/uploads/35599_scrollsusan.png" alt="Scroll down to see my videos and read my review!" />
-              </div>
+   <img src="{{ url('images/scrollsusan.png') }}" alt="Scroll down to see my videos and read my review!" />
+  </div>
     <div id="loginModal" style="top: 50%">
     
-    You must be logged in to use this feature!
-Sign Up Today! It's totally free and you'll receive an amazing welcome pack!
-If you're already a member, welcome back!
+    You must be logged in to use this feature! <br />
+    It's totally free and you'll receive an amazing welcome pack!
+     <a href="{{ url() }}/signup" class="signup">Sign Up Today!</a>
+    If you're already a member, <span>welcome back!</span>
         
-        <a href="{{ url() }}/login">Login</a>
+    <a href="{{ url() }}/login" class="login"> <i class="ion-locked"></i> Login</a>
   </div>
   <div id="lean_overlay"></div>
+
+  <div id="casino_after_youtube" style="display: none;">
+    <p> Play this game at </p>
+    @foreach($casino_lists_orig as $casino_list)      
+      <a href="{{ $casino_list->link_desktop }}" target="_blank"><img src="{{url('uploads')}}/{{$casino_list->image_url}}" width="100px;" height="100px;"></a>
+    @endforeach
+  </div>
 
 @endsection
 
@@ -1880,6 +1997,9 @@ If you're already a member, welcome back!
         tempComment = null;
         tempReply = null;
 
+        var publicUrl = '{{ asset("") }}';
+        var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+
         setSidebarLoadInterval();
 
         recommendFriendAJAX = false;
@@ -1913,7 +2033,8 @@ If you're already a member, welcome back!
                                       .append(
                                         $('<div>').addClass('msgImgcont')
                                             .append(
-                                              $('<img>').attr('src', f.friend.user_detail.profile_picture ? BASE_URL+'/'+ f.friend.user_detail.profile_picture : defaultProfilePic )
+                                              //$('<img>').attr('src', f.friend.user_detail.profile_picture ? BASE_URL+'/'+ f.friend.user_detail.profile_picture : defaultProfilePic )
+                                               $('<img>').attr('src', getImage(f.friend.user_detail.profile_picture, f.friend.user_detail.user_id, 5050) )
                                               )
                                         )
                                       .append(
@@ -1945,6 +2066,17 @@ If you're already a member, welcome back!
         
 
       });
+
+    /********************** START GET IMAGE ******************************************************************************/
+    function getImage(profile_picture ,user_id, size) {
+
+      if(size === null) {
+          return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+      }
+       return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+    }
+
+  /********************** END GET IMAGE ******************************************************************************/
 
       $('#recommendBtn').on('click', function(){
 
@@ -2020,236 +2152,6 @@ If you're already a member, welcome back!
 
           
           });
-
-  /*  socket.on('connect', function(){
-      room = 'post_comment_{{$post->id}}';
-      socket.emit('connect_post_comment', {room : room , user : '{{ isset($user->email) ?$user->email : "Guest" }}'});
-    });
-
-    socket.on('post_comment_connected', function(){
-      post_comment_connected = true;
-      allowToComment(); 
-    });
-
-    socket.on('login_success', function(){
-      login_success = true;
-      allowToComment(); 
-    });
-
-    function allowToComment(){
-
-      if(login_success && post_comment_connected)
-      {
-        $('#submitCommentTextarea').removeAttr('disabled');
-        $('#submitCommentForm').removeAttr('disabled');
-      }
-
-    }
-
-    function Comment(){
-      this.id,
-      this.content,
-      this.user_id,
-      this.content_id,
-      this.email,
-      this.temporaryComment,
-      this.theComment,
-      this.profile_picture;
-    }
-
-    Comment.prototype.makeTemporaryComment = function(){
-
-      this.temporaryComment = $('<li></li>').addClass('temporary')
-            .append(
-              $('<div></div>').addClass('commentlist')
-              .append(
-                $('<div></div>').addClass('comment-parent')
-                .append(
-                  $('<img>').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic).addClass('avatar')
-                )
-                .append(
-                  $('<div></div>').addClass('comment-info').text(this.email)
-                )
-                .append(
-                  $('<div></div>').addClass('comment-content').text(this.content)
-                )
-              )
-            );
-
-      return this.temporaryComment;
-    };
-
-    Comment.prototype.maketheComment = function(){
-
-      var reply_form = '';
-
-      if(user)
-      {
-        reply_form = $('<form></form>').addClass('reply-form').attr('action', '{{ url("add_post_reply") }}').attr('method', 'POST').css('display', 'none')
-                .append( $('<input>').attr('type', 'hidden').attr('name', 'parent').val(this.id) )
-                .append( $('<input>').attr('type', 'hidden').attr('name', 'user_id').val(user.id) )
-                .append( $('<input>').attr('type', 'hidden').attr('name', 'content_id').val(this.content_id) )
-                .append( $('<input>').attr('type', 'hidden').attr('name', 'email').val(user.email) )
-                .append(
-                  $('<div></div>').addClass('form-group')
-                      .append(
-                        $('<textarea>').addClass('form-control').attr('rows', 4).attr('placeholder', 'Write a reply').attr('name', 'content')
-                        )
-                   ).append( 
-                  $('<div></div>').addClass('form-group')
-                      .append(
-                        $('<button type="submit" class="button_example" value="submit">').text('Submit')
-                        )
-                   );
-      }
-        this.theComment = 
-                $('<li></li>')
-                .append(
-                  $('<div></div>').addClass('commentlist')
-                  .append(
-                    $('<div></div>').addClass('comment-parent').attr('id', 'comment-'+this.id)
-                    .append(
-                      $('<img>').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic).addClass('avatar')
-                    )
-                    .append(
-                      $('<div></div>').addClass('comment-info').text(this.email)
-                    )
-                    .append(
-                      $('<div></div>').addClass('comment-content').text(this.content)
-                    )
-                    .append(
-                      $('<a href="javascript:;">').addClass('reply_btn').text('Reply')
-                    )
-                    .append(
-                      $('<div"></div>').addClass('reply-list').attr('id', 'reply-to-'+this.id)
-                    )
-                    .append(
-                      reply_form
-                    )
-                  )
-                );
-              
-      return this.theComment;
-    };
-
-    socket.on('push_post_comment', function(response){
-
-      console.log('push_post_comment');
-      console.log(response);
-
-      $('#no-comments').remove();
-
-      comment = new Comment();
-
-      comment.id = response.id;
-      comment.user_id = response.user_id;
-      comment.content_id = response.content_id;
-      comment.email = response.email;
-      comment.content = response.content;
-      comment.profile_picture = response.user.user_detail.profile_picture;
-
-      if($('#comment-'+comment.id).length == 0)
-      {
-        $('#commentList ul').append(comment.maketheComment());
-        $(document).trigger('adjustHeight');
-      }
-
-    });
-
-
-    socket.on('push_post_reply', function(response){
-
-      reply = new Reply();
-
-      reply.id = response.id;
-      reply.user_id = response.user_id;
-      reply.content = response.content;
-      reply.content_id = response.content_id;
-      reply.email = response.email;
-      reply.parent = response.parent;
-      reply.profile_picture = response.profile_picture;
-
-      if($('#reply-'+reply.id).length == 0)
-      {
-        $('#reply-to-'+reply.parent).append(reply.maketheReply());
-        $(document).trigger('adjustHeight');
-      }
-
-    });
-
-      
-
-    $('#commentForm').on('submit', function(e){
-
-      e.preventDefault();
-
-      if(tempComment == null){
-
-        comment = new Comment();
-
-        comment.user_id = $(this).find('[name="user_id"]').val() || false;
-        comment.content = $(this).find('[name="content"]').val();
-        comment.content_id = $(this).find('[name="content_id"]').val() || false;
-        comment.email = $(this).find('[name="email"]').val() || false;
-        comment.profile_picture = userImage;
-        _token = $(this).find('[name="_token"]').val();
-        actionUrl = $(this).attr('action');
-
-        if(comment.content)
-        {
-
-          tempComment = comment.makeTemporaryComment();
-
-          $('#commentList ul').append(tempComment);
-          $('#no-comments').remove();              
-
-          if(comment.user_id && comment.user_id && comment.email)
-          {
-
-            $(this).find('[name="content"]').val('');
-
-            $.ajax({
-              type : 'post',
-              data : { _token : _token , content : comment.content, user_id : comment.user_id, email : comment.email , content_id : comment.content_id },
-              url : actionUrl,
-              dataType : 'json',
-              success : function(response)
-              {
-
-                console.log(response);
-                if(response)
-                {
-                  comment.id = response.id;
-                  $(comment.temporaryComment).replaceWith(comment.maketheComment());
-                  $(document).trigger('adjustHeight');
-                  tempComment = null;
-                  socket.emit('post_comment', response);
-                }
-              },
-              error : function(res)
-              {
-                console.log(res.responseText);
-              }
-            });
-
-
-          }
-          else
-          {
-            alert('You must login first!');
-          }
-
-        }
-        else{
-          alert('Please write something!');
-        }
-
-      }
-
-      return false;
-      
-    });*/
-
 
     $('.gameExp').on('click','#addToFavorite', function(){
 
@@ -2397,120 +2299,6 @@ If you're already a member, welcome back!
         }
   });
 
-
- /*   $(document).on('click', '#commentList .reply_btn', function(){
-
-      if(user && post_comment_connected && login_success)
-      {
-        form = $(this).parent().find('.reply-form');
-
-        $('#commentList').find('.reply-form').not(form).slideUp();
-
-        $(form).slideToggle('slow', function(){
-          $(document).trigger('adjustHeight');
-        });
-      }
-
-    });
-
-
-    function Reply(){
-      this.id, 
-      this.user_id, 
-      this.content, 
-      this.content_id, 
-      this.email, 
-      this.parent, 
-      this.temporaryReply, 
-      this.theReply, 
-      this.profile_picture;
-    }
-
-    Reply.prototype.makeTemporaryReply = function(){
-
-       this.temporaryReply = $('<div></div>').addClass('replies-parent').addClass('temporary')
-             .append(
-                $('<img>').addClass('avatar').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic)
-                )
-              .append($('<div></div>').addClass('reply-info').text(this.email))
-              .append($('<div></div>').addClass('reply-content').text(this.content));
-
-      return this.temporaryReply;
-    }
-
-    Reply.prototype.maketheReply = function(){
-
-        this.theReply = $('<div></div>').addClass('replies-parent').attr('id', 'reply-'+this.id)
-              .append(
-                $('<img>').addClass('avatar').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic)
-                )
-              .append($('<div></div>').addClass('reply-info').text(this.email))
-              .append($('<div></div>').addClass('reply-content').text(this.content));
-
-      return this.theReply;
-    }
-
-    $('#commentList').on('submit', '.reply-form', function(e){
-
-      e.preventDefault();
-      if(tempReply == null){
-
-            reply = new Reply();
-
-            reply.user_id = $(this).find('[name="user_id"]').val() || false;
-            reply.content = $(this).find('[name="content"]').val();
-            reply.content_id = $(this).find('[name="content_id"]').val() || false;
-            reply.email = $(this).find('[name="email"]').val() || false;
-            _token = $('meta[name="csrf-token"]').attr('content');
-            reply.profile_picture = userImage;
-            reply.parent = $(this).find('[name="parent"]').val();
-
-            actionUrl = $(this).attr('action');
-
-            if(reply.content){
-
-              $(this).find('[name="content"]').val('');
-
-                tempReply = reply.makeTemporaryReply();
-                $('#reply-to-'+reply.parent).append(tempReply);
-                $(document).trigger('adjustHeight');
-                $.ajax({
-                    type : 'post',
-                    data : {  user_id : reply.user_id, content : reply.content, content_id : reply.content_id, email : reply.email, _token : CSRF_TOKEN, parent : reply.parent },
-                    url : actionUrl,
-                    dataType : 'json',
-                    success : function(response){
-
-                      console.log('maketheReply');
-                      console.log(response);
-                      if(response){
-
-                            reply.id = response.id;
-                            response.profile_picture = userImage;
-                            
-                            $(reply.temporaryReply).replaceWith(reply.maketheReply());
-                            $(document).trigger('adjustHeight');
-                              tempReply = null;
-
-                              
-                              socket.emit('post_reply', response);
-
-                      }
-                    },error : function(res){
-                      console.log(res.responseText);
-                    }
-                  });
-
-
-            }else{
-              alert('Please write something!');
-            }
-
-      }
-      return false;
-
-    });*/
-
     $('.postcontent').on('click','.casino_yes',function(e){
 
       e.preventDefault();
@@ -2559,9 +2347,9 @@ If you're already a member, welcome back!
       banner_type = 1;
 
       $.ajax({
-        type: 'post',
+        type: 'get',
         url: "{{url('casino/ajax/get_article_banner')}}",
-        data: {_token: CSRF_TOKEN,'articleBannerRatio' : articleBannerRatio,'total_image' : total_image,'banner_type' : banner_type}, 
+        data: {'articleBannerRatio' : articleBannerRatio,'total_image' : total_image,'banner_type' : banner_type,'get_casino_category' : get_casino_category}, 
         success: function(response)
         {
           var parsed = JSON.parse(response),
@@ -2585,80 +2373,6 @@ If you're already a member, welcome back!
       });
     }
     //END Article Banner
-
-    // Random Game
-    $('#random_game').on('click',function(e){
-      e.preventDefault();
-      $('#random_game_image').attr('src','http://susanwins.com/uploads/66058_default.gif').addClass('w48');
-
-      setTimeout(function(){
-        location.href = '{{url("")}}/{{$random_single_page->slug}}';
-      }, 2000);
-    });
-    // END Random Game
-
-    // OLD REELS
-    // var images4 = 
-    // [
-    // '<div class="slotwrapper"><div class="details"><div class="totalcontainer" style="top: 57%;"><div class="innertotalcontainer" style="width:{{ $widget_ratings->music_sounds / 10 * 100 }}%;"><img src="http://susanwins.com/uploads/56148_stars.jpg" /></div></div><img src="http://susanwins.com/uploads/19401_music.jpg"></div></div>'
-    // ];
-
-    // var images5 = 
-    // [
-    // '<div class="slotwrapper"><div class="details"><div class="totalcontainer" style="top: 53%;"><div class="innertotalcontainer" style="width:{{$widget_ratings->long_term_play / 10 * 100}}%;"><img src="http://susanwins.com/uploads/56148_stars.jpg" /></div></div><img src="http://susanwins.com/uploads/80687_longterm.jpg"></div></div>'
-    // ];
-
-    // var images6 = 
-    // [
-    // '<div class="slotwrapper"><div class="details"><div class="totalcontainer" style="top: 50%;"><div class="innertotalcontainer" style="width:{{$widget_ratings->fun_rate / 10 * 100}}%;"><img src="http://susanwins.com/uploads/56148_stars.jpg" /></div></div><img src="http://susanwins.com/uploads/81613_funrating.jpg"></div></div>'
-    // ];
-
-    // var images7 = 
-    // [
-    // '<div class="slotwrapper"><div class="details"><div class="totalcontainer" style="top: 51%;"><div class="innertotalcontainer" style="width:{{$widget_ratings->graphics / 10 * 100}}%;"><img src="http://susanwins.com/uploads/56148_stars.jpg" /></div></div><img src="http://susanwins.com/uploads/47931_graphic.jpg"></div></div>'
-    // ];
-
-    // $("#winwinwin3").click(function(){
-
-    //   if(header_counter == 0)
-    //   {
-
-    //     images4.push('{!! $casino_lists[0] !!}');
-    //     images5.push('{!! $casino_lists[1] !!}');
-    //     images6.push('{!! $casino_lists[2] !!}');
-    //     images7.push('{!! $casino_lists[3] !!}');
-
-    //     $('.featimg .replaceme').fadeOut(300, function() {
-       
-
-    //     $('.featimg .replaceme').attr("src","http://susanwins.com/uploads/64878_click-header.png");
-    //     $('.featimg .replaceme').fadeIn(100);
-
-    //      $('.hidethenshow').css({'display':'block'}).addClass('animated bounceIn');
-
-    //        function showme(){
-    //            $('.hidethenshowtwo').css({'display':'block'}).addClass('animated bounceIn');
-    //         }
-    //         setTimeout(showme, 500);
-
-    //     });
-
-    //   }
-    //   ezslot15.win();
-    //   ezslot16.win();
-    //   ezslot17.win();
-    //   ezslot18.win();
-
-    //   header_counter++;
-
-    // });
-
-    // var ezslot15 = new EZSlots("ezslots15",{"reelCount":1,"winningSet":[1,1,1,1],"symbols":images4,"height":255,"width":169});
-    // var ezslot16 = new EZSlots("ezslots16",{"reelCount":1,"winningSet":[1,1,1,1],"symbols":images5,"height":255,"width":169});
-    // var ezslot17 = new EZSlots("ezslots17",{"reelCount":1,"winningSet":[1,1,1,1],"symbols":images6,"height":255,"width":169});
-    // var ezslot18 = new EZSlots("ezslots18",{"reelCount":1,"winningSet":[1,1,1,1],"symbols":images7,"height":255,"width":169});
-
-    //END REELS
 
     // SIDEBAR AJAX
     function updateSidebarHeight(){
@@ -2871,14 +2585,8 @@ If you're already a member, welcome back!
         else
         {
 
-          sideBarAjaxDone = false;
-          sideBarAJAX().done(function(response){
-
-            try {
-                  $.parseJSON(response);
-            } catch(error) {
-                location.reload();
-            }
+            sideBarAjaxDone = false;
+            sideBarAJAX().done(function(response){
 
             var parsed = JSON.parse(response);
 
@@ -2960,9 +2668,9 @@ If you're already a member, welcome back!
 
       (function throttle(){
         $.ajax({
-          type: 'post',
+          type: 'get',
           url: "{{url('home/ajax_get_ads_posts_init')}}",
-          data: {_token: CSRF_TOKEN,'posts_category_id' : posts_category_id,'posts_id' : post_id, 'contentOffset' :contentOffset, random_sidebar_order_number : random_sidebar_order_number },
+          data: {'posts_category_id' : posts_category_id,'posts_id' : post_id, 'contentOffset' :contentOffset, random_sidebar_order_number : random_sidebar_order_number,'get_casino_category' : get_casino_category },
           success : dfr.resolve, 
           error : function(xhr)
           {
@@ -3129,7 +2837,7 @@ $('.postcontent img').css('display','inline');
 
   $(document).ready(function(){
 
-      $("iframe[src^='//www.youtube.com']").parent().wrap("<div class='yt_container'></div>");
+    $("iframe[src^='//www.youtube.com']").parent().wrap("<div class='yt_container'></div>");
 
     function getFrameID(id) {
 
@@ -3246,17 +2954,16 @@ $('.postcontent img').css('display','inline');
             // console.log('this is a state');
             // console.log(event.target.F.videoData.video_id);
             // var new_src = '//www.youtube.com/embed/'+event.target.F.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
-            // $('iframe').attr('src',new_src).parent().html("<div style='position: relative; z-index:999;'><img src='{{url('uploads')}}/{{$yt_image_url}}'></div>");
           }
           else if (state === 0) 
           {
+            var watermelon_id = event.target.getVideoData();
+            var get_this_casino_for_yt = $("#casino_after_youtube").html();
             // var iframe_id_men = event.target.f.id;
-            // $("#"+iframe_id_men).parent().html("<div style='position: relative; z-index:999;'><img src='{{url('uploads')}}/{{$yt_image_url}}'></div>");
-            var new_src = '//www.youtube.com/embed/'+event.target.D.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
-            // console.log('samoka this guy 2');
-            // console.log(new_src);
-            $('iframe[src="'+new_src+'"]').parent().html("<div style='position: relative; z-index:999;'><a href='{{$yt_image_link}}'><img class='not_count' src='{{url('uploads')}}/{{$yt_image_url}}'></a></div>");
-            // <div style='position: relative; z-index:999;'><a href='{{$yt_image_link}}'><img src='{{url('uploads')}}/{{$yt_image_url}}'></a></div>
+            // var new_src = '//www.youtube.com/embed/'+event.target.D.videoData.video_id+'?enablejsapi=1&rel=0&controls=1';
+            var new_src = '//www.youtube.com/embed/'+watermelon_id.video_id+'?enablejsapi=1&rel=0&controls=1';
+            $('iframe[src="'+new_src+'"]').parent().html(get_this_casino_for_yt);
+
           }
         }
         //END ONPLAYERSTATECHANGE

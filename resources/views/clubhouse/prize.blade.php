@@ -14,7 +14,13 @@
 @section('background-content')
 
 <style type="text/css">
-
+body{
+  height: 100%;
+  width: 100%;
+}
+.cd-tour-nav{
+  display: none;
+}
 .roulette {
   position: absolute;
   margin: 0 auto;
@@ -260,7 +266,7 @@
 	height: 100%;
 	width: 100%;
 	z-index: 99;
-	display: none;
+/*	display: none;*/
 	pointer-events: none;
 }
 @media(min-width: 1440px){
@@ -281,8 +287,8 @@
     left: 892px;
   }
   .entercode {    
-    top: 436px;
-    left: 868px;
+    top: 439px;
+    left: 881px;
    }
 }
 
@@ -294,18 +300,18 @@
   }
   .roulette, .shadow{
    left: 413px;
-   top: 117px;
+   top: 90px;
   }
   .spinner{
-	top: 294px;
+	top: 267px;
 	left: 590px;
   }
   .entercode{
-	top: 329px;
-	left: 569px;
+	    top: 305px;
+    left: 576px;
   }
   .stand {
-    top: 695px;
+    top: 636px;
     left: 515px;
   }
 }
@@ -319,6 +325,8 @@
 }
 
 </style>
+
+<canvas id="confetti" width="1" height="1" style="display:none;"></canvas>
 
 <div class="roomNavIcons">
   <ul>
@@ -340,28 +348,15 @@
     <li class="cd-single-step no-pulse">
 
       <div class="cd-more-info">
-        <h2> Prizeroom page </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+        <h2> Susan's Prize Room! </h2>
+        <p> If you're lucky enough to have a prize code you can put it in here! There are a few ways to get prize codes: 
+          <ul>
+            <li> You'll get your first prize code in the welcome pack - make sure to fill out your details in your profile room so we can send it to you </li>
+            <li> You'll also get prize codes when you participate in the Chat Lounges - My chat hosts love to give them out! </li>
+            <li> The last way to get prize codes is by referring friends to my club! The more the merrier! </li>
+          </ul>
+        </p>
         <img src="img/step-1.png" alt="step 1">
-      </div>
-    </li> <!-- .cd-single-step -->
-    <li class="cd-single-step">
-      <span>Step 1</span>
-
-      <div class="cd-more-info left">
-        <h2> Your Diary </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
-        <img src="img/step-1.png" alt="step 1">
-      </div>
-    </li> <!-- .cd-single-step -->
-
-    <li class="cd-single-step">
-      <span>Step 2</span>
-
-      <div class="cd-more-info right">
-        <h2>Step Number 2</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia quasi in quisquam.</p>
-        <img src="img/step-2.png" alt="step 2">
       </div>
     </li> <!-- .cd-single-step -->
 
@@ -369,10 +364,10 @@
 
   @endif
 
-	<canvas id="confetti" width="1" height="1" style="display:none;"></canvas>
+	
 
 	<div class="bgwrapper">
-			<img id="roombg" src="{{url('images/clubhouse')}}/prizeroom.png" alt="">		
+			<img id="roombg" src="{{url('images/clubhouse')}}/prizeroom.jpg" alt="">		
 				 
 				<div class="entercode">
 					<span class="error"> Code is Invalid </span>
@@ -491,7 +486,7 @@
 					      $.ajax({
 					      	url : '{{ url("prize/claimPrize") }}',
 					      	type : 'POST',
-					      	data : { prizeCode_id : prizeCode.id, _token : CSRF_TOKEN, price : price, mobile : true },
+					      	data : { prizeCode_id : prizeCode.id, _token : CSRF_TOKEN, price : price },
 					      	dataType : 'json',
 					      	success : function(result){
 					      		console.log('yeah');
@@ -634,30 +629,38 @@
 						return new Vector2(0, 0);
 					}
 				}
+
 				Vector2.Lerp = function(_vec0, _vec1, _t) {
 					return new Vector2((_vec1.x - _vec0.x) * _t + _vec0.x, (_vec1.y - _vec0.y) * _t + _vec0.y);
 				}
+
 				Vector2.Distance = function(_vec0, _vec1) {
 					return sqrt(Vector2.SqrDistance(_vec0, _vec1));
 				}
+
 				Vector2.SqrDistance = function(_vec0, _vec1) {
 					var x = _vec0.x - _vec1.x;
 					var y = _vec0.y - _vec1.y;
 					return (x * x + y * y + z * z);
 				}
+
 				Vector2.Scale = function(_vec0, _vec1) {
 					return new Vector2(_vec0.x * _vec1.x, _vec0.y * _vec1.y);
 				}
+
 				Vector2.Min = function(_vec0, _vec1) {
 					return new Vector2(Math.min(_vec0.x, _vec1.x), Math.min(_vec0.y, _vec1.y));
 				}
+
 				Vector2.Max = function(_vec0, _vec1) {
 					return new Vector2(Math.max(_vec0.x, _vec1.x), Math.max(_vec0.y, _vec1.y));
 				}
+
 				Vector2.ClampMagnitude = function(_vec0, _len) {
 					var vecNorm = _vec0.Normalized;
 					return new Vector2(vecNorm.x * _len, vecNorm.y * _len);
 				}
+
 				Vector2.Sub = function(_vec0, _vec1) {
 					return new Vector2(_vec0.x - _vec1.x, _vec0.y - _vec1.y, _vec0.z - _vec1.z);
 				}
@@ -737,6 +740,7 @@
 						_g.fill();
 					}
 				}
+
 				ConfettiPaper.bounds = new Vector2(0, 0);
 
 				function ConfettiRibbon(_x, _y, _count, _dist, _thickness, _angle, _mass, _drag) {

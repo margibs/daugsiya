@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Session;
 use App\User_Detail;
+use Input;
 
 class AuthController extends Controller
 {
@@ -61,10 +62,16 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'email' => 'required|email|max:255|unique:users',
+            'custom_Password' => 'required|min:6',
+            'name_(awf_first)' => 'required|min:2',
+            'name_(awf_last)' => 'required|min:2',
+        ]);
+        /*return Validator::make($data, [
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
             'firstname' => 'required|min:2',
             'lastname' => 'required|min:2',
-        ]);
+        ]);*/
     }
 
     /**
@@ -84,24 +91,91 @@ class AuthController extends Controller
 
     public function signup(Request $request){
 
-         $validator = $this->signupValidator($request->all());
+        $validator = $this->signupValidator($request->all());
 
         if ($validator->fails()) {
 
             return redirect('signup')->withErrors($validator)
                         ->withInput();
-        }
+        } 
 
-        Auth::login($this->create($request->all()));
+        //dd($request->Input('custom_Password'));
+        //dd($request->all());
+        $data = [
+                'password' => $request->Input('custom_Password'),
+                'email' => $request->Input('email'),
+                'firstname' =>  $request->Input('name_(awf_first)'),
+                'lastname' =>  $request->Input('name_(awf_last)')
+            ];
+
+      /*  $data = [
+                'password' => $request->Input('password'),
+                'email' => $request->Input('email'),
+                'firstname' =>  $request->Input('firstname'),
+                'lastname' =>  $request->Input('lastname')
+            ];*/
+
+
+
+      Auth::login($this->create($data));
+
+       /*$user_detail = new User_Detail();
+        $user_detail->firstname = $request->firstname;
+        $user_detail->lastname = $request->lastname;*/
 
         $user_detail = new User_Detail();
-        $user_detail->firstname = $request->firstname;
-        $user_detail->lastname = $request->lastname;
+        $user_detail->firstname = $request->Input('name_(awf_first)');
+        $user_detail->lastname = $request->Input('name_(awf_last)');
 
         $user = Auth::user();
+ 
+       $user->user_detail()->save($user_detail);
+     
+     
+       return redirect('clubhouse/home');
+        //return redirect('https://www.aweber.com/scripts/addlead.pl');
 
-        $user->user_detail()->save($user_detail);
-
-        return redirect('clubhouse/home');
     }
+
+    public function userSignup(Request $request) {
+
+        $validator = $this->signupValidator($request->all());
+
+        if ($validator->fails()) {
+
+           /* return redirect('signup')->withErrors($validator)
+                        ->withInput();*/
+
+                         return json_encode($validator);
+        }
+
+
+        $data = [
+                'password' => $request->Input('password'),
+                'email' => $request->Input('email'),
+                'firstname' =>  $request->Input('firstname'),
+                'lastname' =>  $request->Input('lastname')
+            ];
+
+      Auth::login($this->create($data)); 
+
+        $user_detail = new User_Detail();
+        $user_detail->firstname = $request->Input('firstname');
+        $user_detail->lastname = $request->Input('lastname');
+
+        $user = Auth::user();
+ 
+       $user->user_detail()->save($user_detail);
+     
+    
+      $data = [
+        'error' => false,
+        'status' => 200,
+        'data' => $user,
+      ];
+      return json_encode($data);
+
+       /*return redirect('clubhouse/home');*/
+    }
+
 }

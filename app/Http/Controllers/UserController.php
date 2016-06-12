@@ -32,6 +32,7 @@ use Jenssegers\Agent\Agent as MediumAgent;
 use Yajra\Datatables\Datatables;
 
 use Input;
+use Mail;
 
 
 class UserController extends Controller
@@ -88,6 +89,10 @@ class UserController extends Controller
                         'users.updated_at'
                         )->get();
         return Datatables::of($users)
+                ->addColumn('action', function ($users) {
+                                    return 
+                                    "<a href='".url("admin/user/edit")."/".$users->id."' ><i class='fa fa-pencil'></i></a>";
+                                })
                 ->editColumn('created_at', '{!! $created_at->diffForHumans() !!}')
                 ->editColumn('updated_at', '{!! $created_at->diffForHumans() !!}')
                 ->make(true);
@@ -205,8 +210,8 @@ class UserController extends Controller
     protected function userDetailsValidator(array $data)
     {
         return Validator::make($data, [
-            'firstname' => 'required|min:2|max:80|alpha',
-            'lastname' => 'required|min:2|max:80|alpha',
+            'firstname' => 'required|min:2|max:80',
+            'lastname' => 'required|min:2|max:80',
             'address' => 'max:100',
             'phone_no' => 'integer'
         ]);
@@ -484,7 +489,6 @@ class UserController extends Controller
     }
 
     public function userDetails(Request $request){
-
 
         $validator = $this->userDetailsValidator($request->all());
 
@@ -867,5 +871,140 @@ class UserController extends Controller
  
 
     }    
+
+     public function emailSend() {
+        
+        $this->_email = Input::get('email');
+        if($this->_email == '') {
+            return view('clubhouse.login');
+        }
+
+        
+        $id = User::findEmail($this->_email);
+        if($id) 
+        {
+
+            $result = Auth::loginUsingId($id);
+            if($result) {
+                //update email_confirm and welcome_package_sent users table
+                $user = User::findOrFail($id);
+                $user->email_confirm = 1;
+                $user->welcome_package_sent = 1;
+                $user->save();
+                
+                //sending email
+              /*  $data = array('name' => "This is Susan Message");
+                Mail::send('emails.welcome', $data, function ($message) {
+                    $message->from('susan@susanwins.com', 'Welcome to Susan fdsaf ');
+                    $message->to('gso8412@gmail.com')->subject('Ambot lang!');
+                    //$message->to($this->_email)->subject('Ambot lang!');
+                });*/
+                return redirect('clubhouse/home');
+
+            }
+            else {
+                 return view('clubhouse.login');
+            }      
+        }
+        //return to login
+        else 
+        {
+            return view('clubhouse.login');
+        }
+    }
+
+     public function sendEmailAweber() {
+         
+        $email = Auth::user()->email;
+        $firstname = Auth::user()->user_detail->firstname;
+        $lastname = Auth::user()->user_detail->lastname;
+        $full_name = $firstname .' '. $lastname;
+        $confirme_value = Auth::user()->email_confirm;
+
+        if($confirme_value == 1) {
+            $data = [
+                    'confirme_value' => $confirme_value
+                ];
+            return json_encode($data);
+
+        }
+        else {
+
+                $ch = curl_init('http://www.aweber.com/scripts/addlead.pl');
+               $fields_string = '';
+               $fields = array( 
+                               'name' => urlencode($full_name), 
+                               'email' => urlencode($email), 
+                               'meta_web_form_id' => '2089372002', 
+                               'meta_split_id' => '', 
+                               'listname' => 'awlist4254968', 
+                               'redirect' => '"http://susanwins.com/', 
+                               'meta_redirect_onlist' => 'http://susanwins.com/', 
+                               'meta_adtracking' => 'Susan_Signup', 
+                               'meta_message' => '1'
+                               ); 
+               foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; } 
+               rtrim($fields_string,'&'); 
+
+                curl_setopt($ch,CURLOPT_POST,count($fields)); 
+               curl_setopt($ch,CURLOPT_POSTFIELDS,$fields_string); 
+               curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+               $returned = curl_exec($ch); 
+
+               $data = [
+                    'email' => $email,
+                    'full_name' => $full_name,
+                    'data' => $returned 
+                ];    
+            return json_encode($data);
+
+        }
+
+
+
+     
+    } 
+
+    public function enterAddress() {
+
+
+         $user_detail_id = Auth::user()->user_detail->id;
+
+        $user = User::find(Auth::user()->id);
+        $user->welcome_package_address = Input::get('address');
+        $user->welcome_package_sent = 1;
+        $user->save();
+
+        $user_detail = User_Detail::find($user_detail_id);
+        $user_detail->address = Input::get('address');
+        $user_detail->save();
+
+                
+        $data = [
+                'test' => 'Hello World',
+                'address' => Input::get('address'),
+                'user' => $user->id,
+                'user_detail_id' => $user_detail_id
+            ];
+
+        return json_encode($data);
+    }
+
+    public function ignore() {
+
+        $user = User::find(Auth::user()->id);
+        $user->ignore_welcome_package = 1;
+        $user->save();
+        
+        $data = ['message' => 'success', 'user' => $user];
+        
+        return json_encode($data);
+    }
+
+    public function editUser() {
+        //return $id = Input::get('id');
+        return "Hello World";
+    }
+
 
 }

@@ -393,14 +393,14 @@
                         @foreach($chatrooms[0]->room_messages as $msg)
                           <li data-user="{{ $msg->user->user_detail->user_id }}"> 
                                 <a href="javascript:;" data-target="#friendProfile" class="subModalToggle viewFriendProfile">
-                                    @if($msg->user->user_detail->profile_picture == "")
-                                         <img src="{{  asset('/user_uploads/default_image/default_01.png') }}" />
-                                    @else
-                                         <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/user_uploads/user_'.$msg->user->user_detail->user_id.'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" />
-                                    @endif
-                                   
+                                    
+                                    <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" />
                                      </a>
-                                    <p> {{ $msg->message }} </p>
+                                   <!--  <p> {{ $msg->message }} </p> -->
+                                     <em>{{ $msg->user->user_detail->fullName() }}</em>
+                                  <!--   <span class="timestamp" data-datetime="{{ $msg->created_at }}"><span class="livetime"></span></span> -->
+                                      <em class="timestamp" data-datetime="{{ $msg->created_at }}"><em class="livetime"></em></em>
+                                     <p>{!! str_contains($msg->message, '.com') ? "<a target='_blank' href=' $msg->message ' style='text-decoration: none;'>$msg->message</a>"  : $msg->message !!} </p>
 
                                
                                 </li>
@@ -548,6 +548,8 @@
      var messageUrl = '{{ url("message") }}';
      var notifyUrl  = '{{ url("notification") }}';
 		var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+
+   FULL_NAME = "{{ Auth::user()->user_detail->fullName() ? Auth::user()->user_detail->fullName() : ''  }}";
 
        $('#messageContent').animate({
               scrollTop: $('#messageContent')[0].scrollHeight
@@ -841,6 +843,24 @@
 
     });
 
+   function messageChecker(message) {
+      result = message.indexOf(".com");
+     // image = message.indexOf(".jpg");
+      if(result != -1) {
+          console.log(true);
+          console.log(message);
+          console.log(result);
+          return "<p><a target='_blank' href='"+message+"' style='text-decoration: none;'>"+message+"</a></p>";
+      }
+      else {
+          console.log(false);
+          console.log(message);
+          console.log(result);
+          return "<p>"+message+"</p>";
+      }
+     
+    }
+
 	function changeChatroom(data){
 
     console.log('changeChatroom');
@@ -874,12 +894,17 @@
               .append(
                 $('<a href="javascript:;">').attr('data-target', '#friendProfile').addClass('subModalToggle viewFriendProfile')
                   .append(
-                    $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+this.user.user_detail.user_id+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
+                    $('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/'+this.user.user_detail.profile_picture : defaultProfilePic )
                   )
                 )
-		 					
+             
+              .append(
+                $('<em>').text(FULL_NAME)
+                )
+              .append($('<em></em>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))
 		 					.append(
-		 						$('<p>').text(this.message)
+		 						//$('<p>').text(this.message)
+                messageChecker(this.message)
 		 						)
 	 					)
 	 			});
@@ -933,9 +958,15 @@
             .append(
               $('<a href="javascript:;">').attr('data-target', '#friendProfile').addClass('subModalToggle viewFriendProfile')
                 .append(
-                  $('<img>').attr('src', userImage ? publicUrl+'/user_uploads/user_'+userId+'/'+userImage : defaultProfilePic )
+                  $('<img>').attr('src', userImage ? publicUrl+'/'+userImage : defaultProfilePic )
                 )
-              )				
+              )
+
+            	
+              .append(
+                $('<em>').text(FULL_NAME)
+                )
+              .append($('<em></em>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))		
 	 					.append(
 	 						$('<p>').text(message)
 	 						)
@@ -975,9 +1006,15 @@
             .append(
               $('<a href="javascript:;">').attr('data-target', '#friendProfile').addClass('subModalToggle viewFriendProfile')
                 .append(
-                  $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_id+'/'+data.user.profile_picture : defaultProfilePic )
+                  $('<img>').attr('src', data.user.profile_picture ? publicUrl+'/'+data.user.profile_picture : defaultProfilePic )
                 )
               )
+
+           
+              .append(
+                $('<em>').text(FULL_NAME)
+                )
+              .append($('<em></em>').addClass('timestamp').livestamp(moment.tz(data.created_at, timeZone).format() ))
 	 					.append(
 	 						$('<p>').text(data.message)
 	 						)

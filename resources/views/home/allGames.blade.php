@@ -139,9 +139,7 @@ width: 39%;
 margin: 30px auto 20px auto;
 }
 
-.latestMain ul{
-    margin-top: 0;
-}
+
 .commentsReel{
 margin-left: -2px;
 position: absolute;
@@ -157,7 +155,6 @@ padding-top: 10px;
 margin: 0 auto;
 position: absolute;
 top: 64px;
-overflow: hidden;
 left: 13px;
 }
 .related .outer {
@@ -357,7 +354,7 @@ width: 30%;
 }
 .singleFooter{
 position: absolute;
-    bottom: 0;
+bottom: 0;
 width: 100.3%;
 }
 .singelTopReel{
@@ -472,7 +469,6 @@ z-index: 2;
 #wrapper{
 position: absolute;
 border: 0;
-width: 100%;
 top:524px;
 }
 #wrapper a {
@@ -648,20 +644,7 @@ width: 100%;
 border-radius: 5px;
 }
 
-.latestMain{
-background: none;
-box-shadow: 0 0 0 0;
-}
-.latestMain .gameList{
-margin: 3px 33px 20px 41px;
-}
-.latestMain .gameList .inner{
-background-repeat: repeat;
-}
 
-.commentRelativeBox{
-margin-top: -55px;
-}
 
 @media(max-width: 1199px){
 .right{
@@ -685,10 +668,7 @@ height: 200px;
 top: 569px;
 }
 .content{
-margin-top: 146px;
-}
-.latestMain .gameList{
-    margin: -2px 27px 20px 36px;	
+margin-top: 150px;
 }
 #wrapper{
 top: 427px;
@@ -745,28 +725,6 @@ width: 24%;
 .randombutton, .claimbutton{
 width: 50%;
 }
-#playedGame{
-right: 40px;
-}
-#playbig{
-right: 90px;  
-}
-#playbig a {
-width: 119px!important;
-height: 60px!important;
-}
-#playbig .button {
-font: 25px/0.9em 'Work Sans',sans-serif;
-}
-#playbig {
-top: -13px;
-}
-.latestMain .gameList {
-margin: -2px 20px 20px 30px;
-}
-.latestMain .gameList .inner{
-    padding: 10px 23px;	
-}
 }
 @media(max-width: 768px){
 .related .outer .inner ul li {
@@ -820,13 +778,20 @@ width: 23%;
 }
 
 }
-
-#planeMachine2, #planeMachine3, #planeMachine4, #planeMachine5{
-	height: 238px;
-	padding-top: 16px;
+.latestMain{
+background: none;
+box-shadow: 0 0 0 0;
+}
+.latestMain .gameList{
+margin: 3px 33px 20px 41px;
+}
+.latestMain .gameList .inner{
+background-repeat: repeat;
 }
 
-
+.related{
+  height: 1320px;
+}
 </style>
 
 
@@ -836,7 +801,7 @@ width: 23%;
       <div class="col-xs-24 col-lg-24 col-lg-24 col-lg-24">
        
 
-        <div class="col-xs-24 col-sm-19 col-md-19 col-lg-19 left" id="main">
+        <div class="col-xs-24 col-sm-19 col-md-19 col-lg-19 left">
 
           <img src="{{ url('images/responsive/singleTopReel.png') }}" class="singelTopReel" />
           <img src="{{ url('images/responsive/singlePostBG.png') }}" class="singlePostBG">
@@ -848,80 +813,35 @@ width: 23%;
           <div class="reels">
                   <div class="row no-gutter">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine2">
+                        <div id="planeMachine2" class="" style="overflow: hidden;height: 248px;width: 100%;">
                               <div class="text-center">
-                                <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
+                                <img src="http://susanwins.com/uploads/19401_music.jpg">                            
                               </div>
                           </div>
                     </div>          
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine3">
+                        <div id="planeMachine3" class="" style="overflow: hidden;height: 248px;width: 100%;">
                               <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                              </div>
-                              <div class="text-center">
-                                <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
+                                <img src="http://susanwins.com/uploads/80687_longterm.jpg">  
                               </div>
                           </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine4">
+                        <div id="planeMachine4" class="" style="overflow: hidden;height: 248px;width: 100%;">
                           <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
+                            <img src="http://susanwins.com/uploads/81613_funrating.jpg">         
                           </div>
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div id="planeMachine5">
+                        <div id="planeMachine5" class="" style="overflow: hidden;height: 248px;width: 100%;">
                           <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/54797_junglejimreels.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/20611_wildgamblerreel.jpg">
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/63331_we.jpg">                              
-                          </div>
-                          <div class="text-center">
-                            <img src="http://susanwins.com/uploads/72613_tales_of_krakow.jpg">
+                            <img src="http://susanwins.com/uploads/47931_graphic.jpg">
                           </div>
                         </div>
                     </div>
                   </div>
-                </div>
+          </div>
 
           <div id="wrapper">
               <div class="socbtn"> 
@@ -992,7 +912,26 @@ width: 23%;
 
                                   <div class="inner">
 
-                             
+                                          <div class="claimbutton">
+                                            <div class="inner">
+                                              <img src="http://susanwins.com/images/homepage/claim.png">
+                                            </div>
+                                          </div>
+
+                                          <div class="bottomCasinos">
+                                              <ul>
+                                                 
+                                                <li> <a href="3" target="_blank"> <img src="http://www.susanwins.com/uploads/13553_hardrock2.jpg"> </a> </li>
+                                                 
+                                                <li> <a href="1" target="_blank"> <img src="http://www.susanwins.com/uploads/13553_hardrock2.jpg"> </a> </li>
+                                                 
+                                                <li> <a href="4" target="_blank"> <img src="http://www.susanwins.com/uploads/13553_hardrock2.jpg"> </a> </li>
+                                                 
+                                                <li> <a href="2" target="_blank"> <img src="http://www.susanwins.com/uploads/13553_hardrock2.jpg"> </a> </li>
+                                                                                              </ul>
+                                          </div>
+                                          
+
 
                                       <h6> Top Categories </h6>
                                       <ul>
@@ -1049,127 +988,40 @@ width: 23%;
                                                                 
                                       <h6 style="border-top: 1px solid #F9EBCF;"> Recent Comments </h6>
                                    
-							  <div class="comments">
 
-              <div class="comment-section">
+                        
+                                      <div class="comments">
 
-                <div class="comments-list" id="commentList">
-                  @if(count($comments))
-                    <ul>
-                      @foreach($comments as $comment)
-                      <li>
+                                       <div class="comment-section">
+                                                
+                                                  <div class="comments-list" id="commentList">
+                                                                                                        <ul></ul>
+                                                            <p id="no-comments">No Comments yet.</p>
 
-                        <div class="commentlist">
 
-                          <div class="comment-parent">
+                                                                                                        
+                                                  </div>
 
-                            <img src="{{$comment->user->user_detail->profile_picture ? url('').'/user_uploads/user_'.$comment->user->user_detail->user_id.'/'.$comment->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
-                            <span class="timestamp" data-datetime="{{ $comment->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
-                            <div class="comment-info">{{ ucfirst($comment->user->user_detail->firstname) }} {{ucfirst($comment->user->user_detail->lastname)}}</div>
-                            <div class="comment-content">{!! $comment->content !!}</div>
-                            <a href="javascript:;" class="reply_btn">Reply</a>
 
-                            <div class="reply-list" id="reply-to-{{$comment->id}}">
-                              @foreach($comment->allgames_replies as $reply)
-                              <div class="replies-parent">
-                                <img src="{{$reply->user->user_detail->profile_picture ? url('').'/'.'user_uploads/user_'.$reply->user->user_detail->user_id.'/'.$reply->user->user_detail->profile_picture : url('').'/images/default_profile_picture.png' }}" class="avatar">
-                                <span class="timestamp" data-datetime="{{ $reply->created_at }}"><span class="livetime"></span> | <span class="readable_time"></span></span>
-                                <div class="reply-info">{{$reply->user->email}}</div>
-                                <div class="reply-content">{!! $reply->content !!}</div>
-                              </div>
-                              @endforeach
-                            </div>
 
-                            @if(isset($user))
-                            <form class="reply-form" action="{{ url('add_reply') }}" method="POST" style="display:none">
-                              <input type="hidden" name="parent" value="{{ $comment->id }}">
-                              <input type="hidden" name="user_id" value="{{ $user->id }}">
-                              <input type="hidden" name="content_id" value="0">
-                              <input type="hidden" name="email" value="{{ $user->email }}">
-
-                              <div class="form-group">
-                                <textarea class="form-control" rows="4" placeholder="Write a reply" name="content"></textarea>
-                              </div>
-                              <div class="form-group"></div>
-                              <div class="form-group">
-                                <button type="submit" class="button_example"  value="submit">Submit</button>
-                              </div>
-                            </form>
-                            @endif                                                              
-                          </div>
-                        </div>
-
-                      </li>         
-                      @endforeach
-                    </ul> 
-
-                  @else
-                    <ul></ul>
-                    <p id="no-comments">No Comments yet.</p>
-                  @endif 
-                </div>
-
-                <form class="comment-form" action="{{ url('add_comment') }}" method="POST" id="commentForm">
-                  {!! csrf_field() !!}
-                  <div class="form-group">
-                    <textarea class="form-control" rows="4" placeholder="Write a comment" name="content" id="submitCommentTextarea" disabled="disabled"></textarea>
-                  </div>
-                  <div class="form-group">
-
-                    @if(isset($user))
-                      <input type="hidden" name="user_id" value="{{ $user->id }}">
-                      <input type="hidden" name="content_id" value="0">
-                      <input type="hidden" name="email" value="{{ $user->email }}">
-                      <p style="display:none;">Signed in as {{ $user->email }}  
-                        <a href="{{ url('logout') }}?redirect={{ Request::url() }}"><i class="fa fa-sign-out"></i></a> 
-                      </p>
-                    @else
-                      <div class="rednotifbox">
-                        <a href="{{ url('login') }}?redirect={{ Request::url() }}">Login to Comment</a> or <a href="{{ url('register') }}?redirect={{ Request::url() }}">Register</a>
-                      </div>
-                    @endif
-
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="button_example"  value="submit" id="submitCommentForm" disabled="disabled">Submit</button>
-                  </div>
-                </form>
-
-              </div>
-            </div> 
-                        <!-- 
-                                              <div class="comments">
-                                
-                                               <div class="comment-section">
-                                                        
-                                                          <div class="comments-list" id="commentList">
-                                                                                                                <ul></ul>
-                                                                    <p id="no-comments">No Comments yet.</p>
-                                
-                                
-                                                                                                                
-                                                          </div>
-                                
-                                
-                                
-                                                            <form class="comment-form" action="http://susanwins.com/add_comment" method="POST" id="commentForm">
-                                                            <input type="hidden" name="_token" value="1wYYjbtAylFDRJW7j1XBkRXCoxnLbAP3j1zQzdXm">
-                                                              <div class="form-group">
-                                                                  <textarea class="form-control" rows="4" placeholder="Write a comment" name="content" id="submitCommentTextarea" disabled="disabled"></textarea>
-                                                              </div>
-                                                              <div class="form-group">
-                                                                
-                                                                                                                         <div class="rednotifbox">
-                                                                      <a href="http://susanwins.com/login?redirect=http://susanwins.com/tennis-stars-online-slots-review">Login to Comment</a> or <a href="http://susanwins.com/register?redirect=http://susanwins.com/tennis-stars-online-slots-review">Register</a>
-                                                                    </div>
-                                                                                                                  </div>
-                                                              <div class="form-group">
-                                                                  <button type="submit" class="button_example" value="submit" id="submitCommentForm" disabled="disabled">Submit</button>
-                                                              </div>
-                                                          </form>
-                                                          
+                                                    <form class="comment-form" action="http://susanwins.com/add_comment" method="POST" id="commentForm">
+                                                    <input type="hidden" name="_token" value="1wYYjbtAylFDRJW7j1XBkRXCoxnLbAP3j1zQzdXm">
+                                                      <div class="form-group">
+                                                          <textarea class="form-control" rows="4" placeholder="Write a comment" name="content" id="submitCommentTextarea" disabled="disabled"></textarea>
                                                       </div>
-                                              </div>   -->        
+                                                      <div class="form-group">
+                                                        
+                                                                                                                 <div class="rednotifbox">
+                                                              <a href="http://susanwins.com/login?redirect=http://susanwins.com/tennis-stars-online-slots-review">Login to Comment</a> or <a href="http://susanwins.com/register?redirect=http://susanwins.com/tennis-stars-online-slots-review">Register</a>
+                                                            </div>
+                                                                                                          </div>
+                                                      <div class="form-group">
+                                                          <button type="submit" class="button_example" value="submit" id="submitCommentForm" disabled="disabled">Submit</button>
+                                                      </div>
+                                                  </form>
+                                                  
+                                              </div>
+                                      </div>          
 
                       </div>
                     </div>
@@ -1184,7 +1036,7 @@ width: 23%;
 
             <div class="col-xs-24 col-sm-5 col-md-5 col-lg-5 right">
                <div class="sidebar">
-                  <img src="{{ url('images/single-susan.png') }}" alt="" class="susan">
+                  <img src="http://susanwins.com/uploads/26351_single-susan.png" alt="" class="susan">
                       <div class="sidebarInner">
                         <h3> <img src="http://susanwins.com/uploads/28532_sidebartext.png" alt=""> </h3>
                          <div class="rellimg"></div>
@@ -1411,11 +1263,11 @@ width: 23%;
 
     function updateSidebarHeight(){
 
-     mainHeight = $('#main').height() - ($('.singelTopReel').height())/* - parseInt($('.singleFooter').css('padding-bottom').replace('px', ''))*/;
+     mainHeight = $('#main').height() - ($('.main').height()) - parseInt($('.singleFooter').css('padding-bottom').replace('px', ''));
 
-             sideBarHeight = mainHeight + ( $('.postcontent').offset().top - $('.sidebarInner').offset().top );
-        finalSidebarContentHeight = sideBarHeight - ( $('.sidebarInner').find('h3').height() + (sideBarSpacer ) );
-        $('.sidebarInner').css('height', sideBarHeight+'px');
+             sideBarHeight = mainHeight + ( $('.postcontent').offset().top - $('.sidebar').offset().top );
+        finalSidebarContentHeight = sideBarHeight - ( $('.sidebar').find('h3').height() + (sideBarSpacer ) );
+        $('.sidebar').css('height', sideBarHeight+'px');
         sidebarContentHeight = $('.rellimg').height();
         sideBarHeightLeft = finalSidebarContentHeight - sidebarContentHeight;
 
@@ -1430,7 +1282,7 @@ width: 23%;
 
         if(sideBarHeightLeft <= sideBarSpacer){ 
 
-          offsetBottom = ($('.sidebarInner').offset().top+sideBarHeight) - lastElement.offset().top - (sideBarSpacer);
+          offsetBottom = ($('.sidebar').offset().top+sideBarHeight) - lastElement.offset().top - (sideBarSpacer);
 
             if(!lastElement.hasClass('updateHeight')){
 
@@ -1461,7 +1313,7 @@ width: 23%;
 
                    }
 
-                  prevOffsetBottom = ($('.sidebarInner').offset().top+sideBarHeight) - prevElement.offset().top - (sideBarSpacer);
+                  prevOffsetBottom = ($('.sidebar').offset().top+sideBarHeight) - prevElement.offset().top - (sideBarSpacer);
 
                   prevElement.addClass('updateHeight').data('originalHeight', $(prevElementImage).height());
                    prevElementImage.css('height', prevOffsetBottom+'px');
@@ -1480,7 +1332,7 @@ width: 23%;
                         lastElement.removeClass('updateHeight').removeData('originalHeight');
                     }else{
 
-                      offsetBottom = ($('.sidebarInner').offset().top+sideBarHeight) - lastElement.offset().top - (sideBarSpacer);
+                      offsetBottom = ($('.sidebar').offset().top+sideBarHeight) - lastElement.offset().top - (sideBarSpacer);
 
                       if(offsetBottom <= lastElement.data('originalHeight')){
                           theImage.css('height', offsetBottom+'px');
@@ -1540,7 +1392,6 @@ width: 23%;
     $(document).on('adjustHeight', function(){
           sideBarCompleted = false;
           startAddingSidebarContent();
-          console.log('adjustHeight');
     });
 
     function setSidebarLoadInterval(){
@@ -1561,28 +1412,8 @@ width: 23%;
 
       }, 100);
     }
-     function startAddingSidebarContent(){
 
-      updateSidebarHeight();
-      //console.log('startAddingSidebarContent');
-
-      if(finalSidebarContentHeight > sidebarContentHeight && sideBarHeightLeft >= sideBarSingleContentHeight)
-      {
-        getSidebarContent();
-      }
-      else
-      {
-        if(sideBarHeightLeft <= 0)
-        {
-          lastImage = $('.rellimg').children().last();
-            pendingSideBarElements.push($(lastImage)[0].outerHTML);
-            //$(lastImage).remove();
-            sideBarCompleted = true;
-
-        }
-      }
-    }
-/*    function startAddingSidebarContent(){
+    function startAddingSidebarContent(){
 
         updateSidebarHeight();
         //console.log(sideBarCompleted);
@@ -1603,7 +1434,7 @@ width: 23%;
                 sideBarCompleted = true;
               }
             }
-    }*/
+    }
 
      function getSidebarContent(){
 
@@ -1771,56 +1602,12 @@ width: 23%;
 
 
   
-	var width = $(window).width(); 
-	var height = $(window).height(); 
 
-	$(document).on('adjustsinglePostBG', function(){
-		adjustsinglePostBG();
-	});
-	$(window).bind("load", function() {
-		adjustsinglePostBG();
-		adjustCommentRelativeBox();
 
-	});
-
-	$(document).on('adjustHeight', function(){
-		adjustsinglePostBG();
-		adjustCommentRelativeBox();
-	})
-
-	function adjustsinglePostBG(){
-		var result = $(".content").height();   
-		$(".singlePostBG").height(result);
-	}
-
-	function adjustCommentRelativeBox(){        
-	    var result2 = $(".related").height();           
-	    	console.log(result2);
-
-	      if ( width > 1199 ) {
-	        var relatedAddition = 245;
-	      }
-	      else if ( width > 991 && width < 1200 ) {
-	        var relatedAddition = 205;
-	      }
-	      else if( width > 767 && width < 992 ){
-	        var relatedAddition = 170;
-	      }
-	      else if( width > 765 && width < 767 ){
-	        var relatedAddition = 210;
-	      }
-	      else if( width < 766 ){
-	        var relatedAddition = 210;
-	      }
-	    
-	      	console.log(relatedAddition);
-	    $(".commentRelativeBox").height(result2 + relatedAddition );
-	}
-/*
     $(window).bind("load", function() {
 
         var result = $(".content").height();            
-        var result2 = $(".related .inner").height();           
+        var result2 = $(".related").height();           
 
         $(".singlePostBG").height(result);
 
@@ -1831,7 +1618,7 @@ width: 23%;
             var relatedAddition = 205;
           }
           else if( width > 767 && width < 992 ){
-            var relatedAddition = 180;
+            var relatedAddition = 170;
           }
           else if( width > 765 && width < 767 ){
             var relatedAddition = 210;
@@ -1842,67 +1629,8 @@ width: 23%;
         
 
         $(".commentRelativeBox").height(result2 + relatedAddition );
-    });*/
-     $(window).bind("load", function() {
-   
-
-		var machine1 = $("#planeMachine2").slotMachine({
-          active  : 0,
-          delay : 500
-        });
-
-        var machine2 = $("#planeMachine3").slotMachine({
-          active  : 1,
-          delay : 500
-        });
-
-        var machine3 = $("#planeMachine4").slotMachine({
-          active  : 2,
-          delay : 500
-        });
-
-        var machine4 = $("#planeMachine5").slotMachine({
-          active  : 2,
-          delay : 500
-        });
-
-        function onComplete(active){
-          switch(this.element[0].id){
-            case 'machine1':
-              $("#planeMachine2").text("Index: "+this.active);
-              break;
-            case 'machine2':
-              $("#planeMachine3").text("Index: "+this.active);
-              break;
-            case 'machine3':
-              $("#planeMachine4").text("Index: "+this.active);
-              break;
-            case 'machine4':
-              $("#planeMachine5").text("Index: "+this.active);
-              break;
-          }
-        }
-
-        $("#winwinwin3").click(function(){
-
-          machine1.shuffle(5, onComplete);
-
-          setTimeout(function(){
-            machine2.shuffle(5, onComplete);
-          }, 500);
-
-          setTimeout(function(){
-            machine3.shuffle(5, onComplete);
-          }, 600);
-
-          setTimeout(function(){
-            machine4.shuffle(5, onComplete);
-          }, 700);
-
-        })
-
-});
-
+    });
+    
 
   </script>
 

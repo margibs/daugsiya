@@ -14,7 +14,8 @@
   <ul>
     <li> <a href="{{ url('admin/comments') }}" @if($comment_status2 == 3) class="active" @endif> <i class="icon-line-speech-bubble"></i> All </a> </li>
     <li> <a href="{{ url('admin/comments') }}?comment_status=approved" @if($comment_status2 == 1) class="active" @endif> <i class="icon-line-check"></i> Approved </a> </li>                    
-    <li> <a href="{{ url('admin/comments') }}?comment_status=pending" @if($comment_status2 == 0) class="active" @endif> <i class="icon-line-cross"></i> Pending </a> </li>
+   <!--  <li> <a href="{{ url('admin/comments') }}?comment_status=pending" @if($comment_status2 == 0) class="active" @endif> <i class="icon-line-cross"></i> Pending </a> </li> -->
+     <li> <a href="#!" id="pending" @if($comment_status2 == 0) class="active" @endif> <i class="icon-line-cross"></i> Pending </a> </li>
     <li> <a href="{{ url('admin/comments') }}?comment_status=trashed" @if($comment_status2 == 2) class="active" @endif> <i class="icon-trash"></i> Trash </a> </li>                  
     <li> <a class="searchlink"> <i class="icon-line-search"></i> Search </a> </li>
   </ul>
@@ -22,7 +23,7 @@
 </div>
 
 
-<table>
+<!-- <table>
   <thead>
     <tr><td style="width: 3%;"> <input type="checkbox"> </td>
     <td style="width: 10%;"> Name </td>
@@ -53,8 +54,50 @@
 		</tr>
 	@endforeach	
   </tbody>
+</table> -->
+
+<!-- {!! $comments->appends(Input::except('page'))->render() !!} -->
+
+<table class="table table-condensed table-bordered table-striped" id="users-table">
+	<thead>
+	    <tr>
+	    	<th>Content</th>
+	        <th>Date</th>
+			<th>Approved</th>
+	        <th>Post</th>
+	        <th>Action</th>
+	    </tr>
+	</thead>
 </table>
 
-{!! $comments->appends(Input::except('page'))->render() !!}
+@endsection
 
+@section('script_js')
+<script>
+$(document).on('ready', function(){
+	$('#pending').on('click', function(){
+		console.log("change comments");
+	});
+});	
+</script>
+
+@endsection
+
+@push('scripts')
+<script>
+$(function() {
+    $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '/admin/getAllComments',
+        columns: [
+            { data: 'content', name: 'content' },
+            { data: 'created_at', name: 'created_at' },
+            { data: 'approved', name: 'approved' },
+            { data: 'slug', name: 'slug' },
+            { data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+    });
+});
+</script>
 @endsection

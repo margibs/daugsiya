@@ -1,5 +1,6 @@
 (function(window, document, $){
 
+
       timeZone = 'Europe/London';
 
       london = moment.tz(timeZone);
@@ -19,6 +20,31 @@
         
       });
 
+        /*  resendConfirmationAjax = false;
+          $(document).on('click', '#resendConfirmation', function(){
+            _this = $(this);
+
+            if(!resendConfirmationAjax){
+
+              _this.text('Loading...');
+              resendConfirmationAjax = true;
+
+                $.ajax({
+                       url :BASE_URL+'/admin/sendEmailAweber',
+                       data : { _token : CSRF_TOKEN },
+                       dataType : 'json',
+                       type : 'POST',
+                       success : function(data){
+                        console.log(data);
+                       _this.parent('.confirmNotification').addClass('done').text('Resend Confirmation Sent! Please Check Your Email.');
+                       },error : function(xhr){
+                         console.log(xhr.responseText);
+                       }
+                   });
+            }
+             
+        });*/
+
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var baseUrl = $('meta[name="baseURL"]').attr('content');
 
@@ -37,6 +63,63 @@
                  
            var sessionId = $('#sessionId').val();
           var defaultProfilePic = baseUrl+'/images/default_profile_picture.png';
+
+
+
+                  if($('#initialWelcomePackage').length > 0){
+          initialWelcomePackageOpened = true;
+
+          $('.modal-trigger').leanModal({ complete : ignoreWelcomePack });
+          $('#initialWelcomePackageTrigger').click();
+          function ignoreWelcomePack(){
+
+            if(initialWelcomePackageOpened){
+              initialWelcomePackageOpened = false;
+                 $.ajax({
+                 url :baseUrl+'/admin/ignore',
+                 data : { _token : CSRF_TOKEN},
+                 dataType : 'json',
+                 type : 'POST',
+                 success : function(data){
+                 console.log(data);
+                 },error : function(xhr){
+                   console.log(xhr.responseText);
+                 }
+                });
+            }
+           
+          }
+        }else{
+          $('#yesWelcomePackage').leanModal();
+        }
+
+
+    submitWelcomePackageAJAX = false;
+    $(document).on('click','.submitWelcomePackage', function(){
+        thisModal = $(this).parents('.modal');
+          address = thisModal.find('.welcomeAddress').val();
+          if(!address){
+            alert('Please enter a valid address');
+            return;
+          }
+          if( !submitWelcomePackageAJAX ){
+            submitWelcomePackageAJAX = true;
+             $.ajax({
+                 url :BASE_URL+'/admin/enterAddress',
+                 data : { _token : CSRF_TOKEN, address: address },
+                 dataType : 'json',
+                 type : 'POST',
+                 success : function(data){
+                      thisModal.closeModal();
+                    $('.confirmNotification').addClass('done').text('Welcome Package Request Sent!');
+
+                 },error : function(xhr){
+                   console.log(xhr.responseText);
+                 }
+             });
+
+          }
+      });
 
 
         socket.on('connect', function(){
@@ -115,6 +198,17 @@
         });
     }
 
+       /********************** START GET IMAGE ******************************************************************************/
+  function getImage(profile_picture ,user_id, size) {
+
+      if(size === null) {
+          return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+      }
+       return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+    }
+
+  /********************** END GET IMAGE ******************************************************************************/
+
     socket.on('post_recommendGame_notification', function(friend){
             
 
@@ -127,7 +221,8 @@
                       $('<li>').append(
                 $('<a href="'+baseUrl+'/'+friend.game.slug+'">')
                     .append(
-                          $('<img>').attr('src', friend.user.user_detail.profile_picture ? baseUrl+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+                          //$('<img>').attr('src', friend.user.user_detail.profile_picture ? baseUrl+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+                          $('<img>').attr('src', getImage(friend.user.user_detail.profile_picture, friend.user.user_detail.user_id, 5050) )
                     )
                         .append(
                             $('<div>').addClass('msgContent')
@@ -168,7 +263,8 @@
             $(thePage).find('#yourUserNotifs .messageList').prepend(
                   $('<li>')
             .append(
-              $('<img>').attr('src', friend.user.profile_picture ? baseUrl+'/'+friend.user.profile_picture : defaultProfilePic )
+              //$('<img>').attr('src', friend.user.profile_picture ? baseUrl+'/'+friend.user.profile_picture : defaultProfilePic )
+              $('<img>').attr('src', getImage(friend.user.profile_picture, friend.user.user_id, 5050) )
             )
             .append(
               $('<div>').addClass('msgContent')
@@ -448,7 +544,8 @@
                         $('<li>').append(
                             $('<a href="'+data_url+'">')
                                 .append(
-                                      $('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+                                      //$('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+                                      $('<img>').attr('src', getImage(data.user.user_detail.profile_picture, data.user.user_detail.user_id, 5050))
                                 )
                                     .append(
                                         $('<div>').addClass('msgContent')
@@ -495,7 +592,8 @@ socket.on('post_addFriend_request', function(request_id, request){
 
               requestHtml = $('<li>').attr('id', 'friend-request-'+request.user_id)
             .append(
-              $('<img>').attr('src', request.profile_picture ? baseUrl+'/'+request.profile_picture : defaultProfilePic )
+              //$('<img>').attr('src', request.profile_picture ? baseUrl+'/'+request.profile_picture : defaultProfilePic )
+              $('<img>').attr('src', getImage(request.profile_picture, request.user_id, 5050))
             )
             .append(
               $('<div>').addClass('msgContent')
@@ -558,7 +656,8 @@ socket.on('post_addFriend_request', function(request_id, request){
                 $(thePage).find('.chatBox .body ul').append(
                     $('<li>')
                         .append(
-                          $('<img>').attr('src', message.from.profile_picture ? baseUrl+'/'+message.from.profile_picture : defaultProfilePic)
+                          //$('<img>').attr('src', message.from.profile_picture ? baseUrl+'/'+message.from.profile_picture : defaultProfilePic)
+                          $('<img>').attr('src', getImage(message.from.profile_picture, message.from.user_id, 5050))
                           )
                         .append(
                             $('<span>').text(message.message)
@@ -867,7 +966,8 @@ socket.on('post_addFriend_request', function(request_id, request){
 
             $(li).attr('id', 'friend-request-'+request.user_id)
             .append(
-              $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+              //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+              $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050))
             )
             .append(
               $('<div>').addClass('msgContent')
@@ -897,7 +997,8 @@ socket.on('post_addFriend_request', function(request_id, request){
           {
              $(li)
             .append(
-              $('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
+              //$('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
+              $('<img>').attr('src', getImage(request.user.profile_picture, request.user.user_id, 5050))
             )
             .append(
               $('<div>').addClass('msgContent')
@@ -926,7 +1027,8 @@ socket.on('post_addFriend_request', function(request_id, request){
             $(li).append(
                 $('<a href="'+baseUrl+'/'+request.game.slug+'">')
                     .append(
-                          $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050))
                     )
                         .append(
                             $('<div>').addClass('msgContent')
@@ -951,7 +1053,8 @@ socket.on('post_addFriend_request', function(request_id, request){
             $(li).append(
                 $('<a href="'+baseUrl+'/all_games">')
                     .append(
-                          $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050))
                     )
                         .append(
                             $('<div>').addClass('msgContent')
@@ -973,7 +1076,8 @@ socket.on('post_addFriend_request', function(request_id, request){
             $(li).append(
                 $('<a href="'+baseUrl+'/'+request.postslug+'">')
                     .append(
-                          $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050))
                     )
                         .append(
                             $('<div>').addClass('msgContent')
@@ -995,7 +1099,8 @@ socket.on('post_addFriend_request', function(request_id, request){
           $(li).append(
                 $('<a href="'+baseUrl+'/'+request.categoryslug+'">')
                     .append(
-                          $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                          $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050))
                     )
                         .append(
                             $('<div>').addClass('msgContent')
@@ -1034,6 +1139,10 @@ socket.on('post_addFriend_request', function(request_id, request){
                         $('#navbarTitle').text('Messages');
 
                         });
+
+                $(page).on('click','li.unread', function(){
+                    $(this).removeClass('unread');
+                });
                   
                 $(page).find('.pageLoading').show();
                 $(page).find('#yourMessages').hide();
@@ -1077,7 +1186,8 @@ socket.on('post_addFriend_request', function(request_id, request){
 
                                     li = $('<li>').addClass('app-button').attr('data-target', 'myMessages').attr('data-args', '{ "user_id" : "'+msg.from_user.user_detail.user_id+'", "name" : "'+msg.from_user.user_detail.firstname+'" }')
                                           .append(
-                                              $('<img>').attr('src', msg.from_user.user_detail.profile_picture ? baseUrl+'/'+ msg.from_user.user_detail.profile_picture : defaultProfilePic )
+                                              //$('<img>').attr('src', msg.from_user.user_detail.profile_picture ? baseUrl+'/'+ msg.from_user.user_detail.profile_picture : defaultProfilePic )
+                                              $('<img>').attr('src', getImage(msg.from_user.user_detail.profile_picture, msg.from_user.user_detail.user_id, 5050))
                                             )
                                           .append(
                                             $('<div>').addClass('msgContent')
@@ -1120,19 +1230,35 @@ socket.on('post_addFriend_request', function(request_id, request){
 
               App.controller('privateMessage', function (page, request) {
            		 this.transition = 'slide-left';
+               this.restorable = false;
 
               $(page).on('appDestroy', function(){
                 $('.bottomNotification').show();
               });
+
+            $(page).on('appLayout', function(){
+                  chatBox = $(page).find('.chatBox');
+
+                  chatBody = chatBox.find('.body');
+                          chatBoxOffsetTop = chatBody.offset().top;
+                          chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
+                            
+                      chatBody.css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
+                      chatBody.scrollTop(chatBody[0].scrollHeight);
+              });
+
               $(page).on('appShow', function(){
                 $('.bottomNotification').hide();
 
 
                 chatBox = $(page).find('.chatBox');
-                chatBoxOffsetTop = chatBox.offset().top;
+
+                chatBody = chatBox.find('.body');
+                chatBoxOffsetTop = chatBody.offset().top;
                 chatBoxFooterOffsetTop = $(page).find('.chatFooter').offset().top;
-                  
-                  $(page).find('.chatBox .body').css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
+                      
+                chatBody.css('height', (chatBoxFooterOffsetTop- chatBoxOffsetTop)+'px');
+                chatBody.scrollTop(chatBody[0].scrollHeight);
 
 
 
@@ -1199,7 +1325,8 @@ socket.on('post_addFriend_request', function(request_id, request){
                                       if(this.from != userId){
 
                                         $(li).append(                        
-                                          $('<img>').attr('src', data.other_person.user_detail.profile_picture ? baseUrl+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+                                          //$('<img>').attr('src', data.other_person.user_detail.profile_picture ? baseUrl+data.other_person.user_detail.profile_picture : defaultProfilePic )
+                                          $('<img>').attr('src', getImage(data.other_person.user_detail.profile_picture, data.other_person.user_detail.user_id, 5050))                        
                                         );
 
                                       }else{
@@ -1261,7 +1388,8 @@ socket.on('post_addFriend_request', function(request_id, request){
                                       if(this.from != userId){
 
                                         $(li).append(                        
-                                          $('<img>').attr('src', data.other_person.user_detail.profile_picture ? baseUrl+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+                                          //$('<img>').attr('src', data.other_person.user_detail.profile_picture ? baseUrl+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+                                          $('<img>').attr('src', getImage(data.other_person.user_detail.profile_picture, data.other_person.user_detail.user_id, 5050))
                                         );
 
                                       }else{

@@ -35,7 +35,7 @@ $(function(){
 	    	console.log(result2);
 
 	      if ( width > 1199 ) {
-	        var relatedAddition = 245;
+	        // var relatedAddition = 245;
 	      }
 	      else if ( width > 991 && width < 1200 ) {
 	        var relatedAddition = 205;
@@ -51,7 +51,7 @@ $(function(){
 	      }
 	    
 	      	console.log(relatedAddition);
-	    $(".commentRelativeBox").height(result2 + relatedAddition );
+	    $(".commentRelativeBox").height(result2 + 25 );
 	}
 
 
@@ -61,7 +61,8 @@ $(function(){
 			$(document).trigger('adjustHeight');
 			adjustCommentRelativeBox();
 		});
-
+		var result2 = $(".related").height();        
+		$(".commentRelativeBox").height(result2 + relatedAddition );
 	});
 
 	$('#playFancy').on('click', function(e) {

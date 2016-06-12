@@ -3,6 +3,13 @@
 	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 	var BASE_URL = $('meta[name="baseURL"]').attr('content');
 
+	IMAGE_BASE_URL = "{{ url('/')}}";
+
+	 
+	//var publicUrl = '{{ asset("") }}';
+	//var defaultProfilePic = IMAGE_BASE_URL+'/images/default_profile_picture.png';
+	var defaultProfilePic = "http://susanwins.com/images/default_profile_picture.png";
+
 
 	function placeCaretAtEnd(el) {
    /* el.focus();*/
@@ -73,7 +80,7 @@
 			.append($('<div>').addClass('actionButtons'));
 
 			$(closeButton).on('click', function(){
-				$(returnContainer).hide();
+				$(returnContainer).removeClass('hovering').hide();
 			});
 
 			return returnContainer;
@@ -126,9 +133,11 @@
 					offsetTop = $(tagFriend).offset().top+$(tagFriend).height();
 					offsetLeft = $(tagFriend).offset().left;
 
-					var defaultProfilePic = BASE_URL+'/images/default_profile_picture.png';
-					var profile_picture = data.user_detail.profile_picture ? BASE_URL+'/'+data.user_detail.profile_picture : defaultProfilePic;
-					$(personContainer).find('.imageFrame').html('').append($('<img>').attr('src', profile_picture ));
+					//var defaultProfilePic = BASE_URL+'/images/default_profile_picture.png';
+					//var profile_picture = data.user_detail.profile_picture ? BASE_URL+'/'+data.user_detail.profile_picture : defaultProfilePic;
+					//$(personContainer).find('.imageFrame').html('').append($('<img>').attr('src', profile_picture ));
+					$value_null = null;
+					$(personContainer).find('.imageFrame').html('').append($('<img>').attr('src', getImage(data.user_detail.profile_picture, data.user_detail.user_id, $value_null) ));
 					$(personContainer).find('h6').text(data.user_detail.firstname+' '+data.user_detail.lastname);
 
 					if(data.friend){
@@ -170,6 +179,17 @@
 
 
 	});
+
+	 /********************** START GET IMAGE ******************************************************************************/
+    function getImage(profile_picture ,user_id, size) {
+
+      if(size === null) {
+          return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+      }
+       return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+    }
+
+  /********************** END GET IMAGE ******************************************************************************/
 
 
 	$(document).on('focus','.dummyTextarea', function(e){
@@ -574,12 +594,10 @@
 			 'text-align' : 'left',
 			 'overflow-y' : 'auto',
 			 'margin' : $(TextArea).css('margin'),
-			 'float' : $(TextArea).css('float'),
 			 'font-family' : $(TextArea).css('font-family'),
 			 'font-size' : $(TextArea).css('font-size'),
 			 'box-shadow' : $(TextArea).css('box-shadow'),
 			 'background' : $(TextArea).css('background'),
-			 'background-color' : $(TextArea).css('background-color'),
 			  }).attr('contenteditable', 'true').attr('placeholder', placeholder);
 			dummyTextareaParent = $('<div></div>').addClass('dummyTextareaParent').append(dummyTextarea).css('position', 'relative');
 			$(dummyTextareaParent).insertBefore(TextArea);

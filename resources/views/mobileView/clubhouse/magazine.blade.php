@@ -38,6 +38,10 @@
         response = $(this).data('response');
         //alert('Hello World');
         data_result = $(this).parents('.choiceContainer').html('You answered '+$(this).text()+" "+response);
+        /*console.log(question_id);
+        console.log(choice_id);
+        console.log(response);
+        console.log(data_result);*/
           if(follow_id != '0'){
 
             $(page).find('.follow_up_'+follow_id).css('display', 'block');

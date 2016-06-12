@@ -8,7 +8,7 @@
 @section('background', 'default')
 
  @section('switch-button')
- 	  <button class="categ-button"> <a href="{{ url('welcome') }}">Login / Sign-Up</a></button>
+ 	  <button class="categ-button"> <a href="{{ url('welcome') }}"> Login</a></button>
 @endsection
 
 @section('split-content')
@@ -36,7 +36,7 @@
   top: 50%;
   left: 30%;
   z-index: 2;
-  background:rgb(255, 255, 255);
+  background:rgba(255, 255, 255, 0.85);
   padding: 25px 20px;
   border-radius: 3px;
   overflow: hidden;
@@ -47,8 +47,9 @@
 }
 .signupform h3{
     font-family: 'Work Sans',Roboto,Arial,Helvetica,sans-serif;
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 .singupcontainer .signupform h1{
 	font-family: 'Work Sans';
@@ -59,7 +60,7 @@
     text-transform: uppercase;
 }
 .signupform input[type="text"], .signupform input[type="password"], .signupform input[type="email"]{
-    background: #F5F5F5;
+    background: #FFFFFF;
     border: medium none;
     padding: 12px 20px;
     font-size: 17px;
@@ -68,9 +69,9 @@
     margin-bottom: 12px;
     width: 100%;
     color: #000;
-    -moz-box-shadow: inset 0 0 10px -2px #ABABAB;
+/*    -moz-box-shadow: inset 0 0 10px -2px #ABABAB;
     -webkit-box-shadow:inset 0 0 10px -2px #ABABAB;
-    box-shadow: inset 0 0 10px -2px #ABABAB;
+    box-shadow: inset 0 0 10px -2px #ABABAB;*/
 }
 .signupform button{
   background: rgb(242, 155, 32);
@@ -122,8 +123,8 @@ font-family: Roboto;
 }
 .singupbox{
     position: absolute;
-    top: 57%;
-    right: 31%;
+    top: 517px;
+    right: 30%;
     z-index: 3;
     background: rgba(255, 255, 255, 0.85);
     padding: 58px 35px;
@@ -137,11 +138,11 @@ font-family: Roboto;
     font-weight: 600;
 }
 .singupbox p{
-  color: #685230;
-  font-size: 27px;
-  display: block;
-  text-align: center;
-  margin-bottom: 12px;
+    color: #685230;
+    font-size: 35px;
+    display: block;
+    text-align: center;
+    margin-bottom: 12px;
 }
 .singupbox h2{
   color: #000;
@@ -159,17 +160,99 @@ font-family: Roboto;
 
 .susan{
     position: absolute;
-    top: 302px;
-    left: 40px;
-    width: 810px;
+    top: 46%;
+    left: 15%;
+    width: auto;
 }
 .butler{
     position: absolute;
-    top: 45%;
+    bottom: -6px;
     z-index: 2;
     right: 150px;
-    width: 685px;
+    width: 800px;
 }
+
+
+.oval-outer{
+  position:absolute;
+  top: 28%;
+  left:21%;
+}
+.oval-speech {
+    position: absolute;
+    width: 378px;
+    padding: 66px 35px;
+    margin: 1em auto 50px;
+    text-align: center;
+    color: #fff;
+        background: #fff;
+/*    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,214,94,1)), color-stop(100%,rgba(254,191,4,1)));
+    background: -webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd65e', endColorstr='#febf04',GradientType=0 );*/
+    -webkit-border-top-left-radius: 220px 120px;
+    -webkit-border-top-right-radius: 220px 120px;
+    -webkit-border-bottom-right-radius: 220px 120px;
+    -webkit-border-bottom-left-radius: 220px 120px;
+    -moz-border-radius: 220px / 120px;
+    border-radius: 228px / 135px;
+    border: 4px solid #FFE9AA;
+    -moz-transform: rotate(-6deg);
+    -webkit-transform: rotate(-6deg);
+    transform: rotate(-6deg);
+}
+.oval-speech p{
+       font-family: 'Work Sans',Roboto,Arial,Helvetica,sans-serif;
+    font-size: 49px;
+    font-weight: 600;
+    line-height: 43px;
+    color: white;
+    /*text-shadow: 0px 3px 4px rgb(253, 189, 0);*/
+}
+.oval-speech p span{
+  color: #A51615;
+}
+/*.oval-speech:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: -30px;
+    right: 50%;
+    height: 30px;
+    border-right: 60px solid #5a8f00;
+    background: #5a8f00;
+    -webkit-border-bottom-right-radius: 80px 50px;
+    -moz-border-radius-bottomright: 80px 50px;
+    border-bottom-right-radius: 80px 50px;
+    -webkit-transform: translate(0, -2px);
+    -moz-transform: translate(0, -2px);
+    -ms-transform: translate(0, -2px);
+    -o-transform: translate(0, -2px);
+    transform: translate(0, -2px);
+}
+.oval-speech:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: -30px;
+    right: 50%;
+    width: 60px;
+    height: 30px;
+    background: #fff;
+    -webkit-border-bottom-right-radius: 40px 50px;
+    -moz-border-radius-bottomright: 40px 50px;
+    border-bottom-right-radius: 40px 50px;
+    -webkit-transform: translate(-30px, -2px);
+    -moz-transform: translate(-30px, -2px);
+    -ms-transform: translate(-30px, -2px);
+    -o-transform: translate(-30px, -2px);
+    transform: translate(-30px, -2px);
+}*/
+
 @media(max-width: 1680px){
   .susan {
       top: 23%;
@@ -224,6 +307,20 @@ font-family: Roboto;
   }
 }
 @media(max-width: 1366px){
+  .oval-outer {
+    top: 17%;
+    left: 15%;
+  }
+  .oval-speech{
+    padding: 47px 0px;
+    width: 338px;
+    border-radius: 223px / 115px;
+  }
+  .oval-speech p{
+    font-size: 49px;
+    line-height: 39px;
+    color: #151515;
+  }
   #roombg{
     top: 0px;
     left: -112px;
@@ -262,26 +359,32 @@ font-family: Roboto;
     top: 200px;
  }
  .signupform{
-    top: 48%;
-    left: 27%;
-    width: 280px;
+    top: 43%;
+    left: 20%;
+    width: 310px;
  }
- .singupbox{
-    top: 44.5%;
-    right: 27%;
-    width: 300px;
- }
- .susan{
-    top: 130px;
-    left: -70px;
-    width: 670px;
-  }
-  .butler{
-    top: 28%;
+ .singupbox {
+    top: 297px;
+    right: 26%;
+    padding: 42px 20px;
+    width: 373px;
+}
+.singupbox h2 {
+    font-size: 45px;
+}
+ .susan {
+    bottom: -28px;
+    top: auto;
+    left: 3%;
+    width: 438px;
+}
+ .butler {
+    top: auto;
     z-index: 2;
     right: 0;
-    width: 580px;
-  }
+    width: 700px;
+    bottom: -30px;
+}
 }
 @media(max-width: 1280px){
   #roombg {
@@ -339,13 +442,22 @@ font-family: Roboto;
 
 
 	<div class="bgwrapper">
-		<img id="roombg" src="{{url('images/clubhouse')}}/front-house.png" alt="">		      	
+		<img id="roombg" src="{{url('images/clubhouse')}}/front-house.jpg" alt="">		      	
 
-					 
+					
+
+
 					  <div class="container_24">
     							<div class="grid_12">	
+                    <div class="oval-outer">
+                       <blockquote class="oval-speech">
+                          <p> <span>Have Fun</span> Come on in!  </p>
+                        </blockquote>
+                    </div>
+                        
     								<div class="signupform">									
 
+                    
     									<form action="{{ url('login/post') }}" method="POST">
     									{!! csrf_field() !!}
 
@@ -397,7 +509,7 @@ font-family: Roboto;
 
 <script type="text/javascript">
   
-   = true;
+   // = true;
   // $(document).ready(function(){
   //   $('.susan').addClass('animated slideInLeft');
   //   $('.signupform').addClass('animated slideInUp');

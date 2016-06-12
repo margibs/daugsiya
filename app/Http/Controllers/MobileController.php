@@ -23,6 +23,7 @@ use App\CustomQuery;
 use App\CommonFunctions;
 use App\Model\Category;
 use App\Global_Notification;
+use App\HomeImage;
 
 use Session;
 
@@ -196,6 +197,15 @@ class MobileController extends Controller
         $this->getNotificationCounts();
 
          $this->data['category_randomizer'] = $this->categoryImageList(15);
+         //dd($this->data);
+         $this->data['home_images_all'] = HomeImage::all();
+
+        /*  $this->data['home_images_all'] = HomeImage::all();*/
+
+
+         $this->data['home_images_footer_ad'] = HomeImage::where('show_add', 1)->where('position', 1)->first(['image','link']);
+       
+        $this->data['home_images_footer_ad2'] = HomeImage::where('show_add', 1)->where('position', 2)->first(['image','link']);
          //dd($this->data);
 		return view('home.homepage', $this->data);
 	}

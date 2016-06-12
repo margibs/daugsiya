@@ -3,29 +3,16 @@
 	
 @section('custom-styles')
 <style type="text/css">
-
+body{
+  background: #fff url(http://susanwins.com/uploads/72437_bg-mobile-prizeroom.jpg) center top;
+}
 .roulette {
-/*   position: absolute;
-margin: 0 auto;
-width: 560px;
-height: 560px;
-
-    left: -280px;
-background-color: transparent;
-background-size: 560px 560px;
-background-image: url(../images/clubhouse/sharpwheel.png);
-border-radius: 300px;
-z-index: 2; */
-
-position: relative;
-    /* margin: 0 auto; */
+    position: relative;
     width: 145%;
-    /* height: 100%; */
     top: 0;
     left: -74%;
     bottom: 0%;
     padding-bottom: 145%;
-    /* right: -50%; */
     background-color: transparent;
     background-size: 100% 100%;
     background-image: url(../images/clubhouse/sharpwheel.png);
@@ -301,6 +288,10 @@ border-bottom: 10px solid transparent;
 }
 </style>
 @endsection
+    
+    @section('content-menu')
+       <a href="#" class="waves-effect back_button button-collapse" data-activates="slide-out" ><i class="ion-navicon"></i>  </a>
+@endsection
 
  @section('navbar-title', 'Home')
 @section('content')
@@ -341,6 +332,9 @@ border-bottom: 10px solid transparent;
 <script src="{{ asset('js/roulette.js') }}"></script>
   <script>
        $(document).on('ready', function(){
+
+                 $('.app-page').css({ 'display' : 'block' });
+        $('#mainLoading').remove();
 
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 

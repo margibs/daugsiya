@@ -24,13 +24,14 @@ use App\Model\CasinoBannerCountry;
 use App\Chat_Room;
 use Illuminate\Support\Facades\Auth as Auth;
 use App\User;
+use App\CasinoMaskLink;
 
 class CasinoController extends Controller
 {
     public function casino()
     {
     	$casinos = Casino::all();
-
+        
     	return view('casino.casino',compact('casinos'));
     }
 
@@ -52,7 +53,13 @@ class CasinoController extends Controller
 
     public function newCasino()
     {
-    	return view('casino.newCasino');
+        $casinos = Casino::all();
+        $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
+         $maskLinkArray = $this->getMaskLinks();
+        //return view('casino.newSkyScraperBanner',compact('priority_list', 'casinos'));
+
+        //$casinos = Casino::all();
+    	return view('admin2.casino.newCasino', compact('priority_list', 'casinos', 'maskLinkArray'));
     }
 
     public function editCasino($id)
@@ -89,6 +96,7 @@ class CasinoController extends Controller
 
     public function addCasino(Request $request,$id = 0)
     {
+
     	$redirect = 'admin/new_casino';  
 
     	//check if new casino or edit casino
@@ -149,11 +157,39 @@ class CasinoController extends Controller
                 $data[] = array('casino_id' => $casino->id,'category_id' => $request->input('category_id')[$i],'created_at' => date('Y-m-d H:i:s'), 'updated_at'=> date('Y-m-d H:i:s'));
             }
 
-            CasinoCategory::insert($data);
+            casino_category::insert($data);
         }
 
         return redirect('admin/casino');
     }
+    public function getCasinosArray()
+    {
+        $casinos = Casino::orderBy('name','ASC')->get();
+        $casinoArray = [];
+        $casinoArray[0] = "SELECT CASINO";
+        foreach ($casinos as $casino) 
+        {
+            $casinoArray[$casino->id] = $casino->name;
+        }
+        
+
+        return $casinoArray;
+    }
+
+    public function getMaskLinks()
+    {
+        $maskLinks = CasinoMaskLink::orderBy('mask_link','ASC')->get();
+        $maskLinkArray = [];
+        $maskLinkArray[0] = "SELECT MASK LINK";
+
+        foreach ($maskLinks as $maskLink) 
+        {
+           $maskLinkArray[$maskLink->id] = $maskLink->mask_link;
+        }
+
+        return $maskLinkArray;
+    }
+
 
      public function addCasinoBanner(Request $request,$id = 0){
 
@@ -367,6 +403,11 @@ class CasinoController extends Controller
 
     public function newArticleBanner()
     {
+        $casinos = $this->getCasinosArray();
+        $maskLinkArray = $this->getMaskLinks();
+        
+        $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
+        
         
         $casinos = Casino::all();
         $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
@@ -398,6 +439,8 @@ class CasinoController extends Controller
     public function addArticleBanner(Request $request,$id = 0)
     {
         $redirect = 'admin/new_article_banner';
+
+      /*  dd($request->all());*/
 
         //check if new casino or edit casino
         //get redirect

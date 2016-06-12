@@ -10,7 +10,7 @@
   <style type="text/css">
 
    body {
-    background: #fff url(http://susanwins.com/uploads/51107_mobilefronthouse.jpg) no-repeat center top;
+    background: #fff url(http://susanwins.com/uploads/71471_bg-mobile.jpg) no-repeat 100% 15%;
   }
   .collection{
 border: none;
@@ -22,19 +22,22 @@ border: none;
     border: none;
   }
   .collection .collection-item.avatar{
-    min-height: 115px;
+    min-height: 148px;
   }
   .collection .collection-item.avatar .circle{
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
     border: 2px solid #FFF;
+    -moz-box-shadow: 0 0 10px -1px #000;
+    -webkit-box-shadow: 0 0 10px -1px #000;
+    box-shadow: 0 0 10px -1px #000;
   }
   .collection .collection-item.avatar .title{
-    font-size: 19px;
+    font-size: 23px;
     font-weight: 600;
     display: block;
     text-align: center;
-    margin-top: 36px;
+    margin-top: 50px;
     color: #fff;
     background: rgb(207,11,11);
     background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -45,13 +48,18 @@ border: none;
     background: -ms-linear-gradient(top, rgba(207,11,11,0.96) 0%,rgba(165,6,6,0.96) 100%);
     background: linear-gradient(to bottom, rgba(207,11,11,0.96) 0%,rgba(165,6,6,0.96) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cf0b0b', endColorstr='#a50606',GradientType=0 );
-
-    padding: 8px;
+    padding: 11px;
     border-radius: 30px;
-    margin-left: 14px;
-    width: 80%;
+    margin-left: 40px;
+    width: 84%;
   }
   </style>
+
+<!-- NEED TO MODIFIED -->
+ <!-- @section('content-menu')
+       <a href="#" class="waves-effect back_button button-collapse" data-activates="slide-out" ><i class="ion-navicon"></i>  </a>
+ @endsection  -->
+ 
    <div class="app-page" data-page="main">
 <!--    <div class="app-topbar"></div> -->
   <div class="app-content" data-no-scroll>
@@ -99,6 +107,9 @@ border: none;
 @section('app-js')
   <script>
        $(document).on('ready', function(){
+            
+            $('.app-page').css({ 'display' : 'block' });
+            $('#mainLoading').remove();
 
              App.load('main');
 

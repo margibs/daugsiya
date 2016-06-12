@@ -7,11 +7,19 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">    
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="google-site-verification" content="ZsovtY5ezCxnStSn3xVYrsyYw7Jdt3pUHDhlV-qwKTY" />
-    <meta name="baseURL" content="{{ url('') }}" />
-    <link rel="shortcut icon" href="{{ asset('images/susanfav.png') }}">
+     <meta name="baseURL" content="{{ url('') }}" />
+    <link rel="shortcut icon" id="favicon"  href="{{ asset('images/susanfav.png') }}">
+   <!--  <link href="/YOUR_PATH/favicon.ico" rel="icon" type="image/x-icon" /> -->
+
+   <!--  <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAA/f3+AHZ3hAD+/f4Aj5CgACQqRwBWXXQA8PDyAAoMKQBhaH4AFyBDAKKnsgDZ3uQA9PX1AGxscwCVmqYAERc0AM7R2AD6/v0A2tziAF1gdQDt7vEA9Pj+AOPm5wDZ290A9fX2AF1ieAAqNE4Apay2AJ2drwD39/kAERU7AP7+/gBFSWUAU1hsAFlZaQBZWGwAztLXAAgJJABMUmUA4uTmAMvN1QD+/v8A3ODhADQ4TAD//v8AVmBvAOrr6wAAABUA5ebpAERMXgBzeYMAV2F1AKesuAAPEzIAcnSJAP///QDn6OwA4eTnAHx9gAD09vYADQ8lAAoQMwADAx4ALDVOAEtNXAAlJTEA3N3jAAoOMQCNjpsAYGJrAK6vuQD29vcARUxoADg7TgABBBQA8/T1AP7//wD///8ASUtjAA4VNwD6/f0AkJGcANLU1QCcoq4AaG58AH+EkAAjJSsAm6CsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKU5OTk5OTk5OTk5OTk5OFQo4Tk5OTk5OTk5OTk5OAT4zTk5OTk5OTk5OTk5OIFEZBx8gTk5OTk5OTk5OTgNOTiIuPQY3BBRPIw47AkVQMEQ2QkFKNRFYExdMTjlLUjwYEldTDx0lCys6DU4mFlY/IE5ORjIsCFRDKAwnHkgvKjFOTk5NBUcQIRokVRstTk4gTk5OTiAcCUBJNE4gTk5OTgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD//wAA//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAA=" rel="icon" type="image/x-icon" /> -->
+
+    <!-- <link id="favicon" rel="shortcut icon" type="image/png" href="favicon.png" /> -->
+
+  <!--   <link rel="icon" href="http://susanwins.com/uploads/43069_friendicon.png"> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
     
     <!-- Document Title
     ============================================= -->
@@ -25,16 +33,44 @@
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900' rel='stylesheet' type='text/css'>
-
-  
-    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900,500' rel='stylesheet' type='text/css'>
 
     <!--<link rel="stylesheet" href="{{ elixir('css/clubhouse-all.css') }}">-->
 
+    <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+
     <script src="{{ asset('js/modernizr.custom.js') }}"></script>
 
+   
+    <script type="text/javascript">
+    
+    document.head = document.head || document.getElementsByTagName('head')[0];
+    
+    var notificationCOunts = 0;
+    function changeFavicon(src, counter) {
+      console.log(counter);
+     var link = document.createElement('link'),
+     oldLink = document.getElementById('dynamic-favicon');
+     link.id = 'dynamic-favicon';
+     link.rel = 'shortcut icon';
+     link.href = src;
+     if (oldLink) {
+      document.head.removeChild(oldLink);
+     }
+     document.head.appendChild(link);
+     notificationCOunts += counter;
+     document.title = notificationCOunts+'chatroom';
+    }
 
+    function resetFavicon(){
+      oldLink = document.getElementById('dynamic-favicon');
+      document.head.removeChild(oldLink);
+    }
+
+    /*<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">*/
+    </script> 
 
     <!--[if lt IE 9]>
         <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -61,26 +97,230 @@
         .globalBox{
           right: 76px;
         }
-
+    
+    .pmBoxContainer{
+         position: fixed;
+    left: 0;
+    right: 0;
+    top: 98px;
+    bottom: 7px;
+    width: 100%;
+    /* height: 100%; */
+    z-index: 998;
+        pointer-events: none;
+    }
 
       .pmBox{
-          position: absolute;
-          top: 20%;
-          left: 50%;
-          z-index: 4;
+       /* overflow: hidden; */
+      /* top: 120px; */
+      border-radius: 5px;
+      width: 370px;
+      text-align: center;
+      padding: 0 0 13px 0;
+      display: none;
+      -moz-box-shadow: 0 0 30px -10px #000;
+      -webkit-box-shadow: 0 0 30px -10px #000;
+      box-shadow: 0 0 30px -10px #000;
+      height: 480px;
+      overflow: hidden;
+      position: fixed;
+      -moz-box-shadow: 0 3px 6px 1px #7F7F7F;
+      -webkit-box-shadow: 0 3px 6px 1px #7F7F7F;
+      box-shadow: 0 3px 6px 1px #7F7F7F;
+      border: none;
+      background: #979797;
+      z-index: 99;
+          pointer-events: all;
+      }
+      .pmBox ul li{
+      overflow: hidden;
+      padding-bottom: 3px;
+          margin-bottom: 6px;
+      }
+
+      .pmBox ul li img{
+      width: 33px;
+      border-radius: 50%;
+      float: left;
+      margin-right: 14px;
+      margin-left: 15px;
+      margin-bottom: -85px;
+      }
+      .pmBox ul li span, .bigChatBox .body #messageContent li span{
+      font-family: Roboto,Helvetica,Arial,sans-serif;
+      text-align: left;
+      font-size: 14px;
+      padding: 6px 20px;
+      margin-right: 20px;
+      font-weight: 500;
+      margin-left: 61px;
+      margin-top: 0;
+      background: rgb(255, 255, 255);
+      border-radius: 20px;
+      line-height: 18px;
+      float: left;
+      display: block;
+      }
+      #sendPrivateMessage{
+        text-align: left;
+      }
+
+      .pmBox ul li span.alt{
+     background: #BA7FEC;
+    display: inline-block;
+    float: right!important;
+    margin-left: 50px!important;
+    color: #FFFFFF;
+      }
+      .pmBox .body h2{
+      background: rgb(140,2,5);
+      background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+      background: -moz-linear-gradient(top, rgb(49, 49, 49) 0%, rgb(6, 6, 6)  100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(49, 49, 49)), color-stop(100%,rgb(6, 6, 6) ));
+      background: -webkit-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: -o-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: -ms-linear-gradient(top, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      background: linear-gradient(to bottom, rgb(49, 49, 49) 0%,rgb(6, 6, 6)  100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c0205', endColorstr='#ba0034',GradientType=0 );
+      -moz-box-shadow: 0 0 10px -3px #000;
+      -webkit-box-shadow: 0 0 10px -3px #000;
+      box-shadow: 0 2px 10px -3px #000;
+      font-family: Roboto;
+      padding: 11px;
+      font-size: 20px;
+      font-weight: 600;
+      -moz-box-shadow: 0 0 10px -1px #000;
+      -webkit-box-shadow: 0 0 10px -1px #000;
+      box-shadow: 0 0 10px -1px #000;
+      position: relative;
+      z-index: 2;
+      color: #FFFFFF;
+      text-shadow: 0px 1px 2px rgb(109, 9, 9);
+      }
+      .pmBox .body{
+        background: #EDEDED;
+        padding-bottom: 10px;
+      }
+      .pmBox .body h2 i{
+      float: right;
+      color: #B5B2B2;
+      margin: 1px;
+      cursor: pointer;
+      }
+      .pmBox .body ul{
+        padding-top: 15px;
+      }
+      .pmBox .body h2 span.online{
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      background: green;
+      border-radius: 50%;
+      margin-right: 2px;
+      }
+      .pmBox  .footer{
+        margin-top: 10px;
+        border-top: 1px solid #E8E8E8;
+        margin-top: -1px;
+      }
+      .pmBox .triggers {
+      position: absolute;
+      bottom: 16px;
+      right: 19px;
+      z-index: 2;
+      }
+      .pmBox .arrow_box {
+      right: -139px;
+      top: 4px;
+      z-index: 101;
+      }
+      .pmBox textarea {
+      border: 1px solid transparent;
+      padding: 18px;
+      width: 84%;
+      height: 60px;
+      font-family: 'Work Sans';
+      font-size: 16px;
+      font-weight: 500;
+      min-height: 60px;
+      -moz-box-shadow: 0 0 7px -3px #D8D8D8;
+      -webkit-box-shadow: 0 0 7px -3px #D8D8D8;
+      box-shadow: 0 0 7px -3px #D8D8D8;
+      padding-right: 80px;
+      margin: 1px 0 -3px 0;
+      }
+    
+      .pmBox textarea:focus{
+        outline: none;
+      }
+
+      .pmBox .footer{
+      position: relative;
+      }
+      .pmBox #tooltip {
+      position: absolute;
+      top: 276px;
+      z-index: 100;
+      right: 20px;
+      height: 200px;
+      }
+      .pmBox  #tooltip ul {
+      text-align: left;
+      }
+      .pmBox #tooltip ul li img{
+      width: 32px!important;
+      margin: 5px!important;
+      float: none!important;
+      }
+      .pmBox .triggers i {
+      font-size: 27px;
+      margin-left: 3px;
+      color: #807C7C;
+      cursor: pointer;
+      border-left: 1px solid #ddd;
+      padding-left: 12px;
+      }
+      .pmBox .common {
+      min-height: 15px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      overflow: hidden;
+      }
+.pmFooter{
+        background: rgb(255,255,255);
+        
+      }
+      .pmFooter p{
+        font-family: roboto;
+        font-size: 12px;
+        color: #C9C5C5;
+        background: #EDEDED;
+        padding: 5px 0 9px 0;
+      }
+      .messageBox ul li a p{
+      color:#000;
       }
 
       .messageBox.notificationBox {
-          right: -6px;
+          right: -59px;
           z-index: 20;
       }
+      .globalNotifBox {
+        right: -13px;
+    }
 
       #myNotifications li button{
-            display: inline-block;
-          font-size: 12px;
-          padding: 4px 15px;
-          margin: 6px 5px;
-          width: 100px;
+        display: inline-block;
+        font-size: 12px;
+        padding: 4px 15px;
+        margin: 6px 5px;
+        width: 100px;
+        background: #9C0504;
+        border: none;
+        border-radius: 15px;
+        color: #fff;
+        border: 1px solid #941413;
+        cursor: pointer;
       }
       .friendProfile  .msgImgcont{
         width: 150px;
@@ -89,6 +329,8 @@
         display: block;
         margin-left: 110px;
         margin-bottom: 9px;
+        border-radius: 50%;
+        border: 4px solid #B11A1A;
       }
 
       .messageBox.messageNotifBox{
@@ -139,8 +381,7 @@
     }
     </style>
 
-
-      <!-- private messaging -->
+   <!-- private messaging -->
   <style>
     
       .chatbox-panel{
@@ -161,7 +402,7 @@
       width: 275px;
       height: 36px;
       }
-      
+
     .sendPrivateMessage{
         text-align:   left;
       }
@@ -259,6 +500,90 @@
       bottom: 0;
       left: 0;
       }
+
+      .chatSmContainerParent{
+        float: right;
+        width: 40px;
+        height: 36px;
+            position: relative;
+      }
+
+      .chatSmContainerParent .chatSmContainerBtn{
+          position: relative;
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: #C50D12;
+          background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+          background: -moz-linear-gradient(top, #C50D12 0%, #A20807 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C50D12), color-stop(100%,#A20807));
+          background: -webkit-linear-gradient(top, #C50D12 0%,#A20807 100%);
+          background: -o-linear-gradient(top, #C50D12 0%,#A20807 100%);
+          background: -ms-linear-gradient(top, #C50D12 0%,#A20807 100%);
+          background: linear-gradient(to bottom, #C50D12 0%,#A20807 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C50D12', endColorstr='#A20807',GradientType=0 );
+          border: 1px solid #BC0C0F;
+          color: #fff;
+          font-size: 25px;
+          padding: 5px 8px;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+      }
+
+      .chatSmContainerParent .chatSmContainer{
+        position: absolute;
+        bottom: 35px;
+            right: 0;
+            display: none;
+      }
+
+      .chatSmContainerParent .chatSmContainer .smInner{
+        float: left;
+        width: 100%;
+        position: relative;
+        background: #C50D12;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #C50D12 0%, #A20807 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C50D12), color-stop(100%,#A20807));
+        background: -webkit-linear-gradient(top, #C50D12 0%,#A20807 100%);
+        background: -o-linear-gradient(top, #C50D12 0%,#A20807 100%);
+        background: -ms-linear-gradient(top, #C50D12 0%,#A20807 100%);
+        background: linear-gradient(to bottom, #C50D12 0%,#A20807 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C50D12', endColorstr='#A20807',GradientType=0 );
+        border: 1px solid #BC0C0F;
+        padding: 5px 0;
+        font-size: 14px;
+      }
+      .chatSmContainerParent .chatSmContainer .smInner li{
+        float: left;
+        width: 100%;
+        padding: 4px;
+        padding-right: 18px;
+        position: relative;
+        cursor: pointer;
+      }
+      .chatSmContainerParent .chatSmContainer .smInner li a{
+           max-width: 193px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+        float: left;
+        color: #fff;
+        text-decoration: none;
+        font-family: 'Roboto';
+      }
+
+      .chatSmContainerParent .chatSmContainer .smInner li:hover{
+            background-color: #9C0E11;
+      }
+
+      .chatSmContainerParent .chatSmContainer .smInner li .closeSm{
+       position: absolute;
+        right: 3px;
+        color: #DE6466;
+        cursor: pointer;
+      }
   </style>
   </head>
 <body>
@@ -271,14 +596,14 @@
 
 
 
- <div class="container-fluid verytopHeader">
+  <div class="container-fluid verytopHeader">
         <div class="container">
           <div class="col-lg-24">
                 <header>
-                  <div class="col-xs-8 col-sm-7 col-md-5 col-lg-3">
+                  <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5">
                     <a href="{{ url('/') }}"><img class="logo" src="http://susanwins.com/uploads/52424_logo.png" alt="Logo"></a>
                   </div>
-                  <div class="col-xs-14 col-sm-14 col-md-12 col-lg-13 hide991" style="text-align: right;">
+                  <div class="col-xs-14 col-sm-14 col-md-12 col-lg-11 hide991" style="text-align: right;">
                     <div class="search">
                       <input type="text" placeholder="Search Games" id="search" autocomplete="off">                  
                     </div>
@@ -310,7 +635,7 @@
 
                       <ul class="topicons">
                               
-                        <li> <a href="http://susanwins.dev/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/80737_clubhouseicon.png" /> </a> </li>
+                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png" /> </a> </li>
                         <li> 
                           <a href="javascript:;" id="messagesMenu"> 
                             <span id="unreadMessageNotification">
@@ -318,7 +643,7 @@
                                 <span class="notifcount   animated bounce bounceInUp">{{ $unread_messages_count }}</span>
                               @endif
                             </span>
-                            <img src="http://susanwins.com/uploads/16972_chaticon.png" />
+                            <img src="http://susanwins.com/uploads/64163_chaticon.png" />
                           </a> 
                         </li>
 
@@ -331,7 +656,7 @@
                               @endif
                             </span>
                         
-                            <img src="http://susanwins.com/uploads/78234_notificationicon.png" />
+                            <img src="http://susanwins.com/uploads/83444_notificationicon.png" />
                           </a> 
                          </li>
                         
@@ -344,25 +669,52 @@
                                       </span>
                                 @endif
                             </span>
-                           <img src="http://susanwins.com/uploads/34532_friendicon.png" />
+                           <img src="http://susanwins.com/uploads/43069_friendicon.png" />
                            </a> 
                         </li>
 
                         <li style="margin-right: 6px;"> 
                           <a href="{{ url('/logout') }}"> 
-                           <img src="http://susanwins.com/uploads/39695_logouticon.png" />
+                           <img src="http://susanwins.com/uploads/34338_logouticon.png" />
                           </a> 
                         </li>
+
+                         <li style="margin-right: 6px;"> 
+                          <a href="#"> 
+                              <button id="sendEmail">SendEmail</button>
+                          </a> 
+                        </li>
+
+                         <li style="margin-right: 6px;"> 
+                          <a href="#"> 
+                              <button id="enterAddress">Enter Address</button>
+                          </a> 
+                        </li>
+
+
+                        
+                         <li style="margin-right: 6px;"> 
+                          <a href="#"> 
+                              <button id="ignore">ignore</button>
+                          </a> 
+                        </li>
+
+                         <li style="margin-right: 6px;"> 
+                          <a href="#"> 
+                              <button id="notify">Notify</button>
+                          </a> 
+                        </li>
+
 
                       </ul>
 
                    @else
-                       <ul class="topicons" style="margin-top: 9px;">           
-                        <li> <a href="#" class="facebookSM"> <i class="ion-social-facebook"></i> </a> </li>
-                        <li> <a href="#" class="twitterSM"> <i class="ion-social-twitter"></i>  </a> </li>
-                        <li> <a href="#" class="pinterestSM"> <i class="ion-social-pinterest"></i></a> </li>
-                        <li> <a href="#" class="instagramSM"> <i class="ion-social-instagram"></i>   </a> </li>
-                        <li style="margin-left: 10px;"><!--  <img src="http://susanwins.com/uploads/74688_cherrylogin.gif" class="cherry" />   --><a href="{{ url('/login') }}" class="loginbtn"> Login/Signup </a></li>
+                      <ul class="topicons">           
+                        <li> <a href="#" class="twitterSM"> <img src="http://susanwins.com/uploads/73749_twittericon.png" />  </a> </li>
+                        <li> <a href="#" class="facebookSM"> <img src="http://susanwins.com/uploads/84170_facebookicon.png" /> </a> </li>                        
+                        <li> <a href="#" class="pinterestSM"> <img src="http://susanwins.com/uploads/18419_pinteresticon.png" /> </a> </li>
+                        <li> <a href="#" class="instagramSM"> <img src="http://susanwins.com/uploads/18859_instaicon.png" />   </a> </li>
+                        <li style="margin-left: 10px;"> <!-- <img src="http://susanwins.com/uploads/74688_cherrylogin.gif" class="cherry" />  --> <a href="{{ url('/login') }}" class="loginbtn"> Login/Signup </a></li>
                         <!-- <li> <a href="#"> <i class="ion-social-youtube"></i>   <span>  Signout </span> </a> </li> -->
                       </ul>
                    @endif
@@ -383,15 +735,63 @@
   </div>
 
 
-    @yield('split-content')
+<!--  <div class="pmBoxContainer">
+  <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
+         <div class="divContainer">
+           <div class="header"></div>
+             <div class="body">
+               <h2> <i class="fa fa-times"></i> <span class="online"></span> <b id="pmName">Syndey Winchester </b> </h2>
+               <ul class="messagesContent" id="pmMessageContent">
+               </ul>
+             </div>
+             <div class="pmFooter">
+                   <div class="arrow_box pmArrowbox" style="display:none;"></div>  
+                   <div id="tooltip pmTooltip" style="display:none;">
+
+                     <ul>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                     </ul>
+
+                     </div>
+
+                   <div class="triggers">
+                     
+                     <i class="fa fa-paper-plane pmTrigger"></i>
+                   </div>
+                   <p> Press enter to send message</p>
+                   <form id="sendPrivateMessage">
+                       <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message" style="height:auto;" ></textarea>
+                   </form>
+               </div>
+           </div>
+     </div>
+</div> -->
+  
+
+   @yield('split-content')
 
      @if(isset($user))
      <!--  <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}"> -->
-            @if($user->user_detail->profile_picture == "")
-                 <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ '/user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
-            @else
-                <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
-            @endif
+          <!--   @if($user->user_detail->profile_picture == "")
+               <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ '/user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+          @else
+              <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+          @endif
+           -->
+               <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
       
       <!--  <img src ="{{asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview">  -->
     @endif
@@ -399,51 +799,49 @@
    <input type="hidden" value="{{ $session_id }}" id="sessionId">
   @endif
     @yield('background-content')
-      <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
-          <div class="divContainer">
-            <div class="header"></div>
-              <div class="body">
-                <h2> <i class="fa fa-times"></i> <span class="online"></span> <b id="pmName">Syndey Winchester </b> </h2>
-                <ul class="messagesContent" id="pmMessageContent">
-                </ul>
-              </div>
-              <div class="pmFooter">
-                    <div class="arrow_box pmArrowbox" style="display:none;"></div>  
-                    <div id="tooltip pmTooltip" style="display:none;">
-
-                      <ul>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                      </ul>
-
-                      </div>
-
-                    <div class="triggers">
-                      
-                      <i class="fa fa-smile-o pmTrigger"></i>
-                      <i class="fa fa-paper-plane"></i>
-                    </div>
-                    <form id="sendPrivateMessage">
-                        <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message" style="height:auto;" ></textarea>
-                    </form>
-                </div>
-            </div>
-      </div>
-
-      <div class="chatbox-panel" id="chatBoxPanel"></div>
-	
+     <!--  <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
+         <div class="divContainer">
+           <div class="header"></div>
+             <div class="body">
+               <h2> <i class="fa fa-times"></i> <span class="online"></span> <b id="pmName">Syndey Winchester </b> </h2>
+               <ul class="messagesContent" id="pmMessageContent">
+               </ul>
+             </div>
+             <div class="pmFooter">
+                   <div class="arrow_box pmArrowbox" style="display:none;"></div>  
+                   <div id="tooltip pmTooltip" style="display:none;">
+     
+                     <ul>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                         <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                     </ul>
+     
+                     </div>
+     
+                   <div class="triggers">
+                     
+                     <i class="fa fa-smile-o pmTrigger"></i>
+                     <i class="fa fa-paper-plane"></i>
+                   </div>
+                   <form id="sendPrivateMessage">
+                       <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message" style="height:auto;" ></textarea>
+                   </form>
+               </div>
+           </div>
+     </div> -->
+    <div class="chatbox-panel" id="chatBoxPanel"></div>
     <script src="{{ asset('js/jquery-1.12.0.js') }}"></script>
     <script src="{{ asset('js/CSSPlugin.min.js') }}"></script> 
     <script src="{{ asset('js/TweenLite.min.js') }}"></script> 
@@ -469,7 +867,7 @@
        })();*/
 
     </script>
-      <script src="{{ asset('js/sockets.io.js') }}"></script>
+        <script src="{{ asset('js/sockets.io.js') }}"></script>
         <script> 
             var myFriends = '<?php echo isset($myFriends) && count($myFriends) > 0 ? json_encode($myFriends) : "" ?>';
             var onlineFriendsList = [];
@@ -492,14 +890,12 @@
     <script src="{{ asset('js/moment-timezone.min.js') }}"></script> 
     <script src="{{ asset('js/livestamp.min.js') }}"></script> 
 
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+     <script src="{{ asset('js/privateMessaging.js') }}"></script>
 
-
-  <script src="{{ asset('js/privateMessaging.js') }}"></script>
-
+     @yield('script')
 
   <script>
-
-
 
   var loginPage = false;
 
@@ -511,8 +907,8 @@
 
     var window_focus = true;
 
-    window.onblur = function() { window_focus = false; }
-    window.onfocus = function() { window_focus = true; }
+window.onblur = function() { window_focus = false; }
+window.onfocus = function() { window_focus = true; }
 
     $(['http://susanwins.com/uploads/64878_click-header.png']).preload();
 
@@ -554,7 +950,93 @@ var friendUrl = '{{ url("friends") }}';
  var notifUrl = '{{ url("notification") }}';
  var clubhouseUrl = '{{ url("clubhouse") }}';
  var sessionId = $('#sessionId').val();
-var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+  var defaultProfilePic = publicUrl+'/images/default_profile_picture.png';
+  var EMAIL = "{{ isset($_GET['email']) ? $_GET['email'] : ''}}";
+
+
+/* $('#sendEmail').on('click', function(){
+    console.log("You Click Me");
+     $.ajax({
+            url :baseUrl+'/admin/sendEmailAweber',
+            data : { _token : CSRF_TOKEN },
+            dataType : 'json',
+            type : 'POST',
+            success : function(data){
+            console.log(data);
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+        });
+  });
+*/
+  $(document).on('click', '#sendEmail', function(){
+     console.log("You Click Me");
+       $.ajax({
+            url :baseUrl+'/admin/sendEmailAweber',
+            data : { _token : CSRF_TOKEN },
+            dataType : 'json',
+            type : 'POST',
+            success : function(data){
+            console.log(data);
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+        });
+  });
+
+
+
+   $(document).on('click', '#enterAddress', function(){
+     //console.log("You Click Me Address");
+     var address = "My New Address";
+       $.ajax({
+            url :baseUrl+'/admin/enterAddress',
+            data : { _token : CSRF_TOKEN, address: address },
+            dataType : 'json',
+            type : 'POST',
+            success : function(data){
+            console.log(data);
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+        });
+  });
+
+    $(document).on('click', '#ignore', function(){
+       $.ajax({
+            url :baseUrl+'/admin/ignore',
+            data : { _token : CSRF_TOKEN},
+            dataType : 'json',
+            type : 'POST',
+            success : function(data){
+            console.log(data);
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+        });
+  });
+
+    $(document).on('click', '#notify', function(){
+     console.log("You Click Me Address");
+
+    changeFavicon("http://susanwins.com/uploads/43069_friendicon.png", 2);
+    blink();
+    //icon = '<i class="ion-android-happy lightorange"></i>';
+    //changeFavicon(icon, "23");
+
+    //$("#favicon").attr("href","http://susanwins.com/uploads/43069_friendicon.png").attr("title","Hello Wolrd");
+
+
+
+     
+  });
+
+    function blink(){
+    $("#favicon").delay(100).fadeTo(100,0.5).delay(100).fadeTo(100,1, blink);
+}
+
+  
+     
   
 var profileImage = $('#data-profile').val();
 var pagename = '{{ Request::segment(2) }}';
@@ -705,7 +1187,8 @@ london = moment.tz(timeZone);
                 $('<li>').append(
                           $('<a href="'+baseUrl+'/'+friend.game.slug+'">').addClass('unread')
                             .append(
-                              $('<img>').attr('src', friend.user.user_detail.profile_picture ? publicUrl+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+                              //$('<img>').attr('src', friend.user.user_detail.profile_picture ? publicUrl+'/'+friend.user.user_detail.profile_picture : defaultProfilePic )
+                              $('<img>').attr('src', getImage(friend.user.user_detail.profile_picture, friend.user.user_detail.user_id, 5050) )
                               )
                             .append(
                               $('<p>')
@@ -724,7 +1207,6 @@ london = moment.tz(timeZone);
 
       });
 
-
        socket.on('post_accepted_friend_notification', function(friend){
 
           span = $('<span>').addClass('notifcount');
@@ -734,13 +1216,14 @@ london = moment.tz(timeZone);
               }
 
               $('#unreadUserNotification').html('').append($(span).text(notifcount));
-          console.log("Post friend request");
-          console.log(friend.profile_picture);
+
+
           $('#myNotifications').prepend(
               $('<li>').append(
                         $('<a href="javascript:;">').addClass('unread')
                           .append(
-                            $('<img>').attr('src', friend.profile_picture ? publicUrl+'/'+friend.profile_picture : defaultProfilePic )
+                           // $('<img>').attr('src', friend.profile_picture ? publicUrl+'/'+friend.profile_picture : defaultProfilePic )
+                            $('<img>').attr('src', getImage(friend.profile_picture, friend.user_id, 5050) )
                             )
                           .append(
                             $('<p>')
@@ -857,7 +1340,6 @@ london = moment.tz(timeZone);
                           );
                   }else if(notification.type == 4){
 
-
                       var a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
                             .append(
                               $('<p>')
@@ -968,7 +1450,6 @@ london = moment.tz(timeZone);
                     );
             }else if(notification.type == 4){
 
-
                var a =  $('<a href="//'+ notification.custom_notification.link +' ">').addClass('unread')
                             .append(
                               $('<p>')
@@ -1003,7 +1484,7 @@ london = moment.tz(timeZone);
        });
 
 
-      socket.on('post_custom_notification', function(notification){
+   socket.on('post_custom_notification', function(notification){
 
             $.each(notification, function(){
 
@@ -1155,7 +1636,8 @@ london = moment.tz(timeZone);
         $('<li>').append(
               $('<a href="'+data_url+'">')
               .append(
-                $('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+                //$('<img>').attr('src', data.user.user_detail.profile_picture ? baseUrl+'/'+data.user.user_detail.profile_picture : defaultProfilePic )
+                $('<img>').attr('src', getImage(data.user.user_detail.profile_picture. data.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1187,7 +1669,7 @@ london = moment.tz(timeZone);
         if(data)
         {
           readUserNotifications();
-          $(theButton).bind('click', readUserNotifications);
+          $(theButton).bind('ckick', readUserNotifications);
         }
 
         $('#myNotifications').html('');
@@ -1202,7 +1684,7 @@ london = moment.tz(timeZone);
             button = $('<a href="javascript:;">')
             .append(
               //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
-              $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
+               $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
             )
             .append(
               $('<p>')
@@ -1230,7 +1712,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="javascript:;">')
               .append(
-              $('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
+              //$('<img>').attr('src', request.user.profile_picture ? baseUrl+'/'+request.user.profile_picture : defaultProfilePic )
+              $('<img>').attr('src', getImage(request.user.profile_picture, request.user.user_id, 5050))
               )
               .append(
                 $('<p>')
@@ -1253,7 +1736,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="'+baseUrl+'/'+request.game.slug+'">')
               .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1274,7 +1758,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="'+baseUrl+'/all_games">')
               .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                 $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1289,7 +1774,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="'+baseUrl+'/'+request.postslug+'">')
               .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                 $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1304,7 +1790,8 @@ london = moment.tz(timeZone);
             $(li).append(
               $('<a href="'+baseUrl+'/'+request.categoryslug+'">')
               .append(
-                $('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                //$('<img>').attr('src', request.user.user_detail.profile_picture ? baseUrl+'/'+request.user.user_detail.profile_picture : defaultProfilePic )
+                 $('<img>').attr('src', getImage(request.user.user_detail.profile_picture, request.user.user_detail.user_id, 5050) )
               )
               .append(
                 $('<p>')
@@ -1343,7 +1830,8 @@ london = moment.tz(timeZone);
     requestHtml =  $('<li>').attr('id','friend-request-'+request.user_id).append(
                         $('<a href="javascript:;">').addClass('unread')
                           .append(
-                            $('<img>').attr('src', request.profile_picture ? publicUrl+'/'+request.profile_picture : defaultProfilePic )
+                            //$('<img>').attr('src', request.profile_picture ? publicUrl+'/'+request.profile_picture : defaultProfilePic )
+                            $('<img>').attr('src', getImage(request.profile_picture, request.user_id, 5050) )
                             )
                           .append(
                             $('<p>')
@@ -1385,8 +1873,12 @@ london = moment.tz(timeZone);
 
   });
 
+$(document).on('click', '.pmTrigger', function(){
+    $(this).parents('.pmBox').find('form').submit();
+});
 
- /* $('#sendPrivateMessage').on('submit', function(e){
+
+/*  $('#sendPrivateMessage').on('submit', function(e){
         e.preventDefault();
           theUser = $(this).data('user');
           message = $('#privateMessageTextarea').val();
@@ -1507,7 +1999,8 @@ london = moment.tz(timeZone);
                     if(this.from != userId){
 
                       $(li).append(                        
-                        $('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+                        //$('<img>').attr('src', data.other_person.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )
+                        $('<img>').attr('src', getImage(data.other_person.user_detail.profile_picture, data.other_person.user_detail.user_id, 5050) )                        
                       );
 
                     }else{
@@ -1549,7 +2042,8 @@ london = moment.tz(timeZone);
 
               $('#pmMessageContent').append(
                       $('<li>').append(
-                        $('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+message.from.profile_picture : defaultProfilePic )
+                        //$('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+message.from.profile_picture : defaultProfilePic )
+                        $('<img>').attr('src', getImage(message.from.profile_picture, message.from.user_id, 5050) )
                       )
                       .append(
                           $('<span>').text(message.message)
@@ -1577,7 +2071,8 @@ london = moment.tz(timeZone);
                         .append(
                             $('<a href="javascript:;">').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox').addClass('unread')
                               .append(
-                                $('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+ message.from.profile_picture : defaultProfilePic )
+                                //$('<img>').attr('src', message.from.profile_picture ? publicUrl+'/'+ message.from.profile_picture : defaultProfilePic )
+                                $('<img>').attr('src', getImage(message.from.profile_picture, message.from.user_id, 5050) )
                                 )
 
                               .append(
@@ -1698,15 +2193,15 @@ london = moment.tz(timeZone);
              $.each(inbox, function(){
 
               msg = this;
-             /* console.log("Testing for id");
-              console.log(msg);*/
-
+              console.log("testing debug");
+              console.log(msg.from_user.user_detail.profile_picture);
                 button = $('<a href="javascript:;">').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox')
                               .append(
                                 //$('<img>').attr('src', msg.from_user.user_detail.profile_picture ? publicUrl+'/'+ msg.from_user.user_detail.profile_picture : defaultProfilePic )
-                                //CHAMGES CALL A FUNCTION GET IMAGE
+                                 //CHAMGES CALL A FUNCTION GET IMAGE
                                 $('<img>').attr('src', getImage(msg.from_user.user_detail.profile_picture,  msg.from_user.user_detail.user_id, 5050) )
                                 )
+
 
                               .append(
                                 $('<p>')
@@ -1754,7 +2249,6 @@ london = moment.tz(timeZone);
     }
 
   /********************** END GET IMAGE ******************************************************************************/
-
 
   $('#myMessages').on('click', 'li a', function(){
 
@@ -2067,7 +2561,7 @@ interact('.draggable')
     inertia: true,
     // keep the element within the area of it's parent
     restrict: {
-      restriction: "parent",
+      restriction: ".pmBoxContainer",
       endOnly: true,
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
     },
@@ -2084,6 +2578,9 @@ interact('.draggable')
       //   'moved a distance of '
       //   + (Math.sqrt(event.dx * event.dx +
       //                event.dy * event.dy)|0) + 'px');
+
+          console.log(event.dx);
+        console.log(event.dy);
     }
   });
 
@@ -2109,7 +2606,17 @@ interact('.draggable')
       }
   });
 
-  
+
+  $('.variable-width').slick({
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    centerMode: true,
+    variableWidth: true,
+    autoplay: true
+  });
+
+ 
 
   </script>
     <script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
@@ -2119,3 +2626,4 @@ interact('.draggable')
 
 </body>
 </html>
+

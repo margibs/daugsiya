@@ -23,14 +23,80 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900' rel='stylesheet' type='text/css'>
     @yield('custom-styles')
+
+    <style>
+
+     footer ul{
+         padding: 25px 0 0 0;
+          height: 60px;
+      }
+      footer ul li, footer ul li a, footer ul li div{
+        font-size: 32px;
+        margin: 2px 9px 0 8px;
+        width: 58px;
+        position: relative;
+      }
+      footer ul li i {
+        position: relative;
+        left: 2px;
+      }
+      footer ul li a{
+            margin-left: 0;
+      }
+      footer ul li{
+        font-size: 13px;
+        position: relative;
+        top: -31px;
+            color: #8C8C8C;
+      }
+      .pastelblue{
+        color: #5fa0ee!important;
+      }
+      .lightbrown{
+        color: #CA7C51!important;
+      }
+      .darkorange{
+        color: #e3ab32!important;
+      }
+      .lightorange{
+        color: #ffd451!important;
+      }
+      nav i{
+        display: initial;
+        position: relative;
+        margin-right: 5px;
+        top: 5px;
+      }
+          .side-nav a{
+        font-size: 16px;
+        font-weight: 600;
+        color: #000;
+      }
+
+    .modal.bottom-sheet {
+    top: auto;
+    bottom: -100%;
+    margin: 0;
+    width: 100%;
+    height: 87%;
+    max-height: 45%;
+    border-radius: 0;
+    will-change: bottom, opacity;
+    }
+      
+      </style>
   </head>
+    @if(isset($user) && ($user->welcome_package_sent == 0 || $user->email_confirm == 0))
+     <body class="withnotif">
+  @else
   <body>
+@endif
        @if(isset($user))
 
           @if($user->user_detail->profile_picture == "")
                  <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ 'user_uploads/default_image/default_01.png' }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
             @else
-                <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ 'user_uploads/user_'}}{{$user->id}}/{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
+                <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{$user->user_detail->profile_picture}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}">
             @endif
 
     @endif
@@ -38,58 +104,179 @@
        <input type="hidden" value="{{ $session_id }}" id="sessionId">
       @endif
 
-         <header>
-      <div class="row no-gutters">
+
+     <header>
+      <div class="row no-gutters" style="position: relative;">
         <div class="col-xs-24">
-          <a href="javascript:;" class="waves-effect back_button" id="backButton"><i class="material-icons">chevron_left</i> </a>
-          <a href="#"> <img src="http://susanwins.com/uploads/52424_logo.png" alt=""> </a>
+           <!-- <a href="javascript:;" class="waves-effect back_button" id="backButton"><i class="ion-navicon"></i> </a> -->
+           @if(!isset($user))
+             <a href="{{ url('/login') }}" class="logout_button logoutlink"> <i class="ion-person"></i> Login | Register  </a>             
+             <a href="{{ url('/') }}" class="logo_button" style="left: 31px;"> <img src="http://susanwins.com/uploads/52424_logo.png" alt=""> </a>
+          @endif
+
+          @if(isset($user))
+           <a href="#" class="waves-effect back_button button-collapse" data-activates="slide-out" ><i class="ion-navicon"></i>  </a>          
+           <a href="{{ url('/') }}" class="logo_button"> <img src="http://susanwins.com/uploads/52424_logo.png" alt=""> </a>           
+        
+          @endif
+        
+
         </div>
       </div>
+        @if(Auth::check())
+          @if(isset($user) && $user->email_confirm == 0)
+                <div class="confirmNotification">
+                    Please check your email and confirm your membership!
+              </div>
+              @elseif(isset($user) && $user->welcome_package_sent == 0)
+              <div class="confirmNotification">
+                    Do you wish to receive the amazing Free Welcome Pack?
+                    <button type="button" id="yesWelcomePackage" href="#welcomePackageAddress">Yes</button>
+              </div>
+        @endif
+      @endif
     </header>
 
-    @if(isset($user))
+    
+    @if(Auth::check())
+       <nav class="transparent slide_menu">
+  <ul class="right hide-on-med-and-down">
+    <!-- <li><a href="#!">First Sidebar Link</a></li>
+    <li><a href="#!">Second Sidebar Link</a></li> -->
 
-     <footer>
-          <ul>
-            <li> <a href="{{ url('/') }}"> <i class="ion-home"></i> </a> </li>
-            <li> <div id="messagesMenu"> <i class="ion-chatbubbles"></i>
-                   <span id="unreadMessageNotification" class="notifCounter">
-      
-                               @if(isset($unread_messages_count) && $unread_messages_count > 0)
-                                   <span class="notifcount">{{ $unread_messages_count }}</span>
-                                 @endif
-                    </span>
-      
-            </div> </li>
-            <li> <div id="globalNotifMenu"> <i class="ion-android-notifications"></i>
-                      
-                      <span id="unreadGlobalNotification" class="notifCounter">
-      
-                                @if(isset($global_notification_count) && $global_notification_count > 0)
-                                   <span class="notifcount">{{ $global_notification_count }}</span>
-                                 @endif
-                      </span>
+  </ul>
+      <ul id="slide-out" class="side-nav">
+          <!-- <div class="card">
+            <div class="card-image"> -->
+              <!-- <img src="http://lorempixel.com/580/250/nature/1"> -->
+           <!--    <img src="{{ asset('images/background.jpg') }}">
+           <span class="card-title">{{  $user->user_detail->firstname.' '.$user->user_detail->lastname }}</span> -->
+             <!--    <img src="{{ $user->user_detail->profile_picture ? 'user_uploads/user_'.$user->user_detail->user_id.'/'.$user->user_detail->profile_picture :  'user_uploads/default_image/default_01.png' }}"> 
+              <span class="card-title" style="color:blue;">{{  $user->user_detail->firstname.' '.$user->user_detail->lastname }}</span> -->
+            <!-- </div>
+        </div> -->
+          <a href="{{ url('/') }}"> <i class="ion-ios-home-outline"></i> Home </a>            
+          <a href="#" id="menuMessage"> <i class="ion-ios-chatbubble-outline"></i> Messages </a>            
+          <a href="{{ url('clubhouse/profile') }}"> <i class="ion-ios-person-outline"></i> Profile </a>
+          <a href="{{ url('clubhouse/chatroom') }}"> <i class="ion-ios-people-outline"></i> Chatroom </a>
+          <a href="{{ url('prizes') }}"> <i class="ion-ios-star-outline"></i> Prize Room </a>
+          <a href="{{ url('clubhouse/slotsroom') }}"> <i class="ion-ios-game-controller-a"></i> Slots Room </a>
+          <a href="{{ url('/logout') }}"> <i class="ion-ios-circle-outline"></i> Logout </a> 
+      </ul>
+    </nav>
+      @endif
 
-            </div> </li>
-            <li> <div id="notificationMenu"> <i class="ion-android-happy"></i>
+  @if(Auth::check()) 
+    <footer>
+      <ul>
+        <li> <a href="{{ url('/clubhouse/home') }}" class="lightbrown"> <i class="ion-home"></i> <span class="tinylabel"> Clubhouse </span> </a> </li>
+        <li> <div id="messagesMenu">  <i class="ion-chatbubbles pastelblue"></i> <span class="tinylabel"> Messages </span>
+               <span id="unreadMessageNotification" class="notifCounter">
+  
+                           @if(isset($unread_messages_count) && $unread_messages_count > 0)
+                               <span class="notifcount">{{ $unread_messages_count }}</span>
+                             @endif
+                </span>
+  
+        </div> </li>
+        <li> <div id="globalNotifMenu"> <i class="ion-ios-bell darkorange"></i> <span class="tinylabel"> Notification </span>
+                  
+                  <span id="unreadGlobalNotification" class="notifCounter">
+  
+                            @if(isset($global_notification_count) && $global_notification_count > 0)
+                               <span class="notifcount">{{ $global_notification_count }}</span>
+                             @endif
+                  </span>
 
-                    <span id="unreadUserNotification" class="notifCounter">
+        </div> </li>
+        <li> <div id="notificationMenu"> <i class="ion-android-happy lightorange"></i> <span class="tinylabel"> Request </span>
+
+                <span id="unreadUserNotification" class="notifCounter">
+  
+                            @if(isset($user_notification_count) && $user_notification_count > 0)
+                                 <span class="notifcount   animated bounce bounceInUp"> 
+                                       {{ $user_notification_count }}
+                                     </span>
+                               @endif
+                </span>
+        </div> </li>
+    <!--     <li> 
+           <div class="fixed-action-btn vertical click-to-toggle  class="moreOptions"">
+              <a class="">
+              <i class="ion-more"></i>
+                </a>
+                <ul>
+                  <li><a class="btn-floating red" href="{{ url('logout') }}"><i class="material-icons">insert_chart</i></a></li>
+                  <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                  <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                  <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                </ul> 
+        </div>
+         </li> -->
       
-                                @if(isset($user_notification_count) && $user_notification_count > 0)
-                                     <span class="notifcount   animated bounce bounceInUp"> 
-                                           {{ $user_notification_count }}
-                                         </span>
-                                   @endif
-                    </span>
-            </div> </li>
-            <li> <a href="{{ url('/notifications') }}"> <i class="ion-power"></i> </a> </li>
-          </ul>
-        </footer>
+      </ul>
+    </footer>
     @else
-        <footer>
-          <a href="{{ url('/') }}/login" class="loginFooter">Login/Signup</a>
-      </footer>
-    @endif
+    <footer class="offlinechat">
+      <a class="directlink" href="{{ url('/signup') }}">
+        <em> Join The <span> Fun! </span> </em>
+      </a>
+       <!--  <a class="waves-effect waves-light modal-trigger modalpopup " href="#modal1">
+           <a class="waves-effect waves-light modal-trigger" href="#modal2">
+          SusansLounge
+         <span  id="popMessage" > </span>
+       </a>  -->
+
+        <a class="waves-effect waves-light modal-trigger modalpopup " href="#chat_room_modal">
+    <!--   <a class="waves-effect waves-light modal-trigger" href="#modal2">  -->
+           SusansLounge
+          <span  id="popMessage" > </span>
+        </a> 
+           <!-- Modal Trigger -->
+ 
+        <div id="chatMessageCount"><span id="unreadChat"></span></div>
+    </footer>
+     @endif
+      
+        <!-- Modal Message -->
+     <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4> Signup today to use this feature and receive an AMAZING Welcome Pack! <a href="{{ url('/signup') }}"> Signup </a> or <a href="{{ url('/login') }}"> Login </a></h4>      
+    </div>
+  </div>
+
+ 
+
+  <!-- Modal Structure -->
+  <div id="chat_room_modal" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>SusansLounge</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+          
+
+  
+
+  <div class="pageLoading" id="mainLoading">
+            <div class="preloaderContainer">
+                  <div class="preloader-wrapper big active">
+                  <div class="spinner-layer spinner-red-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div><div class="gap-patch">
+                      <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+         </div>
 
   <div class="container topMargin" >
 
@@ -133,7 +320,22 @@
 
         @yield('homecontentResposnive')
         @yield('singlecontentResposnive')
+         
 
+  </div>
+
+  <div id="welcomePackageAddress" class="modal">
+   <div class="inner">
+       <h2>  Do you wish to receive the amazing Free Welcome Pack?</h2>
+          <p class="two">Enter your address below - We've got an incredible FREE welcome pack to send you!</p>
+        <div class="form-group">
+            <textarea name="address" placeholder="Enter Address" class="welcomeAddress"></textarea>
+
+        </div>
+        <div class="form-group">
+          <button type="button" class="submitWelcomePackage">Submit</button>
+        </div>
+      </div>
   </div>
 <div class="app-page" data-page="myMessages">
       <div class="app-topbar"></div>
@@ -234,9 +436,11 @@
              </div>
         <div class="chatBox">
             <div class="body">
+            
                 <ul>
             </ul>
             </div>
+      
             <div class="chatFooter">
                    <div class="triggers">
                       <span class="sendMessage"><i class="fa fa-paper-plane"></i></span>
@@ -277,7 +481,7 @@
     USER_IMAGE = "{{ isset(Auth::user()->user_detail->profile_picture) ? Auth::user()->user_detail->profile_picture : '' }} ";
     USER_NAME = "{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}";
     USER_FULLNAME = "{{ isset(Auth::user()->user_detail) ? Auth::user()->user_detail->firstname.' '.Auth::user()->user_detail->lastname : '' }}";
-    userImage = $('#userId').data('image');
+    userImage = $('#userId').data('profile');
     DEFAULT_IMAGE = BASE_URL+'/user_uploads/default_image/default_01.png';
     ROOM_ID = "{{ isset($selectedRoom->id ) ? $selectedRoom->id  : '' }}";
     ROOM_NAME = "{{ isset($selectedRoom->name) ? $selectedRoom->name : '' }}";
@@ -285,6 +489,7 @@
     MESSAGE = "";
     var comment_type = "{{ isset($comment_type) ? $comment_type : '' }}";
     var content_id = "{{ isset($content_id) ? $content_id : '' }}";
+  
     var socket = io.connect('{{ url('') }}:8891');
   </script>
          <script src="{{ asset('js/jquery.caret.js') }}"></script>
@@ -293,6 +498,47 @@
    <script src="{{ asset('js/mobileLayout.js') }}"></script>
 
    <script src="{{ asset('js/mobileHome.js') }}"></script>
-     <script src="{{ asset('js/singlePage.mobile.js') }}"></script>
+   <script type="text/javascript" src="https://www.youtube.com/player_api"></script>
+   <script src="{{ asset('js/singlePage.mobile.js') }}"></script>
+   <script src="{{ asset('js/jquery.profanityfilter.min.js') }}"></script>
+
+  <script >
+
+    console.log(socket);
+       $('#menuMessage').on('click', function(){
+        //console.log("Hello World");
+
+       
+         $('.slide_menu').sideNav('hide');
+           App.load('myMessages');
+
+
+      });
+
+        $('#popMessage').on('click', function(){
+              //console.log("Hello World");
+               //$('#modal1').openModal();
+               $('#chat_room_modal').openModal();
+            });
+
+$(document).on('ready', function(){
+      // $('.body ul li span').profanityFilter({
+      //     customSwears: ['shit']
+      // });
+
+                $('p').profanityFilter({
+                    customSwears: ['shit']
+                })
+            
+  });
+
+     /*$(document).on('ready', function(){
+         socket.on('open_current_room', function(data){
+        console.log(data);
+       });
+     });*/
+
+
+  </script>
     @yield('app-js')
 </html>

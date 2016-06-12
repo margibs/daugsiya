@@ -4,97 +4,209 @@
 
 @include('casino.__navigation')
 
-  <!-- modal -->
-    <div class="modal">
-      <header class="modal-header">
-        <h1 class="modal-header-title left"></h1>
-        <button class="modal-header-btn modal-close" title="Close Modal"> <i class="icon-line-cross"></i> Close </button>
-        <!-- <button class="modal-header-btn uploadbtn" title="Upload" style="float:left;"> <i class="icon-line-outbox"></i> Upload </button> -->
-        <button class="modal-header-btn" id="save_image_close_modal" title="Close Modal"> <i class="icon-line-check"></i> Select </button>        
-      </header>
-      <div class="modal-body">
-        <section class="modal-content">      
-            
-            <div id="fileuploader">Upload</div>            
 
-            <div id="image_list"></div>
+<style type="text/css">
+.sortbox{
+    background: #000200;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+.sortbox h3{
+    color: #A3A5A3;
+}
+.sortbox  p{
+     color: #7ECA75;
+}
+.sortbox ul li{
+    margin: 20px 0;
+    color: #fff;
+}
+.sortbox .rawlink{
+    color: #9A9A9A;
+}
 
-        </section>
-      </div>
+.modal-content {
+    /* padding: 20px; */
+    /* transition: transform 0.7s cubic-bezier(0.165, 0.840, 0.440, 1.000); */
+    /* transform: translateY(-50px); */
+    position: absolute;
+    top: 1%;
+    width: 900px;
+    height: 380px;
+    margin: auto;
+    width: 60%;
+    /* border: 3px solid #73AD21; */
+    padding: 10px;
+}
+</style>
+
+<!-- modal -->
+  <div class="modal">
+    <header class="modal-header">
+      <h1 class="modal-header-title left"></h1>
+      <button class="modal-header-btn modal-close" title="Close Modal"> <i class="icon-line-cross"></i> Close </button>
+      <!-- <button class="modal-header-btn uploadbtn" title="Upload" style="float:left;"> <i class="icon-line-outbox"></i> Upload </button> -->
+      <button class="modal-header-btn" id="save_image_close_modal" title="Close Modal"> <i class="icon-line-check"></i> Select </button>        
+    </header>
+    <div class="modal-body">
+      <section class="modal-content">      
+          
+          <div id="fileuploader">Upload</div>            
+
+          <div id="image_list"></div>
+
+      </section>
     </div>
-  <!-- modal -->
-
-<div class="panel">
-  <h6> 
-    <a title="Upload Image" id="load_media_files" class="featImageButton featimglink modal-trigger"> 
-    <i class="icon-line-plus"></i> Casino Logo  </a> 
-  </h6>         
-   <div id="img_here">
-    @if(old('image_url'))
-    <img src="{{url('uploads')}}/{{old('image_url')}}" alt="">
-    @endif
-  </div>   
-</div>
-
-<div class="panel">
-  <h6> 
-    <a title="Upload Image" id="load_media_files2" class="featImageButton featimglink modal-trigger"> 
-    <i class="icon-line-plus"></i> Reel Image  </a> 
-  </h6>         
-   <div id="img_here2">
-    @if(old('reels_image'))
-    <img src="{{url('uploads')}}/{{old('reels_image')}}" alt="">
-    @endif
-  </div>   
-</div>
-
-<div class="panel">
-  <h6> 
-    <a title="Upload Image" id="load_media_files3" class="featImageButton featimglink modal-trigger"> 
-    <i class="icon-line-plus"></i> Claim Bonus Image  </a> 
-  </h6>         
-   <div id="img_here3">
-    @if(old('claim_image'))
-    <img src="{{url('uploads')}}/{{old('claim_image')}}" alt="">
-    @endif
-  </div>   
-</div>
-
-
-
-
-
-@if (count($errors) > 0)
-  <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-          @endforeach
-      </ul>
   </div>
-@endif
-<form action="{{url('admin/casino')}}" method="post">
-	{!! csrf_field() !!}
-  <input id="image_url" type='hidden' name='image_url' value="{{ old('image_url') }}">
-  <input id="reels_image" type='hidden' name='reels_image' value="{{ old('reels_image') }}">
-  <input id="claim_image" type='hidden' name='claim_image' value="{{ old('claim_image') }}">
-  
-	<input type="text" name="name" placeholder="name" value="{{ old('name') }}"> <br>
-  <input type="text" name="link_desktop" placeholder="Desktop Link" value="{{ old('link_desktop') }}"><br>
-  <input type="text" name="link_mobile" placeholder="Mobile Link" value="{{ old('link_mobile') }}"><br>
-  <textarea name="bonus_offer" cols="30" rows="10" placeholder="Bonus offer">{{ old('bonus_offer') }}</textarea><br>
+<!-- modal -->
 
-  <input name="category_id[]" type="checkbox" value="39">  Playtech <br>
-  <input name="category_id[]" type="checkbox" value="34">  Microgaming <br>
-  <input name="category_id[]" type="checkbox" value="43">  Netent <br>
-	<input type="submit" value="Submit">
+<div class="content-mid">
+  <form action="" id="editCasinoForm">
+          <div class="col-md-2">
+                <div class="sortbox">
+                        <h3> General Config: </h3>
+                        <p> Article Banners <span> Option to set ratio of banner to pictures: 1 banner after ever X pictures </span> </p>
+                        <input type="number" min="1" max="5" step="1">
+                        <p> Skyscraper Banners <span> Option to set ratio of banner to pictures: 1 banner after ever X pictures </span> </p>
+                        <input type="number" min="1" max="5" step="1">
+                        
+                        <p> Casino Banners </p>
+                        <h3> Add New: </h3>
+                        <input type="text" placeholder="Casino Name" />
+                        
+                        <select>
+                            <option> Select Country  </option>
+                        </select>
 
-</form>
+                        <select>
+                            <option>  Select  Mask Link  </option>
+                        </select>
+
+
+
+                        <ul class="unstyled centered">
+                          <li class="control-inline">
+                            <input class="styled-checkbox" id="features-lcd" type="checkbox" value="lcd"><label for="features-lcd"> Playtech </label>
+                          </li>
+                          <li class="control-inline">
+                            <input class="styled-checkbox" id="features-touchscreen" type="checkbox" value="touchscreen"><label for="features-touchscreen"> Microgaming </label>
+                          </li>
+                          <li class="control-inline">
+                            <input class="styled-checkbox" id="features-lightweight" type="checkbox" value="lightweight"><label for="features-lightweight"> NetEnt </label>
+                          </li>
+                        </ul>
+
+
+                      
+                        <button> Submit </button>
+                </div>            
+            </div>  
+
+
+            <div class="col-md-10">
+                    
+
+                 <ul class="postEntries casino-profile">
+                   <li> 
+                        <a href="#"> 
+                            <div class="post">
+                                 <b> <i class="fa fa-eye-slash" aria-hidden="true"></i> <em>1</em> </b>                                                         
+                                 <h2> <a title="Upload Image" id="load_media_files" class="featImageButton featimglink modal-trigger"> 
+                                  <i class="icon-line-plus"></i> Casino Logo  </a> </h2>
+                                 <span> 178 x 124 </span>
+                                 <!-- <img src="http://susanwins.com/uploads/48244_888_v_euro.jpg"> -->
+                                  <div id="img_here">
+                                    <img src="http://susanwins.com/uploads/48244_888_v_euro.jpg">
+                                  </div>   
+                            </div>
+                        </a>
+                    </li>
+                    <li> 
+                        <a href="#"> 
+                            <div class="post">
+                                  <b> <i class="fa fa-eye" aria-hidden="true"></i> <em>2</em> </b>                     
+                                 <h2>  <a title="Upload Image" id="load_media_files2" class="featImageButton featimglink modal-trigger"> 
+                                    <i class="icon-line-plus"></i> Reel Image </a> </h2>
+                                 <span> 201 x 250 </span>
+                                 <!-- <img src="http://susanwins.com/uploads/13194_888_reel_euro.jpg"> -->
+                                  <div id="img_here2">
+                                      <img src="http://susanwins.com/uploads/13194_888_reel_euro.jpg">
+                                </div>   
+                            </div>
+                        </a>
+                    </li>
+                    <li> 
+                        <a href="#"> 
+                            <div class="post">
+                                 <b> <i class="fa fa-eye" aria-hidden="true"></i> <em>2</em> </b>                                   
+                                 <h2>  <a title="Upload Image" id="load_media_files4" class="featImageButton featimglink modal-trigger"> 
+                                      <i class="icon-line-plus"></i> Claim Bonus Imagee </a>  </h2>
+                                  <span> 294 x 236 </span>
+                                 <!-- <img src="http://susanwins.com/uploads/86439_888_294x236_euro.jpg"> -->
+                                 <div id="img_here4">
+                                   <img src="http://susanwins.com/uploads/86439_888_294x236_euro.jpg">
+                                </div>   
+                            </div>
+                        </a>
+                    </li>
+
+                    <hr>
+                     <li> 
+                          <div class="post">
+                                 <b> <i class="fa fa-eye-slash" aria-hidden="true"></i> <em>1</em> </b>                                                         
+                                 <h2> <a title="Upload Image" id="load_media_files5" class="featImageButton featimglink modal-trigger"> 
+                                      <i class="icon-line-plus"></i> SkyScraper Banner AD  </a></h2>
+                                 <span> 196 x 405 </span>
+                                 <!-- <img src="http://susanwins.com/uploads/48244_888_v_euro.jpg"> -->
+                                  <div id="img_here5">
+                                   <img src="http://susanwins.com/uploads/48244_888_v_euro.jpg">
+                                </div>   
+                          </div>
+
+                    </li>
+
+
+                </ul>             
+
+              
+                <ul class="postEntries casino-profile bigbanner">
+                    <li> 
+                        <a href="#"> 
+                            <div class="post">
+                                  <b> <i class="fa fa-eye" aria-hidden="true"></i> <em>2</em> </b>                                    
+                                 <h2> <a data-toggle="modal" data-target="#myModal"> Article Banner AD  </a> </h2>
+                                 <span> 752 x 114 </span>
+                                 <img src="http://susanwins.com/uploads/31712_888h_euro.jpg">
+                            </div>
+                        </a>
+                    </li>
+                </ul> 
+              
+              
+            
+            </div>
+    </form>
+    </div>
 
 <script src="{{ asset('nexuspress/js/draggabilly.pkgd.js') }}"></script>
 <script src="{{ asset('nexuspress/js/modal.js') }}"></script>
 <script src="{{ asset('nexuspress/js/jquery.uploadfile.min.js') }}"></script>
 <script src="{{ asset('nexuspress/js/rome.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('nexuspress/chosen/chosen.jquery.min.js') }}"></script>
+
+  <script type="text/javascript">
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+  </script>
 
 <script>
   $('.uploadbtn').click(function(){
@@ -220,6 +332,58 @@
     
   });
 
+
+    $('#load_media_files4').on('click',function(){
+    Modal.open();
+      load_file = 4;
+      $('#image_list').html('');
+        $.ajax({
+          type: 'get',
+          url: "{{url('admin/ajax_get_media_file')}}",
+          success: function(response)
+          {
+            var parsed = JSON.parse(response);
+
+              $.each( parsed, function( index, obj){
+
+                var add_parent = 
+                  template_for_media_file.replace(/--image_url--/ig, obj.image_url)
+                  .replace(/--id--/ig, obj.id);
+
+                $('#image_list').append(add_parent);
+
+            });
+
+          }
+        });
+  });
+
+     $('#load_media_files5').on('click',function(){
+    Modal.open();
+      load_file = 5;
+      $('#image_list').html('');
+        $.ajax({
+          type: 'get',
+          url: "{{url('admin/ajax_get_media_file')}}",
+          success: function(response)
+          {
+            var parsed = JSON.parse(response);
+
+              $.each( parsed, function( index, obj){
+
+                var add_parent = 
+                  template_for_media_file.replace(/--image_url--/ig, obj.image_url)
+                  .replace(/--id--/ig, obj.id);
+
+                $('#image_list').append(add_parent);
+
+            });
+
+          }
+        });
+  });
+
+
   var url = '';
     $("#image_list").on("click", "img", function (event) {
         url = $(this).attr('get-this');
@@ -247,6 +411,16 @@
         else if(load_file == 3)
         {
           $('#img_here3').html("<img src='{{ url('uploads') }}/"+url+"'>");
+          $('#claim_image').attr('value',url);
+        }
+        else if(load_file == 4)
+        {
+          $('#img_here4').html("<img src='{{ url('uploads') }}/"+url+"'>");
+          $('#claim_image').attr('value',url);
+        }
+        else if(load_file == 5)
+        {
+          $('#img_here5').html("<img src='{{ url('uploads') }}/"+url+"'>");
           $('#claim_image').attr('value',url);
         }
 

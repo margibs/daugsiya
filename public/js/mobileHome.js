@@ -1,5 +1,14 @@
 (function(window, document, $){
 
+	var BASE_URL = $('meta[name="baseURL"]').attr('content');
+	var defaultProfilePic = "http://susanwins.com/images/default_profile_picture.png";
+	var sessionId = $('#sessionId').val();
+	console.log('sessionId '+sessionId);
+
+
+
+
+
 
 	  function Comment(){
       this.id,
@@ -77,6 +86,30 @@
     }
 
 
+  $('#popMessage').html('');
+  //$('#unreadChat').html('');
+  socket.on('open_current_room', function(room){
+
+       $('#popMessage').html('').append('<span> ' + room.people.length + ' people are talking now</span>');
+       
+       });
+
+	  socket.on('post_chatroom_message', function(data){
+
+			if($('#unreadChat').find('.notif').length)
+				{
+					lastCount = parseInt($('#unreadChat').find('.notif').text());
+					$('#unreadChat').find('.notif').text(lastCount+1);
+				}
+				else
+				{
+					$('#unreadChat').html('').append('<span class="notif animated bounce bounceInUp"> 1 </span>');
+				}
+
+
+	  });
+
+
 
      var comment_connected = false;
     var login_success = false;
@@ -93,8 +126,13 @@
 					      if(comment_type && content_id){
 					          socket.emit('connect_to_comment', {type : comment_type , content_id : content_id  , user : USER_FULLNAME ? USER_FULLNAME : 'Guest' });
 					      }
+					      if(USER_ID == '') {
+					      	socket.emit('look_at_room', sessionId);
+					      }
 					      
 					    });
+
+
 
 				      socket.on('comment_connected', function(){
 				      comment_connected = true;
@@ -108,7 +146,7 @@
 
 				      function allowToComment(){
 
-					      if(login_success && comment_connected)
+					      if(login_success && comment_connected && USER_ID)
 					      {	
 					      	$(page).find('#submitCommentTextarea').removeAttr('disabled').tagging();
 					      	$(page).find('#submitCommentForm').removeAttr('disabled');
@@ -116,6 +154,16 @@
 					      }
 
 					    }
+
+
+            if(USER_ID == ''){
+
+                  $(page).find('#submitCommentTextarea').removeAttr('disabled').attr('readonly', 'readonly');
+                  $(page).find('#submitCommentForm').removeAttr('disabled').attr('readonly', 'readonly');
+                  $(page).on('click', '#submitCommentTextarea, #submitCommentForm', function(){
+                    $('#loginModal').openModal();
+                  });
+            }
 
 
 			 socket.on('push_comment', function(response){
@@ -132,7 +180,8 @@
 		      comment.content_id = response.content_id;
 		      comment.name = response.name;
 		      comment.content = response.content;
-		      comment.profile_picture = response.user.user_detail.profile_picture;
+		      //comment.profile_picture = response.user.user_detail.profile_picture;
+		      comment.profile_picture = getImage(response.user.user_detail.profile_picture, response.user.user_detail.user_id, 5050);
 
 		      if($(page).find('#comment-'+comment.id).length == 0)
 		      {
@@ -155,7 +204,7 @@
 		      reply.content_id = response.content_id;
 		      reply.name = response.name;
 		      reply.parent = response.parent;
-		      reply.profile_picture = response.user.user_detail.profile_picture;
+		      reply.profile_picture = getImage(response.user.user_detail.profile_picture, response.user.user_detail.user_id, 5050);
 
 		      if($(page).find('#reply-'+reply.id).length == 0)
 		      {
@@ -176,16 +225,16 @@
 
 	       		$(page).on('submit', '#commentForm', function(e){
 	       			e.preventDefault();
+	       			$(this).trigger('simulateSubmit');
 
 	       			content = $(this).find('[name="content"]').val();
 
-	       			if(!content){
-	       				alert('Please write something!');
+	       			if(!content && USER_ID){
+	       				//alert('Please write something!');
 	       				return;
 	       			}
 
 	       			if(!USER_ID){
-	       				alert('You must login first!');
 
 	       				return;
 	       			}
@@ -196,7 +245,8 @@
 			        comment.content = content;
 			        comment.content_id = $(this).find('[name="content_id"]').val() || false;
 			        comment.name = USER_FULLNAME || false;
-			        comment.profile_picture = userImage;
+			        //comment.profile_picture = userImage;
+			        comment.profile_picture = getImage(userImage, comment.user_id, 5050);
 			        actionUrl = $(this).attr('action');
 
 			        friendTags = $(this).data('friendTags');
@@ -241,9 +291,19 @@
 	       		
 	       		});
 
+	       		 /********************** START GET IMAGE ******************************************************************************/
+			    function getImage(profile_picture ,user_id, size) {
+
+			      if(size === null) {
+			          return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+			      }
+			       return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+			    }
+
 				$(page).on('submit', '.reply_form', function(e){
 					
 					e.preventDefault();
+					$(this).trigger('simulateSubmit');
 
 					content = $(this).find('[name="content"]').val();
 
@@ -265,7 +325,8 @@
 			        reply.content = content;
 			        reply.content_id = $(this).find('[name="content_id"]').val() || false;
 			        reply.name = USER_FULLNAME || false;
-			        reply.profile_picture = userImage;
+			        //reply.profile_picture = userImage;
+			        reply.profile_picture = getImage(userImage, reply.user_id, 5050);
 			        reply.parent = $(this).find('[name="parent"]').val();
 			        actionUrl = $(this).attr('action');
 

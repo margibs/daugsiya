@@ -13,7 +13,10 @@ class HomeImage extends Model
     protected $fillable = [
     			'image',
     			'link',
-    			'position'
+    			'position',
+                'redirect_link',
+                'is_boolean',
+                'show_add'
     		];
 
     protected $dates = ['deleted_at'];
@@ -24,5 +27,12 @@ class HomeImage extends Model
     						->select('*')
     						->get();
     	return $data;
+    }
+
+    static function find_redirect($redirect) {
+        return  DB::table('home_images')
+                        ->select(['id'])
+                        ->where('redirect_link', '=', $redirect)
+                        ->get();
     }
 }

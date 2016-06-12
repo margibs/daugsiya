@@ -45,5 +45,16 @@ class User_Detail extends Model
     	return $this->profile_picture ? url().'/user_uploads/user_'.$this->user_id.'/'.$this->profile_picture : $this->default_image;
     }
 
+     //NEED TO ADD TO SERVER
+    public function fullName() {
+        return $this->firstname .' '. $this->lastname;
+    }
+
+    public function messageChecker($message) {
+        $value = str_contains('This is my name', 'my');
+    }
+
+
+
 
 }

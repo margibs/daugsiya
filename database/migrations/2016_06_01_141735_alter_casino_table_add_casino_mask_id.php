@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterCasinoBanners extends Migration
+class AlterCasinoTableAddCasinoMaskId extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,8 @@ class AlterCasinoBanners extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('casino_banners', 'image_link')){}
-        Schema::table('casino_banners', function (Blueprint $table) {
-            $table->string('image_link')->unique()->change();
+        Schema::table('casinos', function (Blueprint $table) {
+            $table->integer('casino_mask_id');
         });
     }
 
@@ -25,6 +24,8 @@ class AlterCasinoBanners extends Migration
      */
     public function down()
     {
-        //Schema::drop('aleter_casino_banners');
+        Schema::table('casinos', function (Blueprint $table) {
+            $table->dropColumn('casino_mask_id');
+        });
     }
 }

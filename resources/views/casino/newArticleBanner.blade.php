@@ -48,8 +48,9 @@
 	{!! csrf_field() !!}
   <input id="image_url" type='hidden' name='image_url' value="{{ old('image_url') }}">
 	<input type="hidden" name="banner_type" value="1">
-	<input type="text" name="image_link" placeholder="Image Link" value="{{ old('image_link') }}">
-  <input type="text" name="redirect_link" placeholder="Redirect Link" value="{{ old('redirect_link') }}"> 
+	<input type="text" name="image_link" placeholder="Banner Slug" value="{{ old('image_link') }}">
+  <input type="text" name="redirect_link" placeholder="Desktop Redirect Link" value="{{ old('redirect_link') }}">
+  <input type="text" name="mobile_redirect_link" placeholder="Mobile Redirect Link" value="{{ old('mobile_redirect_link') }}"> 
    <select name="casino_id" placeholder="Casino">
       <option value="0">N/A</option>
       @foreach($casinos as $c)
@@ -57,8 +58,7 @@
             <option value="{{ $c->id }}" {{ $c->id }}>{{ $c->name }}</option>
       @endforeach
 
-  </select>
-  <br>
+  </select> <br>
   {!! Form::select('countries[]', 
                 [
                   'AF' => 'Afghanistan',

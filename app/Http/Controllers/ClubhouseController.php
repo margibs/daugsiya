@@ -18,7 +18,11 @@ use App\Global_Notification;
 use App\Model\Post;
 use Session;
 use App\Friend;
+
 use AWeberAPI;
+
+use Input;
+
 
 class ClubhouseController extends Controller
 {
@@ -293,6 +297,7 @@ class ClubhouseController extends Controller
         return view('clubhouse.prize', compact('user', 'unread_messages_count', 'user_notification_count', 'global_notification_count', 'session_id', 'myFriends'));
     }
 
+
     public function aweberApi() {
          
        $this->connect();
@@ -341,5 +346,38 @@ class ClubhouseController extends Controller
     }
 
    
+
+
+     public function confirmEmail() {
+        
+        $email = Input::get('email');
+
+        if($email == '') {
+            return view('clubhouse.login');
+        }
+        $id = User::findEmail($email);
+        if($id) 
+        {
+
+            $result = Auth::loginUsingId($id);
+            if($result) {
+                //update email_confirm and welcome_package_sent users table
+                $user = User::findOrFail($id);
+                $user->email_confirm = 1;
+                $user->save();
+                return redirect('clubhouse/home');
+
+            }
+            else {
+                 return view('clubhouse.login');
+            }      
+        }
+        //return to login
+        else 
+        {
+            return view('clubhouse.login');
+        }
+    }
+
 
 }

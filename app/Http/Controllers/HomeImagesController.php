@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
 use App\HomeImage;
 use App\Model\CasinoBanner;
+use App\Autopost;
+use DB;
+use App\Model\Comment;
+
 
 
 class HomeImagesController extends Controller
@@ -27,7 +31,9 @@ class HomeImagesController extends Controller
 
     public function anyData() 
     {
-        $home_image = HomeImage::select(['id', 'image', 'link', 'position', 'created_at', 'updated_at'])->get();
+        $home_image = HomeImage::select(['id', 'image', 'link', 'redirect_link', 'show_add', 'position', 'created_at', 'updated_at'])
+                                ->where('is_boolean', '=', 0)
+                                ->get();
         return Datatables::of($home_image)
                  ->addColumn('action', function ($home_image) {
                                             return 
@@ -127,4 +133,103 @@ class HomeImagesController extends Controller
                 ->make(true);
     }
 
+    public function get_mobile_adds() {
+
+         $home_image = HomeImage::select(['id', 'image', 'link', 'redirect_link', 'show_add', 'position', 'created_at', 'updated_at'])
+                                ->where('is_boolean', '=', 1)
+                                ->get();
+        return Datatables::of($home_image)
+                 ->addColumn('action', function ($home_image) {
+                                            return 
+                                            "<a href='".url("admin/homeads/edit")."/".$home_image->id."' >Edit</a>
+                                            <a href='".url("admin/homeads/delete/imageDelete")."/".$home_image->id."' >Delete</a>
+                                            ";
+                                        })
+                ->editColumn('created_at', '{!! $created_at->diffForHumans() !!}')
+                ->editColumn('updated_at', '{!! $created_at->diffForHumans() !!}')
+                ->make(true);
+    }
+
+    //DATA TABLE FOR AUTOPOST
+    public function getAllJson() {
+         $autoposts = Autopost::select(['id', 'description', 'fb', 'twitter', 'pinterest', 'instagram', 'date_posting'])->get();
+      /*  $autoposts = DB::table('autoposts')
+                        select(['id', 'description', 'fb', 'twitter', 'pinterest', 'instagram', 'date_posting'])
+                        ->get();;*/
+         return Datatables::of($autoposts)
+                              ->addColumn('action', function ($autoposts) {
+                                            return 
+                                            "<a href='".url("admin/homeads/edit")."/".$autoposts->id."' >Edit</a>
+                                            <a href='".url("admin/homeads/delete/imageDelete")."/".$autoposts->id."' >Delete</a>
+                                            ";
+                                        })
+                              ->editColumn('fb', function($autoposts){
+                                 return (($autoposts->fb == 1) ? '<span style="color:yellow;">Not Posted</span>'  : 
+                                        (($autoposts->fb == 2) ? '<span style="color:red;">ERROR POSTING</span>' :
+                                        '<span style="color:green;">POSTED</span>'));
+                              })
+                              ->editColumn('twitter', function($autoposts){
+                                 return (($autoposts->twitter == 1) ? '<span style="color:yellow;">Not Posted</span>'  : 
+                                        (($autoposts->twitter == 2) ? '<span style="color:red;">ERROR POSTING</span>' :
+                                        '<span style="color:green;">POSTED</span>'));
+                              })
+                               ->editColumn('pinterest', function($autoposts){
+                                 return (($autoposts->pinterest == 1) ? '<span style="color:yellow;">Not Posted</span>'  : 
+                                        (($autoposts->pinterest == 2) ? '<span style="color:red;">ERROR POSTING</span>' :
+                                        '<span style="color:green;">POSTED</span>'));
+                              })
+                              ->editColumn('instagram', function($autoposts){
+                                 return (($autoposts->instagram == 1) ? '<span style="color:yellow;">Not Posted</span>'  : 
+                                        (($autoposts->instagram == 2) ? '<span style="color:red;">ERROR POSTING</span>' :
+                                        '<span style="color:green;">POSTED</span>'));
+                              })
+                              ->make(true);
+    }
+
+    public function getAllComments() {
+
+
+        $comments = Comment::join('users','comments.user_id','=','users.id')
+                            ->join('posts','comments.content_id','=','posts.id')
+                            ->select(['users.name','comments.content','comments.created_at','comments.approved','posts.slug','posts.id'])
+                            ->where('comments.type',3)->get();
+
+        return Datatables::of($comments)
+                            ->addColumn('action', function ($comments) {
+                                        return 
+                                        "<a href='".url("admin/editComment/")."/".$comments->id."' ><i class='fa fa-pencil'></i></a>
+                                        <a href='".url("admin/homeads/delete/imageDelete")."/".$comments->id."' ><i class='icon-trash'></i></a>
+                                        ";
+                                    })
+                            ->editColumn('approved', function($comments) {
+                                return $comments->approved ==  0 ? '<a href=""><i class="icon-thumbs-down"></i></a>' : '<a href="" style="color:green;"><i class="icon-thumbs-up"></i></a>';
+                            })
+                            ->make(true);
+
+    }
+
+    public function getAllCommentsPending() {
+
+        $comments = Comment::join('users','comments.user_id','=','users.id')
+                            ->join('posts','comments.content_id','=','posts.id')
+                            ->select(['users.name','comments.content','comments.created_at','comments.approved','posts.slug','posts.id'])
+                            ->where('comments.type',3)
+                            ->where('approved', 0)
+                            ->get();
+
+        return Datatables::of($comments)
+                            ->addColumn('action', function ($comments) {
+                                        return 
+                                        "<a href='".url("admin/editComment/")."/".$comments->id."' ><i class='fa fa-pencil'></i></a>
+                                        <a href='".url("admin/homeads/delete/imageDelete")."/".$comments->id."' ><i class='icon-trash'></i></a>
+                                        ";
+                                       /* <a href="{{ url('/') }}/{{ $comment->slug }}" traget="_blank" style="font-size: 13px;">{{ url('/') }}/{{ $comment->slug }}</a> </td>
+                                            <td style="text-align: center;"><a href="#"><i class="icon-trash"></i></a></td>*/
+                                    })
+                            ->editColumn('approved', function($comments) {
+                                return $comments->approved ==  0 ? '<a href=""><i class="icon-thumbs-down"></i></a>' : '<a href="" style="color:green;"><i class="icon-thumbs-up"></i></a>';
+                            })
+                            ->make(true);
+
+    }
 }

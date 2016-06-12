@@ -54,6 +54,7 @@ use DateTimeZone;
 use App\Http\HomeImageRequest;
 use Input;
 use App\Model\CasinoBanner;
+use Storage;
 
 
 
@@ -546,7 +547,8 @@ class AdminController extends Controller
     public function homeAds()
     {
         $home_images = HomeImage::get();
-        return view('admin.homeAds',compact('home_images'));
+        $priority_list = array("1" => 1,"2" => 2,"3" => 3,"4" => 4,"5" => 5);
+        return view('admin.homeAds',compact('home_images', 'priority_list'));
     }
 
     public function insertImage(Request $request) 
@@ -554,6 +556,7 @@ class AdminController extends Controller
          $validator = Validator::make($request->all(), [
             'image' => 'required',
             'link' => 'required',
+            'redirect_link' => 'required:unique',
             'position' => 'required'
         ]);
 
@@ -564,7 +567,19 @@ class AdminController extends Controller
             return view('admin.homeAds',compact('home_images'))->withErrors($validator);
          }
 
+        $result = HomeImage::find_redirect($request->redirect_link);
+        if($result != '') {
+
+            $validator = [
+                'redirect_link' => 'Redirect Link Already Exist'
+            ];
+            $home_images = HomeImage::get();
+            return view('admin.homeAds',compact('home_images'))->withErrors($validator);
+        }
+     
+
         $data = $request->all();
+       
         $image = HomeImage::create($data);
         $home_images = HomeImage::get();
         return view('admin.listImageAdds',compact('home_images'));
@@ -574,6 +589,7 @@ class AdminController extends Controller
     {
 
         $home_image = HomeImage::find($id);
+
         return view('admin.viewAds', compact('home_image'));
         
     }
@@ -1592,5 +1608,122 @@ class AdminController extends Controller
         return json_encode($sites);
     }
 
- 
+    public function mobile_home_ads() {
+
+        $home_images = HomeImage::get();
+        $priority_list = array("1" => 1,"2" => 2,"3" => 3);
+        return view('admin.mobileHomeAds',compact('home_images', 'priority_list'));
+    }
+
+    public function findMediaFiles($id) {
+        $media_files =  MediaFile::find($id);
+        return json_encode($media_files);
+    }
+
+    public function deleteMediaFiles($id) {
+        $media_file = MediaFile::findOrFail($id);
+        if(!unlink(public_path('/uploads/' . $media_file->image_url))) {
+
+        }
+        $media_file->delete();
+          //delete the image
+        $data = ['error' => false, 'data' => $media_file];
+        return json_encode($data);
+    }
+
+    public function editComment($id) {
+        $post = Post::findOrFail($id);
+  
+
+        return view('admin.editComment', compact('post'));
+    }
+
+    public function editCommentPost(Request $request, $id) {
+        
+           
+        $post = Post::findOrFail($id);
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post->save();
+
+       
+        $comment = Comment::find($post->id);
+        if($comment) {
+            $comment->content = $request->content;
+            $comment->approved = $request->approved;
+            $compact->save();
+        }
+        else {
+             $comment_status = $request->get('comment_status');
+        $comment_status2 = 3;
+        $comments = '';
+        
+        if($comment_status == null)
+        {
+            $comments =
+                DB::table('comments')
+                ->join('users','comments.user_id','=','users.id')
+                ->join('posts','comments.content_id','=','posts.id')
+                ->select('users.name','comments.content','comments.created_at','comments.approved','posts.slug','posts.id')
+                ->where('comments.type',3)
+                // ->groupBy('posts.slug')
+                ->paginate(15);
+        }
+        elseif($comment_status == 'pending')
+        {
+            $comments =
+                DB::table('comments')
+                ->join('users','comments.user_id','=','users.id')
+                ->join('posts','comments.content_id','=','posts.id')
+                ->select('users.name','comments.content','comments.created_at','comments.approved','posts.slug','posts.id')
+                ->where('comments.type',3)
+                ->where('approved',0)
+                // ->groupBy('comments.id')
+                ->paginate(15);
+
+                $comment_status2 = 0;
+        }
+        elseif($comment_status == 'approved')
+        {
+            $comments =
+                DB::table('comments')
+                ->join('users','comments.user_id','=','users.id')
+                ->join('posts','comments.content_id','=','posts.id')
+                ->select('users.name','comments.content','comments.created_at','comments.approved','posts.slug','posts.id')
+                ->where('comments.type',3)
+                ->where('approved',1)
+                // ->groupBy('comments.id')
+                ->paginate(15);
+
+                $comment_status2 = 1;
+        }
+        elseif($comment_status == 'trashed')
+        {
+            $comments =
+                DB::table('comments')
+                ->join('users','comments.user_id','=','users.id')
+                ->join('posts','comments.content_id','=','posts.id')
+                ->select('users.name','comments.content','comments.created_at','comments.approved','posts.slug','posts.id')
+                ->where('comments.type',3)
+                ->where('approved',2)
+                // ->groupBy('comments.id')
+                ->paginate(15);
+
+                $comment_status2 = 2;
+        }
+
+
+        // dd($comments);
+
+        return view('admin.comments',compact(['comments','comment_status2']));
+
+        }
+
+        return "Updated";
+     
+
+
+
+
+    } 
 }

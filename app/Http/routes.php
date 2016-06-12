@@ -14,6 +14,15 @@
 use Jenssegers\Agent\Agent as Agent;
 $Agent = new Agent();
 
+Route::get('welcome', function(){
+
+	return view('welcome');
+	//return "Hello World";
+});
+
+Route::post('email/send', 'UserController@emailSend');
+
+
 Route::get('get/me/token', function () {
 
 	if(Request::ajax()){
@@ -122,6 +131,9 @@ Route::get('admin/autoposts/twitter', 'AutoPostController@runTwitterPost');
 Route::get('admin/autoposts/pinterest', 'AutoPostController@runPinterestPost');
 Route::get('admin/autoposts/instagram', 'AutoPostController@runInstagramPost');
 Route::get('admin/autoposts/check_execute', 'AutoPostController@checkExecute');
+
+//DATA TABLES FOR INDEX
+Route::get('admin/autoposts/getAll', 'HomeImagesController@getAllJson');
 
 
 Route::post('room/getRoomMessages', 'ChatroomController@getRoomMessages');
@@ -302,9 +314,38 @@ Route::group(['middleware' => 'UserCheck'], function()
 	Route::get('admin/article/get','HomeImagesController@articleGet');
 	Route::get('admin/skypscrapper/get','HomeImagesController@skypscrapperGet');
 	Route::get('admin/home-adds/get', 'HomeImagesController@anyDataCasino');
+	/*
+	*  FUNCTION FOR LINK IN MOBILE
+	*/
+	Route::get('admin/mobile_home_ads','AdminController@mobile_home_ads');
+	Route::get('admin/get_mobile_adds', 'HomeImagesController@get_mobile_adds');
+
+	//EDIT USERS
+	Route::get('admin/user/edit/{id}', 'UserController@editUser');
+
+
+	//FIND MEDIAFILES
+	Route::get('admin/findMediaFiles/{id}', 'AdminController@findMediaFiles');
+	Route::get('admin/deleteMediaFiles/{id}', 'AdminController@deleteMediaFiles');
+
+	//COMMENTS DATABALES
+	Route::get('admin/getAllComments', 'HomeImagesController@getAllComments');
+	//COMMENTS DATABALES NEED TO MODIFIED
+	Route::get('admin/getAllCommentsPending', 'HomeImagesController@getAllCommentsPending');
+	//EDIT COMMENT
+	Route::get('admin/editComment/{id}', 'AdminController@editComment');
+
+	Route::get('admin/editComment/{id}', 'AdminController@editComment');
+
+	Route::post('admin/editComment/{id}', 'AdminController@editCommentPost');
+
+
 	
 
 });
+
+
+
 
 
 //Ajax Call
@@ -404,6 +445,13 @@ Route::group(['middleware' => 'ClubMiddleware'], function()
 	Route::post('message/getPaginatePrivateMessage', 'MessageController@getPaginatePrivateMessage');
 	Route::post('message/postPaginatePrivateMessage', 'MessageController@postPaginatePrivateMessage');
 
+	//SEND AWEBER EMAIL
+	Route::post('admin/sendEmailAweber', 'UserController@sendEmailAweber');
+
+	Route::post('admin/enterAddress', 'UserController@enterAddress');
+
+	Route::post('admin/ignore', 'UserController@ignore');
+
 
 });
 
@@ -413,6 +461,11 @@ Route::post('login/post', 'ClubhouseController@postLogin');
 Route::get('signup', 'PageController@signup');
 Route::post('signup/post', 'Auth\AuthController@signup');
 Route::get('logout', 'ClubhouseController@getLogout');
+
+
+//new signup
+Route::post('user/signup', 'Auth\AuthController@userSignup');
+
 
 //Route::get('aweber/api', 'ClubhouseController@aweberApi');
 
@@ -424,9 +477,15 @@ Route::get('aweber/api', 'AweberApiSusan@connectToAWeberAccount');
 
 // Registration routes...
 // Route::get('register', 'Auth\AuthController@getRegister');
-// Route::post('register', 'Auth\AuthController@postRegister');
+// Route::post('register', 'Auth\AuthController@postRegister');x
 
 //Single BLog
+
+Route::get('test_admin', function(){
+	return view('admin2.layout');
+});
+
+Route::get('clubhouse/confirm', 'ClubhouseController@confirmEmail');
 
 if ($Agent->isMobile()) {
     // you're a mobile device

@@ -13,6 +13,11 @@ class Post extends Model
         return $this->hasMany('App\Model\Comment', 'content_id')->where('parent', '=', 0)->where('type', 3);
     }
 
+    //NEED TO ADD TO SERVER
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
     public function total_comments(){
     	return $this->hasMany('App\Model\Comment', 'content_id')->where('type', 3);
     }

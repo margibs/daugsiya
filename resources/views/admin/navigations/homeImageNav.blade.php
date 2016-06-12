@@ -8,7 +8,8 @@
   </div>
 
   <ul>
-    <li> <a href="{{ url('/admin/home_ads') }}" > <i class="icon-line-head"></i> Add </a> </li>
+    <li> <a href="{{ url('/admin/home_ads') }}" > <i class="icon-line-head"></i>Deskop Add </a> </li>
+    <li> <a href="{{ url('/admin/mobile_home_ads') }}" > <i class="icon-line-head"></i>Mobile Add </a> </li>
     <li> <a href="{{ url('admin/homeads/list/imageAdds') }}"> <i class="icon-line-star"></i> List </a> </li>       
     <li> <a href="{{ url('admin/homeads/list/trashed') }}"> <i class="icon-trash"></i> Trash </a> </li>
     <li> <a class="searchlink"> <i class="icon-line-search"></i> Search </a> </li>

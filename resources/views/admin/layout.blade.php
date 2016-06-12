@@ -32,7 +32,16 @@
     <![endif]-->
 
 <!--     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+       <!--  <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"> -->
+
+       <!-- Custom Theme files -->
+
+    <!-- CSS STYLE FOR NEW LAYOUT-->
+    <link href="{{ asset('css/style.css') }}" rel='stylesheet' type='text/css' />
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet"> 
+    <!-- CSS STYLE FOR NEW LAYOUT-->
+    
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"> 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>        
     <script type="text/javascript">
@@ -100,9 +109,31 @@
 </script>
 
  <!-- DataTables -->
-  <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+ <!--  <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script> -->
+  <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script> 
+
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+      <script src="{{ asset('js/moment.min.js') }}"></script> 
+    <script src="{{ asset('js/moment-timezone.min.js') }}"></script> 
+    <script src="{{ asset('js/livestamp.min.js') }}"></script> 
+
+    <script type="text/javascript">
+      timeZone = 'Europe/London';
+
+// Comment ---------------
+  
+  $('.timestamp').each(function(){
+      timestamp = this;
+      datetime = $(timestamp).data('datetime');
+      $(timestamp).find('.livetime').livestamp(moment.tz(datetime, timeZone).format() );
+      $(timestamp).find('.readable_time').text(moment.tz(datetime, timeZone).format('MMM DD, YYYY'));
+  });
+
+    </script>
+
    <!-- App scripts -->
+     @yield('script_js')
         @stack('scripts')
 
 </body>

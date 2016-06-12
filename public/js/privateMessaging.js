@@ -1,13 +1,16 @@
 
 (function(window, document, $){
 
-
+		console.log("PRIVATE MESSAGE");
 	  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 		var BASE_URL = $('meta[name="baseURL"]').attr('content');
 		var messageUrl = BASE_URL+'/message';
 		var userId = $('#userId').val();
 		var USER_UPLOADS = '/user_uploads/user_';
 		var tabActions = [];
+
+		var defaultProfilePic = BASE_URL+'/user_uploads/default_image/default_01.png';
+
 
 
 	function getTabActionKey(user_id){
@@ -44,6 +47,53 @@
 		 console.log('addTabAction');
 		 console.log(tabActions);
 	}
+
+	   /********************** START GET IMAGE ******************************************************************************/
+    function getImage(profile_picture ,user_id, size) {
+
+      if(size === null) {
+          return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+      }
+       return  profile_picture ? BASE_URL+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+    }
+
+  /********************** END GET IMAGE ******************************************************************************/
+
+   function messageChecker(message, updated_at) {
+      result = message.indexOf(".com");
+      image = message.indexOf(".jpg");
+
+      if(result != -1) {
+          console.log(true);
+          return "<p><a target='_blank' href='"+message+"' style='text-decoration: none;'>"+message+"</a><dev class='timestamp' data-datetime='"+updated_at+"'><dev class='livetime'></dev></dev></p>";
+      }
+      else {
+          console.log(false);
+          
+          return "<p>"+message+"<dev class='timestamp' data-datetime='"+updated_at+"'><dev class='livetime'></dev></dev></p>";
+      }
+     
+    }
+
+    /*function messageChecker(message) {
+      result = message.indexOf(".com");
+     // image = message.indexOf(".jpg");
+      if(result != -1) {
+          console.log(true);
+          console.log(message);
+          console.log(result);
+          return "<p><a target='_blank' href='"+message+"' style='text-decoration: none;'>"+message+"</a></p>";
+      }
+      else {
+          console.log(false);
+          console.log(message);
+          console.log(result);
+          return "<p>"+message+"</p>";
+      }
+     
+    }*/
+
+
 
 function getPmCb(userId){
 
@@ -107,7 +157,6 @@ function appendTab(theTab){
 
 	if(chatBoxContainers.length >=4){
 		lastContainer = $(chatBoxContainers).eq(3);
-		console.log(lastContainer);
 		theTab.insertBefore(lastContainer);
 	}
 
@@ -141,6 +190,10 @@ function checkTabContainers(){
 	}
 	
 }
+
+$(document).on('checkTabContainers', function(){
+	checkTabContainers();
+})
 
 $(document).on('click','.chatSmContainerBtn', function(){
 	$('.chatSmContainer').toggle();
@@ -426,6 +479,20 @@ function getPrivateMessageReadCount(user_id, callback){
 				});
 }
 
+ function initializeDate() {
+
+          timeZone = 'Europe/London';
+      
+      $('.timestamp').each(function(){
+          timestamp = this;
+          datetime = $(timestamp).data('datetime');
+          $(timestamp).find('.livetime').livestamp(moment.tz(datetime, timeZone).format() );
+          $(timestamp).find('.readable_time').text(moment.tz(datetime, timeZone).format('MMM DD, YYYY'));
+      });
+
+   }
+
+
 function getPrivateMessage(user_id, callback){
 
 	thePmCb = $('#pmbox-user-'+user_id);
@@ -460,14 +527,21 @@ function getPrivateMessage(user_id, callback){
 						{
 							$.each(data.conversation, function(){
 
+								//console.log(data.conversation[0].created_at);
+
 								li = $('<li>');
 
-								span = $('<span>').text(this.message);
+								//console.log(this.updated_at);
+
+								//span = $('<span>').text(this.message);
+								//span = $('<span>').append(messageChecker(this.message));
+								span = $('<span>').append(messageChecker(this.message, this.updated_at));
 
 								if(this.from != userId)
 								{
 									$(li).append(                        
-										$('<img>').attr('src', data.other_person.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )                        
+										//$('<img>').attr('src', data.other_person.user_detail.profile_picture ? BASE_URL+'/'+USER_UPLOADS+data.other_person.user_detail.user_id+'/'+data.other_person.user_detail.profile_picture : defaultProfilePic )
+										$('<img>').attr('src', getImage(data.other_person.user_detail.profile_picture, data.other_person.user_detail.user_id, 5050))                        
 									);
 								}
 								else
@@ -487,6 +561,8 @@ function getPrivateMessage(user_id, callback){
 							if(callback) callback(thePmCb);
 						}
 
+						initializeDate();
+
 					},
 					error : function(xhr)
 					{
@@ -500,7 +576,6 @@ $(document).on('click', '.pmFriend', function(){
 	_this = this;
 
 	user_id = $(this).attr('data-user') ? $(this).attr('data-user') : $(this).parent().attr('data-user');
-	alert('user_id');
 	if(user_id){
 
 		thePmCb = getPmCb(user_id);
@@ -559,10 +634,13 @@ socket.on('post_private_message', function(message){
 
 				thePmCb.find('.messagesContent').append(
 					$('<li>').append(
-						$('<img>').attr('src', BASE_URL+'/'+message.from.profile_picture ? BASE_URL+'/'+message.from.profile_picture : defaultProfilePic )
+						//$('<img>').attr('src', BASE_URL+'/'+message.from.profile_picture ? BASE_URL+'/'+message.from.profile_picture : defaultProfilePic )
+						$('<img>').attr('src', getImage(message.from.profile_picture, message.from.user_id, 5050))
 					)
 					.append(
-						$('<span>').text(message.message)
+						//$('<span>').text(message.message)
+						//span = $('<span>').append(messageChecker(this.message, this.updated_at));
+						$('<span>').append(messageChecker(message.message, message.updated_at))
 					)
 				);
 			}
@@ -590,7 +668,8 @@ socket.on('post_private_message', function(message){
 					.append(
 						$('<a href="javascript:;">').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox').addClass('unread')
 						.append(
-							$('<img>').attr('src', message.from.profile_picture ? BASE_URL+'/'+ message.from.profile_picture : defaultProfilePic )
+							//$('<img>').attr('src', message.from.profile_picture ? BASE_URL+'/'+ message.from.profile_picture : defaultProfilePic )
+							$('<img>').attr('src', getImage(message.from.profile_picture, message.from.user_id, 5050))
 						)
 						.append(
 							$('<p>')

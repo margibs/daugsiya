@@ -9,46 +9,38 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="baseURL" content="{{ url('') }}" />
     <meta name="google-site-verification" content="ZsovtY5ezCxnStSn3xVYrsyYw7Jdt3pUHDhlV-qwKTY" />
-    
+
     <link rel="shortcut icon" href="{{ asset('images/susanfav.png') }}">
 
-
+      <link rel="icon" href="http://susanwins.com/uploads/43069_friendicon.png">
 
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> -->
-
 
     @yield('for_og')
     
     <!-- Document Title
     ============================================= -->
     <title> SusanWins @yield('page-title')</title>
+
     <!-- Stylesheets
     ============================================= -->
-    <!--<link rel="stylesheet" href="{{ asset('css/reset.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/ezslots.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/jquery.m.flip.css') }}">        
-    <link rel="stylesheet" href="{{ asset('css/master.css') }}">    
-    <link rel="stylesheet" href="{{ asset('css/960_24_col.css') }}">-->
-<!-- 
-    <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
-     -->
-    
 
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="{{ asset('css/grid24.css') }}">    
-  <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">    
-  <link rel="stylesheet" href="{{ asset('css/responsiveHomepage.css') }}">        
-  <link rel="stylesheet" href="{{ asset('css/animate.css') }}">        
-  <link rel="stylesheet" href="{{ asset('css/hint.min.css') }}">
-   <link rel="stylesheet" href="{{ asset('css/tagging.css') }}">
-  <!-- <link rel="stylesheet" href="{{ asset('css/bttrlazyloading.min.css') }}">         -->
-  <link rel="stylesheet" href="{{ asset('css/jquery.slotmachine.css') }}">
-  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="{{ elixir('css/all.css') }}"> -->
   
-  <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Work+Sans:800,900' rel='stylesheet' type='text/css'>
-   
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="{{ asset('css/grid24.css') }}">    
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">    
+    <link rel="stylesheet" href="{{ asset('css/responsiveHomepage.css') }}">        
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">        
+    <link rel="stylesheet" href="{{ asset('css/hint.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tagging.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery.slotmachine.css') }}">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,900,500' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:500,800,900' rel='stylesheet' type='text/css'>
+
 
     <!--[if lt IE 9]>
         <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -64,8 +56,9 @@
     </script>
     -->
 
+    
+
    @yield('scripts_here')
-      <!-- new chat -->
 
   <style>
 
@@ -75,6 +68,43 @@
       padding: 10px;
       margin-bottom: -3px;
       font-family: Roboto;
+      }
+      .chatbox-panel{
+      position: fixed;
+      bottom: 0;
+      z-index: 99;
+      width: 1184px;
+      right: 7%;
+      }
+
+      .chatbox-container{
+      position: relative;
+      z-index: 1;
+      bottom: 0;
+      right: 0;
+      float: right;
+      margin-left: 4px;
+      width: 275px;
+      height: 36px;
+      }
+
+          .pmBoxContainer{
+           position: fixed;
+      left: 0;
+      right: 0;
+      top: 98px;
+      bottom: 7px;
+      width: 100%;
+      /* height: 100%; */
+      z-index: 998;
+          pointer-events: none;
+      }
+
+      .chatbox{
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
       }
 
       .main{
@@ -99,11 +129,18 @@
       left: 50%;
 
       z-index: 30;
+          pointer-events: all;
       }
-
-      .messageBox.notificationBox {
-      right: -47px;
-      z-index: 20;
+      .pmFooter{
+        background: rgb(255,255,255);
+        
+      }
+      .pmFooter p{
+        font-family: roboto;
+        font-size: 11px;
+        color: #C9C5C5;
+        background: #EDEDED;
+        padding: 8px 0 9px 0;
       }
 
       #myNotifications li button{
@@ -112,6 +149,10 @@
       padding: 4px 15px;
       margin: 6px 5px;
       width: 100px;
+      background: #A10606;
+      border: none;
+      border-radius: 21px;
+      color: #fff;
       }
       .friendProfile  .msgImgcont{
       width: 150px;
@@ -131,12 +172,12 @@
       }
 
       .messageBox.notificationBox {
-      right: -60px;
+      right: -57px;
       z-index: 20;
       }
 
       .messageBox.globalNotifBox{
-      right: -4px;
+      right: -10px;
       z-index: 10;
       }
 
@@ -157,10 +198,6 @@
       font-family: Roboto;
       }
 
-
-      .fa-smile-o, .fa-paper-plane{
-      display: none;
-      }
 
 
       .typing-indicator {
@@ -253,190 +290,13 @@
       }
 
       .pmBox{
-      /*overflow: hidden;*/
-      /*top: 120px;*/
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.95);
-      width: 370px;
-      text-align: center;
-      /*position: relative;
-      left: 93%;*/
-      padding: 0 0 13px 0;
-      display: none;
-      -moz-box-shadow: 0 0 30px -10px #000;
-      -webkit-box-shadow: 0 0 30px -10px #000;
-      box-shadow: 0 0 30px -10px #000;
-      height: 470px;
-      overflow: hidden;
-      position:fixed;
-      }
-      .pmBox ul li{
-      overflow: hidden;
-      }
-      .pmBox ul li img{
-      width: 45px;
-      border-radius: 50%;
-      float: left;
-      margin-right: 14px;
-      margin-left: 15px;
-      margin-bottom: -85px;
-      }
-      .pmBox ul li span, .bigChatBox .body #messageContent li span{
-      font-family: Roboto,Helvetica,Arial,sans-serif;
-      text-align: left;
-      font-size: 13px;
-      padding: 10px 20px;
-      margin-right: 20px;
-      font-weight: 600;
-      margin-left: 70px;
-      margin-top: 10px;
-      background:rgba(245, 245, 245, 0.77);
-      border-radius: 20px;
-      line-height: 18px;
-      float: left;
-      }
-
-
-      .pmBox ul li span.alt{
-      background: #FFCACE;
-      display: inline-block;
-      float: right!important;
-      margin-left: 50px!important;
-      }
-      .pmBox .body h2{
-      background: rgba(255, 255, 255, 0.64);
-      font-family: 'Work Sans';
-      padding: 11px;
-      font-size: 16px;
-      font-weight: 600;
-      -moz-box-shadow: 0 0 10px -5px #000;
-      -webkit-box-shadow: 0 0 10px -5px #000;
-      box-shadow: 0 0 10px -5px #000;
-      position: relative;
-      z-index: 2;
-      }
-      .pmBox .body h2 i{
-      float: right;
-      color: #B5B2B2;
-      margin: 1px;
-      cursor: pointer;
-      }
-      .pmBox .body h2 span.online{
-      display: inline-block;
-      width: 9px;
-      height: 9px;
-      background: green;
-      border-radius: 50%;
-      margin-right: 2px;
-      }
-      .pmBox  .footer{
-      margin-top: 10px;
-      }
-      .pmBox .triggers {
-      position: absolute;
-      bottom: 36px;
-      right: 30px;
-      z-index: 2;
-      }
-      .pmBox .arrow_box {
-      right: -139px;
-      top: 4px;
-      z-index: 101;
-      }
-      .pmBox textarea {
-      border: 1px solid #d8d8d8;
-      padding: 20px;
-      width: 91%;
-      height: 60px;
-      border-radius: 5px;
-      position: relative;
-      /* bottom: -7px; */
-      /* left: 20px; */
-      font-family: 'Work Sans';
-      font-size: 14px;
-      font-weight: 500;
-      min-height: 60px;
-      -moz-box-shadow: 0 0 7px -3px #D8D8D8;
-      -webkit-box-shadow: 0 0 7px -3px #D8D8D8;
-      box-shadow: 0 0 7px -3px #D8D8D8;
-      padding-right: 80px;
-      margin: 12px 20px 5px 20px;
-      }
-      .pmBox .footer{
-      position: relative;
-      }
-      .pmBox #tooltip {
-      position: absolute;
-      top: 276px;
-      z-index: 100;
-      right: 20px;
-      height: 200px;
-      }
-      .pmBox  #tooltip ul {
-      text-align: left;
-      }
-      .pmBox #tooltip ul li img{
-      width: 32px!important;
-      margin: 5px!important;
-      float: none!important;
-      }
-      .pmBox .triggers i {
-      font-size: 20px;
-      margin-left: 3px;
-      color: #807C7C;
-      cursor: pointer;
-      }
-      .pmBox .common {
-      min-height: 15px;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      overflow: hidden;
-      }
-
-      .messageBox ul li a p{
-      color:#000;
-      }
-
-      /*.slotMachineNoTransition {
-          -webkit-transition: none !important;
-                  transition: none !important;
-      }
-
-      .slotMachineBlurFast {
-          -webkit-filter: blur(5px);
-                  filter: blur(5px);
-      }
-
-      .slotMachineBlurMedium {
-          -webkit-filter: blur(3px);
-                  filter: blur(3px);
-      }
-
-      .slotMachineBlurSlow {
-          -webkit-filter: blur(2px);
-                  filter: blur(2px);
-      }
-
-      .slotMachineBlurTurtle {
-          -webkit-filter: blur(1px);
-                  filter: blur(1px);
-      }
-
-      .slotMachineGradient {
-          -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );
-          -webkit-mask: url("data:image/svg+xml;utf8,<svg version="1.1" xmlns="http:// www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop></linearGradient><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeMask)"></rect></mask></svg>#slotMachineFadeMask");
-                  mask: url("data:image/svg+xml;utf8,<svg version="1.1" xmlns="http:// www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop></linearGradient><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeMask)"></rect></mask></svg>#slotMachineFadeMask");
-      }*/
-  </style>
-        <style>
-        .pmBox{
        /* overflow: hidden; */
       /* top: 120px; */
       border-radius: 5px;
       width: 370px;
       text-align: center;
       padding: 0 0 13px 0;
-      /* display: none; */
+      display: none;
       -moz-box-shadow: 0 0 30px -10px #000;
       -webkit-box-shadow: 0 0 30px -10px #000;
       box-shadow: 0 0 30px -10px #000;
@@ -448,7 +308,6 @@
       box-shadow: 0 3px 6px 1px #7F7F7F;
       border: none;
       background: #979797;
-      display:block;
       }
       .pmBox ul li{
       overflow: hidden;
@@ -587,7 +446,6 @@
       margin: 5px!important;
       float: none!important;
       }
-
       .pmBox .triggers i {
       font-size: 27px;
       margin-left: 3px;
@@ -595,8 +453,6 @@
       cursor: pointer;
       border-left: 1px solid #ddd;
       padding-left: 12px;
-      display: block;
-
       }
       .pmBox .common {
       min-height: 15px;
@@ -607,28 +463,124 @@
        .pmBox .body ul{
         padding-top: 15px;
       }
+      .messageBox ul li a p{
+      color:#000;
+      }
 
-        .pmFooter{
+      /*.slotMachineNoTransition {
+          -webkit-transition: none !important;
+                  transition: none !important;
+      }
+
+      .slotMachineBlurFast {
+          -webkit-filter: blur(5px);
+                  filter: blur(5px);
+      }
+
+      .slotMachineBlurMedium {
+          -webkit-filter: blur(3px);
+                  filter: blur(3px);
+      }
+
+      .slotMachineBlurSlow {
+          -webkit-filter: blur(2px);
+                  filter: blur(2px);
+      }
+
+      .slotMachineBlurTurtle {
+          -webkit-filter: blur(1px);
+                  filter: blur(1px);
+      }
+
+      .slotMachineGradient {
+          -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );
+          -webkit-mask: url("data:image/svg+xml;utf8,<svg version="1.1" xmlns="http:// www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop></linearGradient><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeMask)"></rect></mask></svg>#slotMachineFadeMask");
+                  mask: url("data:image/svg+xml;utf8,<svg version="1.1" xmlns="http:// www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop></linearGradient><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeMask)"></rect></mask></svg>#slotMachineFadeMask");
+      }*/
+
+      .introBubble{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top:100%;
+        left: 0;
+        z-index: 99999;
+      }
+      .introBubble .bigbubble{
         background: rgb(255,255,255);
-        
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmOGUwYjciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(248,224,183,1) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(248,224,183,1)));
+        background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(248,224,183,1) 100%);
+        background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(248,224,183,1) 100%);
+        background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(248,224,183,1) 100%);
+        background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(248,224,183,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f8e0b7',GradientType=0 );
+        height: 85%;
+        width: 60%;
+        padding: 20px 30px;
+        border-radius: 50%/50%;
+        margin: 50px 150px 40px 260px;
+        position: relative;
+        z-index: 2;
+        border: 4px solid #fff;
+        -moz-box-shadow:0 0 15px -2px #737373;
+        -webkit-box-shadow:0 0 15px -2px #737373;
+        box-shadow: 0 0 15px -2px #737373;
       }
-      .pmFooter p{
-        font-family: roboto;
-        font-size: 11px;
-        color: #C9C5C5;
-        background: #EDEDED;
-        padding: 8px 0 9px 0;
+      .introBubble .bigbubble .firstPara{
+        margin: 40px 60px;
       }
-
-      .pmBox .messagesContent{
-        overflow-y: scroll;
-    width: auto;
-    height: 355px;
-}
+      .introBubble .bigbubble .firstPara .one, .introBubble .bigbubble .firstPara .three{
+          display: block;
+          text-align: center;
+      }
+      .introBubble .bigbubble .firstPara .two{
+         font-family: 'Work Sans';
+         margin: 8px 140px 20px 140px;
+        font-size: 59px;
+        text-align: center;
+        color: #861919;
+        display: block;
+      }
+      .introBubble .bigbubble .firstPara .twotwo{
+          display: block;
+          text-align: center;
+          font-size: 38px;
+          margin: 10px 0;
+      }
+      .introBubble .bigbubble .firstPara .four{
+          display: block;
+          text-align: center;
+          margin: 6px 0px;
+      }
+      .introBubble p{
+           font-family: Roboto;
+        font-weight: 600;
+        font-size: 24px;
+        color: #BC4548;
+      }
+      .introBubble img{
+        width: auto;
+        right: 14%;
+        position: absolute;
+        bottom: 0;
+      }
+      .introBubble ul{
+        margin: 0 70px;
+        text-align: center;
+      }
+      .introBubble ul li{
+        font-size: 26px;
+        font-family: Roboto;
+        margin: 12px;
+        color: #AD5E5E;
+      }
+      .introBubble ul li i{
+        color: #E4CF32;
       }
   </style>
-
-  <!-- private messaging -->
+   <!-- private messaging -->
   <style>
     
       .chatbox-panel{
@@ -705,36 +657,36 @@
       }
 
       .chatbox .messagesContent img{
-            width: 33px;
-    border-radius: 50%;
-    float: left;
-    margin-right: 14px;
-    /* margin-left: 15px; */
-    margin-bottom: -85px;
+        width: 27px;
+        border-radius: 50%;
+        float: left;
+        margin-right: 14px;
+        /* margin-left: 15px; */
+        margin-bottom: -85px;
       }
 
       .chatbox .messagesContent li span{
-     font-family: Roboto,Helvetica,Arial,sans-serif;
-    text-align: left;
-    font-size: 14px;
-    padding: 6px 20px;
-    /* margin-right: 20px; */
-    font-weight: 500;
-    margin-left: 36px;
-    margin-top: 0;
-    background: rgb(255, 255, 255);
-    border-radius: 20px;
-    line-height: 18px;
-    float: left;
-    display: block;
+         font-family: Roboto,Helvetica,Arial,sans-serif;
+        text-align: left;
+        font-size: 12px;
+        padding: 4px 13px;
+        /* margin-right: 20px; */
+        font-weight: 500;
+        margin-left: 36px;
+        margin-top: 0;
+        background: rgb(255, 255, 255);
+        border-radius: 20px;
+        line-height: 18px;
+        float: left;
+        display: block;
       }
 
       .chatbox .messagesContent li span.alt{
-            background: #BA7FEC;
-    display: inline-block;
-    float: right!important;
-    /* margin-left: 50px!important; */
-    color: #FFFFFF;
+          background: #DE3A3B;
+          display: inline-block;
+          float: right!important;
+          /* margin-left: 50px!important; */
+          color: #FFFFFF;
       }
 
       .pmMiniChat .head {
@@ -800,6 +752,7 @@
         border: 1px solid #BC0C0F;
         padding: 5px 0;
         font-size: 14px;
+        border-radius: 5px;
       }
       .chatSmContainerParent .chatSmContainer .smInner li{
         float: left;
@@ -835,106 +788,108 @@
   </head>
 <body>
 
+  <div class="introBubble">
+      <div class="bigbubble" tabindex="1">
+        <p class="firstPara"> 
+            <span class="one">Hi, I'm so glad you're finally here!</span>
+            <span class="two"> I'm Susan and I LOVE playing slots!</span>
+            <span class="three"> This is THE LARGEST online community for slots lovers.</span>
+            <span class="four"> We have so much fun here. And we want <b>YOU</b> to join in!</span>
+        </p>
+        <p>
+          <ul>
+            <li><i class="fa fa-star" aria-hidden="true"></i> Find amazing new slots games to play!</li>
+            <li><i class="fa fa-star" aria-hidden="true"></i> Read my full reviews and watch my slots gameplay videos!</li>
+            <li><i class="fa fa-star" aria-hidden="true"></i> Nearly 1,000 AMAZING slots games showcased.</li>
+            <li><i class="fa fa-star" aria-hidden="true"></i> Find exactly where to play them and get EXCLUSIVE welcome bonuses!</li>
+            <li><i class="fa fa-star" aria-hidden="true"></i> Join my FREE member's club and receive an AMAZING FREE Welcome Pack!</li>
+            <li><i class="fa fa-star" aria-hidden="true"></i> Chat about slots, celebs, and the latest gossip in my chat lounges!</li>
+            <li><i class="fa fa-star" aria-hidden="true"></i> Win amazing prizes, let your hair down, have fun and RELAX!</li>
+          </ul>
+        </p>
+        <p class="firstPara"> 
+            <span class="one">I can't wait to meet you! </span>
+            <span class="twotwo"> Click anywhere to close this window </span>
+            <span class="three"> and browse the hundreds of amazing slots games </span>
+            <span class="four"> just waiting to be played! </span>
+        </p>
+      </div> 
+     <img src="{{url('')}}/images/front-susan-right.png">
+  </div>
 
-  <!--  <div class="pmBoxContainer">
-     <div class="pmBox draggable">        
-           <div class="divContainer">
-             <div class="header"></div>
-               <div class="body">
-                 <h2> <i class="ion-android-close"></i><i class="ion-minus"></i> <span class="online"></span> <b class="pmName"> </b> </h2>
-                 <ul class="messagesContent"></ul>
-               </div>
-               <div class="pmFooter">
-                     <div class="arrow_box pmArrowbox" style="display:none;"></div>  
-                     <div class="tooltip pmTooltip" style="display:none;">
-    
-                       </div>
-    
-                     <div class="triggers">
-                       <i class="fa fa-paper-plane pmTrigger"></i>
-                     </div>
-                     <p> Press enter to send message</p>
-                     <form class="sendPrivateMessage">
-                         <textarea class="privateMessageTextarea" placeholder="Type Message"  ></textarea>
-                     </form>
-                 </div>
-             </div>
-     </div> 
-   </div>  -->
-  
- @if(Auth::check())
+  @if(Auth::check())
 
- 
+    <div class="activity">
+
+      <h2> Friends Recent Activity </h2>
+
+      <ul id="friendUserActivityContainer">
+
+        @if(isset($myFriends) && count($myFriends) > 0)
 
 
-   <div class="activity">
+        @if(isset($user_activities) && count($user_activities) != 0 && $user_activities != null)
 
-    <h2> Friends Recent Activity </h2>
-    <ul class="bxslider" id="friendUserActivityContainer">
-
-      @if(isset($myFriends) && count($myFriends) > 0)
-       
-
-       @if(isset($user_activities) && count($user_activities) != 0 && $user_activities != null)
-      
         @foreach($user_activities as $activity)
-          <li> 
-          <img src="{{ $activity->profile_picture ? asset('user_uploads/user_'.$activity->profile_picture.'/'.$activity->profile_picture) : asset('images/default_profile_picture.png') }}">
+        <li> 
+        <img src="{{ $activity->profile_picture ? asset('user_uploads/user_'.$activity->user_id.'/5050/'.$activity->profile_picture) : asset('images/default_profile_picture.png') }}">
         @if($activity->type == 1)
-            <p>{{ $activity->full_name }} addedd <a href="{{ $activity->slug }}"  style="text-decoration:none;">{{ $activity->gamename }}</a> as a new Favorite</p>
+        <p>{{ $activity->full_name }} addedd <a href="{{ $activity->slug }}"  style="text-decoration:none;">{{ $activity->gamename }}</a> as a new Favorite</p>
         @elseif($activity->type == 2)
-            <p>{{ $activity->full_name }} played <a href="{{ $activity->slug }}"  style="text-decoration:none;">{{ $activity->gamename }}</a></p>
+        <p>{{ $activity->full_name }} played <a href="{{ $activity->slug }}"  style="text-decoration:none;">{{ $activity->gamename }}</a></p>
         @elseif($activity->type == 3)
-            <p>{{ $activity->full_name }} just won {{ $activity->prizename }}</p>
-         @endif
-            </li>
+        <p>{{ $activity->full_name }} just won {{ $activity->prizename }}</p>
+        @endif
+        </li>
         @endforeach
 
-
-  
-       @endif
+        @endif
 
 
         @else
 
-                   <li> 
-                 <a href="#" style="
-                 overflow: hidden;
-                font-weight: 400;
-                color: #000;
-                text-decoration: none;
-                text-align: center;
-                display: block;
-                    font-family: Roboto;">
-                  <img src="https://s3.amazonaws.com/uifaces/faces/twitter/choblab/128.jpg" style="float: none; width: 50px; margin-bottom: 10px;">
-                  <p style="font-size: 17px;text-align: center;    font-family: Roboto;"> Aww you don't have any friends yet! <span style="    
-                text-decoration: none;
-                font-weight: bold;
-                color: #D21416;
-                font-family: Roboto;
-                font-size: 17px;"> Join in the chat and make some now!  </span> </p>
-                
-                 </a> 
-                </li>
+        <li> 
+          <a href="#" style="
+          overflow: hidden;
+          font-weight: 400;
+          color: #000;
+          text-decoration: none;
+          text-align: center;
+          display: block;
+          font-family: Roboto;">
+            <img src="https://s3.amazonaws.com/uifaces/faces/twitter/choblab/128.jpg" style="float: none; width: 50px; margin-bottom: 10px;">
+            <p style="font-size: 17px;text-align: center;    font-family: Roboto;"> Aww you don't have any friends yet! 
+              <span style="    
+              text-decoration: none;
+              font-weight: bold;
+              color: #D21416;
+              font-family: Roboto;
+              font-size: 17px;"> 
+              Join in the chat and make some now!  
+              </span> 
+            </p>
+          </a> 
+        </li>
 
-      @endif  
+        @endif  
 
+      </ul>
 
-    </ul>
-    <a class="more" href="">
-   <!--  <i class="fa fa-chevron-down"></i> -->
-    </a>
-  </div>
- @endif
+      <a class="more" href="">
+      <!--  <i class="fa fa-chevron-down"></i> -->
+      </a>
+
+    </div>
+  @endif
 
   <div class="container-fluid verytopHeader">
         <div class="container">
           <div class="col-lg-24">
                 <header>
-                  <div class="col-xs-8 col-sm-7 col-md-5 col-lg-3">
+                  <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5">
                     <a href="{{ url('/') }}"><img class="logo" src="http://susanwins.com/uploads/52424_logo.png" alt="Logo"></a>
                   </div>
-                  <div class="col-xs-14 col-sm-14 col-md-12 col-lg-13 hide991" style="text-align: right;">
+                  <div class="col-xs-14 col-sm-14 col-md-12 col-lg-11 hide991" style="text-align: right;">
                     <div class="search">
                       <input type="text" placeholder="Search Games" id="search" autocomplete="off">                  
                     </div>
@@ -966,7 +921,7 @@
 
                       <ul class="topicons">
                               
-                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/80737_clubhouseicon.png" /> </a> </li>
+                        <li> <a href="http://susanwins.com/clubhouse/home" id="userMenu"> <img src="http://susanwins.com/uploads/38368_clubhouseicon.png" /> </a> </li>
                         <li> 
                           <a href="javascript:;" id="messagesMenu"> 
                             <span id="unreadMessageNotification">
@@ -974,7 +929,7 @@
                                 <span class="notifcount   animated bounce bounceInUp">{{ $unread_messages_count }}</span>
                               @endif
                             </span>
-                            <img src="http://susanwins.com/uploads/16972_chaticon.png" />
+                            <img src="http://susanwins.com/uploads/64163_chaticon.png" />
                           </a> 
                         </li>
 
@@ -987,7 +942,7 @@
                               @endif
                             </span>
                         
-                            <img src="http://susanwins.com/uploads/78234_notificationicon.png" />
+                            <img src="http://susanwins.com/uploads/83444_notificationicon.png" />
                           </a> 
                          </li>
                         
@@ -1000,25 +955,26 @@
                                       </span>
                                 @endif
                             </span>
-                           <img src="http://susanwins.com/uploads/34532_friendicon.png" />
+                           <img src="http://susanwins.com/uploads/43069_friendicon.png" />
                            </a> 
                         </li>
 
                         <li style="margin-right: 6px;"> 
                           <a href="{{ url('/logout') }}"> 
-                           <img src="http://susanwins.com/uploads/39695_logouticon.png" />
+                           <img src="http://susanwins.com/uploads/34338_logouticon.png" />
                           </a> 
                         </li>
 
                       </ul>
 
                    @else
-                      <ul class="topicons" style="margin-top: 9px;">           
+                      <ul class="topicons">           
                         <li> <a href="#" class="twitterSM"> <img src="http://susanwins.com/uploads/73749_twittericon.png" />  </a> </li>
                         <li> <a href="#" class="facebookSM"> <img src="http://susanwins.com/uploads/84170_facebookicon.png" /> </a> </li>                        
                         <li> <a href="#" class="pinterestSM"> <img src="http://susanwins.com/uploads/18419_pinteresticon.png" /> </a> </li>
-                        <li> <a href="#" class="instagramSM"> <img src="http://susanwins.com/uploads/50236_instaicon.png" />   </a> </li>
+                        <li> <a href="#" class="instagramSM"> <img src="http://susanwins.com/uploads/18859_instaicon.png" />   </a> </li>
                         <li style="margin-left: 10px;"> <!-- <img src="http://susanwins.com/uploads/74688_cherrylogin.gif" class="cherry" />  --> <a href="{{ url('/login') }}" class="loginbtn"> Login/Signup </a></li>
+                      
                         <!-- <li> <a href="#"> <i class="ion-social-youtube"></i>   <span>  Signout </span> </a> </li> -->
                       </ul>
                    @endif
@@ -1040,62 +996,64 @@
 
     
   @if(isset($user))
-      @if($user->user_detail->profile_picture == "")
-          <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{'user_uploads/default_image/default_01.png'}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
-      @else
-          <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{'user_uploads/user_'.$user->user_detail->user_id.'/'.$user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
-      @endif
-    
+     <!--  @if($user->user_detail->profile_picture == "")
+         <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{'user_uploads/default_image/default_01.png'}}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
+     @else
+         <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{'user_uploads/user_'.$user->user_detail->user_id.'/'.$user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
+     @endif -->
+     <input type="hidden" value="{{ $user->id }}" id="userId" data-profile="{{$user->user_detail->profile_picture}}" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}" data-isAdmin="{{ $user->is_admin }}" data-email="{{ $user->email }}">
   @endif
+
   @if(isset($session_id))
      <input type="hidden" value="{{ $session_id }}" id="sessionId">
   @endif
-  @yield('homecontent')
-  @yield('singlecontent') 
- <!--  <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
-       <div class="divContainer">
-         <div class="header"></div>
-           <div class="body">
-             <h2> <i class="fa fa-times"></i> <span class="online"></span> <b id="pmName"> </b> </h2>
-             <ul class="messagesContent" id="pmMessageContent">
-             </ul>
-           </div>
-           <div class="pmFooter">
-                 <div class="arrow_box pmArrowbox" style="display:none;"></div>  
-                 <div id="tooltip pmTooltip" style="display:none;">
- 
-                   <ul>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                       <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-                   </ul>
- 
-                   </div>
- 
-                 <div class="triggers">
-                   
-                   <i class="fa fa-smile-o pmTrigger"></i>
-                   <i class="fa fa-paper-plane"></i>
-                 </div>
-                 <form id="sendPrivateMessage">
-                     <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message"  ></textarea>
-                 </form>
-             </div>
-         </div>
- </div>  -->
 
-      
+  @yield('homecontent')
+  @yield('singlecontent')
+   <!--  <div class="pmBoxContainer">
+     <div class="pmBox draggable" id="pmBox" style="margin-left: 6px;">        
+           <div class="divContainer">
+             <div class="header"></div>
+               <div class="body">
+                 <h2> <i class="ion-android-close"></i> <span class="online"></span> <b id="pmName"> </b> </h2>
+                 <ul class="messagesContent" id="pmMessageContent">
+                 </ul>
+               </div>
+               <div class="pmFooter">
+                     <div class="arrow_box pmArrowbox" style="display:none;"></div>  
+                     <div id="tooltip pmTooltip" style="display:none;">
+   
+                       <ul>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                           <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                       </ul>
+   
+                       </div>
+   
+                     <div class="triggers">
+                       <i class="fa fa-paper-plane pmTrigger"></i>
+                     </div>
+                     <p> Press enter to send message</p>
+                     <form id="sendPrivateMessage">
+                         <textarea id="privateMessageTextarea" class="chatCommon txtstuff" placeholder="Type Message"  ></textarea>
+                     </form>
+                 </div>
+             </div>
+     </div> 
+   </div> -->
+
   <div class="overlay"></div>
 
   @yield('homecontentResposnive')
@@ -1119,14 +1077,14 @@
        (function(){
 
 
-        /*_tracker = document.createElement('script');
+        _tracker = document.createElement('script');
         _tracker.type = 'text/javascript';
         _tracker.async = true;
         _tracker.src = ('https:' == document.location.protocol ? 'https://ssl.' : 'http://') + 'nexolytics.susanwins.com/js/tracker.js';
 
         var s = document.getElementsByTagName('script')[0];
 
-        s.parentNode.insertBefore(_tracker,s);*/
+        s.parentNode.insertBefore(_tracker,s);
 
        })();
 
@@ -1160,10 +1118,22 @@
     <script src="{{ asset('js/jquery.slotmachine.js') }}"></script>
     <script src="{{ asset('js/jquery.caret.js') }}"></script>
     <script src="{{ asset('js/tagging.js') }}"></script>
+
+    <script src="{{ asset('js/classie.js') }}"></script>
     <script src="{{ asset('js/privateMessaging.js') }}"></script>
     <!--<script src="{{ elixir('js/custom/main.js') }}"></script>-->
-  <script>
-  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  
+<!--   <div class="container">
+    <div class="row">
+      <div class="terms">
+        <p> Terms & Conditions   Privacy Policy  Gambling is for over +18 (symbol) GambleAware  LOGO  </p>  
+        <p> Copyright © 2016 SusanWins  </p>  
+      </div> 
+    </div>
+  </div> -->
+
+ <script>
+
   $(document).ready(function(){
 
     // $.ajaxSetup({
@@ -1180,7 +1150,7 @@
         // keep the element within the area of it's parent
         restrict: 
         {
-          restriction: "parent",
+          restriction: ".pmBoxContainer",
           endOnly: true,
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
         },
@@ -1200,8 +1170,6 @@
       });
 
 
-
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     var comment_connected = false;
     var login_success = false;
     var tempComment = null;
@@ -1210,30 +1178,21 @@
     var user = user_json ? JSON.parse(user_json) : false;
     var comment_type = "{{ isset($comment_type) ? $comment_type : '' }}";
     var content_id = "{{ isset($content_id) ? $content_id : '' }}";
-    var BASE_URL = $('meta[name="baseURL"]').attr('content');
     var friendUrl = BASE_URL+'/friends';
     var profileImage = $('#data-profile').val();
-    // getAnotherToken();
+    var publicUrl = '{{ asset("") }}';
+    var defaultProfilePic = publicUrl+'/user_uploads/default_image/default_01.png';
 
-    // setInterval(getAnotherToken, 10000);
+       /********************** START GET IMAGE ******************************************************************************/
+    function getImage(profile_picture ,user_id, size) {
 
-    // function getAnotherToken(){
-    //       $.ajax({
-    //           type: 'GET',
-    //           url: 'get/me/token',
-    //           async: false,
-    //           success: function (token) {
-    //               CSRF_TOKEN = token;
-    //           },
-    //           error: function () {
-                 
-    //           }
-    //       });
+      if(size === null) {
+          return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+profile_picture : defaultProfilePic;
+      }
+       return  profile_picture ? publicUrl+'/user_uploads/user_'+user_id+'/'+size+'/'+profile_picture : defaultProfilePic;
+    }
 
-    // }
-
-
-
+  /********************** END GET IMAGE ******************************************************************************/
      
 timeZone = 'Europe/London';
 
@@ -1293,7 +1252,8 @@ timeZone = 'Europe/London';
               .append(
                 $('<div></div>').addClass('comment-parent')
                 .append(
-                  $('<img>').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic).addClass('avatar')
+                  //$('<img>').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic).addClass('avatar')
+                  $('<img>').attr('src', getImage(this.profile_picture, this.user_id, 5050)).addClass('avatar')
                 )
                 .append(
                   $('<div></div>').addClass('comment-info').text(this.email)
@@ -1337,7 +1297,8 @@ timeZone = 'Europe/London';
                   .append(
                     $('<div></div>').addClass('comment-parent').attr('id', 'comment-'+this.id)
                     .append(
-                      $('<img>').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic).addClass('avatar')
+                      //$('<img>').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic).addClass('avatar')
+                      $('<img>').attr('src', getImage(this.profile_picture, this.user_id, 5050)).addClass('avatar')
                     )
                     .append(
                       $('<span class="timestamp"> | <span class="readable_time">'+moment.tz(timeZone).format('MMM DD, YYYY')+'</span></span>')
@@ -1657,7 +1618,8 @@ function unFriend(friend_id, other_person){
 
        this.temporaryReply = $('<div></div>').addClass('replies-parent').addClass('temporary')
              .append(
-                $('<img>').addClass('avatar').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic)
+                //$('<img>').addClass('avatar').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic)
+                $('<img>').addClass('avatar').attr('src', getImage(this.profile_picture, this.user_id, 5050))
                 )
               .append($('<div></div>').addClass('reply-info').text(this.email))
               .append($('<div></div>').addClass('reply-content').html(this.content));
@@ -1669,7 +1631,8 @@ function unFriend(friend_id, other_person){
 
         this.theReply = $('<div></div>').addClass('replies-parent').attr('id', 'reply-'+this.id)
               .append(
-                $('<img>').addClass('avatar').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic)
+                //$('<img>').addClass('avatar').attr('src', this.profile_picture ? BASE_URL+'/'+this.profile_picture : defaultProfilePic)
+                $('<img>').addClass('avatar').attr('src', getImage(this.profile_picture, this.user_id, 5050))
                 )
                 .append(
                       $('<span class="timestamp"> | <span class="readable_time">'+moment.tz(timeZone).format('MMM DD, YYYY')+'</span></span>')
@@ -1829,7 +1792,7 @@ function unFriend(friend_id, other_person){
       $('#pmBox').fadeToggle();
     });
 
-   /* $('.bxslider').bxSlider({
+    $('.bxslider').bxSlider({
     mode: 'vertical',
     slideMargin: 5,
     minSlides: 6,
@@ -1837,15 +1800,28 @@ function unFriend(friend_id, other_person){
     pager:false,
     prevText:'‹',
     nextText:'›'
-    });*/
+    });
 
   });
 
- 
+ function init() {
+    window.addEventListener('scroll', function(e){
+        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+            shrinkOn = 10,
+            header = document.querySelector(".verytopHeader");
+        if (distanceY > shrinkOn) {
+            classie.add(header,"smaller");
+        } else {
+            if (classie.has(header,"smaller")) {
+                classie.remove(header,"smaller");
+            }
+        }
+    });
+}
+window.onload = init();
 
 
   </script>
-
 
 
   @yield('footer_scripts')

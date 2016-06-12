@@ -19,30 +19,37 @@
 @section('background-content')
 
 <style type="text/css">
+.cd-tour-nav{
+  display: none;
+}
 	#roombg{
 		top: -5px;
     	left: -11px;
 		width: 106%;
 	}
 	.gamelist{
-	  width: 680px;
-	  height: 390px;
-	  position: absolute;  
-	  top: 226px;
-      left: 657px;
-	  z-index: 2;  
-	  overflow: hidden;
+	  width: 689px;
+    height: 390px;
+    position: absolute;
+    top: 225px;
+    left: 643px;
+    z-index: 2;
+    overflow-x: hidden;
+    overflow-y: scroll;
 	}
 	.gamelist ul li, .gamelist ul li a{
 	  display: inline-block;
+	      width: 100%;
 	}
 	.gamelist ul li{
-	  width: 167px;
+	  width: 162px;
 	}
 	.gamelist ul li a img{
-	  width: 100%;
-	  border-radius: 3px;
-	  margin: 3px;
+	     width: 100%;
+    border-radius: 3px;
+    margin: 3px;
+    margin: 3px auto;
+    background-color: #fff;
 	}
 	.guideSusanContainer{
 		left: 0;
@@ -50,7 +57,6 @@
 	@media(min-width: 1440px){
 	  #roombg{
 	     top: 0;
-	     left: 0;
 	  }	
 	 
 	}
@@ -62,13 +68,16 @@
 	     width: 110%;
 	  }	  
 	  .gamelist{
-	    top: 143px;
-	    left: 438px;
-	    height: 293px;	    
-	    width: 518px;
+	    top: 146px;
+	    left: 439px;
+	    height: 289px;
+	    width: 516px;
+	  }
+	  .gamelist ul li a img{
+	  	margin: 1px 3px;
 	  }
 	  .gamelist ul li {
-		    width: 126px;
+		    width: 120px;
 	  }
 	  .slotsroomPage .cd-single-step:nth-of-type(1) {
 		    left: 27%;
@@ -97,14 +106,13 @@
 
   <ul class="cd-tour-wrapper slotsroomPage">
     <li class="cd-single-step no-pulse">
-
       <div class="cd-more-info">
-        <h2> Slotsroom page </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+        <h2> The Slots Room </h2>
+        <p> Here's where you can browse the entire selection of online slots on SusanWins - <br /> Find new games, and relive old classics! Scroll through the games and find amazing new challenges! </p>
         <img src="img/step-1.png" alt="step 1">
       </div>
     </li> <!-- .cd-single-step -->
-    <li class="cd-single-step">
+    <!-- <li class="cd-single-step">
       <span>Step 1</span>
 
       <div class="cd-more-info left">
@@ -112,21 +120,21 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
         <img src="img/step-1.png" alt="step 1">
       </div>
-    </li> <!-- .cd-single-step -->
+    </li> --> <!-- .cd-single-step -->
 
   </ul> <!-- .cd-tour-wrapper -->
 
   @endif
 
 	<div class="bgwrapper">
-			<img id="roombg" src="{{url('images/clubhouse')}}/slotroom.png" alt="">		
+			<img id="roombg" src="{{url('images/clubhouse')}}/slotroom.jpg" alt="">		
 
 			<div class="gamelist">
 			  <ul>
 					@foreach($posts as $post)
 					        <li>           
 					            <a href="{{url('')}}/{{$post->slug}}">                  
-					              <img src="{{url('uploads')}}/{{$post->thumb_feature_image}}">
+					              <img class="lazyload" src="{{ asset('uploads/66058_default.gif') }}" data-src="{{asset('uploads')}}/{{$post->thumb_feature_image}}">
 					            </a>
 					        </li>  
 					 @endforeach
@@ -139,11 +147,16 @@
 @endsection
 
 @section('custom_scripts')
-
+<script src="{{ asset('js/lazysizes.min.js') }}"></script>
 <script type="text/javascript">
-	$('.gamelist ul').slimScroll({
-        height: '388px'
-    });
+
+
+	/*		$(function(){
+		  $(".lazyload").unveil(200);
+		});*/
+	// $('.gamelist ul').slimScroll({
+ //        height: '388px'
+ //    });
 </script>
 
 @endsection

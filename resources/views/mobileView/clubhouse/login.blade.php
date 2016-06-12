@@ -3,12 +3,16 @@
   
 @section('custom-styles')
 <style type="text/css">
-  body {
-    background: #fff url(http://susanwins.com/uploads/51107_mobilefronthouse.jpg) no-repeat center top;
-  }
+body{
+  background: #E9F6FE url(http://susanwins.com/uploads/61221_signup-bg-mobile.jpg) center 17% no-repeat;
+}
+.app-page .app-content {
+    padding-top: 15px!important;
+}
   .bgwrapper{
     padding-top: 100px;
   }
+
   .formBox{
     margin-right: 110px;
     margin-left: 20px;
@@ -58,16 +62,33 @@
     box-shadow: 0 0 10px -2px #B3B3B3;
     text-shadow: 0px 1px 2px rgb(167, 121, 17);
   }
-  .formBox .terms{
-    font-family: Roboto;
-    font-size: 11px;
-    line-height: 16px;
-    margin: 10px 0;
+  .formBox .terms {
+    font-family: helvetica,Arial,Sans-serif;
+    font-size: 12px;
+    text-align: center;
+        margin: 16px 0;
     color: #B7B4B4;
-  }
+}
   .formBox .terms a{
     text-decoration:none;
-    color: #982A29
+    color: #F5C582
+  }
+      
+  form button{
+    background: #f19b20!important;
+    display: block!important;
+    width: 95%;
+    font-family: 'Work Sans';
+    text-transform: initial!important;
+    font-size: 28px;
+    font-weight: 600;
+    height: auto!important;
+    padding: 10px!important;
+    letter-spacing: 0!important;
+    margin-left: 10px;
+  }
+  .input-field{
+    margin-top: 0;
   }
   .benefits{
      margin-top: 10px;
@@ -94,15 +115,41 @@
   }
   form input[type=text], form input[type=password], form input[type=email]{
     background: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    width: 95%;
-    font-family: 'Work Sans';
-    font-size: 20px;
-    font-weight: 600;
+    /* border: 1px solid #E6E3E3; */
+    /* border-radius: 4px; */
+    border-bottom: 1px solid #F3DCBB;
+    text-align: center;
+    padding: 0 10px;
+    width: 93%;
+    font-family: Roboto,Helvetica,Arial,Sans-serif;
+    font-size: 16px;
     color: #000;
+    box-shadow: 0 0 0 0;
+    margin-bottom: 6px;
   }
+  input:not([type]).valid, input:not([type]):focus.valid, input[type=text].valid, input[type=text]:focus.valid, input[type=password].valid, input[type=password]:focus.valid, input[type=email].valid, input[type=email]:focus.valid, input[type=url].valid, input[type=url]:focus.valid, input[type=time].valid, input[type=time]:focus.valid, input[type=date].valid, input[type=date]:focus.valid, input[type=datetime].valid, input[type=datetime]:focus.valid, input[type=datetime-local].valid, input[type=datetime-local]:focus.valid, input[type=tel].valid, input[type=tel]:focus.valid, input[type=number].valid, input[type=number]:focus.valid, input[type=search].valid, input[type=search]:focus.valid, textarea.materialize-textarea.valid, textarea.materialize-textarea:focus.valid {
+    border-bottom:none;
+    box-shadow: 0 0 0 0!important;
+  }
+  header{
+    display: none;
+  }
+  .signinlogo{
+    text-align: center;
+  }
+  .signinlogo img{
+    width: 170px;
+    margin: 20px 0
+  }
+  .signuplink{
+    text-align: center;
+    font-size: 20px;
+  }
+  .signuplink a{
+    color: #F19B20;
+    font-weight: 700;
+  }
+
 </style>
 
 @endsection
@@ -111,11 +158,18 @@
 
   @section('content')
 
-     <div class="app-page" data-page="main">
-    <div class="app-topbar"></div>
+      <div class="app-page" data-page="main">
   <div class="app-content">
-                   
+        
+                
+    
                <div class="row">
+                  <div class="col-xs-24">
+                    <div class="signinlogo">
+                      <a href="{{ url('/') }}"> <img src="http://susanwins.com/uploads/52424_logo.png" alt=""> </a>
+                    </div>
+                  </div>
+
                   <form class="col s12" action="{{ url('login/post') }}" method="POST">
                   {!! csrf_field() !!}
                     <div class="row">
@@ -127,7 +181,16 @@
                         <input id="password" type="password" class="validate" name="password" placeholder="Password">
                       <!--   <label for="password">Enter Your Password</label> -->
                       </div>
-                      <button class="waves-effect waves-light btn" type="Submit">Let me in</button>
+                      <button class="waves-light btn" type="Submit">Let me in</button>
+                      <p class="signuplink"> or <a href="{{ url('/signup')}}"> Why should I join? </a></p>
+                    
+                        @if(count($errors->all()) > 0)
+                        <ul class="errors">
+                          @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                          @endforeach
+                        </ul>
+                      @endif
                     </div>
                   </form>
                 </div>
@@ -161,9 +224,9 @@
 @section('app-js')
   <script>
        $(document).on('ready', function(){
-
+               $('.app-page').css({ 'display' : 'block' });
+                $('#mainLoading').remove();
              App.load('main');
-
        });
   </script>
 @endsection

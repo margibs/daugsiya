@@ -3,6 +3,8 @@ left: 0;
     right: 0;
     top: 0;
     position: absolute;
+    bottom:0;
+    display: none;
 }
 
 .pageModal .app-content{
@@ -12,10 +14,12 @@ left: 0;
 .app-page .app-content{
         position: relative;
             position: relative;
-    padding-top: 75px;
+    padding-top: 48px;
         overflow-x: hidden;
 }
-
+.featImgDiv .featimg{
+    width: 100%;
+}
 
 nav{
     box-shadow: none;
@@ -53,8 +57,8 @@ nav .logo{
     text-align: center;
     width: 100%;
     display: block;
-    font-size: 26px;
-    padding: 10px;
+    font-size: 24px;
+    padding: 5px;
     font-family: "Work Sans";
     color: rgb(154, 10, 14);
     font-weight: 800;
@@ -102,10 +106,25 @@ height: 372px;
 .back_button{
     color: #000;
     padding: 0 1em;
-        height: 56px;
+    height: 38px;
     float: left;
+    margin-top: -9px;
 }
-
+.logout_button{
+    position: absolute;
+    right: 15px;
+    color: #9E0603;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    top: 16px;
+    font-weight: 500;
+}
+.logo_button{
+    position: absolute;
+    left: 74px;
+    width: 106px;
+    top: 4px;
+}
 #navbarTitle{
         display: inline-block;
     float: right;
@@ -122,11 +141,12 @@ height: 372px;
 
 .back_button i
 {
-display: inline-block !important;
-    font-size: 56px !important;
+    display: inline-block !important;
+    color: #E4C8C8;
+    font-size: 24px !important;
     line-height: 1 !important;
-    margin-left: -20px;
-    margin-right: -12px;
+    margin-left: 4px;
+    margin-top: 11px;
 }
 
 .back_button span{
@@ -137,18 +157,19 @@ display: inline-block !important;
 .userButtons{
     float: left;
     width: 100%;
-    background-color: #887D70;
+/*    background-color: #887D70;*/
     padding: 8px;
     text-align: center;
 }
 
 .userButtons span,
 .userButtons a{
-        background: #fff;
     padding: 5px;
-    color: #777777;
+    font-weight: 600;
+    font-size: 17px;
+    color: #A85F36;
     border-radius: 8px;
-    margin: 0 4px;
+    margin: 0 9px;
 }
 
 .userDetailBackground{
@@ -161,7 +182,7 @@ display: inline-block !important;
 
 .userDetail .upperHalf{
     height: 358px;
-        background: #CEBDA8;
+        background: #CEBDA8 url(http://susanwins.com/uploads/60698_mobileprofilebg.jpg) no-repeat center 58%;
     position: relative;
     float: left;
     width: 100%;
@@ -172,21 +193,20 @@ display: inline-block !important;
        width: 100%;
 }
 .userDetail .imgContainer .changePicButtonContainer{
-        width: 167px;
+    width: 154px;
     border-radius: 50%;
-    padding: 8px;
+    padding: 2px;
     position: relative;
-        margin: 20px auto;
-        background: #fff;
+    margin: 20px auto;
+    background: rgb(255, 255, 255);
 }
 
 .userDetail .changePicButton{
-        display: block;
+   display: block;
     width: 150px;
     height: 150px;
     border-radius: 50%;
     overflow: hidden;
-        border: 1px solid #ccc;
 }
 
 .userDetail .changePicButtonContainer label{
@@ -197,7 +217,7 @@ display: inline-block !important;
     background: RGBA(255, 255, 255, 0.56);
     display: inline-block;
     font-size: 35px;
-    font-weight: 700;
+    font-weight: 400;
     margin-left: 31px;
     margin-top: -35px;
     cursor: pointer;
@@ -209,8 +229,8 @@ display: inline-block !important;
     line-height: 1.1;
     height: 40px;
     width: 40px;
-    background: #fff;
-    color: #ccc;
+    background: rgba(255, 255, 255, 0.29);
+    color: #F8F6F4;
 }
 
 .userDetail .changePicButton img{
@@ -228,8 +248,12 @@ display: inline-block !important;
 }
 
 .userDetail .upperHalf h6{
-            text-align: center;
-    font-size: 22px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: -8px;
+    color: #fff;
+    text-shadow: 0px 1px 2px rgb(115, 114, 114);
 }
 
 .userDetail .upperHalf .userDetailActions .app-button,
@@ -239,8 +263,8 @@ display: inline-block !important;
 }
 
 .userDetail .actionButton{
-    padding: 8px 20px;
-    color: #ccc !important;
+    padding: 6px 20px;
+    color: #A91212 !important;
     background: #fff;
     border-radius: 1em;
     line-height: 66px;
@@ -281,28 +305,26 @@ display: inline-block !important;
 .friendList li{
     text-align: center;
     position: relative;
+    margin: 0px 0 20px 0;
 }
 .friendList li img{
-    width:110px;
-    height:110px;
-        margin: auto;
+    width: 100%;
+    height: auto;
+    margin: auto;
     display: block;
-        border-radius: 6px;
-   
+    border-radius: 10px;
 }
 
 .friendList .user_online_status{
-        position: absolute;
-    width: 22px;
-    height: 22px;
+    position: absolute;
+    width: 13px;
+    height: 13px;
     background: green;
     border-radius: 50%;
-    border: 2px solid #e3e3e3;
     z-index: 1;
-        right: -2px;
-    top: -10px;
-
-  }
+    right: 6px;
+    top: -3px;
+}
 
   .friendList .user_online_status.offline {
     background-color: #D6D5D4;
@@ -315,37 +337,37 @@ display: inline-block !important;
 .messageList li{
     position: relative;
     overflow: hidden;
-    padding: 1em 0;
+    padding: 15px 0;
     display: block;
     margin: 0 20px 0 1em;
 
 }
 
 .messageList li:not(:last-child){
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #ECEAEA;
 }
 
 .messageList li img{
-        width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     float: left;
+    border-radius: 10px;
 }
 
 .messageList li .msgContent{
     position: relative;
     left: 0;
     right: 0;
-    margin-left: 80px;
+    margin-left: 65px;
 
 }
 
 .messageList li .msgContent .info h6{
-        display: inline;
-        font-size: 13px;
-    font-weight: 600;
-    color: #060606;
+    font-size: 15px;
+    font-weight: 500;
+    color: #A20704;
     font-family: 'Roboto';
-    margin: 0;
+    margin: 4px 0;
 }
 
 .messageList li .msgContent .info span.timestamp{
@@ -354,15 +376,14 @@ display: inline-block !important;
 }
 
 .messageList li .msgContent p{
-    height: 46px;
+    min-height: 25px;
     overflow: hidden;
-    padding-right: 4em;
-    text-align: justify;
-
-        font-family: Roboto;
-    font-weight: 300;
-    color: #726F6F;
-    font-size: 13px;
+    padding-right: 5px;
+    text-align: left;
+    font-family: Roboto;
+    font-weight: 500;
+    color: #000000;
+    font-size: 15px;
     line-height: 16px;
     margin: 0;
 }
@@ -395,6 +416,8 @@ display: inline-block !important;
 
 .friendList li .userName{
     font-weight: bold;
+   line-height: 1px;
+    font-size: 12px;
 }
 
 .pageLoading{
@@ -427,11 +450,11 @@ display: inline-block !important;
 }
 
 .chatBox .body{
-           background: #EDEDED;
-       position: relative;
-        height: 400px;
+    background: #EDEDED;
+    position: relative;
+    /*        height: 400px;*/
     width: 100%;
-    margin: auto;
+    margin: auto auto auto auto;
     padding: 1em 0;
     overflow-y: scroll;
 }
@@ -441,6 +464,10 @@ display: inline-block !important;
             display: block;
     float: left;
 }
+.chatBox ul li:first-child{
+    margin-top:40px;
+}
+
 .chatBox ul li{
         display: block;
     width: 100%;
@@ -466,10 +493,10 @@ display: inline-block !important;
 .chatBox ul li span{
     font-family: Roboto,Helvetica,Arial,sans-serif;
     text-align: left;
-    font-size: 14px;
-    padding: 10px 20px;
+    font-size: 15px;
+    padding: 8px 20px;
     margin-right: 20px;
-    font-weight: 500;
+    font-weight: 400;
     margin-left: 61px;
     margin-top: 0;
     background: rgb(255, 255, 255);
@@ -478,49 +505,56 @@ display: inline-block !important;
     float: left;
     display: block;
     word-break: break-all;
+    color: #272727;
+    border: 1px solid #E8E8E8;
 }
 
 .chatBox ul li span.alt{
-        background: #F4ABAA;
+    background: #C75F5F;
     display: inline-block;
     float: right!important;
     margin-left: 50px!important;
-    color: #BC5554;
+    color: #FFFCFC;
+    word-break: break-word;
 }
 
 .chatBox .chatFooter{
-    position: absolute;
+    position: fixed;
     width: 100%;
-       bottom: 67px;
-    height: 70px;
+    background: #fff;
+    bottom: 60px;
+/*    height: 70px;*/
 
 }
 
 .chatBox .chatFooter .triggers{
     position: absolute;
     right: 0;
-    padding: 1em;
-    border-left: 1px solid #ccc;
-        pointer-events: all;
+    padding: 2px 20px;
+    pointer-events: all;
     z-index: 1;
+    font-size: 34px;
+    color: #B54C4C;
 }
 .chatBox .chatFooter textarea{
-        border: 1px solid #ccc;
+    border: none;
     position: relative;
     font-family: 'Work Sans';
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
     -moz-box-shadow: 0 0 7px -3px #D8D8D8;
     -webkit-box-shadow: 0 0 7px -3px #D8D8D8;
     box-shadow: 0 0 7px -3px #D8D8D8;
     padding-right: 80px;
     resize: none;
-    padding: 1em;
-    height: 70px;
-        padding-right: 3em;
-
+    padding: 13px 19px;
+    height: 60px;
+    padding-right: 3em;
 }
 
+.modal .modal-content{
+    padding: 7px;
+}
 #rateModal{
         opacity: 1;
     background: rgba(0, 0, 0, 0.73);
@@ -529,20 +563,30 @@ display: inline-block !important;
 #rateModal h4{
     text-align: center;
     color:#fff;
+    font-size: 25px;
+}
+#selectCasinoModal h4{
+    text-align: center;
+    color: #000;
+    font-size: 25px;
+    line-height: 22px;
+    font-weight: 700;
+    margin: 13px 0;
 }
 
 #rateModal button,
 #rateModal button a{
-        border: none;
-    background: transparent;
-
+    border: none;
+    background: rgba(158, 158, 158, 0.34);
     color: #fff;
     border-radius: 2px;
     font-family: Roboto;
-    font-size: 50px;
+    font-size: 26px;
     font-weight: 500;
-    width: 49%;
+    width: 100%;
     text-align: center;
+    border-radius: 50px;
+    margin: 5px 0;
 }
 
 
@@ -699,6 +743,7 @@ display: inline-block !important;
     width: 100%;
     margin-right: -65px;
     padding-right: 65px;
+        position: relative;
 }
 
 .replyArea .toggleReply{
@@ -717,7 +762,12 @@ display: inline-block !important;
      width: 65px;
     position: absolute;
     right: 0;
+    top: 0;
         font-size: 18px;
+}
+#commentList{
+    position: relative;
+    z-index: 2;
 }
 
 #commentList li{

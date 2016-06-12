@@ -7,7 +7,7 @@
 @section('scripts_here')
 
 <link rel="stylesheet" href="{{ asset('css/rateit.css') }}">
-<link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
 @endsection
 
@@ -71,23 +71,22 @@
 }
 
 .cropperContainer{
-      top: 21%;
-    left: 14%;
-      position: absolute;
-          background: rgba(255, 255, 255, 0.98);
-    width: 370px;
-        height: 440px;
-    padding: 0 0 15px 0;
-        border-radius: 5px;
+    top: 21%;
+    left: 43%;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.98);
+    width: 300px;
+    height: auto;
     overflow: hidden;
-        z-index: 1;
+    z-index: 1;
     moz-box-shadow: 0 0 30px -10px #000;
     -webkit-box-shadow: 0 0 30px -10px #000;
     box-shadow: 0 0 30px -10px #000;
     display: none;
+    border-radius: 8px;
 }
 
-.cropperContainer .fa-times{
+.cropperContainer .ion-close-round{
      top: 0px;
     color: rgb(158, 0, 0);
     position: absolute;
@@ -98,33 +97,31 @@
 }
 
 .cropperContainer button{
-    background: #A40605;
+    background: transparent;
     border: none;
     display: block;
-    width: 46.5%;
-    margin: 15px 5px 5px 5px;
+    width: 50%;
+    margin: 0;
     float: left;
     padding: 7px;
     border-radius: 2px;
-    color: #fff;
     font-family: 'Work Sans';
-    font-size: 20px;
+    font-size: 35px;
     font-weight: 500;
-    -moz-box-shadow: 0px 2px 3px -2px #696969;
-    -webkit-box-shadow: 0px 2px 3px -2px #696969;
-    box-shadow: 0px 2px 3px -2px #696969;
+    margin-bottom: 13px;
     cursor: pointer;
 }
-
+.cropperContainer  #doneCropping{
+      color: #229C20;
+}
+.cropperContainer  #cancelCropping{
+     color: #C70D0D;
+}
 #cropperH{
-padding: 20px 0;
-background: rgba(190, 19, 19, 0.92);
-height: 372px; 
+padding: 0;
 }
 
-#cropperH input[type="range"]::-webkit-slider-runnable-track,
-#cropperH input[type="range"]::-ms-fill-upper
-{
+#cropperH input[type="range"]{
       background: #000;
 }
 
@@ -144,6 +141,116 @@ height: 372px;
     font-weight: 600;
     cursor: pointer;
 }
+
+
+.tvbox .tabs {
+    width: 650px;
+    float: none;
+    list-style: none;
+    padding: 0;
+    margin: 62px auto;
+}
+ 
+
+
+.labels:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.tvbox .tabs label {
+    display: inline-block;
+    padding: 7px 20px;
+    color: #BBAAA8;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Roboto;
+    cursor: pointer;
+}
+
+ 
+ .tabs .gameList{
+  background: #000;
+    padding: 10px;
+}
+  .tabs .gameList li, .tabs .gameList li a{
+    display: inline-block;
+  }
+  .tabs .labels{
+    text-align: center;
+        background: #161617;
+    width: 80%;
+    margin: 0 auto 3px auto;
+    border-radius: 2px;
+  }
+
+.tvbox .tab-content {
+    display: none;
+    width: 100%;
+    padding: 15px;
+
+    border: 1px solid #251F1F;
+    border-radius: 3px;
+    background: #cdd1d4;
+    background: -moz-linear-gradient(-45deg,  #cdd1d4 0%, #1c1c1e 30%);
+    background: -webkit-linear-gradient(-45deg,  #cdd1d4 0%,#1c1c1e 30%);
+    background: linear-gradient(135deg,  #cdd1d4 0%,#1c1c1e 30%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdd1d4', endColorstr='#1c1c1e',GradientType=1 );
+
+
+
+}
+
+
+
+
+.tvbox  .tab-content * {
+    -webkit-animation: scale 0.4s ease-in-out;
+    -moz-animation: scale 0.4s ease-in-out;
+    animation: scale 0.4s ease-in-out;
+}
+@keyframes scale {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+    }
+  50% {
+    transform: scale(1.01);
+    opacity: 0.5;
+    }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tvbox .tabs input[type=radio] {
+    display:none;
+}
+
+.tvbox  [id^="tab"]:checked + label {
+    color: #fff!important;
+}
+
+.tvbox  [id^=tab]:checked ~ div[id^=tab-content] {
+    display: block;
+    color: #fff!important;
+}
+
+.tvbox  [id^=tab]:checked ~ [id^=label]  {
+    background: #08C;
+    color: white;
+}
+
+
+#tab1:checked ~ #tab-content1,
+#tab2:checked ~ #tab-content2,
+#tab3:checked ~ #tab-content3 {
+    display: block;
+}
+
+
 </style>
 
    <!--  <div class="container background-container" style="width: 1280px !important; margin-top: 40px; padding:0">
@@ -598,22 +705,22 @@ height: 372px;
     <li class="cd-single-step no-pulse">
 
       <div class="cd-more-info">
-        <h2> Profile page </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+        <h2> Welcome to Your Private Quarters! </h2>
+        <p> There's loads to do here, click start tour and I'll show you how it all works! </p>
         <img src="img/step-1.png" alt="step 1">
       </div>
     </li> <!-- .cd-single-step -->
     <li class="cd-single-step">
-      <span>Step 1</span>
+      <span> Your Details </span>
 
       <div class="cd-more-info top">
-        <h2> Your Diary </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+        <h2> Your Details </h2>
+        <p> I'd love to send you my welcome pack for new members, it includes your membership card and some awesome free gifts. Just fill in your information and I'll post it over first thing! </p>
         <img src="img/step-1.png" alt="step 1">
       </div>
     </li> <!-- .cd-single-step -->
 
-    <li class="cd-single-step">
+   <!--  <li class="cd-single-step">
       <span>Step 2</span>
 
       <div class="cd-more-info top">
@@ -621,72 +728,76 @@ height: 372px;
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia quasi in quisquam.</p>
         <img src="img/step-2.png" alt="step 2">
       </div>
-    </li> <!-- .cd-single-step -->
+    </li>  --><!-- .cd-single-step -->
+
+  
 
     <li class="cd-single-step" id="beforeTvStep">
-
-      <span>Step 3</span>
+      <span> My Slots Collections </span>
 
       <div class="cd-more-info left">
-        <h2>Step Number 3</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <h2> My Slots Collections </h2>
+        <p> The TV in your room shows your 'favourite slots', 'slots you've played', and 'slots you haven't played'. Click 'Next' to see how it works... </p>
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
+
     <li class="cd-single-step afterTvStep" id="afterTvFirstStep" data-next="tab2">
-      <span>Step 3.5</span>
+      <span> Your Favourite Games </span>
 
       <div class="cd-more-info right">
-        <h2>View games</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <h2> Your Favourite Games </h2>
+        <p> When you're browsing slots games on my website, you'll have the option to add them to your favourites - you'll then be able to find them here on your TV! You haven't got any favourite games yet - add some today! </p>
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
     <li class="cd-single-step afterTvStep" data-next="tab3"  data-prev="tab1">
-      <span>Step 3.5</span>
+      <span> Games you've played </span>
 
       <div class="cd-more-info right">
-        <h2>View games 2</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <h2> Games you've played </h2>
+        <p> You'll also have the option to mark the games that you've played - all those games will then appear here so you can keep track of what you've played! </p>
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
     <li class="cd-single-step afterTvStep" data-prev="tab2">
-      <span>Step 3.5</span>
+      <span> Games you haven't tplayed </span>
 
       <div class="cd-more-info right" id="afterTvLastStep">
-        <h2>View games 3</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <h2> Games you haven't played </h2>
+        <p>Finally, you can check all the games you haven't played yet here - This is a great way to explore new games you haven't seen before! </p>
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
 
-    <li class="cd-single-step afterTvStep" data-prev="tab3" id="lastTvStep">
-      <span>Step 4</span>
-      <div class="cd-more-info left">
-        <h2>Step Number 4</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+
+    <li class="cd-single-step">
+      <span> Your Profile Pic </span>
+      <div class="cd-more-info right">
+        <h2> Your Profile Pic  </h2>
+        <p> You're looking great today! Here's where you can upload a profile picture to your account! </p>
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
 
     <li class="cd-single-step">
-      <span>Step 5</span>
+      <span>Your Friends </span>
       <div class="cd-more-info right">
-        <h2>Step Number 5</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+        <h2>Your Friends</h2>
+        <p>Susan's Club is all about making friends and having a good time - Friends that you make in the chat lounge will appear here. You can also directly message them from this screen. </p>
         <img src="img/step-3.png" alt="step 3">
       </div>
     </li> <!-- .cd-single-step -->
 
-    <li class="cd-single-step">
-      <span>Step 6</span>
-      <div class="cd-more-info right">
-        <h2>Step Number 6</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
-        <img src="img/step-3.png" alt="step 3">
-      </div>
-    </li> <!-- .cd-single-step -->
+   <!--    <li class="cd-single-step">
+      <span> We Want To Interview You! </span>
+         <div class="cd-more-info top">
+        <h2> We Want To Interview You!  </h2>
+        <p> We're dying to know more about you! Let us know what you like - that way we can customize prizes and gifts specifically to your taste! Other users will be able to see your answers in your public profile and you can see what they put too! </p>
+        <img src="img/step-2.png" alt="step 2">
+      </div> 
+    </li>  --><!-- .cd-single-step -->
+
 
   </ul> <!-- .cd-tour-wrapper -->
 
@@ -695,7 +806,7 @@ height: 372px;
     <div id="pages" style="width:1px;height:1px;overflow:hidden;">
       <div style="text-align:center;background-color:rgb(121, 142, 143)">
          <div class="firstpage">
-            <h2> {{ $user->user_detail->firstname }} <span> Magazine </span> </h2>
+            <h2 style="font-family: Lobster,Helvetica,arial,sans-serif;"> {{ $user->user_detail->firstname }}'s' <span> Magazine </span> </h2>
             <h3> This is the hottest interview of the year! Today, we're interviewing {{ $user->user_detail->firstname }}  </h3>
             <h4> Wow, such an honour to have you here Misis Burito! I'd love to ask you some questions!  </h4>
          </div>
@@ -776,21 +887,22 @@ height: 372px;
   </div>
 
     <div class="bgwrapper">
-      <img id="roombg" src="{{url('images/clubhouse')}}/profileroom3.png" alt="">
+      <img id="roombg" src="{{url('images/clubhouse')}}/profileroom3.jpg" alt="">
 
       <div  class="box good tvbox">
-        <i class="fa fa-times"></i> 
+    <i class="ion-close-round"></i> 
     
         <div class="casinoBox">
-          <i class="fa fa-times"></i>
+          <i class="ion-close-round"></i>
           <p> Select from these casinos: </p>
           <ul id="selectCasino">
-           <!--  <li> <a href="#"> <img src="http://susanwins.com/uploads/13553_hardrock2.jpg" alt=""> </a> </li>
+            <li> <a href="#"> <img src="http://susanwins.com/uploads/13553_hardrock2.jpg" alt=""> </a> </li>
            <li> <a href="#"> <img src="http://susanwins.com/uploads/13553_hardrock2.jpg" alt=""> </a> </li>
            <li> <a href="#"> <img src="http://susanwins.com/uploads/13553_hardrock2.jpg" alt=""> </a> </li>
-           <li> <a href="#"> <img src="http://susanwins.com/uploads/13553_hardrock2.jpg" alt=""> </a> </li> -->
+           <li> <a href="#"> <img src="http://susanwins.com/uploads/13553_hardrock2.jpg" alt=""> </a> </li>
           </ul>
         </div>
+        <!--
 
         <ul class="tabs" data-toggle="#pinboard" id="gameCollection">
             <li>
@@ -827,8 +939,7 @@ height: 372px;
 
                                   <div class="col-sm-12"><button type="button" class="buttonone" data-post="{{ $favorite->id }}"> <i class="fa fa-play"></i> </button>
                                 <button type="button"><a href="{{ url('') }}/{{ $favorite->slug }}"> <i class="fa fa-book"></i> </a></button></div>
-
-                                <!-- <a href="#" class="info" title="Full Image">Full Image</a>   -->
+                            
                               </div>  
                             </div> 
 
@@ -883,7 +994,6 @@ height: 372px;
                                     <div class="col-sm-12"><button type="button" class="buttonone" data-post="{{ $played_game->id }}">   <i class="fa fa-play"></i>  </button></div>
                                   <div class="col-sm-12"><button type="button"><a href="{{ url('') }}/{{ $played_game->slug }}"> <i class="fa fa-book"></i> </a></button></div>
 
-                                <!-- <a href="#" class="info" title="Full Image">Full Image</a>   -->
                               </div>  
                             </div> 
 
@@ -936,7 +1046,6 @@ height: 372px;
                               <div class="col-sm-12"><button type="button" class="buttonone" data-post="{{ $unplayed_game->id }}">   <i class="fa fa-play"></i>  </button></div>
                               <div class="col-sm-12"><button type="button"><a href="{{ url('') }}/{{ $unplayed_game->slug }}"> <i class="fa fa-book"></i>  </a></button></div>
 
-                            <!-- <a href="#" class="info" title="Full Image">Full Image</a>   -->
                           </div>  
                         </div> 
 
@@ -948,11 +1057,165 @@ height: 372px;
               </div>
                 </div>
             </li>
-        </ul>
+        </ul> -->
+
+       <ul class="tabs">
+        
+        <li class="labels">
+            <label for="tab3" id="label3"> <i class="ion-sad-outline"></i> Not played </label>
+            <label for="tab1" id="label1"> <i class="ion-ios-heart"></i> Favourites Games </label>
+            <label for="tab2" id="label2"> <i class="ion-happy-outline"></i> You've Played </label>            
+        </li>
+
+
+        <li>  
+            <input type="radio" checked name="tabs" id="tab1">
+            <div id="tab-content1" class="tab-content">
+                  <ul class="gameList">
+                    @foreach($user->favorites as $favorite)
+
+                      <li>
+
+                          <div class="rateDiv">
+
+
+                              <div class="view third-effect">  
+                                <img src="{{ asset('uploads') }}/{{ $favorite->thumb_feature_image }}" alt="">
+                              <div class="mask"> 
+
+                                  <div class="rateStatus">My Rating
+                                    @if(!$favorite->user_rating)
+                                    <span data-target="favorite_{{ $favorite->id }}">
+                                      - <b>NOT RATED</b>
+                                    </span>
+                                    @endif
+                                    
+                                  </div>
+
+                                  <div class="ratingArea">
+                                    <input type="hidden" value="{{ $favorite->gameRating['totalRating'] }}" step="0.5" id="favorite_{{ $favorite->id }}" data-post="{{$favorite->id }}" class="rating">
+                                                          <div class="rateit" data-rateit-backingfld="#favorite_{{ $favorite->id }}" data-rateit-resetable="false" data-rateit-ispreset="true"></div>                             
+                                  </div>
+
+                                 <div class="col-sm-12"><button type="button" class="buttonone" data-post="{{ $favorite->id }}"> Play </button></div>
+                                 <div class="col-sm-12"><button type="button"><a href="{{ url('') }}/{{ $favorite->slug }}"> View </a></button></div>
+                            
+                              </div>  
+                            </div> 
+
+
+                              
+                              
+                            
+
+
+                          </div>
+
+                        
+                      </li>
+                    @endforeach
+                </ul>
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="tabs" id="tab2">
+            <div id="tab-content2" class="tab-content">
+                 <ul class="gameList">
+                    @foreach($user->played_games as $played_game)
+                      
+                      <li>
+
+                          <div class="rateDiv">
+
+                              <div class="view third-effect">  
+                              <img src="{{ asset('uploads') }}/{{ $played_game->thumb_feature_image }}" alt="">
+                              <div class="mask"> 
+
+                                 <div class="rateStatus">My Rating
+                                        @if(!$played_game->user_rating)
+                                        <span data-target="played_game_{{ $played_game->id }}">
+                                          - <b>NOT RATED</b>
+                                        </span>
+                                        @endif
+                                        
+                                      </div>
+                                      <div class="ratingArea">
+                                        <input type="hidden" value="{{ $played_game->gameRating['totalRating'] }}" step="0.5" id="played_game_{{ $played_game->id }}" data-post="{{$played_game->id }}" class="rating">
+                                                              <div class="rateit" data-rateit-backingfld="#played_game_{{ $played_game->id }}" data-rateit-resetable="false" data-rateit-ispreset="true"></div>
+
+                                      
+                                      </div>
+
+                                  <div class="col-sm-12"><button type="button" class="buttonone" data-post="{{ $played_game->id }}">  Play  </button></div>
+                                  <div class="col-sm-12"><button type="button"><a href="{{ url('') }}/{{ $played_game->slug }}"> View </a></button></div>
+
+                              </div>  
+                            </div> 
+
+
+
+                          </div>
+
+                      
+                      </li>
+                    @endforeach
+                </ul>
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="tabs" id="tab3">  
+            <div id="tab-content3" class="tab-content">
+                 <ul class="gameList">
+              @foreach($user->unplayed_games as $unplayed_game)
+
+                  <li>
+
+                      <div class="rateDiv">
+
+
+                          <div class="view third-effect">  
+                          <img src="{{ asset('uploads') }}/{{ $unplayed_game->thumb_feature_image }}" alt="">
+                          <div class="mask"> 
+
+                             <div class="rateStatus">My Rating - 
+                                @if(!$unplayed_game->user_rating)
+                                <span data-target="unplayed_game_{{ $unplayed_game->id }}">
+                                  <b>NOT RATED</b>
+                                </span>
+                                @endif
+                                
+                              </div>
+                              <div class="ratingArea">
+                                <input type="hidden" value="{{ $unplayed_game->gameRating['totalRating'] }}" step="0.5" id="unplayed_game_{{ $unplayed_game->id }}" data-post="{{$unplayed_game->id }}" class="rating">
+                                                      <div class="rateit" data-rateit-backingfld="#unplayed_game_{{ $unplayed_game->id }}" data-rateit-resetable="false" data-rateit-ispreset="true"></div>
+
+                              
+                              </div>
+
+
+                              <div class="col-sm-12"><button type="button" class="buttonone" data-post="{{ $unplayed_game->id }}"> Play  </button></div>
+                              <div class="col-sm-12"><button type="button"><a href="{{ url('') }}/{{ $unplayed_game->slug }}"> View  </a></button></div>
+
+                          </div>  
+                        </div> 
+
+                      </div>
+                    
+                  </li>
+                @endforeach
+              </ul>
+              </div>
+         
+            </li>
+
+   
+
+    </ul>  
+
       </div>    
 
       <div class="box2 good keybox">
-        <i class="fa fa-times"></i> 
+        <i class="ion-close-round"></i> 
         <form action="{{ url('clubhouse/profile/changePassword') }}" method="POST">           
             @if(session('changePasswordErrors'))
               <ul class="formMessage errorlist">
@@ -979,13 +1242,13 @@ height: 372px;
               <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm New Password">
             </div>
             <div class="form-group">
-              <button type="submit">Submit</button>
+              <button type="submit"> <i class="ion-checkmark-round"></i> </button>
             </div>
           </form>
       </div>
       
       <div class="box3 good profilebox">  
-        <i class="fa fa-times"></i> 
+        <i class="ion-close-round"></i> 
         <form action="{{ url('clubhouse/profile/userDetails') }}" method="POST">
           @if(session('userDetailsErrors'))
             <ul class="formMessage errorlist">
@@ -1013,16 +1276,16 @@ height: 372px;
           </div>
           <div class="form-group">
             <label for="">Phone Number</label>
-            <input type="text" name="phone_no" class="form-control" value="{{ isset($user->user_detail) ? $user->user_detail->phone_no || '' : '' }}"  placeholder="Phone Number">
+            <input type="text" name="phone_no" class="form-control" value="{{ isset($user->user_detail) ? $user->user_detail->phone_no  : '' }}"  placeholder="Phone Number">
           </div>
           <div class="form-group">
-            <button type="submit">Submit</button>
+            <button type="submit"> <i class="ion-checkmark-round"></i> </button>
           </div>
         </form>
       </div>
 
       <div class="box4 good magbox">
-        <i class="fa fa-times"></i>         
+        <i class="ion-close-round"></i>         
 <!--         <span class="arrow left" onclick="clipmeR();"> <i class="fa fa-chevron-left"></i> </span>
         <span class="arrow right" onclick="clipmeL();"> <i class="fa fa-chevron-right"></i> </span>
  -->
@@ -1031,7 +1294,7 @@ height: 372px;
 
       <div class="box5 good friendsbox" >
         <div class="friendBox">
-           <i class="fa fa-times"></i> 
+           <i class="ion-close-round"></i> 
            <div class="tabs">
                  <div class="tab">
                      <input type="radio" id="tab-1" name="tab-group-1" checked="">
@@ -1051,11 +1314,11 @@ height: 372px;
                                   <li data-friend="{{$fr->friend->id }}">
                                     <span class="offline" id="friend-online-status-{{ $fr->friend->user_detail->user_id }}"></span>
                                     <div class="options" data-user="{{ $fr->friend->user_detail->user_id }}">
-                                      <a  data-target="#pmBox" class="subModalToggle pmFriend"> <i class="fa fa-comment"></i>  </a>
+                                      <a  data-target="#pmBox" class="subModalToggle pmFriend"> <i class="ion-ios-chatbubble"></i>  </a>
                                       <!-- <a  data-target="#friendProfile" id="friendprofopen" class="subModalToggle viewFriendProfile toggle-good">  <i class="fa fa-user"></i> </a> -->
                                     </div>
                                     <div class="msgImgcont">
-                                      <img src="{{ $fr->friend->user_detail->userPicture5050() }}" class="viewProfile" alt="">
+                                     <img src="{{ $fr->friend->user_detail->userPicture5050() }}" class="viewProfile" alt="">
                                     </div>
                                    <!--  <h6> {{ ucwords( $fr->friend->user_detail->firstname.' '.$fr->friend->user_detail->lastname ) }} </h6> -->
                                     <h6> {{ ucwords( $fr->friend->user_detail->firstname ) }} </h6>
@@ -1083,11 +1346,10 @@ height: 372px;
 
                           <ul class="messagingBox">                   
                             @foreach($user->myMessages as $msg)
-                              <li data-user="{{ $msg->from_user->user_detail->user_id }}" style="text-align:left;">
-                                <a href="javascript:;" class="subModalToggle pmFriend toggle-good" data-target="#pmBox"><span class="offline" id="friend-message-online-status-{{ $msg->from_user->user_detail->user_id }}"></span>
+                              <li data-user="{{ $msg->from_user->user_detail->user_id }}" style="text-align:left;padding:8px 0;display: block;">
+                                <a href="javascript:;" class="subModalToggle pmFriend toggle-good" data-target="#pmBox"><span class="offline" id="friend-message-online-status-{{ $msg->from_user->user_detail->user_id }}" style="left: 45px;top: 5px;"></span>
                                 <div class="msgImgcont" style="float: left;">
-                                   <img src="{{ $msg->from_user->user_detail->userPicture5050() }}" alt=""> 
-
+                                    <img src="{{ $msg->from_user->user_detail->userPicture5050() }}" alt=""> 
                                 </div>
                               <h6> {{ ucwords($msg->from_user->user_detail->firstname.' '.$msg->from_user->user_detail->lastname ) }} <em> 3:36pm </em></h6>
                               <p> {{ $msg->message }} </p></a>
@@ -1102,69 +1364,69 @@ height: 372px;
         </div>
       </div>
 
+      
           <div class="friendProfile" id="friendProfile">
               <div class="divContainer">          
                       <div class="imgContainer">
-                      <i class="fa fa-times"></i> 
-                      <span> <a href="#" class="add"> <i class="fa fa-plus"></i> </a> </span>
+                      <i class="ion-close-round"></i>                       
                   <!--     <span> <a href="#" class="block"> <i class="fa fa-ban"></i> </a> </span> -->
-                      <span id="pm-user"> <a class="message"> <i class="fa fa-comment" style="position: relative;   top:9px;"></i> </a> </span>
+                      <span id="pm-user"> <a class="message"> <i class="ion-chatbubbles" style="position: relative; top:9px;"></i> </a> </span>
                       <div class="msgImgcont">
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/whale/128.jpg" id="viewFriendProfilePic">
                       </div>
                       <h6 id="viewFriendProfileName"> Samantha Wilson </h6>
-                            <div id="profileBtn">
+                        <div id="profileBtn">
                         </div>
                       </div>
-                      	<div class="moredetailsbox">
-	                      <p> Favorite Games  </p>
-	                      <div class="favegames">
-	                        <span class="ellipsis"> <i class="fa fa-ellipsis-h"></i><a href=" "></a></span>
-	                        <ul id="profileFavorites">
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/35843_8balls.gif"> </a> </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/44897_alchemist-lab.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/68900_hot-gems.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/21872_innocence-temptation.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/82396_iron-man.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/35843_8balls.gif"> </a> </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/44897_alchemist-lab.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/68900_hot-gems.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/21872_innocence-temptation.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/82396_iron-man.gif"> </a>  </li>
-	                        </ul>
-	                      </div>
-	                      <p> Games Played with their rating  </p>
-	                      <div class="favegames">
-	                        <ul id="profilePlayedGames">
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/35843_8balls.gif"> </a> </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/44897_alchemist-lab.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/68900_hot-gems.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/21872_innocence-temptation.gif"> </a>  </li>
-	                          <li> <a href="#"> <img src="http://susanwins.com/uploads/82396_iron-man.gif"> </a>  </li>
-	                        </ul>
-	                      </div>
-	                     <!--  <p> Interview  </p>
-	                      <div class="interviewBox">
-	                        <div>
-	                          <p class="question"> We've heard you're great company to be around – but when you're socialising what's your drink of choice? </p>
-	                          <p class="answer"> Spirit & Mixer </p>
-	                        </div>
-	                      </div> -->
-	                    </div>
+                        <div class="moredetailsbox">
+                        <p> Favorite Games  </p>
+                        <div class="favegames">
+                          <span class="ellipsis"> <i class="fa fa-ellipsis-h"></i><a href=" "></a></span>
+                          <ul id="profileFavorites">
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/35843_8balls.gif"> </a> </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/44897_alchemist-lab.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/68900_hot-gems.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/21872_innocence-temptation.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/82396_iron-man.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/35843_8balls.gif"> </a> </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/44897_alchemist-lab.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/68900_hot-gems.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/21872_innocence-temptation.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/82396_iron-man.gif"> </a>  </li>
+                          </ul>
+                        </div>
+                        <p> Games Played with their rating  </p>
+                        <div class="favegames">
+                          <ul id="profilePlayedGames">
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/35843_8balls.gif"> </a> </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/44897_alchemist-lab.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/68900_hot-gems.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/21872_innocence-temptation.gif"> </a>  </li>
+                            <li> <a href="#"> <img src="http://susanwins.com/uploads/82396_iron-man.gif"> </a>  </li>
+                          </ul>
+                        </div>
+                       <!--  <p> Interview  </p>
+                        <div class="interviewBox">
+                          <div>
+                            <p class="question"> We've heard you're great company to be around – but when you're socialising what's your drink of choice? </p>
+                            <p class="answer"> Spirit & Mixer </p>
+                          </div>
+                        </div> -->
+                      </div>
                 </div>
           </div>
-      <div class="cropperContainer">
-      <i class="fa fa-times"></i>
+      
+      <div class="cropperContainer">      
           <div id="cropperH"></div>
-          <button type="button" id="doneCropping">Done</button>
-          <button type="button" id="cancelCropping">Cancel</button>
+          <button type="button" id="doneCropping"> <i class="ion-checkmark-round"></i> </button>
+          <button type="button" id="cancelCropping"> <i class="ion-close-round"></i> </button>
       </div>
      <!--  <div class="pmessagebox">
           <div class="pmBox" id="pmBox" style="margin-left: 6px;">        
                  <div class="divContainer">
                    <div class="header"></div>
                      <div class="body">
-                       <h2>  <i class="fa fa-times"></i>  <span class="online"></span> <b id="pmName">Syndey Winchester </b> </h2>
+                       <h2>  <i class="ion-close-round"></i>  <span class="online"></span> <b id="pmName">Syndey Winchester </b> </h2>
                        <ul class="messagesContent" id="messageContent">
                        </ul>
                      </div>
@@ -1205,12 +1467,13 @@ height: 372px;
      </div> -->
 
       <div class="tvwrapper wrapper toggle-good">
-            <div class="itemLabels"> View Games </div>
+            <div class="itemLabels"> My Slots Games </div>
             <div class="tv"> <span></span> </div>
           </div> 
 
-       <div class="diarywrapper wrapper toggle-good">
-            <div class="itemLabels"> View Profile </div>
+       <div class="diarywrapper 
+        wrapper toggle-good">
+            <div class="itemLabels"> My Details </div>
             <div class="diary"> <span></span> </div>
           </div>
           
@@ -1227,10 +1490,10 @@ height: 372px;
             </div>
           </div> -->
 
-          <div class="magwrapper wrapper toggle-good">
+     <!--      <div class="magwrapper wrapper toggle-good">
             <div class="itemLabels"> About You </div>
             <div class="magazine"> <span></span> </div>
-          </div>
+          </div> -->
 
  
           <div class="keywrapper  wrapper  toggle-good">
@@ -1262,34 +1525,29 @@ height: 372px;
           </div>
  -->
           <div class="friendswrapper wrapper toggle-good">
-          <div class="itemLabels"> Your Friends </div>
+          <div class="itemLabels"> My Friends </div>
             <div class="friends"> <span></span> </div>
           </div>
 
 
-
           <div class="picwrapper wrapper">
-            <div class="itemLabels"> Upload image </div>        
+            <div class="itemLabels"> My Profile Picture </div>        
             <div class="pic">                 
            <!--  <img src="{{  $user->user_detail->profile_picture ? asset('').'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png')   }}" alt="" class="profile_pic" id="picPreview"> -->
-            <img src ="{{ $user->user_detail->profile_picture ? asset('user_uploads').'/user_'.$user->id.'/'.$user->user_detail->profile_picture : url('user_uploads/default_image/default_01.png') }}" alt="" class="profile_pic" id="picPreview"> 
+         <!--   <img src ="{{ asset('user_uploads')}}/user_{{$user->id}}/{{$user->user_detail->profile_picture }}" alt="" class="profile_pic" id="picPreview"> -->
+           <img src ="{{ $user->user_detail->profile_picture ? asset('user_uploads').'/user_'.$user->id.'/'.$user->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="" class="profile_pic" id="picPreview">
 
             </div>
 
             <label class="myLabel">
             <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" />
-            <span>  +  </span>
+            <span>    </span>
         </label>
-
-         <!--    <button class="file-upload">            
-            <input type="file" class="upload file-input" name="profilePic" accept="image/*" id="profilePic" > + </button> -->
-
 
 </div>
 @endsection
 
 @section('custom_scripts')
-<script src="{{ asset('js/clubhouse/croppie.js') }}"></script>
 <script src="{{ asset('js/jquery.rateit.min.js') }}"></script>
 <!-- <script src="{{ asset('js/jquery.vticker.min.js') }}"></script> -->
 <script src="{{ asset('js/bookflip.js') }}"></script>
@@ -1308,32 +1566,28 @@ $(document).ready(function(){
     $('.pmBox').css('display','block');
   });
 
-  $('.keybox .fa-times').click(function() {        
+  $('.keybox .ion-close-round').click(function() {        
      $(".keybox ").fadeToggle('fast');
   });
   $('.keywrapper').click(function() {        
      $(".keybox ").fadeToggle('fast');
   });
 
-  $('.profilebox .fa-times').click(function() {        
+  $('.profilebox .ion-close-round').click(function() {        
      $(".profilebox ").fadeToggle('fast');
   });
   $('.diarywrapper').click(function() {        
      $(".profilebox ").fadeToggle('fast');
   });
 
-  $('.tvbox > .fa-times').click(function() {        
+  $('.tvbox > .ion-close-round').click(function() {        
      $(".tvbox ").fadeToggle('fast');
   });
   $('.tvwrapper').click(function() {        
      $(".tvbox ").fadeToggle('fast');
   });
 
-
-
-
-
-  $('#beforeTvStep').on('click','.cd-next', function(){
+   $('#beforeTvStep').on('click','.cd-next', function(){
       $(".tvbox ").fadeIn('fast');
   });
 
@@ -1363,7 +1617,7 @@ $('#lastTvStep').on('click', '.cd-prev', function(){
      $(".friendProfile ").fadeToggle('fast');
   });
 
-   $('.imgContainer .fa-times').click(function() {        
+   $('.imgContainer .ion-close-round').click(function() {        
      $(".friendProfile ").fadeToggle('fast');
   });
 
@@ -1371,7 +1625,7 @@ $('#lastTvStep').on('click', '.cd-prev', function(){
   //    $(".friendProfile ").fadeToggle('fast');
   // });
 
-  $('.magbox .fa-times').click(function() {        
+  $('.magbox .ion-close-round').click(function() {        
      $(".magbox ").fadeToggle('fast');
   });
 
@@ -1379,7 +1633,7 @@ $('#lastTvStep').on('click', '.cd-prev', function(){
      $(".magbox ").fadeToggle('fast');
   });
 
-  $('.casinoBox .fa-times').click(function() {        
+  $('.casinoBox .ion-close-round').click(function() {        
      $(".casinoBox ").hide();
   });
 
@@ -1390,8 +1644,6 @@ $('#lastTvStep').on('click', '.cd-prev', function(){
   $('#mirror').click(function(e){
     $('#profilePic').click();   
   });
-
-  
 
   // $('.maginterviewmain').vTicker('init', {
   //     speed: 600, 
@@ -1606,7 +1858,7 @@ return bb;
                }
             });*/
   
-  $('.cropperContainer').on('click', '> .fa-fa-times, #cancelCropping',function(){
+  $('.cropperContainer').on('click', '> .fa-ion-close-round, #cancelCropping',function(){
       $('.cropperContainer').hide();
   });
 
@@ -1997,7 +2249,7 @@ var $uploadCrop;
           }
       });*/
 
-      /***************** START BUTTON FOR ADD CANCEL AND SEND REQUEST ***********************/
+       /***************** START BUTTON FOR ADD CANCEL AND SEND REQUEST ***********************/
       $('#profileBtn').on('click', 'button', function(){
 
     other_person = $(this).data('other_person');
@@ -2123,8 +2375,7 @@ var $uploadCrop;
             $(".friendProfile ").fadeIn('fast');
         });
 
-
-      $('#myFriends').on('click','.viewProfile', function(){
+ $('#myFriends').on('click','.viewProfile', function(){
 
           modal = $('#friendProfile');
 
@@ -2157,7 +2408,7 @@ var $uploadCrop;
                   $('#viewFriendProfilePic').attr('src', getImage(data, null)  )
                   $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
 
-                   $('#pm-user').data('user', data.user_detail.user_id).find('.message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox');
+                   $('#pm-user').data('user', data.user_detail.user_id).find('.message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox').attr('data-user', theUser);
 
                   relation = data.friend.relation;
                   friend_id = data.friend.friend_id;
@@ -2241,7 +2492,7 @@ var $uploadCrop;
         height: '380px'
     });
 
-    $('.friendBox .fa-times').click(function() {
+    $('.friendBox .ion-close-round').click(function() {
       $('.friendsbox').css("left","-425px");
     });
 
@@ -2273,7 +2524,7 @@ function init_bookflip(startpage){
     pageBackgroundColor="#CCCCCC";
     pageFontColor="#ffffff";
 
-    pageBorderWidth="1";
+    pageBorderWidth="0";
     pageBorderColor="transparent";
     pageBorderStyle="solid";  //dotted, dashed, solid, double, groove, ridge, inset, outset, dotted solid double dashed, dotted solid
 

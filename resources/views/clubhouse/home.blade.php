@@ -156,17 +156,17 @@
           <li class="cd-single-step no-pulse">
 
             <div class="cd-more-info">
-              <h2> Welcome to my house! </h2>
-              <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+              <h2> Welcome to my Clubhouse! </h2>
+              <p> Let me Show you Around, it'll Only Take 30 Seconds! </p>
               <img src="img/step-1.png" alt="step 1">
             </div>
           </li> <!-- .cd-single-step -->
           <li class="cd-single-step">
-            <span>Step 1</span>
+            <span> The Slots Room </span>
 
             <div class="cd-more-info top">
               <h2> The Slots Room</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+              <p> Here's where you can find amazing new slot games to play - See how I did and watch my 'big win' videos! </p>
               <img src="img/step-1.png" alt="step 1">
             </div>
           </li> <!-- .cd-single-step -->
@@ -175,28 +175,28 @@
             <span> Your Profile Room </span>
 
             <div class="cd-more-info left">
-              <h2>Step Number 2</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia quasi in quisquam.</p>
+              <h2> Your Profile Room </h2>
+              <p> This is your private room in my clubhouse; manage your friendships, browse your personal slots collections and customise your account! </p>
               <img src="img/step-2.png" alt="step 2">
             </div>
           </li> <!-- .cd-single-step -->
 
           <li class="cd-single-step">
-            <span> The Chatroom</span>
+            <span> World Famous Susan's Chatroom </span>
 
             <div class="cd-more-info left">
-              <h2>Step Number 3</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+              <h2>  World Famous Susan's Chatroom  </h2>
+              <p> This is THE place to hang out online, meet likeminded people, have a laugh and let your hair down.  </p> <p> All chats are fully hosted and moderated by my team, only nice people allowed! </p>
               <img src="img/step-3.png" alt="step 3">
             </div>
           </li> <!-- .cd-single-step -->
 
           <li class="cd-single-step">
-            <span> The Prize Room </span>
+            <span> The Prize Room  </span>
 
             <div class="cd-more-info left">
-              <h2>Step Number 3</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
+              <h2>The Prize Room </h2>
+              <p>Here's where you can win amazing prizes, from a trip to sunny Spain, £500 cash, or 3 nights in Vegas! </p> <p> If you're lucky enough to find a prize code, head over here and test your luckilings!</p>
               <img src="img/step-3.png" alt="step 3">
             </div>
           </li> <!-- .cd-single-step -->
@@ -205,7 +205,7 @@
 
   @endif
 
-			<img id="roombg" src="{{url('images/clubhouse')}}/front-house.png" alt="">		      		   
+			<img id="roombg" src="{{url('images/clubhouse')}}/front-house.jpg" alt="">		      		   
 		  
 			<div class="as" style="position:absolute;top:150px;left:220px;">
 				<ul>

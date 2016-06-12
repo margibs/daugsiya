@@ -45,9 +45,10 @@
      <div id="media_wrapper">                    
 
 	    @foreach($media_files as $media_file)
-			<a href=""><div class="outer">
+			<a href="#" class="image_gallery" data-id="{{ $media_file->id }}" id="{{ $media_file->id }}"><div class="outer">
+      <input type="hidden" name="id" id="id" class="media_id" value="{{ $media_file->id }}">
 				<div class="inner">
-					<img src="{{ url('/uploads') }}/{{$media_file->image_url}}" />
+					<img src="{{ url('/uploads') }}/{{$media_file->image_url}}" id="{{ $media_file->id}}" class="image_id" />
 				</div>                          
 			</div>
 			</a>
@@ -65,14 +66,15 @@
       <div id="fileuploader">Upload</div>
 
       <div class="panel">
+        <input type="hidden" name="delete_id" id="delete_id" value="">
         <h6> Selected Image Details </h6>
         <div class="details">
         <span> Title </span>
-        <p> I'm an image </p>
-        <span> Dimension </span>
-        <p> 500 x 205 </p>
+        <p id="title"> </p>
+        <span> Description </span>
+        <p id="description"> </p>
         <span> Url </span>
-        <input type="text" value="http://alllad.com/uploads/13484_super glue for eye drops.png">
+        <input type="text" value="" id="url">
         <a href="#" class="delete"> Delete </a>
         </div>                        
       </div>
@@ -102,6 +104,55 @@
 
 			}
 		});
+
+    $('.image_gallery').on('click', function(){
+
+      // ID = document.getElementById("id").value;
+        var ID = $(this).attr('id');
+        //console.log(id);
+      BASE_URL = '{{ url('') }}';
+
+      $.ajax({
+        url: BASE_URL+'/admin/findMediaFiles/'+ID,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('#title').html('');
+          $('#title').append($('<span>').text(data.title))
+          $('#description').html('');
+          $('#description').append($('<span>').text(data.description))
+          $('#url').val(data.image_url);
+          $('#delete_id').val(data.id);
+        },
+        error: function(exr) {
+          console.log(exr);
+        }
+      });
+    });
+
+    $('.delete').on('click', function(){
+       ID = document.getElementById("delete_id").value;
+       if(ID == '') {
+           alert("Please Select Image");    
+       }
+
+       BASE_URL = '{{ url('') }}';
+
+      $.ajax({
+        url: BASE_URL+'/admin/deleteMediaFiles/'+ID,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          location.reload(true);
+        },
+        error: function(exr) {
+          console.log(exr);
+        }
+      });
+
+    });
 	});
 </script>
 

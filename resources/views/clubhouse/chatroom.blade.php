@@ -6,10 +6,12 @@
 @section('scripts_here')
 <style type="text/css">
 
-
+.cd-tour-nav,  .fa-smile-o{
+  display: none;
+}
 .friendprofilebox{
-       left: 35%;
-    top: 18%;
+    left: 40%;
+    top: 15%;
 }
 
 .bigChatBox{    
@@ -80,9 +82,10 @@
   margin-top: -8px;
 }
 .bigChatBox .body{
-  margin-top: 10px;
+ padding-top: 12px;
   height: 518px;
   overflow: hidden;
+      width: 100%;
 }
 .bigChatBox .body ul{
     -moz-transition: all 0.5s ease-out;
@@ -99,13 +102,13 @@
   padding-bottom: 4px;
 }
 .bigChatBox .body  ul li p{
-    font-family: 'Work Sans';
-    font-weight: 500;
-    font-size: 14px;
+    font-family: Roboto;
+    font-weight: 600;
+    font-size: 15px;
     line-height: 18px;
     background: #fff;
     padding: 10px 25px;
-    margin-left: 70px;
+    margin-left: 60px;
     border-radius: 30px;
     border-radius: 30px;
     -moz-box-shadow: 0px 2px 3px -2px #BDBBBB;
@@ -114,7 +117,7 @@
 }
 .bigChatBox .footer textarea{
     border: none;
-    padding: 20px;
+    padding: 8px 50px 8px 10px;
     width: 91%;
     height: 60px;
     border-radius: 5px;
@@ -134,15 +137,23 @@
 }
 .bigChatBox .footer .triggers{
     position: absolute;
-    bottom: 33px;
-    right: 40px;
+    bottom: 30px;
+    right: 34px;
     z-index: 2;
+    background: #ECB91C;
+    border-radius: 50%;
+    padding: 8px;
+    -moz-box-shadow: 0 0 10px -4px #000;
+    -webkit-box-shadow: 0 0 10px -4px #000;
+    box-shadow: 0 0 10px -4px #000;
 }
 .bigChatBox .footer .triggers i{
-    font-size: 23px;
-    margin-left: 4px;
-    color: #807C7C;
+      font-size: 20px;
+    margin-left: 0px;
+    color: #FFF8F8;
     cursor: pointer;
+    position: relative;
+    left: -1px;
 }
 .bigChatBox .footer .arrow_box{
     right: -155px;
@@ -240,9 +251,9 @@
     top: 130px;
   }
   .friendprofilebox{
-      top: 13%;
-      left: 500px;
-      z-index: 2;
+    top: 2%;
+    left: 463px;
+    z-index: 2;
    }
    #pmBox{
     top: 12%!important;
@@ -257,10 +268,9 @@
 
 .roomListContainer .roomList{
     position: absolute;
-    top: 36px;
-    margin-left: 25px;
+    top: 33px;
+    margin-left: 9px;
     background: #d12324;
-    
     z-index: 2;
     width: 164px;
     border-radius: 4px;
@@ -307,6 +317,12 @@
 #privateMessageTextarea{
     min-height: 65px!important;
     height: 65px!important;
+}
+.msgImgcont{
+  width: 50px;
+  height: 50px;
+  float: left;
+  border-radius: 50%;
 }
 </style>
 
@@ -370,28 +386,28 @@
 <input type="hidden" value="{{ $user->id }}" id="userId" data-image="{{ $user->user_detail->profile_picture }}" data-name="{{ $user->user_detail->firstname.' '.$user->user_detail->lastname }}">
 <div class="container background-container" style="width: 1280px !important; margin-top: 40px; padding:0">
   <img src="{{ asset('clubhouse/img/assets/livingroom.png') }}" class="background-image interactiveBackground" alt="">
-	
-	<div class="bigChatBox interactiveObj" top="4%" left="4%">
+  
+  <div class="bigChatBox interactiveObj" top="4%" left="4%">
           <div class="head">
               <div class="roomListContainer">
-              	<button id="roomListBtn"> <span id="roomDetails" 
+                <button id="roomListBtn"> <span id="roomDetails" 
                 
                 @if($chatrooms && count($chatrooms) > 0)
                       data-id="{{ $chatrooms[0]->id }}" data-name="{{ $chatrooms[0]->name }}" data-description="{{ $chatrooms[0]->description }}"
                 @endif
                 >
-              		
-              		@if($chatrooms && count($chatrooms) > 0)
-						{{ $chatrooms[0]->name }}
-              		@endif
-              	</span> <i class="fa fa-chevron-down"></i> </button>
-              	<ul class="roomList">
+                  
+                  @if($chatrooms && count($chatrooms) > 0)
+            {{ $chatrooms[0]->name }}
+                  @endif
+                </span> <i class="fa fa-chevron-down"></i> </button>
+                <ul class="roomList">
 
-              		@foreach($chatrooms as $room)
-							<li><a href="javascript:;" data-name="{{ $room->name }}" data-description="{{ $room->description }}" data-id="{{ $room->id }}">{{ $room->name }}</a></li>
-              		@endforeach
-              		
-              	</ul>
+                  @foreach($chatrooms as $room)
+              <li><a href="javascript:;" data-name="{{ $room->name }}" data-description="{{ $room->description }}" data-id="{{ $room->id }}">{{ $room->name }}</a></li>
+                  @endforeach
+                  
+                </ul>
               </div>
               <p>
                 <span id="chatPopulation"></span>
@@ -401,61 +417,61 @@
               </p>
           </div>
           <div class="chatContainer">
-          		<div class="divContainer">
-          			<div class="body">
-		              <ul class="child" id="messageContent">
-							
-						@if($chatrooms && count($chatrooms) > 0)
-							
-							@foreach($chatrooms[0]->room_messages as $msg)
-								<li data-user="{{ $msg->user->user_detail->user_id }}"> 
-		                  <a href="javascript:;" data-target="#friendProfile" class="subModalToggle viewFriendProfile">
+              <div class="divContainer">
+                <div class="body">
+                  <ul class="child" id="messageContent">
+              
+            @if($chatrooms && count($chatrooms) > 0)
+              
+              @foreach($chatrooms[0]->room_messages as $msg)
+                <li data-user="{{ $msg->user->user_detail->user_id }}"> 
+                      <a href="javascript:;" data-target="#friendProfile" class="subModalToggle viewFriendProfile">
                           
                           <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" />
                            </a>
                           <p> {{ $msg->message }} </p>
 
                      
-			                </li>
+                      </li>
 
-							@endforeach
-						@endif
-		              </ul>
-			          </div>
-			          <div class="theFooter">
-			              <div class="arrow_box" style="display:none;"></div>  
-			              <div id="tooltip" style="display:none;">
+              @endforeach
+            @endif
+                  </ul>
+                </div>
+                <div class="theFooter">
+                    <div class="arrow_box" style="display:none;"></div>  
+                    <div id="tooltip" style="display:none;">
 
-			                <ul>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                    <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
-			                </ul>
+                      <ul>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                          <li> <img src="http://hassankhan.me/emojify.js/images/emoji/grin.png"> </li>
+                      </ul>
 
-			                </div>
+                      </div>
 
-			              <div class="triggers">
-			                
-			                <i class="fa fa-smile-o emojiTrigger"></i>
-			                <i class="fa fa-paper-plane"></i>
-			              </div>
-			              <form id="chatMessageForm" action="{{ url('chatroom/postMessage') }}">
-			              	<textarea id="chatRoomTextarea" class="chatCommon" placeholder="Type Message" disabled="disabled"></textarea>
-			              </form>
-			              
-			          </div>
-          		</div>
+                    <div class="triggers">
+                      
+                      <i class="fa fa-smile-o emojiTrigger"></i>
+                      <i class="fa fa-paper-plane"></i>
+                    </div>
+                    <form id="chatMessageForm" action="{{ url('chatroom/postMessage') }}">
+                      <textarea id="chatRoomTextarea" class="chatCommon" placeholder="Type Message" disabled="disabled"></textarea>
+                    </form>
+                    
+                </div>
+              </div>
           </div>
       </div>
 
@@ -583,47 +599,19 @@
     <li class="cd-single-step no-pulse">
 
       <div class="cd-more-info">
-        <h2> Chatroom page </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
-        <img src="img/step-1.png" alt="step 1">
-      </div>
-    </li> <!-- .cd-single-step -->
-    <li class="cd-single-step">
-      <span>Step 1</span>
-
-      <div class="cd-more-info bottom">
-        <h2> Your Diary </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi alias animi molestias in, aperiam.</p>
+        <h2> World Famous Susan's Chatroom  </h2>
+        <p> This is THE place to hang out online, meet likeminded people, have a laugh and let your hair down. <br /> <br />All chats are fully hosted and moderated by my team, only nice people allowed! </p>
         <img src="img/step-1.png" alt="step 1">
       </div>
     </li> <!-- .cd-single-step -->
 
-    <li class="cd-single-step">
-      <span>Step 2</span>
-
-      <div class="cd-more-info right">
-        <h2>Step Number 2</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia quasi in quisquam.</p>
-        <img src="img/step-2.png" alt="step 2">
-      </div>
-    </li> <!-- .cd-single-step -->
-
-    <li class="cd-single-step">
-      <span>Step 3</span>
-
-      <div class="cd-more-info right">
-        <h2>Step Number 3</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio illo non enim ut necessitatibus perspiciatis, dignissimos.</p>
-        <img src="img/step-3.png" alt="step 3">
-      </div>
-    </li> <!-- .cd-single-step -->
 
   </ul> <!-- .cd-tour-wrapper -->
 
   @endif
 
         <div class="bgwrapper">
-      <img id="roombg" src="{{url('images/clubhouse')}}/chatroom.png" alt="">  
+      <img id="roombg" src="{{url('images/clubhouse')}}/chatroom.jpg" alt="">  
 
       <div class="container background-container" style="width: 1280px !important; margin-top: 40px; padding:0">
 
@@ -645,7 +633,7 @@
                 <ul class="roomList">
 
                   @foreach($chatrooms as $room)
-                     <li><a href="javascript:;" data-href="{{ url('clubhouse/chatroom') }}/{{$room->name}}" data-name="{{ $room->name }}" data-description="{{ $room->description }}" data-id="{{ $room->id }}">{{ $room->name }}</a></li>
+              <li><a href="javascript:;" data-href="{{ url('clubhouse/chatroom') }}/{{$room->name}}" data-name="{{ $room->name }}" data-description="{{ $room->description }}" data-id="{{ $room->id }}">{{ $room->name }}</a></li>
                   @endforeach
                   
                 </ul>
@@ -667,21 +655,24 @@
                           
                           <div class="msgImgcont">
                                
-                              <!--     <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" /> -->
-                            <!--   
-                            @if($msg->user->user_detail->profile_picture == '')
-                                <img src ="{{asset('user_uploads')}}/default_image/default_01.png" > 
-                            @else
-                                <img src ="{{asset('user_uploads')}}/user_{{$msg->user->id}}/{{$msg->user->user_detail->profile_picture }}" > 
-                             @endif  -->
-                               
+                                  <!-- <img src="{{ $msg->user->user_detail->profile_picture ? asset('').'/'.$msg->user->user_detail->profile_picture : asset('/images/default_profile_picture.png') }}" /> -->
+                                 <!--  @if($msg->user->user_detail->profile_picture == '')
+                                     <img src ="{{asset('user_uploads')}}/default_image/default_01.png" > 
+                                 @else
+                                     <img src ="{{asset('user_uploads')}}/user_{{$msg->user->id}}/{{$msg->user->user_detail->profile_picture }}" > 
+                                  @endif -->
 
-                              <img src ="{{ $msg->user->user_detail->userPicture5050() }}" >
+                                     <img src ="{{ $msg->user->user_detail->userPicture5050() }}" >
 
 
                               </div>
                            </a>
-                          <p> {{ $msg->message }} </p>
+                           <em>{{ $msg->user->user_detail->fullName() }}</em>
+                            
+                          <p>{!! str_contains($msg->message, '.com') ? "<a target='_blank' href=' $msg->message ' style='text-decoration: none;'>$msg->message</a>"  : $msg->message !!} 
+                           <dev class="timestamp" data-datetime="{{ $msg->created_at }}"><dev class="livetime"></dev></dev>
+                          </p>
+
 
                      
                       </li>
@@ -730,7 +721,7 @@
                     <div class="triggers">
                       
                       <i class="fa fa-smile-o emojiTrigger"></i>
-                      <i class="fa fa-paper-plane"></i>
+                      <i class="fa fa-paper-plane" id="submitChatMessageButton"></i>
                     </div>
                     <form id="chatMessageForm" action="{{ url('chatroom/postMessage') }}">
                       <textarea id="chatRoomTextarea" class="chatCommon" placeholder="Type Message" disabled="disabled"></textarea>
@@ -831,7 +822,34 @@
    var messageUrl = '{{ url("message") }}';
    var sessionUrl = '{{ url("session") }}';
    var defaultProfilePic = publicUrl+'/user_uploads/default_image/default_01.png';
-   var BASE_URL = $('meta[name="baseURL"]').attr('content');
+
+   FULL_NAME = "{{ Auth::user()->user_detail->fullName() ? Auth::user()->user_detail->fullName() : ''  }}";
+
+   var date = new Date(Date.now() * 1000);
+  var year    = date.getYear();
+  var month   = date.getMonth();
+  var day     = date.getDay();
+  var hour    = date.getHours();
+  var minute  = date.getMinutes();
+  var seconds = date.getSeconds();  
+
+  //2016-06-09 14:48:38
+
+  DATE_NOW = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+seconds;
+  console.log(Date.now());
+ 
+  
+
+      timeZone = 'Europe/London';
+  
+  $('.timestamp').each(function(){
+      timestamp = this;
+      datetime = $(timestamp).data('datetime');
+      $(timestamp).find('.livetime').livestamp(moment.tz(datetime, timeZone).format() );
+      $(timestamp).find('.readable_time').text(moment.tz(datetime, timeZone).format('MMM DD, YYYY'));
+  });
+
+
     
 
     last_room_id = $('#roomDetails').data('id');
@@ -846,13 +864,12 @@
     $('#chatPopulation').text(data.length);
     $('#peopleList').html('');
     $.each(data, function(){
-      console.log(this.profile_picture);
       $('#peopleList')
         .append(
           $('<li>') 
             .append(
-              //$('<img>').attr('src', publicUrl+'/'+this.profile_picture )
-              $('<img>').attr('src', getImage(this.profile_picture, this.user_id, 2020) )
+              //$('<img>').attr('src', this.profile_picture ? publicUrl+'/'+this.profile_picture : defaultProfilePic )
+               $('<img>').attr('src', getImage(this.profile_picture, this.user_id, 2020) )
 
               )
           )
@@ -970,6 +987,8 @@
 
     $(this).attr('disabled', 'disabled');
 
+    //alert('i want to '+action+' person '+other_person+'using friend_id '+friend_id);
+
     if(action){
 
         if(other_person && action == 1){
@@ -988,6 +1007,19 @@
 
 
    });
+
+   function initializeDate() {
+
+          timeZone = 'Europe/London';
+      
+      $('.timestamp').each(function(){
+          timestamp = this;
+          datetime = $(timestamp).data('datetime');
+          $(timestamp).find('.livetime').livestamp(moment.tz(datetime, timeZone).format() );
+          $(timestamp).find('.readable_time').text(moment.tz(datetime, timeZone).format('MMM DD, YYYY'));
+      });
+
+   }
 
    function unFriend(friend_id, other_person){
       $.ajax({
@@ -1109,13 +1141,10 @@
                   $(loading).remove();
                   modal.removeClass('loading');
                   //$('#viewFriendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
-                  //element = "#viewFriendProfilePic";
-                  //getImage(data, "default", element);
-                  //$("#viewFriendProfilePic").attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
                   $("#viewFriendProfilePic").attr('src', getImage(data.user_detail.profile_picture, data.user_detail.user_id, null))
                   $('#viewFriendProfileName').text(data.user_detail.firstname+' '+data.user_detail.lastname);
 
-                  $('#pm-user').data('user', data.user_detail.user_id).find('.message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox');
+                  $('#pm-user').data('user', data.user_detail.user_id).find('.message').addClass('subModalToggle pmFriend').attr('data-target', '#pmBox').attr('data-user', theUser);
 
                   relation = data.friend.relation;
                   friend_id = data.friend.friend_id;
@@ -1179,29 +1208,14 @@
 
       });
 
-    //concat function 
-   /* function getImage(data, size, element) {
-      image_size = "";
-      if(size == 5050) {
-        image_size = size;
-      }
-      else if(size == 2020) {
-         image_size = size;
-      }
-      else if(size == 4545) {
-        image_size = size;
-      }
-      else if(size == "default") {
+  /*  function getImage(data, size) {
 
-        return  $(element).attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+data.user_detail.profile_picture : defaultProfilePic  )
+      if(size === null) {
+          return data.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_detail.user_id+'/'+data.user.user_detail.profile_picture : defaultProfilePic;  
+      }
+      return  data.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_detail.user_id+'/'+size+'/'+data.user.user_detail.profile_picture : defaultProfilePic;
+    }*/
 
-      } 
-
-      return  $(element).attr('src', data.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user_detail.user_id+'/'+image_size+'/'+data.user_detail.profile_picture : defaultProfilePic  )
-       
-    }
-*/
-    
 
       /********************** START GET IMAGE ******************************************************************************/
     function getImage(profile_picture ,user_id, size) {
@@ -1214,6 +1228,9 @@
 
   /********************** END GET IMAGE ******************************************************************************/
 
+
+
+
   function changeChatroom(data){
 
     console.log('changeChatroom');
@@ -1225,6 +1242,7 @@
     $('.chatContainer').find('.loading').remove();
     $('.chatContainer').prepend(loading);
     $('#chatRoomTextarea').attr('disabled', 'disabled');
+
 
     $.ajax({
       url : chatroomUrl+'/getChatroom',
@@ -1241,6 +1259,7 @@
        /* $('<a href="javascript:;>"').attr('data-target', '#friendProfile').addClass('subModalToggle viewFriendProfile')*/
 
         $.each(response.room_messages, function(){
+        /*  console.log(this.updated_at);*/
           $('#messageContent').append(
             $('<li>').attr('data-user', this.user.user_detail.user_id)
               .append(
@@ -1248,23 +1267,32 @@
                   .append(
                       $('<div>').addClass('msgImgcont')
                           .append(
-                            //$('<img>').attr('src', this.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+this.user.user_detail.user_id+'/5050/'+this.user.user_detail.profile_picture : defaultProfilePic )
-                           /* element = ".msgImgcont";
-                            getImage(this, 5050, element);*/
-                            $('<img>').attr('src', getImage(this.user.user_detail.profile_picture, this.user.user_detail.user_id, null) )
+                           $('<img>').attr('src', getImage(this.user.user_detail.profile_picture, this.user.user_detail.user_id, 5050) )
+                           
+                           
+                           
                           )
                     )
                   
                 )
-              
               .append(
-                $('<p>').text(this.message)
+                $('<em>').text(this.user.user_detail.firstname+' '+this.user.user_detail.lastname)
+                )
+              .append(
+                //$('<p>').text(this.message)
+                messageChecker(this.message, this.updated_at)
+
+               
+                 //.append($('<dev></dev>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))
+
               )
+
             )
 
         });
 
         $('#chatRoomTextarea').removeAttr('disabled');
+        initializeDate();
 
       },error : function(xhr){
         console.log(xhr.responseText);
@@ -1295,13 +1323,53 @@
       $('.roomList').slideToggle();
     }
     
-   });     
+   });
+
+   $('#submitChatMessageButton').on('click', function(){
+       // data = $('#chatRoomTextarea').val();
+       
+        $('#chatMessageForm').submit();
+
+
+   });    
+    function messageChecker(message, updated_at) {
+      result = message.indexOf(".com");
+      image = message.indexOf(".jpg");
+
+      if(result != -1) {
+          console.log(true);
+          return "<p><a target='_blank' href='"+message+"' style='text-decoration: none;'>"+message+"</a><dev class='timestamp' data-datetime='"+updated_at+"'><dev class='livetime'></dev></dev></p>";
+      }
+      else {
+          console.log(false);
+          
+          return "<p>"+message+"<dev class='timestamp' data-datetime='"+updated_at+"'><dev class='livetime'></dev></dev></p>";
+      }
+     
+    }
+
 
     $('#chatMessageForm').on('submit', function(e){
 
     e.preventDefault();
 
+ 
     message = $('#chatRoomTextarea').val();
+
+
+
+       if(message == "") {
+        //getData('Please insert data');
+        alert("Please insert data");
+      } 
+      else {
+        //sendMessage(MESSAGE);
+        console.log(message);
+      }
+      
+
+   // messageChecker(message);
+
 
     $('#chatRoomTextarea').val('');
 
@@ -1321,39 +1389,49 @@
                     $('<div>').addClass('msgImgcont')
 
                       .append(
-                        $('<img>').attr('src', userImage ? publicUrl+'/'+userImage : defaultProfilePic )
+                        //$('<img>').attr('src', userImage ? publicUrl+'/'+userImage : defaultProfilePic )
+                        $('<img>').attr('src', getImage(userImage, userId, 5050) )
                       )
                     )
-              )       
+              )
+            
             .append(
-              $('<p>').text(message)
+              $('<em>').text(FULL_NAME)
+            )       
+            .append(
+              //$('<a>').text(message)
+     
+               messageChecker(message, Date.now())
+            
+              
               )
           )
 
-      $.ajax({
-        url : url,
-        type : 'POST',
-        data : { user_id : userId , message : message, room_id : room_id , _token : CSRF_TOKEN },
-        dataType : 'json',
-        success : function(data){
-          socket.emit('send_chatroom_message', room_id, message );
+          $.ajax({
+            url : url,
+            type : 'POST',
+            data : { user_id : userId , message : message, room_id : room_id , _token : CSRF_TOKEN },
+            dataType : 'json',
+            success : function(data){
+              socket.emit('send_chatroom_message', room_id, message );
 
-          $('#messageContent').animate({
-              scrollTop: $('#messageContent')[0].scrollHeight
-          }, 500);
+              $('#messageContent').animate({
+                  scrollTop: $('#messageContent')[0].scrollHeight
+              }, 500);
 
 
-        },error : function(xhr){
-          console.log(xhr.responseText);
-        }
-      });
+            },error : function(xhr){
+              console.log(xhr.responseText);
+            }
+          });
+
+           initializeDate();
 
     }
 
    });
 
     socket.on('post_chatroom_message', function(data){
-      console.log(data.user.profile_picture);
 
       current_room_id = $('#roomDetails').attr('data-id');
       if(current_room_id == data.room_id){
@@ -1369,42 +1447,56 @@
 
                   $('<div>').addClass('msgImgcont')
                     .append(
-                      $('<img>').attr('src', publicUrl+'/'+data.user.profile_picture  )
+                      //$('<img>').attr('src', data.user.profile_picture ? publicUrl+'/'+data.user.profile_picture : defaultProfilePic )
+                      $('<img>').attr('src', getImage(data.user.profile_picture, data.user.user_id, 5050) )
                     )
                   )
                 
               )
+            //.append($('<span></span>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))
             .append(
-              $('<p>').text(data.message)
+              $('<em>').text(FULL_NAME)
+            )
+            .append(
+              //$('<p>').text(data.message)
+               messageChecker(data.message, Date.now())
               )
           )
+      
 
         $('#messageContent').animate({
               scrollTop: $('#messageContent')[0].scrollHeight
           }, 500);
       }
 
+         initializeDate();
 
 
  
     });
 
-        var w = window.innerWidth;
-     
-        if(w == 1366) {
-               $('.bigChatBox .body ul').slimScroll({
-              height: '318px',
-              start: 'bottom'
-          });
-        }
-        else {
-             $('.bigChatBox .body ul').slimScroll({
-              height: '518px',
-              start: 'bottom'
-          });
-        }
+      var w = window.innerWidth;
+    
+       if(w == 1366) {
+              $('.bigChatBox .body ul').slimScroll({
+             height: '318px',
+             start: 'bottom'
+         });
+       }
+       else {
+            $('.bigChatBox .body ul').slimScroll({
+             height: '523px',
+             start: 'bottom'
+         });
+       }
+          
+      
 
 
+        // $('.bigChatBox .body ul').slimScroll({
+        //     height: '518px',
+        //     start: 'bottom'
+        // });
 
            $('#messageContent').animate({
             scrollTop: $('#messageContent')[0].scrollHeight
@@ -1431,9 +1523,12 @@
 
                       // console.log(parsed);
 
+
                       if(!$.isEmptyObject(parsed))
                       {
                         $.each(parsed, function(key, item) {
+                          console.log(item);
+                          console.log(item.updated_at);
                             $('#messageContent').prepend(
                               $('<li>').attr('data-user', item.user.user_detail.user_id)
                                 .append(
@@ -1441,16 +1536,28 @@
                                     .append(
                                         $('<div>').addClass('msgImgcont')
                                           .append(
-                                           // $('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+item.user.user_detail.user_id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
-                                           //data.user.user_detail.profile_picture ? publicUrl+'/user_uploads/user_'+data.user.user_detail.user_id+'/'+data.user.user_detail.profile_picture : defaultProfilePic;  
-                                            $('<img>').attr('src',  getImage(item.user.user_detail.profile_picture, item.user.user_detail.user_id, 5050) )
+                                            //$('<img>').attr('src', item.user.user_detail.profile_picture ? publicUrl+'user_uploads/user_'+item.user.id+'/'+item.user.user_detail.profile_picture : defaultProfilePic )
+                                             //$('<img>').attr('src',  getImage(item, 5050) )
+                                               $('<img>').attr('src',  getImage(item.user.user_detail.profile_picture, item.user.user_detail.user_id, 5050) )
                                           )
                                       )
                                   )
+                               
                                 .append(
-                                  $('<p>').text(this.message)
+                                  $('<em>').text(FULL_NAME)
                                 )
+                                .append(
+                                  //$('<p>').text(this.message)
+                                   messageChecker(this.message, item.updated_at)  
+
+                                )
+
+                                //.append($('<em></em>').addClass('timestamp').livestamp(moment.tz(this.created_at, timeZone).format() ))
                               );
+
+                            console.log(item.updated_at);
+                              
+
                         });
                         $('#messageContent').scrollTop( 300 );
                         get_message_page++;
@@ -1492,6 +1599,12 @@
                       // {
                       //   no_more_message = 0;
                       // }
+                    $('.timestamp').each(function(){
+                          timestamp = this;
+                          datetime = $(timestamp).data('datetime');
+                          $(timestamp).find('.livetime').livestamp(moment.tz(datetime, timeZone).format() );
+                          $(timestamp).find('.readable_time').text(moment.tz(datetime, timeZone).format('MMM DD, YYYY'));
+                      });
 
                     },error : function(xhr){
                       // console.log(xhr.responseText);
@@ -1545,7 +1658,7 @@
 
    });
 
-	 
+   
 
 </script>
 

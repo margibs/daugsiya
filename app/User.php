@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use DB;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -120,6 +121,14 @@ class User extends Model implements AuthenticatableContract,
     public function completed_home_tour(){
         
         return $this->hasOne('App\User_Tour')->where('pagename', 'home')->where('complete', 1);
+    }
+
+     public static function findEmail($email) {
+          return  DB::table('users')
+                        ->select(['id'])
+                        ->where('email', '=', $email)
+                        /*->get();*/
+                        ->pluck('id');
     }
 
 }

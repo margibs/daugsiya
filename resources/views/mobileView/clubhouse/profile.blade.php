@@ -5,8 +5,22 @@
  <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
  <link rel="stylesheet" href="{{ asset('css/jrate.css') }}">
  <style>
+ input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea, textarea{
+  font-size: 30px;
+ font-weight: 600;
+ }
+ .profileForm textarea{
+  border: none;
+ }
  </style>
 @endsection
+
+ 
+
+
+  @section('content-menu')
+     <a href="javascript:;" class="waves-effect back_button" id="backButton"><i class="material-icons">chevron_left</i> </a> 
+  @endsection 
 
 
 @section('content')
@@ -37,7 +51,7 @@
           <div class="row userDetailActions">
 
                   
-          <div class="col s6"><span class="app-button" data-target="yourFriends"><span class="icon ion-person-stalker"></span> <span>{{ count($user->myFriends) }} </span></span></div>
+          <div class="col s6"><span class="app-button" data-target="yourFriends"><span class="icon  ion-android-people"></span> <span>{{ count($user->myFriends) }} </span></span></div>
           <div class="col s6"><span class="app-button" data-target="yourMessages" data-target-args='{ "count" : "{{ count($user->myMessages) }}" }'><span class="icon ion-ios-chatbubble"></span> <span>{{ count($user->myMessages) }}</span></span></div>
           </div>
 
@@ -45,9 +59,9 @@
         <div class="lowerHalf">
             
             <div class="row userButtons">
-                 <span class="editProfile">View Profile</span>
-                  <span class="changePassword">Change Password</span>
-                  <a href="{{ url('clubhouse/magazine') }}">About you</span></a>
+                 <span class="editProfile"><i class="ion-android-create"> </i> Profile</span>
+                  <span class="changePassword"><i class="ion-android-lock"></i> Password</span>
+                <!--   <a href="{{ url('clubhouse/magazine') }}"> <i class="ion-android-person"></i> About you </span></a> -->
             </div>
 
             <div class="listFav">
@@ -104,8 +118,8 @@
            
 
       </div>
-        <button type="button" class="buttonone" id="playGame"> <i class="fa fa-play"></i> </button>
-                                <button type="button"><a href="javascript:;" id="goToGame"> <i class="fa fa-book"></i> </a></button>
+        <button type="button" class="buttonone" id="playGame"> Play Now </button>
+        <button type="button"><a href="javascript:;" id="goToGame"> Read Review</a></button>
     </div>
   </div>
      <div id="selectCasinoModal" class="modal">
@@ -133,9 +147,10 @@
             <ul class="friendList row">
                    @foreach($user->myFriends as $fr)
 
-                       <li class="app-button col s4" data-target="userDetails" data-target-args='{ "user_id" : "{{ $fr->friend->user_detail->user_id }}" }' id="friend_li_{{ $fr->friend->user_detail->user_id }}">
+                       <li class="app-button col s3" data-target="userDetails" data-target-args='{ "user_id" : "{{ $fr->friend->user_detail->user_id }}" }' id="friend_li_{{ $fr->friend->user_detail->user_id }}">
                             <span class="user_online_status offline" id="friend-online-status-{{ $fr->friend->user_detail->user_id }}"></span>
-                            <img src="{{ $fr->friend->user_detail->profile_picture ? asset('').'/'.$fr->friend->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="">
+                          <!--   <img src="{{ $fr->friend->user_detail->profile_picture ? asset('').'/'.$fr->friend->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt=""> -->
+                           <img src="{{ $fr->friend->user_detail->userPicture5050()  }}" alt="">
                             <span class="userName">{{ ucwords( $fr->friend->user_detail->firstname ) }}</span>
                           </li>
                    @endforeach
@@ -152,9 +167,13 @@
             <ul class="messageList">
                    @foreach($user->myMessages as $msg)
                         <li class="app-button" data-target="privateMessage" data-target-args='{ "user_id" : "{{ $msg->from_user->user_detail->user_id }}", "name" : "{{ ucwords($msg->from_user->user_detail->firstname) }}" }'>
-                          <img src="{{ $msg->from_user->user_detail->profile_picture ? asset('').'/'.$msg->from_user->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt="">
+                         <!--  <img src="{{ $msg->from_user->user_detail->profile_picture ? asset('').'/'.$msg->from_user->user_detail->profile_picture : asset('images/default_profile_picture.png') }}" alt=""> -->
+                        <img src="{{ $msg->from_user->user_detail->userPicture5050() }}" alt="">
                           <div class="msgContent">
-                              <div class="info"><h6>{{ ucwords($msg->from_user->user_detail->firstname) }} </h6><span class="timestamp" data-datetime="{{ $msg->created_at }}"><span class="livetime"></span></span></div>
+                              <div class="info">
+                                <span class="timestamp" data-datetime="{{ $msg->created_at }}"><span class="livetime"></span></span>
+                                <h6>{{ ucwords($msg->from_user->user_detail->firstname) }} </h6>
+                              </div>
                               <p> {{ $msg->message }} </p>
                           </div>
 
@@ -205,8 +224,8 @@
           <h6></h6>
           <div class="row userDetailActions">
 
-                <div class="col s6"><span class="actionButton">Unfriend</span></div>
-                <div class="col s6"><span id="messageUser"><span class="icon ion-ios-chatbubble"></span> <span></span></span></div>
+                <div class="col s4"><span class="actionButton"> <i class="ion-android-cancel"></i>  Unfriend</span></div>
+                <div class="col s8"><span id="messageUser"><span class="icon ion-ios-chatbubble"></span> Send a Message <span></span></span></div>
           
           </div>
         </div>
@@ -244,12 +263,12 @@
 
 
 
-<div class="app-page" data-page="edit-profile">
+<div class="app-page" data-page="edit-profile" style="background: #fff;">
   <div class="app-topbar">
     <div class="app-title">Contact</div>
   </div>
     <div class="app-content">
-         <form action="{{ url('clubhouse/profile/userDetails') }}" method="POST">
+         <form class="profileForm" action="{{ url('clubhouse/profile/userDetails') }}" method="POST">
           @if(session('userDetailsErrors'))
             <ul class="formMessage errorlist">
             @foreach(session('userDetailsErrors') as $error)
@@ -287,13 +306,13 @@
 </div>
 
 
-<div class="app-page" data-page="edit-password">
+<div class="app-page" data-page="edit-password" style="background: #fff;">
   <div class="app-topbar">
     <div class="app-title">Contact</div>
   </div>
     <div class="app-content">
           <div class="box2 good keybox">
-            <form action="{{ url('clubhouse/profile/changePassword') }}" method="POST">           
+            <form class="profileForm" action="{{ url('clubhouse/profile/changePassword') }}" method="POST">           
                 @if(session('changePasswordErrors'))
                   <ul class="formMessage errorlist">
                   @foreach(session('changePasswordErrors') as $error)
@@ -338,6 +357,9 @@
 
 
  (function(window, document, $){
+
+          $('.app-page').css({ 'display' : 'block' });
+        $('#mainLoading').remove();
 
       var gameExpUrl = '{{ url("gameExp") }}';
       var profileUrl = '{{ url("profile") }}';
@@ -429,7 +451,8 @@
                      $(page).find('.pageLoading').hide();
               $(page).find('#friendDetailContainer').show().addClass('dataLoaded');
 
-              $(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  );
+              //$(page).find('#friendProfilePic').attr('src', data.user_detail.profile_picture ? publicUrl+'/'+data.user_detail.profile_picture : defaultProfilePic  );
+                $(page).find('#friendProfilePic').attr('src', getImage(data.user_detail.profile_picture, data.user_detail.user_id, null) );
 
               friendName = data.user_detail.firstname+' '+data.user_detail.lastname;
               $(page).find('#friendDetailContainer h6').text(friendName);
@@ -810,11 +833,7 @@
 
       });
             
-            try {
-                App.restore();
-              } catch (err) {
-                 App.load('main');
-              }
+             App.load('main');
              
 
  })(window, document, jQuery);

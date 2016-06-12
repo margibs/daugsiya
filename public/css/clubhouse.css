@@ -1,7 +1,5 @@
   /* -------------------- HIDE EMOTICONS FOR NOW ------------------------- */
-.fa-smile-o, .fa-paper-plane{
-  display: none;
-}
+
 
 
 .typing-indicator {
@@ -582,7 +580,7 @@ body{
 
 .messageBox ul li a img {
   height: 50px;
-  border-radius: 50%;
+  border-radius: 3px;
 }
 
 .messageBox ul li a {
@@ -612,8 +610,8 @@ body{
 
 
 }
-.friendBox .fa-times, .tvbox .fa-times, .keybox .fa-times, .profilebox .fa-times, .magbox .fa-times, .friendsbox .fa-times, .friendprofilebox .fa-times, .imgContainer .fa-times,
-.casinoBox .fa-times{
+.friendBox .ion-close-round, .tvbox .ion-close-round, .keybox .ion-close-round, .profilebox .ion-close-round, .magbox .ion-close-round, .friendsbox .ion-close-round, .friendprofilebox .ion-close-round, .imgContainer .ion-close-round,
+.casinoBox .ion-close-round{
   position: absolute;
   z-index: 2;
   right: 0;
@@ -622,25 +620,19 @@ body{
   cursor: pointer;
 }
 
-.keybox .fa-times{
-  top: -5px;
+.tvbox .ion-close-round{
+    right: -40px;
+    background: #1C1C1E;
+    top: 70px;
+    padding: 4px 6px;
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.75);
 }
-.profilebox .fa-times{
-  top: -4px;
-}
-.tvbox .fa-times{
-  right: 164px;
-  background: white;
-  top: 8px;
-  padding: 4px 6px;
-  border-radius: 50%;
-  color: rgba(66, 25, 105, 0.75);
-}
-.magbox .fa-times{
+.magbox .ion-close-round{
     top: -30px;
     right: 0px;
 }
-.imgContainer .fa-times{
+.imgContainer .ion-close-round{
   top: 0px;
   color: rgb(158, 0, 0);
 }
@@ -653,7 +645,7 @@ body{
   text-align: center;
   font-family: Roboto;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 17px;
   background: rgba(164, 12, 0, 0.63);
   color: #FFFFFF;
   padding: 5px 15px;
@@ -667,16 +659,16 @@ body{
   left: -10px;
   z-index: 2;
 }
-.casinoBox .fa-times{
-  right: 4px!important;
+.casinoBox .ion-close-round{
+   top: -13px!important;
+  right: -16px!important;
   color: rgb(203, 195, 195)!important;
 }
 
 .friendBox ul li{
     overflow: hidden;
     border-bottom: 1px solid rgba(255, 255, 255, 0.48);
-    padding-bottom: 10px;
-    padding: 8px 10px;
+    padding: 3px 6px;
     background: rgba(255, 255, 255, 0.50);
     cursor: pointer;
     transition: background 0.2s ease;
@@ -729,28 +721,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5cffffff', e
     top: 7px;
 }
 .friendBox ul li h6{
-display: block;
-    font-size: 13px;
+    display: block;
+    font-size: 12px;
     font-weight: 600;
     color: #060606;
     font-family: 'Roboto';
 }
 .messagingBox li h6{
-    margin-left: 90px;
+    margin-left: 70px;
     padding-top: 0!important;
 
 }
 
 .msgImgcont{
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     border-radius: 5px;
     overflow: hidden;
     /* float: left; */
     margin: 0 auto 8px auto;
-    -moz-box-shadow: 0 0 10px -2px #616161;
+/*    -moz-box-shadow: 0 0 10px -2px #616161;
     -webkit-box-shadow: 0 0 10px -2px #616161;
-    box-shadow: 0 0 10px -2px #616161;
+    box-shadow: 0 0 10px -2px #616161;*/
 
 }
 .friendBox ul li:hover,
@@ -785,13 +777,12 @@ display: block;
 }
 .friendBox ul li span{
   position: absolute;
-  width: 13px;
-  height: 13px;
+  width: 9px;
+  height: 9px;
   background: green;
-  border-radius: 50%;
-  border: 2px solid #e3e3e3;
-  left: 72px;
-  top: 2px;
+  border-radius: 50%;  
+  left: 56px;
+  top: 0px;
 }
 .friendBox ul li span.offline{
   background-color:#D6D5D4;
@@ -831,7 +822,7 @@ display: block;
 }
 
 .messagingBox li p{
-      margin-left: 90px!important;
+      margin-left: 70px!important;
 }
 
 .friendProfile{
@@ -1539,7 +1530,7 @@ display: block;
   overflow: hidden;
 }
 .pic img{
-  width: 99%;
+  width: 97%;
 /*  margin-top: 17px;*/
 }
 .picwrapper img{
@@ -1548,7 +1539,7 @@ display: block;
 }
 .picwrapper  .itemLabels{
     top: -47px;
-    left: -13px;
+    left: -34px;
 }
 
 
@@ -1792,7 +1783,7 @@ border-left: solid transparent 7px;
 .questionpage{
   padding: 20px;
   width: 90%!important;
-  background: #EBEBEB;
+  background: #FFFFFF;
 }
 
 .questionpage p{
@@ -2120,47 +2111,47 @@ Main Components
   }
 
   /* Profile Page */
-  .profilePage .cd-single-step:nth-of-type(1) {
+ .profilePage .cd-single-step:nth-of-type(1) {
     top: 46%;
     left: 19%;
   }
   
   .profilePage .cd-single-step:nth-of-type(2) {
-    bottom: 30%;
-    right: 20%;
+    bottom: 25%;
+    right: 21%;
   }
   .profilePage .cd-single-step:nth-of-type(3) {
-    bottom: 32%;
-    right: 29%;
+    bottom: 63%;
+    right: 31%;
   }
   .profilePage .cd-single-step:nth-of-type(4) {
     top: 33%;
-    left: 69%;
+    left: 61%;
   }
   .profilePage .cd-single-step:nth-of-type(5) {
-     top: 36%;
+    top: 33%;
     left: 61%;
   }
   .profilePage .cd-single-step:nth-of-type(6) {
-     top: 36%;
+     top: 33%;
     left: 61%;
   }
   .profilePage .cd-single-step:nth-of-type(7) {
-     top: 36%;
-    left: 61%;
+    top: 44%;
+    left: 41%;
   }
   .profilePage .cd-single-step:nth-of-type(8) {
-    top: 50%;
-    left: 65%;
+    top: 47%;
+    left: 31%;
   }
   .profilePage .cd-single-step:nth-of-type(9) {
-    top: 44%;
-    left: 42.3%;
+    top: 72%;
+    right: 29%;
   }
-  .profilePage .cd-single-step:nth-of-type(10) {
+ /* .profilePage .cd-single-step:nth-of-type(10) {
     top: 43%;
     left: 30%;
-  }
+  }*/
 
   /* Chatroom Page */
   .chatroomPage .cd-single-step:nth-of-type(1) {
@@ -2326,19 +2317,30 @@ Main Components
   /*font-size: 2rem;
   line-height: 1.2;
   margin-bottom: .4em;*/
-    font-size: 1.8rem;
-    line-height: 1.2;
+    font-family: 'Work Sans';
+    font-size: 32px;
+    line-height: 33px;
     margin-bottom: .4em;
-    font-family: Roboto;
-    color: #FFEEED;
-    font-weight: 600;
+    color: #EFD25E;
+    font-weight: 600;   
 }
 .cd-single-step .cd-more-info p {
-    font-size: 1.1rem;
-    line-height: 1.3;
+    font-size: 17px;
+    line-height: 22px;
     margin-bottom: 1.4em;
     font-family: Roboto,sans-serif;
-    color: #D47E7D;
+    color: #FFE0DF;
+}
+.cd-single-step .cd-more-info ul li {
+    font-size: 14px;
+    line-height: 1.2em;
+    margin-bottom: 10px;
+    font-family: Roboto,sans-serif;
+    color: #F4FFB5;
+}
+.cd-single-step .cd-more-info ul{
+      list-style: initial;
+    margin-left: 18px;
 }
 .cd-single-step .cd-more-info img {
   margin-bottom: 1.4em;
@@ -2364,7 +2366,19 @@ Main Components
   height: 2px;
   width: 16px;
   border-radius: 4em;
-  background-color: #cbccc8;
+  /*background-color: #cbccc8;*/
+
+    background: rgb(204,0,0);
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, rgb(222, 13, 13)0%, rgb(144, 8, 8) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(204,0,0,1)), color-stop(100%,rgb(144, 8, 8)));
+    background: -webkit-linear-gradient(top, rgb(222, 13, 13)0%,rgb(144, 8, 8) 100%);
+    background: -o-linear-gradient(top, rgb(222, 13, 13)0%,rgb(144, 8, 8) 100%);
+    background: -ms-linear-gradient(top, rgb(222, 13, 13)0%,rgb(144, 8, 8) 100%);
+    background: linear-gradient(to bottom, rgb(222, 13, 13) 0%,rgb(144, 8, 8) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0000', endColorstr='#aa0000',GradientType=0 );
+
+
   /* Force Hardware Acceleration */
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -2403,14 +2417,26 @@ Main Components
     border-radius: 4px;
     box-shadow: 0 3px 20px rgba(0, 0, 0, 0.8);
     opacity: 0;
-    background-color: #A7291B;
+    /*background-color: #A7291B;*/
+
+        background: rgb(204,0,0);
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, rgb(222, 13, 13)0%, rgb(144, 8, 8) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(204,0,0,1)), color-stop(100%,rgb(144, 8, 8)));
+    background: -webkit-linear-gradient(top, rgb(222, 13, 13)0%,rgb(144, 8, 8) 100%);
+    background: -o-linear-gradient(top, rgb(222, 13, 13)0%,rgb(144, 8, 8) 100%);
+    background: -ms-linear-gradient(top, rgb(222, 13, 13)0%,rgb(144, 8, 8) 100%);
+    background: linear-gradient(to bottom, rgb(222, 13, 13) 0%,rgb(144, 8, 8) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0000', endColorstr='#aa0000',GradientType=0 );
+
+
     -webkit-transition: opacity 0.4s;
     -moz-transition: opacity 0.4s;
     transition: opacity 0.4s;
     border-color: #fefffb;
   }
   .cd-single-step .cd-more-info p {
-    margin-bottom: 2.5em;
+        margin: 27px 0px;
   }
   .cd-single-step .cd-more-info img {
     display: none;
@@ -2513,9 +2539,11 @@ Main Components
 }
 .cd-tour-nav a {
     font-size: 1rem;
-    color: #F1F1F1;
+    color: #fff;
     font-weight: bold;
-    background: #9E2012;
+    /*background: #9E2012;*/
+
+
     font-family: Roboto;
     text-decoration: none;
     padding: 7px 16px;
@@ -2648,12 +2676,11 @@ Main Components
     width: 94%;
     height: 65px !important;
     margin: 10px 20px 5px 13px;
-  }
+  }/*
   .tvbox .tabs{
       position: relative;
       min-height: 460px;
       clear: both;
-      /*overflow: hidden;*/
       width: 850px;
   }
   .tvbox .tabs li {
@@ -2671,7 +2698,6 @@ Main Components
       border-radius: 2px 2px 0 0;
       font-size: 16px;
       font-weight: normal;
-      /* text-transform: uppercase; */
       background: rgba(255, 255, 255, 0.5);
       cursor: pointer;
       position: relative;
@@ -2702,7 +2728,7 @@ Main Components
     position: absolute;
     top: 51px;
     left: 0;
-    background-color: rgba(45, 0, 94, 0.86);
+    background-color: rgb(0, 0, 0);
     -moz-box-shadow: 0 0 10px -1px #000;
     -webkit-box-shadow: 0 0 10px -1px #000;
     box-shadow: 0 0 10px -1px #000;
@@ -2711,7 +2737,7 @@ Main Components
   .tvbox .tabs .tab-content p{
     color: #9C6CCE;
       font-family: 'Work Sans';
-      text-align: right;
+      text-align: center;
       font-weight: 500;
       font-size: 15px;
       margin-bottom: 5px;
@@ -2732,7 +2758,6 @@ Main Components
   .tvbox .tabs .tab-content .gameList li button{
     border: none;
       background: transparent;
-/*      padding: 5px 10px;*/
       color: #fff;
       border-radius: 2px;
       font-family: Roboto;
@@ -2746,9 +2771,8 @@ Main Components
   .tvbox .tabs .tab-content .gameList li .buttonone{
     float: left;
     cursor: pointer;
-  /*  margin-right: 10px;*/
   }
-
+*/
 
   .image-upload > input
   {
@@ -2762,8 +2786,8 @@ Main Components
   }
 
   .view {
-      width: 165px;
-        height: 128px;
+width: 146px;
+    height: 117px;
         border-radius: 5px;
   /*   margin: 10px;
      float: left;*/
@@ -2820,14 +2844,18 @@ Main Components
     /* border:100px solid rgba(0,0,0,0.7);*/
     background: rgba(0, 0, 0, 0.73);
   }
-
+.third-effect .mask button, .third-effect .mask button a{
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: #fff;
+}  
   .third-effect:hover a.info {
      opacity:1;
      transition-delay: 0.3s;
   }
   .col-sm-12{
     margin-top: 10px;
-       margin-left: 11px;
   }
 
 
@@ -2888,27 +2916,42 @@ Main Components
   }
 
   .tvbox{
-    position: absolute;top: 220px;right: 560px;z-index: 2;
+    position: absolute;
+    top: 13%;
+    right: 37%;
+    z-index: 2;
   }
   .profilebox{
     position: absolute;
     top: 43%;
     right: 12%;
     z-index: 2;
-    background-color: rgba(255, 255, 255, 0.83);
-    padding: 20px 12px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 10px 12px 10px 12px;
     border-radius: 4px;
     width: 260px;
+    -moz-box-shadow: 0 0 30px -10px #000;
+    -webkit-box-shadow: 0 0 30px -10px #000;
+    box-shadow: 0 0 30px -10px #000;
+  }
+  .profilebox .ion-close-round, .keybox .ion-close-round{
+    float: right;
+    margin-top: -2px;
+    margin-bottom: 4px;
+    cursor: pointer;
   }
   .keybox{
       position: absolute;
       top: 33%;
       right: 560px;
       z-index: 2;
-      background-color: rgba(255, 255, 255, 0.83);
-      padding: 20px 12px;
+      background-color:rgba(255, 255, 255, 0.85);
+      padding: 10px 12px 10px 12px;
       border-radius: 4px;
       width: 230px;
+      -moz-box-shadow: 0 0 30px -10px #000;
+      -webkit-box-shadow: 0 0 30px -10px #000;
+      box-shadow: 0 0 30px -10px #000;
   }
   .keybox form label, .profilebox form label{
       display: block;
@@ -2920,8 +2963,8 @@ Main Components
       display: none;
   }
   .keybox input[type=text], .keybox input[type=password], .profilebox input[type=text], .profilebox input[type=text], .profilebox textarea{
-    border: none;
-      font-size: 14px;
+      border: none;
+      font-size: 17px;
       padding: 14px 14px;
       width: 100%;
       border-radius: 4px;
@@ -2929,23 +2972,21 @@ Main Components
       -moz-box-shadow: 0px 2px 3px -2px #696969;
       -webkit-box-shadow: 0px 2px 3px -2px #696969;
       box-shadow: 0px 2px 3px -2px #696969;
-      font-family: 'Work Sans';
+      font-family: Roboto,Arial,Helvetica,sans-serif;
+      font-weight: 500;
   }
   .keybox button, .profilebox button{
-    background: #A40605;
-      border: none;
-      display: block;
-      width: 100%;
-      padding: 7px;
-      border-radius: 2px;
-      color: #fff;
-      font-family: 'Work Sans';
-      font-size: 20px;
-      font-weight: 500;
-       -moz-box-shadow: 0px 2px 3px -2px #696969;
-      -webkit-box-shadow: 0px 2px 3px -2px #696969;
-      box-shadow: 0px 2px 3px -2px #696969;
-      cursor: pointer;
+    background: none;
+    border: none;
+    display: block;
+    border-radius: 50%;
+    padding: 0px 14px;
+    color: #10671A;
+    font-family: 'Work Sans';
+    font-size: 35px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
   }
   .magbox{
     position: absolute;
@@ -2986,24 +3027,27 @@ Main Components
   /***** Example custom styling *****/
   .myLabel {
     border: none;
-    border-radius: 50%;
-    padding: 0px 9px 3px 9px;
+    padding: 24px 9px 3px 9px;
     margin: 2px;
-    background: RGBA(255, 255, 255, 0.56);
+    background: rgba(255, 255, 255, 0);
     display: inline-block;
     font-size: 35px;
     font-weight: 700;
     margin-left: 31px;
     margin-top: -35px;
     cursor: pointer;
-    position: relative;
+    position: absolute;
     z-index: 1;
+    top: 52px;
+    left: -15px;
+    width: 48%;
+    height: 69%;
   }
   .myLabel:hover {
-      background: #fff;
+      background: transparent;
   }
   .myLabel:active {
-      background: #fff;
+      background:transparent;
   }
   .myLabel :invalid + span {
       color: #D1B5B5;
@@ -3060,24 +3104,30 @@ Main Components
     position: absolute;
     z-index: 5;
     left: 13%;
-    top: 19%;
+    top: 30%;
+    width: 76%;
     background: rgba(255, 255, 255, 0.95) none repeat scroll 0% 0%;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 2px;
     display: none;
+    -moz-box-shadow: 0 0 10px -1px #000;
+    -webkit-box-shadow: 0 0 10px -1px #000;
+    box-shadow: 0 0 10px -1px #000;
   }
   .casinoBox ul li, .casinoBox ul li a{
     display: inline-block;
   }
   .casinoBox p{    
-    margin: 5px 0 20px 0px;
-    font-family: "Work Sans";
-    font-weight: 500;
-    font-size: 15px;
+    margin: 0px 0 11px 0px;
+    font-family: Roboto;
+    font-weight: 600;
+    font-size: 17px;
+    text-align: center;
   }
   .casinoBox ul li a img{
     width: 115px;
     border-radius: 4px;
+        margin: 5px;
   }
 
 @media(max-width: 1680px){
@@ -3172,7 +3222,7 @@ Main Components
 
 @media(max-width: 1366px){
   .guideSusanContainer{
-    top: 32%;
+    top: 37%;
   }
   .guide-susan {
     width: 370px;
@@ -3197,35 +3247,45 @@ Main Components
     top: 62%;
     right: 33%;
   }
-  .profilePage .cd-single-step:nth-of-type(1) {
-    top: 32%;
-    left: 20%;
+   /* Profile Page */
+ .profilePage .cd-single-step:nth-of-type(1) {
+    top: 46%;
+    left: 19%;
   }
+  
   .profilePage .cd-single-step:nth-of-type(2) {
-    bottom: 10%;
+    bottom: 22%;
     right: 13%;
- }
- .profilePage .cd-single-step:nth-of-type(3) {
-    bottom: 12%;
-    right: 25%;
+  }
+  .profilePage .cd-single-step:nth-of-type(3) {
+    bottom: 66%;
+    right: 21%;
   }
   .profilePage .cd-single-step:nth-of-type(4) {
-      top: 64%;
-      left: 76%;
+    top: 41%;
+    left: 70%;
   }
   .profilePage .cd-single-step:nth-of-type(5) {
-    top: 46%;
-    left: 78%;
+    top: 41%;
+    left: 70%;
   }
   .profilePage .cd-single-step:nth-of-type(6) {
-    top: 59%;
-    left: 48.3%;
+    top: 41%;
+    left: 70%;
   }
   .profilePage .cd-single-step:nth-of-type(7) {
-    top: 54%;
-    left: 37%;
-  } 
-  .chatroomPage .cd-single-step:nth-of-type(1) {
+    top: 44%;
+    left: 48%;
+  }
+  .profilePage .cd-single-step:nth-of-type(8) {
+    top: 44%;
+    left: 38%;
+  }
+  .profilePage .cd-single-step:nth-of-type(9) {
+    top: 74%;
+    right: 22%;
+  }
+  .chatroomPage .cd-single-step:nth-of-type(7) {
     top: 32%;
     right: 44%;
   }
@@ -3258,7 +3318,7 @@ Main Components
     top: 505px;
   }
   .magwrapper {    
-    left: 1005px;
+    left: 963px;
     top: 485px;
   }
   .keywrapper {    
@@ -3294,20 +3354,20 @@ Main Components
     margin-top: 8px;
   }
   .tvbox {    
-    top: 130px!important;
-    right: 210px!important;
+   top: 12%!important;
+    right: 28%!important;
    }
    .keybox{
       top: 260px;
       right: 230px;
    }
    .profilebox{
-    top: 240px;
-        right: 280px;
+      top: 150px;
+      right: 40px;
    }
    .friendsbox {      
-     top: 10%;
-     left: 0;  
+     top: 15%;
+     left: -435px;
    }
    .friendprofilebox{
       top: 0;
@@ -3330,6 +3390,7 @@ Main Components
     width: 78px;
     height: 92px;
     overflow: hidden;
+    margin-top: -10px;
   }
 } 
 
